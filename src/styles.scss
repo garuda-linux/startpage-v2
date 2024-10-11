@@ -1,1 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* You can add global styles to this file, and also import other style files */
+@import "@fontsource/jetbrains-mono";
+@import "@fontsource/fira-sans";
+
+body {
+  font-style: normal;
+  font-weight: 400;
+  font-family: "Fira Sans", sans-serif;
+}
+code,
+pre,
+tt,
+kbd,
+samp {
+  font-style: normal;
+  font-weight: 400;
+  font-family: "JetBrains Mono", monospace;
+  font-optical-sizing: auto;
+}

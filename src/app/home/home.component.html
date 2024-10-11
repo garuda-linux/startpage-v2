@@ -1,0 +1,39 @@
+<div class="mt-10 mb-5">
+  <div class="mx-auto" style="width: 200px">
+    <p-image
+      src="/pictures/garuda.png"
+      alt="Image"
+      width="200"
+      id="search-image"
+    />
+  </div>
+</div>
+<div>
+  <div class="text-center">
+    <input
+      type="text"
+      pInputText
+      pAutoFocus
+      [style]="{ width: '20rem', marginTop: '2rem' }"
+      [autofocus]="true"
+      [(ngModel)]="searchTerm"
+      (keydown.enter)="search($event)"
+      placeholder="Start your search..." />
+  </div>
+</div>
+<div class="p-10 max-w-[90%] mx-auto">
+  <div class="grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-4 md:gap-10">
+    @for (link of services; track link) {
+      <app-link [link]="link.link" [title]="link.title" [icon]="link.icon" [subtitle]="link.subtitle"
+                [tag]="link.title"></app-link>
+    }
+  </div>
+</div>
+<div class="p-10 max-w-[90%] mx-auto">
+  <div class="grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-4 md:gap-10">
+    @for (link of contact; track link) {
+      <app-link [link]="link.link" [title]="link.title" [icon]="link.logo" [subtitle]="link.subtitle"
+                [tag]="link.title"></app-link>
+    }
+  </div>
+</div>
