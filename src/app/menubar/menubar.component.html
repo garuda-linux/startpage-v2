@@ -1,1 +1,90 @@
-<p-menubar [model]="items"></p-menubar>
+<p-toolbar [style]="{ 'border-radius': '2rem', 'padding': '1rem 1rem 1rem 1rem' }">
+  <ng-template pTemplate="start">
+    <div class="flex items-center gap-2">
+      <svg width="31" height="33" viewBox="0 0 31 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="..."
+          fill="var(--p-primary-color)"
+        />
+        <mask
+          id="mask0_1_52"
+          style="mask-type:luminance"
+          maskUnits="userSpaceOnUse"
+          x="0"
+          y="0"
+          width="31"
+          height="33"
+        >
+          <path
+            d="..."
+            fill="var(--high-contrast-text-color)"
+          />
+        </mask>
+        <g mask="url(#mask0_1_52)">
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="..."
+            fill="var(--p-primary-color)"
+          />
+        </g>
+        <path
+          d="..."
+          fill="var(--high-contrast-text-color)"
+        />
+        <path
+          d="..."
+          fill="var(--high-contrast-text-color)"
+        />
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="..."
+          fill="var(--high-contrast-text-color)"
+        />
+        <path
+          d="..."
+          fill="var(--high-contrast-text-color)"
+        />
+        <path
+          d="..."
+          fill="var(--high-contrast-text-color)"
+        />
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="..."
+          fill="var(--high-contrast-text-color)"
+        />
+        <path
+          d="..."
+          fill="var(--high-contrast-text-color)"
+        />
+        <path
+          d="..."
+          fill="var(--high-contrast-text-color)"
+        />
+        <path
+          d="..."
+          fill="var(--high-contrast-text-color)"
+        />
+        <path
+          d="..."
+          fill="var(--high-contrast-text-color)"
+        />
+      </svg>
+      @for (item of items; track item) {
+        <p-button (click)="navigateTo(item.url)" label="{{ item.label }}" class="block {{ $index > 2 ? 'hidden sm:flex' : 'flex' }}" text plain></p-button>
+      }
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="end">
+    <div class="sm:flex items-center gap-2 hidden">
+      <p-avatar
+        image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+        [style]="{ width: '32px', height: '32px' }"
+      />
+    </div>
+  </ng-template>
+</p-toolbar>

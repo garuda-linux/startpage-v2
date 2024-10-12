@@ -1,11 +1,15 @@
-import { Component } from "@angular/core"
-import { MenuItem } from "primeng/api"
-import { MenubarModule } from "primeng/menubar"
+import { Component } from '@angular/core';
+import { MenuItem } from 'primeng/api';
+import { MenubarModule } from 'primeng/menubar';
+import { ToolbarModule } from 'primeng/toolbar';
+import { ButtonModule } from 'primeng/button';
+import { AvatarModule } from 'primeng/avatar';
+import { NgClass } from '@angular/common';
 
 @Component({
     selector: "app-menubar",
     standalone: true,
-    imports: [MenubarModule],
+    imports: [MenubarModule, ToolbarModule, ButtonModule, AvatarModule, NgClass],
     templateUrl: "./menubar.component.html",
     styleUrl: "./menubar.component.css",
 })
@@ -49,4 +53,8 @@ export class MenubarComponent {
     ]
 
     constructor() {}
+
+    navigateTo(url: string | undefined) {
+        window.open(url, "_blank")
+    }
 }

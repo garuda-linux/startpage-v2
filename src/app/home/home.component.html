@@ -1,39 +1,48 @@
-<div class="mt-10 mb-5">
-  <div class="mx-auto" style="width: 200px">
-    <p-image
-      src="/pictures/garuda.png"
-      alt="Image"
-      width="200"
-      id="search-image"
-    />
+<div class="mt-10 mb-2.5 md:flex">
+  <div class="md:w-3/4">
+    <div class="mx-auto" style="width: 100px">
+      <p-image
+        src="/pictures/garuda.png"
+        alt="Image"
+        width="100"
+        id="search-image"
+      />
+    </div>
+    <div>
+      <div class="text-center">
+        <input
+          type="text"
+          pInputText
+          pAutoFocus
+          [style]="{ width: '20rem', marginTop: '1rem' }"
+          [autofocus]="true"
+          [(ngModel)]="searchTerm"
+          (keydown.enter)="search($event)"
+          placeholder="Start your search..." />
+      </div>
+    </div>
+    <div class="p-10">
+      <div>
+      </div>
+      <div class="grid grid-cols-2 gap-10 md:gap-10">
+        @for (link of services; track link) {
+          <app-link [link]="link.link" [title]="link.title" [icon]="link.icon" [subtitle]="link.subtitle"
+                    [tag]="link.title"></app-link>
+        }
+      </div>
+    </div>
+
+    <div class="p-10">
+      <div class="grid grid-cols-2 gap-10  md:gap-10">
+        @for (link of contact; track link) {
+          <app-link [link]="link.link" [title]="link.title" [icon]="link.logo" [subtitle]="link.subtitle"
+                    [tag]="link.title"></app-link>
+        }
+      </div>
+    </div>
   </div>
-</div>
-<div>
-  <div class="text-center">
-    <input
-      type="text"
-      pInputText
-      pAutoFocus
-      [style]="{ width: '20rem', marginTop: '2rem' }"
-      [autofocus]="true"
-      [(ngModel)]="searchTerm"
-      (keydown.enter)="search($event)"
-      placeholder="Start your search..." />
-  </div>
-</div>
-<div class="p-10 max-w-[90%] mx-auto">
-  <div class="grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-4 md:gap-10">
-    @for (link of services; track link) {
-      <app-link [link]="link.link" [title]="link.title" [icon]="link.icon" [subtitle]="link.subtitle"
-                [tag]="link.title"></app-link>
-    }
-  </div>
-</div>
-<div class="p-10 max-w-[90%] mx-auto">
-  <div class="grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-4 md:gap-10">
-    @for (link of contact; track link) {
-      <app-link [link]="link.link" [title]="link.title" [icon]="link.logo" [subtitle]="link.subtitle"
-                [tag]="link.title"></app-link>
-    }
+  <div class="md:w-1/3 flex-auto">
+    <h2 class="font-bold text-center">Latest news</h2>
+    <app-news></app-news>
   </div>
 </div>

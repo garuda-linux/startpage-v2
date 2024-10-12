@@ -1,6 +1,9 @@
-<p-card header="{{ title }}" subheader="{{ subtitle }}"
-        [style]="{ width: '15rem', overflow: 'hidden', height: '10rem' }">
-  <ng-template pTemplate="header">
-    <img alt="Card" ngSrc="http://localhost:4200/{{ icon }}" height="50" width="50" />
-  </ng-template>
-</p-card>
+<p-chip
+  label="{{ title }}"
+  image="http://localhost:4200/{{ icon }}"
+  alt="{{ title + 'image' }}"
+  [style]="{ with: '100%' }"
+  (click)="navigateTo(link)"
+  pRipple
+  ngClass="cursor-pointer backdrop-blur"
+/>

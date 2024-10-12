@@ -1,1 +1,27 @@
-<p>news works!</p>
+@if (topicsList) {
+  <!--suppress ALL -->
+  <p-timeline [value]="topicsList" align="alternate" styleClass="customized-timeline">
+    <ng-template pTemplate="marker" let-event>
+        <span
+          class="flex w-8 h-8 items-center justify-center text-white rounded-full z-10 shadow-sm"
+          [style]="{ 'background-color': event }">
+                <i [class]="event.icon"></i>
+        </span>
+    </ng-template>
+    <ng-template pTemplate="content" let-event>
+      <p-card [header]="event.title" [subheader]="event.created_at | datePipe">
+        <img
+          *ngIf="event.avatar_template"
+          [src]="GARUDA_FORUM_URL + event.avatar_template"
+          [alt]="event.fancy_title"
+          width="50"
+          ngClass="rounded-3xl"
+          class="shadow" />
+        <p>
+          {{ event.excerpt }}
+        </p>
+        <p-button label="Read more" [text]="true" (click)="navigateTo(event)" pRipple />
+      </p-card>
+    </ng-template>
+  </p-timeline>
+}

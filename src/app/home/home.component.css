@@ -2,3 +2,11 @@
     margin-left: auto !important;
     margin-right: auto !important;
 }
+
+::ng-deep .p-card-title {
+   font-size: 1em !important;
+}
+
+::ng-deep .p-card-subtitle {
+    font-size: 0.8em !important;
+}

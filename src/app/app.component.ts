@@ -5,6 +5,7 @@ import { MenuModule } from "primeng/menu"
 import { MenubarModule } from "primeng/menubar"
 import { Aura } from "primeng/themes/aura"
 import { MenubarComponent } from "./menubar/menubar.component"
+import { Nora } from 'primeng/themes/nora';
 
 @Component({
     standalone: true,
@@ -12,13 +13,14 @@ import { MenubarComponent } from "./menubar/menubar.component"
     selector: "app-root",
     templateUrl: "./app.component.html",
     styleUrl: "./app.component.scss",
+    providers: []
 })
 export class AppComponent implements OnInit {
     title = "startpage-v2"
 
     constructor(private primengConfig: PrimeNGConfig) {
         this.primengConfig.theme.set({
-            preset: Aura,
+            preset: Nora,
             options: {
                 prefix: "p",
                 darkModeSelector: "system",
