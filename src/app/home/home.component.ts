@@ -1,10 +1,10 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { LinkComponent } from '../link/link.component';
-import { NewsComponent } from '../news/news.component';
-import { contactLinks, serviceLinks } from '../constants';
-import { loadTheme } from '../functions';
+import { CommonModule, NgOptimizedImage } from "@angular/common"
+import { AfterViewInit, Component, ElementRef, Renderer2 } from "@angular/core"
+import { FormsModule } from "@angular/forms"
+import { contactLinks, serviceLinks } from "../../../config"
+import { loadTheme } from "../functions"
+import { LinkComponent } from "../link/link.component"
+import { NewsComponent } from "../news/news.component"
 
 @Component({
     selector: "app-home",
@@ -35,7 +35,9 @@ export class HomeComponent implements AfterViewInit {
         if (savedTheme) {
             this.currentTheme = savedTheme
         } else {
-            const toast = document.getElementById("toast-reminder") as HTMLElement
+            const toast = document.getElementById(
+                "toast-reminder",
+            ) as HTMLElement
             toast.classList.add("flex")
             toast.classList.remove("hidden")
         }

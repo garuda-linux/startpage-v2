@@ -6,4 +6,8 @@ export const appRoutes: Route[] = [
         path: "",
         component: HomeComponent,
     },
+    {
+        path: "**",
+        redirectTo: "",
+    },
 ]

@@ -1,5 +1,5 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { CommonModule, NgOptimizedImage } from "@angular/common"
+import { Component, Input } from "@angular/core"
 
 @Component({
     selector: "app-link",
@@ -17,7 +17,7 @@ export class LinkComponent {
 
     navigateTo(link: string) {
         setTimeout(() => {
-            window.open(link, "_blank")
+            window.location.href = link
         }, 0)
     }
 }

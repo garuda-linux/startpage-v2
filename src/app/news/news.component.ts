@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { GARUDA_FORUM_URL } from '../constants';
-import { DatePipe } from '../date-pipe/date.pipe';
-import { EmojiPipe } from '../emoji-pipe/emoji.pipe';
-import { DiscourseFeed, Topic } from '../types';
+import { CommonModule } from "@angular/common"
+import { HttpClient } from "@angular/common/http"
+import { Component } from "@angular/core"
+import { GARUDA_FORUM_URL } from "../../../config"
+import { DatePipe } from "../date-pipe/date.pipe"
+import { EmojiPipe } from "../emoji-pipe/emoji.pipe"
+import { DiscourseFeed, Topic } from "../types"
 
 @Component({
     selector: "app-news",
@@ -26,7 +26,13 @@ export class NewsComponent {
 
     async getFeed() {
         this.http.get<DiscourseFeed>(this.rssUrl).subscribe(async (data) => {
+            // Ensure the topics are sorted by date, then slice the first
+            data.topic_list.topics.sort((a, b) => {
+                // @ts-ignore
+                return new Date(b.created_at) - new Date(a.created_at)
+            })
             this.topicsList = data.topic_list.topics.slice(0, 10)
+
             for (const topic of this.topicsList) {
                 topic.avatar_template = this.getPosterAvatar(
                     data,
@@ -35,8 +41,9 @@ export class NewsComponent {
                 // Get rid of the emojis showing up in the titles
                 topic.title = topic.title.replace(/:.*?:/g, "")
                 topic.link = `${GARUDA_FORUM_URL}/t/${topic.slug}`
-                this.loading = false
             }
+
+            this.loading = false
         })
     }
 

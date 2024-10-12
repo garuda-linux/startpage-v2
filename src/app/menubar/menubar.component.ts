@@ -1,5 +1,5 @@
-import { NgClass, NgStyle } from '@angular/common';
-import { Component } from '@angular/core';
+import { NgClass, NgStyle } from "@angular/common"
+import { Component } from "@angular/core"
 
 @Component({
     selector: "app-menubar",
@@ -46,4 +46,9 @@ export class MenubarComponent {
             title: "Donate",
         },
     ]
+    settingName = false
+
+    setName() {
+        this.settingName = true
+    }
 }

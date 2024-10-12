@@ -1,11 +1,18 @@
-import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { MenubarComponent } from './menubar/menubar.component';
+import {
+    Component,
+    ElementRef,
+    Inject,
+    OnInit,
+    PLATFORM_ID,
+    Renderer2,
+} from "@angular/core"
+import { RouterModule } from "@angular/router"
+import { MenubarComponent } from "./menubar/menubar.component"
 
-import { initFlowbite } from 'flowbite';
-import { HttpClient } from '@angular/common/http';
-import { isPlatformBrowser } from '@angular/common';
-import { loadTheme } from './functions';
+import { isPlatformBrowser } from "@angular/common"
+import { HttpClient } from "@angular/common/http"
+import { initFlowbite } from "flowbite"
+import { loadTheme } from "./functions"
 
 @Component({
     standalone: true,
