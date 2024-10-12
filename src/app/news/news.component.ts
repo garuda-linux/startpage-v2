@@ -1,14 +1,15 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { DiscourseFeed, Topic } from '../types';
-import { CardModule } from 'primeng/card';
-import { TimelineModule } from 'primeng/timeline';
-import { ButtonModule } from 'primeng/button';
-import { DatePipe } from '../date-pipe/date.pipe';
-import { Ripple } from 'primeng/ripple';
-import { GARUDA_FORUM_URL } from '../constants';
-import { EmojiPipe } from '../emoji-pipe/emoji.pipe';
+import { CommonModule } from "@angular/common"
+import { HttpClient } from "@angular/common/http"
+import { Component } from "@angular/core"
+import { ButtonModule } from "primeng/button"
+import { CardModule } from "primeng/card"
+import { Ripple } from "primeng/ripple"
+import { SkeletonModule } from "primeng/skeleton"
+import { TimelineModule } from "primeng/timeline"
+import { GARUDA_FORUM_URL } from "../constants"
+import { DatePipe } from "../date-pipe/date.pipe"
+import { EmojiPipe } from "../emoji-pipe/emoji.pipe"
+import { DiscourseFeed, Topic } from "../types"
 
 @Component({
     selector: "app-news",
@@ -21,6 +22,7 @@ import { EmojiPipe } from '../emoji-pipe/emoji.pipe';
         DatePipe,
         Ripple,
         EmojiPipe,
+        SkeletonModule,
     ],
     templateUrl: "./news.component.html",
     styleUrl: "./news.component.css",
@@ -28,20 +30,17 @@ import { EmojiPipe } from '../emoji-pipe/emoji.pipe';
 })
 export class NewsComponent {
     rssUrl = "http://localhost:8010/proxy/c/announcements/16.json"
-    rssData: DiscourseFeed | undefined
     avatarSize = "100"
     topicsList: Topic[] = []
+    loading = true
 
-    constructor(
-        private emojiPipe: EmojiPipe,
-        private http: HttpClient,
-    ) {
-        this.getFeed()
+    constructor(private http: HttpClient) {
+        void this.getFeed()
     }
 
     async getFeed() {
         this.http.get<DiscourseFeed>(this.rssUrl).subscribe(async (data) => {
-            this.topicsList = data.topic_list.topics.slice(0, 9)
+            this.topicsList = data.topic_list.topics.slice(0, 5)
             for (const topic of this.topicsList) {
                 topic.avatar_template = this.getPosterAvatar(
                     data,
@@ -49,6 +48,7 @@ export class NewsComponent {
                 )
                 // Get rid of the emojis showing up in the titles
                 topic.title = topic.title.replace(/:.*?:/g, "")
+                this.loading = false
             }
         })
     }
@@ -67,5 +67,14 @@ export class NewsComponent {
 
     protected readonly GARUDA_FORUM_URL = GARUDA_FORUM_URL
 
-    navigateTo(event: any) {}
+    navigateTo(event: Topic) {
+        setTimeout(
+            () =>
+                window.open(
+                    `https://forum.garudalinux.org/t/${event.slug}`,
+                    "_blank",
+                ),
+            500,
+        )
+    }
 }

@@ -1,13 +1,14 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, ViewChild, ViewContainerRef } from "@angular/core"
+import { CommonModule, NgOptimizedImage } from "@angular/common"
+import { Component } from "@angular/core"
 import { FormsModule } from "@angular/forms"
 import { AutoFocus } from "primeng/autofocus"
+import { DataViewModule } from "primeng/dataview"
 import { FluidModule } from "primeng/fluid"
 import { ImageModule } from "primeng/image"
 import { InputTextModule } from "primeng/inputtext"
+import { ToastModule } from "primeng/toast"
 import { LinkComponent } from "../link/link.component"
-import { DataViewModule } from 'primeng/dataview';
-import { NewsComponent } from '../news/news.component';
+import { NewsComponent } from "../news/news.component"
 
 @Component({
     selector: "app-home",
@@ -22,7 +23,7 @@ import { NewsComponent } from '../news/news.component';
         ImageModule,
         DataViewModule,
         NgOptimizedImage,
-        NewsComponent
+        NewsComponent,
     ],
     templateUrl: "./home.component.html",
     styleUrl: "./home.component.css",

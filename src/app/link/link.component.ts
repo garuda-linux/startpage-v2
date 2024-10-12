@@ -1,11 +1,12 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { AvatarModule } from 'primeng/avatar';
-import { CardModule } from 'primeng/card';
-import { PanelModule } from 'primeng/panel';
-import { Ripple } from 'primeng/ripple';
-import { TagModule } from 'primeng/tag';
-import { ChipModule } from 'primeng/chip';
+import { CommonModule, NgOptimizedImage } from "@angular/common"
+import { Component, Input } from "@angular/core"
+import { AvatarModule } from "primeng/avatar"
+import { CardModule } from "primeng/card"
+import { ChipModule } from "primeng/chip"
+import { PanelModule } from "primeng/panel"
+import { Ripple } from "primeng/ripple"
+import { TagModule } from "primeng/tag"
+import { TooltipModule } from "primeng/tooltip"
 
 @Component({
     selector: "app-link",
@@ -19,6 +20,7 @@ import { ChipModule } from 'primeng/chip';
         CardModule,
         NgOptimizedImage,
         ChipModule,
+        TooltipModule,
     ],
     templateUrl: "./link.component.html",
     styleUrl: "./link.component.css",

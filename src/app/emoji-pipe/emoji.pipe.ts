@@ -1,5 +1,5 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { EmojiConvertor } from 'emoji-js';
+import { Pipe, PipeTransform } from "@angular/core"
+import { EmojiConvertor } from "emoji-js"
 
 @Pipe({
     name: "emojiPipe",

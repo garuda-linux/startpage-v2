@@ -14,17 +14,17 @@
           type="text"
           pInputText
           pAutoFocus
-          [style]="{ width: '20rem', marginTop: '1rem' }"
+          [style]="{ width: '20rem', marginTop: '1rem', borderRadius: '1rem' }"
           [autofocus]="true"
           [(ngModel)]="searchTerm"
           (keydown.enter)="search($event)"
           placeholder="Start your search..." />
       </div>
     </div>
-    <div class="p-10">
+    <div class="p-10 mt-5">
       <div>
       </div>
-      <div class="grid grid-cols-2 gap-10 md:gap-10">
+      <div class="grid grid-cols-2 gap-10 lg:grid-cols-3 md:gap-10 xl:grid-cols-4">
         @for (link of services; track link) {
           <app-link [link]="link.link" [title]="link.title" [icon]="link.icon" [subtitle]="link.subtitle"
                     [tag]="link.title"></app-link>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="p-10">
-      <div class="grid grid-cols-2 gap-10  md:gap-10">
+      <div class="grid grid-cols-2 gap-10 lg:grid-cols-3 md:gap-10 xl:grid-cols-4">
         @for (link of contact; track link) {
           <app-link [link]="link.link" [title]="link.title" [icon]="link.logo" [subtitle]="link.subtitle"
                     [tag]="link.title"></app-link>

@@ -1,15 +1,26 @@
-import { Component } from '@angular/core';
-import { MenuItem } from 'primeng/api';
-import { MenubarModule } from 'primeng/menubar';
-import { ToolbarModule } from 'primeng/toolbar';
-import { ButtonModule } from 'primeng/button';
-import { AvatarModule } from 'primeng/avatar';
-import { NgClass } from '@angular/common';
+import { NgClass, NgStyle } from "@angular/common"
+import { Component } from "@angular/core"
+import { MenuItem } from "primeng/api"
+import { AvatarModule } from "primeng/avatar"
+import { ButtonModule } from "primeng/button"
+import { FluidModule } from "primeng/fluid"
+import { MenubarModule } from "primeng/menubar"
+import { StyleClassModule } from "primeng/styleclass"
+import { ToolbarModule } from "primeng/toolbar"
 
 @Component({
     selector: "app-menubar",
     standalone: true,
-    imports: [MenubarModule, ToolbarModule, ButtonModule, AvatarModule, NgClass],
+    imports: [
+        MenubarModule,
+        ToolbarModule,
+        ButtonModule,
+        AvatarModule,
+        NgClass,
+        FluidModule,
+        StyleClassModule,
+        NgStyle,
+    ],
     templateUrl: "./menubar.component.html",
     styleUrl: "./menubar.component.css",
 })
@@ -21,9 +32,19 @@ export class MenubarComponent {
             title: "Homepage",
         },
         {
+            label: "Forum",
+            url: "https://forum.garudalinux.org",
+            title: "Forum",
+        },
+        {
             label: "GitLab",
             url: "https://gitlab.com/garuda-linux",
             title: "GitLab",
+        },
+        {
+            label: "About us",
+            url: "https://garudalinux.org/about.html",
+            title: "About us",
         },
         {
             label: "Garuda Wiki",
@@ -36,23 +57,11 @@ export class MenubarComponent {
             title: "Arch Wiki",
         },
         {
-            label: "Forum",
-            url: "https://forum.garudalinux.org",
-            title: "Forum",
-        },
-        {
             label: "Donate",
             url: "https://garudalinux.org/donate.html",
             title: "Donate",
         },
-        {
-            label: "About us",
-            url: "https://garudalinux.org/about.html",
-            title: "About us",
-        },
     ]
-
-    constructor() {}
 
     navigateTo(url: string | undefined) {
         window.open(url, "_blank")

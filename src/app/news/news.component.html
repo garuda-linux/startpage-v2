@@ -1,4 +1,4 @@
-@if (topicsList) {
+@if (topicsList && !loading) {
   <!--suppress ALL -->
   <p-timeline [value]="topicsList" align="alternate" styleClass="customized-timeline">
     <ng-template pTemplate="marker" let-event>
@@ -9,19 +9,20 @@
         </span>
     </ng-template>
     <ng-template pTemplate="content" let-event>
-      <p-card [header]="event.title" [subheader]="event.created_at | datePipe">
+      <p-card [header]="event.title" [subheader]="event.created_at | datePipe"
+              [style]="{borderRadius: '1rem'}">
         <img
           *ngIf="event.avatar_template"
           [src]="GARUDA_FORUM_URL + event.avatar_template"
           [alt]="event.fancy_title"
           width="50"
-          ngClass="rounded-3xl"
+          ngClass="rounded-3xl mx-auto"
           class="shadow" />
-        <p>
-          {{ event.excerpt }}
-        </p>
         <p-button label="Read more" [text]="true" (click)="navigateTo(event)" pRipple />
       </p-card>
     </ng-template>
   </p-timeline>
+}
+@else {
+  <p-skeleton styleClass="mx-auto mt-10" width="80%" height="90%" borderRadius="16px" />
 }
