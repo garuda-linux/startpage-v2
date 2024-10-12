@@ -29,7 +29,7 @@ import { DiscourseFeed, Topic } from "../types"
     providers: [DatePipe, EmojiPipe],
 })
 export class NewsComponent {
-    rssUrl = "http://localhost:8010/proxy/c/announcements/16.json"
+    rssUrl = `${GARUDA_FORUM_URL}/c/announcements/16.json`
     avatarSize = "100"
     topicsList: Topic[] = []
     loading = true
