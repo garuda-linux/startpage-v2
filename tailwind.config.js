@@ -6,9 +6,14 @@ module.exports = {
     content: [
         join(__dirname, "src/**/!(*.stories|*.spec).{ts,html}"),
         ...createGlobPatternsForDependencies(__dirname),
+        "./node_modules/flowbite/**/*.js",
     ],
     theme: {
         extend: {},
     },
-    plugins: [require("autoprefixer"), require("tailwindcss-primeui")],
+    plugins: [
+        require("autoprefixer"),
+        require("@catppuccin/tailwindcss"),
+        require("flowbite/plugin"),
+    ],
 }

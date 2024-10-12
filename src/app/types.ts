@@ -41,6 +41,7 @@ export interface TopicList {
 }
 
 export interface Topic {
+    link?: string;
     id: number
     title: string
     fancy_title: string

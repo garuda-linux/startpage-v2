@@ -1,31 +1,15 @@
-import { NgClass, NgStyle } from "@angular/common"
-import { Component } from "@angular/core"
-import { MenuItem } from "primeng/api"
-import { AvatarModule } from "primeng/avatar"
-import { ButtonModule } from "primeng/button"
-import { FluidModule } from "primeng/fluid"
-import { MenubarModule } from "primeng/menubar"
-import { StyleClassModule } from "primeng/styleclass"
-import { ToolbarModule } from "primeng/toolbar"
+import { NgClass, NgStyle } from '@angular/common';
+import { Component } from '@angular/core';
 
 @Component({
     selector: "app-menubar",
     standalone: true,
-    imports: [
-        MenubarModule,
-        ToolbarModule,
-        ButtonModule,
-        AvatarModule,
-        NgClass,
-        FluidModule,
-        StyleClassModule,
-        NgStyle,
-    ],
+    imports: [NgClass, NgStyle],
     templateUrl: "./menubar.component.html",
     styleUrl: "./menubar.component.css",
 })
 export class MenubarComponent {
-    items: MenuItem[] = [
+    items = [
         {
             label: "Homepage",
             url: "https://garudalinux.org",
@@ -62,8 +46,4 @@ export class MenubarComponent {
             title: "Donate",
         },
     ]
-
-    navigateTo(url: string | undefined) {
-        window.open(url, "_blank")
-    }
 }

@@ -1,31 +1,58 @@
-<div class="mt-10 mb-2.5 md:flex">
+<div class="sm:pt-20 pt-28 mb-2.5 md:flex">
   <div class="md:w-3/4">
-    <div class="mx-auto" style="width: 100px">
-      <p-image
-        src="/pictures/garuda.png"
-        alt="Image"
-        width="100"
-        id="search-image"
-      />
+    <div class="w-full">
+      <svg
+        (click)="toggleTheme()"
+        class="mx-auto text-maroon"
+        fill="none"
+        width="25%"
+        height="25%"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 300 300"
+        xmlns="http://www.w3.org/2000/svg">
+        <g>
+          <path
+            id="path47"
+            d="M 128.9242,44.34375 C 87.9412,85.07259 46.5836,126.81061 6.2738,167.55159 35.0192,196.36646 64.8301,226.21 93.9313,255.36194 l 89.8755,0.29431 75.8734,-75.65304 -164.7354,-0.14591 -18.265,18.43573 137.875,0.29441 -38.2989,38.29577 -74.6891,2e-5 L 32.2821,167.59834 136.9616,62.92039 h 75.2666 L 269.8996,120.57824 180.06,120.4681 V 95.08632 l -6.8314,6.8314 v -0.0187 l -18.535,18.53654 h 6.8314 l 2e-4,0.009 -6.8314,-0.009 -18.7144,18.73239 h 25.5458 v 0.0428 h 18.5347 v -0.0428 h 95.0912 v 25.17054 l 18.5751,-18.57508 -0.041,-27.60873 c 0,0 -49.4765,-49.47659 -73.7655,-73.76555 z m 90.9969,0.0472 h 1.0629 l -1.0809,-0.0187 z" />
+          <path
+            id="path1038"
+            d="M 126.4242,41.84375 C 85.4412,82.57259 44.0836,124.31061 3.7738,165.05159 32.5192,193.86646 62.3301,223.71 91.4313,252.86194 l 89.8755,0.29431 75.8734,-75.65304 -164.7354,-0.14591 -18.265,18.43573 137.875,0.29441 -38.2989,38.29577 -74.6891,2e-5 L 29.7821,165.09834 134.4616,60.42039 h 75.2666 L 267.3996,118.07824 177.56,117.9681 V 92.58632 l -6.8314,6.8314 v -0.0187 l -18.535,18.53654 h 6.8314 l 2e-4,0.009 -6.8314,-0.009 -18.7144,18.73239 h 25.5458 v 0.0428 h 18.5347 v -0.0428 h 95.0912 v 25.17054 l 18.5751,-18.57508 -0.041,-27.60873 c 0,0 -49.4765,-49.47659 -73.7655,-73.76555 z m 90.9969,0.0472 h 1.0629 l -1.0809,-0.0187 z" />
+        </g>
+      </svg>
     </div>
-    <div>
-      <div class="text-center">
-        <input
-          type="text"
-          pInputText
-          pAutoFocus
-          [style]="{ width: '20rem', marginTop: '1rem', borderRadius: '1rem' }"
-          [autofocus]="true"
-          [(ngModel)]="searchTerm"
-          (keydown.enter)="search($event)"
-          placeholder="Start your search..." />
-      </div>
+    <div class="pt-5">
+      <form class="max-w-md sm:mx-auto mx-10">
+        <label for="search"
+               class="mb-2 text-sm font-medium text-text sr-only bg-maroon">Search</label>
+        <div class="relative">
+          <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg class="w-4 h-4 text-maroon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                 fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+            </svg>
+          </div>
+          <input type="search" id="search" name="name "
+                 class="block w-full p-4 ps-10 text-sm rounded-lg bg-surface0 focus:ring-maroon focus:border-maroon"
+                 placeholder="Start your search now..." required
+                 [(ngModel)]="searchTerm" />
+          <button type="submit"
+                  class="absolute end-2.5 bottom-2.5 bg-surface1 text-maroon hover:text-base hover:bg-mauve focus:ring-4
+                  focus:outline-none focus:ring-maroon font-medium rounded-lg text-sm px-4 py-2"
+                  (click)="search()">
+            Search
+          </button>
+        </div>
+      </form>
     </div>
-    <div class="p-10 mt-5">
+    <div class="p-10">
       <div>
       </div>
       <div class="grid grid-cols-2 gap-10 lg:grid-cols-3 md:gap-10 xl:grid-cols-4">
-        @for (link of services; track link) {
+        @for (link of serviceLinks; track link) {
           <app-link [link]="link.link" [title]="link.title" [icon]="link.icon" [subtitle]="link.subtitle"
                     [tag]="link.title"></app-link>
         }
@@ -34,15 +61,31 @@
 
     <div class="p-10">
       <div class="grid grid-cols-2 gap-10 lg:grid-cols-3 md:gap-10 xl:grid-cols-4">
-        @for (link of contact; track link) {
+        @for (link of contactLinks; track link) {
           <app-link [link]="link.link" [title]="link.title" [icon]="link.logo" [subtitle]="link.subtitle"
                     [tag]="link.title"></app-link>
         }
       </div>
     </div>
   </div>
-  <div class="md:w-1/3 flex-auto">
-    <h2 class="font-bold text-center">Latest news</h2>
+  <div class="md:w-1/3 flex-auto mx-14 md:mx-10">
+    <h2 class="font-bold text-lg text-center text-text mb-5">Latest news</h2>
     <app-news></app-news>
   </div>
+</div>
+
+<div id="toast-reminder"
+     class="fixed hidden justify-end items-center w-full z-50 max-w-[18rem] p-4 space-x-4 text-maroon bg-surface1 rounded-lg shadow top-5 right-5"
+     role="alert">
+  <div class="text-sm font-normal">Try clicking the Garuda logo 🎨</div>
+  <button type="button"
+          class="ms-auto  -my-1.5 bg-surface0 text-mauve hover:text-base rounded-lg focus:ring-2
+         mx-auto hover:bg-mauve inline-flex items-center justify-center h-8 w-8"
+          data-dismiss-target="#toast-reminder" aria-label="Close">
+    <span class="sr-only">Close</span>
+    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+    </svg>
+  </button>
 </div>

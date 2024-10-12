@@ -5,12 +5,33 @@
 /* You can add global styles to this file, and also import other style files */
 @import "@fontsource/jetbrains-mono";
 @import "@fontsource/fira-sans";
+@import "@catppuccin/palette/css/catppuccin.css";
+
+/* Work around https://github.com/tailwindlabs/tailwindcss/discussions/8679#discussioncomment-8686149 */
+@layer components {
+  .autofill-text:-webkit-autofill {
+    -webkit-text-fill-color: var(--ctp-mocha-maroon);
+  }
+
+  .text-input {
+    @apply autofill-text;
+    @apply autofill:shadow-[inset_0_0_0px_1000px_var(--ctp-mocha-surface0)];
+  }
+}
+
+/* Global CSS */
+html {
+  scrollbar-color: var(--ctp-mocha-maroon) var(--ctp-mocha-surface0);
+}
 
 body {
+  margin: 0;
   font-style: normal;
   font-weight: 400;
   font-family: "Fira Sans", sans-serif;
+  @apply text-sm selection:bg-mauve selection:text-base;
 }
+
 code,
 pre,
 tt,
@@ -20,4 +41,5 @@ samp {
   font-weight: 400;
   font-family: "JetBrains Mono", monospace;
   font-optical-sizing: auto;
+  @apply text-sm selection:bg-mauve selection:text-base;
 }

@@ -1,28 +1,36 @@
 @if (topicsList && !loading) {
-  <!--suppress ALL -->
-  <p-timeline [value]="topicsList" align="alternate" styleClass="customized-timeline">
-    <ng-template pTemplate="marker" let-event>
-        <span
-          class="flex w-8 h-8 items-center justify-center text-white rounded-full z-10 shadow-sm"
-          [style]="{ 'background-color': event }">
-                <i [class]="event.icon"></i>
-        </span>
-    </ng-template>
-    <ng-template pTemplate="content" let-event>
-      <p-card [header]="event.title" [subheader]="event.created_at | datePipe"
-              [style]="{borderRadius: '1rem'}">
-        <img
-          *ngIf="event.avatar_template"
-          [src]="GARUDA_FORUM_URL + event.avatar_template"
-          [alt]="event.fancy_title"
-          width="50"
-          ngClass="rounded-3xl mx-auto"
-          class="shadow" />
-        <p-button label="Read more" [text]="true" (click)="navigateTo(event)" pRipple />
-      </p-card>
-    </ng-template>
-  </p-timeline>
+  <ol class="relative border-s border-mauve">
+    @for (topic of topicsList; track topic) {
+      <li class="mb-10 ms-4">
+        <div
+          class="absolute w-3 h-3 bg-surface0 rounded-full mt-1.5 -start-1.5 border border-maroon"></div>
+        <time class="mb-1 text-sm font-normal leading-none text-text">{{ topic.created_at | datePipe }}</time>
+        <h3 class="text-lg font-semibold text-maroon">{{ topic.title }}</h3>
+        <p class="mb-4 text-base font-normal text-mauve">{{ topic.excerpt }}</p>
+        <a href="{{ topic.link }}"
+           class="inline-flex items-center px-4 py-2 text-sm font-medium text-text bg-surface0 rounded-lg hover:bg-mauve hover:text-base">
+          Read more
+          <svg class="w-3 h-3 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+               viewBox="0 0 14 10">
+            <path class="text-maroon focus:text-base" stroke="currentColor" stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 5h12m0 0L9 1m4 4L9 9" />
+          </svg>
+        </a>
+      </li>
+    }
+  </ol>
+} @else {
+  <div role="status" class="max-w-sm animate-pulse">
+    <div class="h-2.5 bg-gray-200 rounded-full w-48 mb-4"></div>
+    <div class="h-2 bg-gray-200 rounded-full max-w-[360px] mb-2.5"></div>
+    <div class="h-2 bg-gray-200 rounded-full mb-2.5"></div>
+    <div class="h-2 bg-gray-200 rounded-full max-w-[330px] mb-2.5"></div>
+    <div class="h-2 bg-gray-200 rounded-full max-w-[300px] mb-2.5"></div>
+    <div class="h-2 bg-gray-200 rounded-full max-w-[360px]"></div>
+    <span class="sr-only">Loading...</span>
+  </div>
 }
-@else {
-  <p-skeleton styleClass="mx-auto mt-10" width="80%" height="90%" borderRadius="16px" />
-}
+
+

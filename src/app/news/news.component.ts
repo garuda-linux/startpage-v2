@@ -1,29 +1,15 @@
-import { CommonModule } from "@angular/common"
-import { HttpClient } from "@angular/common/http"
-import { Component } from "@angular/core"
-import { ButtonModule } from "primeng/button"
-import { CardModule } from "primeng/card"
-import { Ripple } from "primeng/ripple"
-import { SkeletonModule } from "primeng/skeleton"
-import { TimelineModule } from "primeng/timeline"
-import { GARUDA_FORUM_URL } from "../constants"
-import { DatePipe } from "../date-pipe/date.pipe"
-import { EmojiPipe } from "../emoji-pipe/emoji.pipe"
-import { DiscourseFeed, Topic } from "../types"
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { GARUDA_FORUM_URL } from '../constants';
+import { DatePipe } from '../date-pipe/date.pipe';
+import { EmojiPipe } from '../emoji-pipe/emoji.pipe';
+import { DiscourseFeed, Topic } from '../types';
 
 @Component({
     selector: "app-news",
     standalone: true,
-    imports: [
-        CommonModule,
-        CardModule,
-        TimelineModule,
-        ButtonModule,
-        DatePipe,
-        Ripple,
-        EmojiPipe,
-        SkeletonModule,
-    ],
+    imports: [CommonModule, DatePipe, EmojiPipe],
     templateUrl: "./news.component.html",
     styleUrl: "./news.component.css",
     providers: [DatePipe, EmojiPipe],
@@ -40,7 +26,7 @@ export class NewsComponent {
 
     async getFeed() {
         this.http.get<DiscourseFeed>(this.rssUrl).subscribe(async (data) => {
-            this.topicsList = data.topic_list.topics.slice(0, 5)
+            this.topicsList = data.topic_list.topics.slice(0, 10)
             for (const topic of this.topicsList) {
                 topic.avatar_template = this.getPosterAvatar(
                     data,
@@ -48,6 +34,7 @@ export class NewsComponent {
                 )
                 // Get rid of the emojis showing up in the titles
                 topic.title = topic.title.replace(/:.*?:/g, "")
+                topic.link = `${GARUDA_FORUM_URL}/t/${topic.slug}`
                 this.loading = false
             }
         })
