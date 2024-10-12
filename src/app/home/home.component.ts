@@ -39,10 +39,10 @@ export class HomeComponent {
         },
         {
             link: "https://searx.garudalinux.org",
-            title: "Searx",
-            icon: "pictures/searx.svg",
-            subtitle: "Privacy-respecting metasearch engine",
-            tag: "Searx",
+            title: "SearxNG",
+            icon: "pictures/searxng.svg",
+            subtitle: "Privacy-respecting meta search engine",
+            tag: "SearxNG",
         },
         {
             link: "https://reddit.garudalinux.org",
@@ -67,8 +67,8 @@ export class HomeComponent {
         },
         {
             link: "https://builds.garudalinux.org/iso/garuda/",
-            title: "ISO Builds",
-            icon: "pictures/iso.svg",
+            title: "ISO builds",
+            icon: "pictures/iso.webp",
             subtitle: "Garuda Iso Builds",
             tag: "ISO Builds",
         },
@@ -102,14 +102,14 @@ export class HomeComponent {
         },
         {
             link: "https://status.garudalinux.org",
-            title: "General statuspage",
+            title: "Statuspage",
             icon: "pictures/freshstatus.svg",
             subtitle: "Statuspage",
             tag: "Statuspage",
         },
         {
             link: "https://stats.garudalinux.org",
-            title: "Uptime monitoring",
+            title: "Uptimes",
             icon: "pictures/freshping.svg",
             subtitle: "Uptime stats",
             tag: "Uptimes",
@@ -126,7 +126,7 @@ export class HomeComponent {
         },
         {
             link: "https://telegram.me/garudalinux",
-            title: "Telegram (bridged)",
+            title: "Telegram",
             logo: "pictures/telegram.svg",
             subtitle: "Chat with us on Telegram",
             tag: "Telegram",
@@ -137,13 +137,6 @@ export class HomeComponent {
             logo: "pictures/discord.svg",
             subtitle: "Chat with us on Discord",
             tag: "Discord",
-        },
-        {
-            link: "https://irc.garudalinux.org",
-            title: "IRC (bridged)",
-            logo: "pictures/thelounge.png",
-            subtitle: "Use the official Garuda IRC",
-            tag: "IRC",
         },
         {
             link: "https://bsky.app/profile/garudalinux.bsky.social",
