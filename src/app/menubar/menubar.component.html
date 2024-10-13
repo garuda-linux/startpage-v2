@@ -3,8 +3,7 @@
   <div class="flex flex-wrap items-center justify-between md:justify-end mx-auto p-4">
     <a class="flex md:mr-auto  items-center space-x-3 rtl:space-x-reverse">
       <img src="/favicon.png" class="h-8" alt="Garuda Logo">
-      <span class="self-center text-xl font-semibold whitespace-nowrap text-maroon"
-            (click)="setName()">Welcome! 👋🏻</span>
+      <span class="self-center text-xl font-semibold whitespace-nowrap text-maroon">Welcome! 👋🏻</span>
       <div class="w-full"></div>
     </a>
     <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -23,10 +22,17 @@
       <ul
         class="flex flex-col p-4 md:p-0 mt-4 font-medium rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0">
         @for (item of items; track item) {
-          <li>
-            <a href="{{ item.url }}"
-               class="block text-lg py-2 px-3 text-maroon rounded hover:bg-surface0 hover:text-mauve md:hover:bg-transparent md:hover:text-mauve md:p-0">{{ item.title }}</a>
-          </li>
+          @if (item.url !== undefined) {
+            <li>
+              <a href="{{ item.url }}"
+                 class="block text-lg py-2 px-3 text-maroon rounded hover:bg-surface0 hover:text-mauve md:hover:bg-transparent md:hover:text-mauve md:p-0">{{ item.title }}</a>
+            </li>
+          } @else if (item.routerLink !== undefined) {
+            <li [routerLink]="item.routerLink">
+              <a
+                class="block text-lg py-2 px-3 text-maroon rounded hover:bg-surface0 hover:text-mauve md:hover:bg-transparent md:hover:text-mauve md:p-0">{{ item.title }}</a>
+            </li>
+          }
         }
       </ul>
     </div>

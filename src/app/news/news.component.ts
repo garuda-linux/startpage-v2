@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common"
 import { HttpClient } from "@angular/common/http"
 import { Component } from "@angular/core"
+import { RouterLink } from "@angular/router"
 import { GARUDA_FORUM_URL } from "../../../config"
 import { DatePipe } from "../date-pipe/date.pipe"
 import { EmojiPipe } from "../emoji-pipe/emoji.pipe"
@@ -9,7 +10,7 @@ import { DiscourseFeed, Topic } from "../types"
 @Component({
     selector: "app-news",
     standalone: true,
-    imports: [CommonModule, DatePipe, EmojiPipe],
+    imports: [CommonModule, DatePipe, EmojiPipe, RouterLink],
     templateUrl: "./news.component.html",
     styleUrl: "./news.component.css",
     providers: [DatePipe, EmojiPipe],

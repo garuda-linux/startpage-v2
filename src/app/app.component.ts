@@ -1,3 +1,4 @@
+import { isPlatformBrowser } from "@angular/common"
 import {
     Component,
     ElementRef,
@@ -7,12 +8,10 @@ import {
     Renderer2,
 } from "@angular/core"
 import { RouterModule } from "@angular/router"
-import { MenubarComponent } from "./menubar/menubar.component"
-
-import { isPlatformBrowser } from "@angular/common"
-import { HttpClient } from "@angular/common/http"
 import { initFlowbite } from "flowbite"
 import { loadTheme } from "./functions"
+import { MenubarComponent } from "./menubar/menubar.component"
+import { RedirectGuard } from "./redirect/redirect.guard"
 
 @Component({
     standalone: true,
@@ -20,7 +19,7 @@ import { loadTheme } from "./functions"
     selector: "app-root",
     templateUrl: "./app.component.html",
     styleUrl: "./app.component.scss",
-    providers: [],
+    providers: [RedirectGuard],
 })
 export class AppComponent implements OnInit {
     title = "Garuda Startpage"

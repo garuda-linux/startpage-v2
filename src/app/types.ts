@@ -1,3 +1,5 @@
+import { SearchEngine } from "../../config"
+
 export interface DiscourseFeed {
     users: User[]
     primary_groups: PrimaryGroup[]
@@ -95,3 +97,36 @@ export interface Poster {
 export interface EmojiMap {
     [key: string]: string
 }
+
+export interface MenuBarLink {
+    label: string
+    routerLink?: string
+    title: string
+    url?: string
+}
+export type MenuarBarItems = MenuBarLink[]
+
+export interface ContactLink {
+    link: string
+    logo: string
+    routerLink?: string
+    subtitle: string
+    title: string
+}
+export type ContactLinks = ContactLink[]
+
+export interface ServiceLink {
+    icon: string
+    link: string
+    routerLink?: string
+    subtitle: string
+    title: string
+}
+export type ServiceLinks = ServiceLink[]
+
+export interface SearchEngineEntry {
+    name: SearchEngine
+    prettyName: string
+    url: string
+}
+export type SearchEngineList = SearchEngineEntry[]

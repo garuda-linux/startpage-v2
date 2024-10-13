@@ -27,3 +27,12 @@ export function loadTheme(theme: string, renderer: Renderer2, el: ElementRef) {
     )
     return theme
 }
+
+/**
+ * Generate a routerLink as a string.
+ * @param title The title to generate the routerLink from.
+ * @returns The generated routerLink
+ */
+export function generateRouterLink(title: string): string {
+    return title.toLowerCase().replace(/\s/g, "-")
+}

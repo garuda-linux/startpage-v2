@@ -1,0 +1,19 @@
+<div class="p-10">
+  <div>
+  </div>
+  <div class="grid grid-cols-2 gap-10 lg:grid-cols-3 md:gap-10 xl:grid-cols-4">
+    @for (link of serviceLinks; track link) {
+      <app-link [link]="link.link" [title]="link.title" [icon]="link.icon" [subtitle]="link.subtitle"
+                [tag]="link.title"></app-link>
+    }
+  </div>
+</div>
+
+<div class="p-10">
+  <div class="grid grid-cols-2 gap-10 lg:grid-cols-3 md:gap-10 xl:grid-cols-4">
+    @for (link of contactLinks; track link) {
+      <app-link [link]="link.link" [title]="link.title" [icon]="link.logo" [subtitle]="link.subtitle"
+                [tag]="link.title"></app-link>
+    }
+  </div>
+</div>

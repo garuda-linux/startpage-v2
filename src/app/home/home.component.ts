@@ -3,8 +3,11 @@ import { AfterViewInit, Component, ElementRef, Renderer2 } from "@angular/core"
 import { FormsModule } from "@angular/forms"
 import { contactLinks, serviceLinks } from "../../../config"
 import { loadTheme } from "../functions"
+import { LinkSectionComponent } from "../link-section/link-section.component"
 import { LinkComponent } from "../link/link.component"
 import { NewsComponent } from "../news/news.component"
+import { SearchComponent } from "../search/search.component"
+import { ContactLinks, ServiceLinks } from "../types"
 
 @Component({
     selector: "app-home",
@@ -15,14 +18,13 @@ import { NewsComponent } from "../news/news.component"
         FormsModule,
         NgOptimizedImage,
         NewsComponent,
+        LinkSectionComponent,
+        SearchComponent,
     ],
     templateUrl: "./home.component.html",
     styleUrl: "./home.component.css",
 })
 export class HomeComponent implements AfterViewInit {
-    serviceLinks = serviceLinks
-    contactLinks = contactLinks
-    searchTerm = ""
     currentTheme: undefined | string = "mocha"
 
     constructor(
@@ -74,9 +76,5 @@ export class HomeComponent implements AfterViewInit {
                 this.currentTheme = loadTheme("mocha", this.renderer, this.el)
                 localStorage.setItem("theme", "mocha")
         }
-    }
-
-    search() {
-        window.location.href = `https://searx.garudalinux.org/search?q=${this.searchTerm}`
     }
 }

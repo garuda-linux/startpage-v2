@@ -1,7 +1,53 @@
-const isProd = true
+import { SearchEngineList } from "./src/app/types"
+
+const isProd = false
 export const GARUDA_FORUM_URL = isProd
     ? "https://forum.garudalinux.org"
     : "http://localhost:8010/proxy"
+
+// These are the items inside the menu.
+export const menubarItems = [
+    {
+        label: "Homepage",
+        url: "https://garudalinux.org",
+        title: "Homepage",
+    },
+    {
+        label: "Forum",
+        url: "https://forum.garudalinux.org",
+        title: "Forum",
+    },
+    {
+        label: "GitLab",
+        url: "https://gitlab.com/garuda-linux",
+        title: "GitLab",
+    },
+    {
+        label: "About us",
+        url: "https://garudalinux.org/about.html",
+        title: "About us",
+    },
+    {
+        label: "Garuda Wiki",
+        url: "https://wiki.garudalinux.org",
+        title: "Garuda Wiki",
+    },
+    {
+        label: "Arch Wiki",
+        url: "https://wiki.archlinux.org",
+        title: "Arch Wiki",
+    },
+    {
+        label: "Donate",
+        url: "https://garudalinux.org/donate.html",
+        title: "Donate",
+    },
+    {
+        label: "Settings",
+        routerLink: "/settings",
+        title: "Settings",
+    },
+]
 
 // Change this to add or remove links from the contacts section.
 export const contactLinks = [
@@ -109,5 +155,30 @@ export const serviceLinks = [
         title: "Uptimes",
         icon: "pictures/freshping.svg",
         subtitle: "Uptime stats",
+    },
+]
+
+// Available search engines and their URLs (without %s)
+export type SearchEngine = "searxng" | "whoogle" | "google" | "custom"
+export const searchEngineMappings: SearchEngineList = [
+    {
+        name: "searxng",
+        prettyName: "SearxNG",
+        url: "https://searx.garudalinux.org?q=",
+    },
+    {
+        name: "whoogle",
+        prettyName: "Whoogle",
+        url: "https://whoogle.sdf.org?q=",
+    },
+    {
+        name: "google",
+        prettyName: "Google",
+        url: "https://www.google.com/search?q=s",
+    },
+    {
+        name: "custom",
+        prettyName: "Custom",
+        url: "",
     },
 ]

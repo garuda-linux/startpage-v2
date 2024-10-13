@@ -12,8 +12,8 @@ module.exports = {
         extend: {},
     },
     plugins: [
-        require("autoprefixer"),
         require("@catppuccin/tailwindcss"),
+        require("autoprefixer"),
         require("flowbite/plugin"),
     ],
 }

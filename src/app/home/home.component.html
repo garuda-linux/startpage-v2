@@ -1,53 +1,9 @@
 <div class="sm:pt-20 pt-28 mb-2.5 md:flex">
   <div class="md:w-3/4">
-    <div class="w-full">
-      <img src="/garuda.png" alt="Garuda Logo" width="100" class="mx-auto mb-5" />
-    </div>
-    <div class="pt-5">
-      <form class="max-w-md sm:mx-auto mx-10">
-        <label for="search"
-               class="mb-2 text-sm font-medium text-text sr-only bg-maroon">Search</label>
-        <div class="relative">
-          <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-            <svg class="w-4 h-4 text-maroon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                 fill="none" viewBox="0 0 20 20">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-            </svg>
-          </div>
-          <input type="search" id="search" name="name "
-                 class="block w-full p-4 ps-10 text-sm rounded-lg bg-surface0 focus:ring-maroon focus:border-maroon"
-                 placeholder="Start your search now..." required
-                 [(ngModel)]="searchTerm" />
-          <button type="submit"
-                  class="absolute end-2.5 bottom-2.5 bg-surface1 text-maroon hover:text-base hover:bg-mauve focus:ring-4
-                  focus:outline-none focus:ring-maroon font-medium rounded-lg text-sm px-4 py-2"
-                  (click)="search()">
-            Search
-          </button>
-        </div>
-      </form>
-    </div>
-    <div class="p-10">
-      <div>
-      </div>
-      <div class="grid grid-cols-2 gap-10 lg:grid-cols-3 md:gap-10 xl:grid-cols-4">
-        @for (link of serviceLinks; track link) {
-          <app-link [link]="link.link" [title]="link.title" [icon]="link.icon" [subtitle]="link.subtitle"
-                    [tag]="link.title"></app-link>
-        }
-      </div>
-    </div>
-
-    <div class="p-10">
-      <div class="grid grid-cols-2 gap-10 lg:grid-cols-3 md:gap-10 xl:grid-cols-4">
-        @for (link of contactLinks; track link) {
-          <app-link [link]="link.link" [title]="link.title" [icon]="link.logo" [subtitle]="link.subtitle"
-                    [tag]="link.title"></app-link>
-        }
-      </div>
-    </div>
+    <app-search></app-search>
+    <app-link-section></app-link-section>
   </div>
+
   <div class="md:w-1/3 flex-auto mx-14 md:mx-10">
     <h2 class="font-bold text-lg text-center text-text mb-5">Latest news</h2>
     <app-news></app-news>
