@@ -14,6 +14,12 @@ To change the links, edit the `constants.ts` file in the `src/assets` folder.
 - `serviceLinks` is a list of links to our web services.
 - `SearchEngine` and `searchEngineMappings` to add or remove search engines from the list.
 - `defaultSettings` is the default settings for the page.
+- `amountForumPostsHome` is the number of forum posts to show on the startpage.
+- `amountForumPostsSettings` is the number of forum posts to show on the settings page.
+- `wallpapers` is a list of wallpapers to show on the settings page. `name` will be shown in the settings, `url` maybe a
+  local file relative to the `public` folder or a link to an image.
+- `jokesApiUrl` is the Url used to query the jokes API [v2.jokeapi.dev](https://v2.jokeapi.dev/). You can customize the
+  jokes shown when visiting the site.
 
 ## Get the tools
 

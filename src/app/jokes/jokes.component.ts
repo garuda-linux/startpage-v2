@@ -1,8 +1,8 @@
-import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { jokesApiUrl } from '../../../config';
-import { JokeApiResponse } from '../types';
+import { CommonModule } from "@angular/common"
+import { HttpClient } from "@angular/common/http"
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core"
+import { jokesApiUrl } from "../../../config"
+import { JokeApiResponse } from "../types"
 
 @Component({
     selector: "app-jokes",

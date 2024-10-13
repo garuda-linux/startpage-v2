@@ -1,7 +1,7 @@
 <div class="sm:pt-20 pt-28 mb-2.5 md:flex h-svh">
   <div class="md:w-3/4">
     <div class="px-10">
-      <h1 class="bold text-maroon text-lg">Configure startpage settings</h1>
+      <h1 class="bold text-maroon text-lg text-center">Configure startpage settings</h1>
       <div class="md:flex">
         <div class="md:flex-grow">
           <form class="mt-10">
@@ -10,7 +10,7 @@
               name="select-theme"
               id="select-theme"
               [formControl]="theme"
-              class="block w-full md:w-3/4 px-4 py-3 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
+              class="block w-full md:w-3/4 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
               @for (flavor of flavors; track flavor) {
                 <option value="{{ flavor[0] }}">{{ flavor[1].name }}</option>
               }
@@ -24,7 +24,7 @@
                 name="select-search-engine"
                 id="select-search-engine"
                 [formControl]="searchEngine"
-                class="block w-full md:w-3/4 px-4 py-3 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
+                class="block w-full md:w-3/4 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
                 @for (engine of searchEngineMappings; track engine) {
                   <option value="{{ engine.name }}">{{ engine.prettyName }}</option>
                 }
@@ -53,7 +53,7 @@
           </div>
           <button type="submit"
                   (click)="saveSettings()"
-                  class="mt-10 bg-surface0/60 w-40 text-maroon hover:bg-surface0/60 backdrop-blur focus:outline-none focus:ring-4 focus:ring-maroon font-medium rounded-lg text-sm px-4 py-2">
+                  class="mt-10 hidden sm:block bg-surface0/60 w-40 text-maroon hover:bg-surface0/60 backdrop-blur focus:outline-none focus:ring-4 focus:ring-maroon font-medium rounded-lg text-sm px-4 py-2">
             Save
           </button>
         </div>
@@ -64,7 +64,7 @@
               name="select-wallpaper"
               id="select-wallpaper"
               [formControl]="wallpaper"
-              class="block w-full md:w-3/4 px-4 py-3 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
+              class="block w-full md:w-3/4 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
               @for (wallpaper of wallpapers; track wallpaper) {
                 <option value="{{ wallpaper.url }}">{{ wallpaper.name }}</option>
               }
@@ -72,27 +72,33 @@
           </form>
           @if (wallpaper.value === "custom") {
             <div class="mt-10">
-              <label for="input-wallpaper" class="block mb-2 text-md text-text">Custom wallpaper URL</label>
+              <label for="input-wallpaper" class="block mb-2  text-md text-text">Custom wallpaper URL</label>
               <input type="text" id="input-wallpaper"
                      [formControl]="wallpaperCustomUrl"
-                     class="block w-full md:w-3/4 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
+                     class="block w-full md:w-3/4 p2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
             </div>
           }
           <div class="mt-10">
-            <label class="inline-flex items-center cursor-pointer">
+            <label class="inline-flex center items-center cursor-pointer">
               <input type="checkbox" [formControl]="wallpaperFit" class="sr-only peer">
               <div
                 class="relative w-11 h-6 bg-surface0/60 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"></div>
               <span class="ms-3 mr-10 text-sm font-medium text-text">Fit wallpaper</span>
             </label>
           </div>
+          <button type="submit"
+                  (click)="saveSettings()"
+                  style="margin-left: 25%"
+                  class="mt-10 mx-auto sm:hidden bg-surface0/60 w-40 text-maroon hover:bg-surface0/60 backdrop-blur focus:outline-none focus:ring-4 focus:ring-maroon font-medium rounded-lg text-sm px-4 py-2">
+            Save
+          </button>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="md:w-1/3 flex-auto mx-14 md:mx-10">
-    <h2 class="font-bold text-lg text-center mt-16 text-text mb-5">Latest news</h2>
+  <div class="md:w-1/5 flex-auto mx-14 mt-4 pb-2.5 md:mx-10">
+    <h2 class="font-bold text-lg text-center text-text mb-5">Latest news</h2>
     <app-news [amount]="amountForumPostsSettings"></app-news>
   </div>
 </div>

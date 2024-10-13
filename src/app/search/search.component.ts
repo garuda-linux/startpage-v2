@@ -42,7 +42,8 @@ export class SearchComponent {
     navToSearchEngine(): void {
         const url = new URL(this.searchEngineData.url)
         url.searchParams.set("q", this.searchTerm)
-        if (this.searchEngineData.url.match(/garudalinux\.org/)) url.searchParams.set("c", c)
+
+        // if (this.searchEngineData.url.match(/garudalinux\.org/)) url.searchParams.set("c", c)
 
         window.location.href = url.toString()
     }

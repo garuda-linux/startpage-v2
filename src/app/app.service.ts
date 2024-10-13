@@ -7,6 +7,7 @@ import { StartpageSettings } from "./types"
 })
 export class AppService {
     public settings: StartpageSettings = {} as StartpageSettings
+    public data: any = {}
 
     constructor() {
         this.loadSettings()
@@ -51,6 +52,11 @@ export class AppService {
         }
     }
 
+    /**
+     * Apply wallpaper style to the body element.
+     * @param el ElementRef to the origin element.
+     * @param renderer Renderer2 to the origin element.
+     */
     applyWallpaperStyle(el: ElementRef, renderer: Renderer2): void {
         renderer.setStyle(
             el.nativeElement.ownerDocument.body,
@@ -60,5 +66,23 @@ export class AppService {
 
         // const blur = this.settings.wallpaperBlur ? "blur(16px)" : ""
         // renderer.setStyle(el.nativeElement.ownerDocument.body, "filter", blur)
+    }
+
+    /**
+     * Save data to the AppService instance.
+     * @param key Key to save the data under.
+     * @param data Data to save.
+     */
+    saveData(key: any, data: any): void {
+        this.data[key] = data
+    }
+
+    /**
+     * Get data from the AppService instance.
+     * @param key Key to get the data from.
+     * @returns Data saved under the key.
+     */
+    getData(key: any): any {
+        return this.data[key]
     }
 }

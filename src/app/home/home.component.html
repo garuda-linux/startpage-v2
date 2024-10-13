@@ -1,11 +1,11 @@
-<div class="sm:pt-24 pt-28 mb-2.5 md:flex">
+<div class="sm:pt-24 pt-28 sm:mb-2.5 mb-24 md:flex">
   <div class="md:w-3/4 mt-10">
     <app-search></app-search>
     <app-jokes></app-jokes>
     <app-link-section></app-link-section>
   </div>
 
-  <div class="md:w-1/3 lg:w-1/6 flex-auto mx-14 md:mx-10">
+  <div class="md:w-1/3 lg:w-1/6 flex-auto mx-14 pb-2.5 md:mx-10">
     <h2 class="font-bold text-lg text-center text-text mb-5">Latest news</h2>
     <app-news [amount]="amountForumPostsHome"></app-news>
   </div>

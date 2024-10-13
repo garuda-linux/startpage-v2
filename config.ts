@@ -157,7 +157,7 @@ export const serviceLinks = [
 ]
 
 // Available search engines and their URLs (without %s)
-export type SearchEngine = "searxng" | "whoogle" | "google" | "custom"
+export type SearchEngine = "searxng" | "searxng-privau" | "whoogle" | "google" | "custom"
 export const searchEngineMappings: SearchEngineList = [
     {
         name: "searxng",
@@ -168,6 +168,14 @@ export const searchEngineMappings: SearchEngineList = [
         name: "whoogle",
         prettyName: "Whoogle",
         url: "https://search.garudalinux.org",
+    },
+    // This seems to be one of the better instances.
+    // Doesn't nag with Cloudflare Captcha unlike ours.
+    // Running it unprotected made it sadly necessary, however.
+    {
+        name: "searxng-privau",
+        prettyName: "SearxNG (priv.au)",
+        url: "https://priv.au"
     },
     {
         name: "google",
@@ -183,7 +191,7 @@ export const searchEngineMappings: SearchEngineList = [
 
 // These are the settings defaults used
 export const defaultSettings: DefaultSettings = {
-    searchEngine: "searxng" as SearchEngine,
+    searchEngine: "searxng-privau" as SearchEngine,
     theme: "mocha" as StartpageTheme,
     welcomeText: " Welcome! 👋🏻",
     searchEngineUrl: "Set a custom search engine URL (omit %s)",
