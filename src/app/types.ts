@@ -104,7 +104,7 @@ export interface MenuBarLink {
     title: string
     url?: string
 }
-export type MenuarBarItems = MenuBarLink[]
+export type MenuBarItems = MenuBarLink[]
 
 export interface ContactLink {
     link: string
@@ -132,11 +132,25 @@ export interface SearchEngineEntry {
 export type SearchEngineList = SearchEngineEntry[]
 
 export interface StartpageSettings {
+    [key: string]: any
     searchEngine: SearchEngine
     searchEngineName: string
     searchEngineUrl: string
     theme: StartpageTheme
+    wallpaper: string | null
+    wallpaperBlur: boolean
+    wallpaperFit: boolean
     welcomeText: string
 }
 
 export type StartpageTheme = "mocha" | "latte" | "frappe" | "macchiato"
+
+export interface DefaultSettings {
+    [key: string]: any
+}
+
+export interface WallpaperEntry {
+    name: string
+    url: string | null
+}
+export type WallpaperList = WallpaperEntry[]

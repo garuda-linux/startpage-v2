@@ -21,11 +21,7 @@ export function loadTheme(theme: string, renderer: Renderer2, el: ElementRef) {
 
     // @ts-expect-error - this is always a valid color
     const flavorColor = flavors[flavor].colors.base.hex
-    renderer.setStyle(
-        el.nativeElement.ownerDocument.body,
-        "backgroundColor",
-        flavorColor,
-    )
+    renderer.setStyle(el.nativeElement.ownerDocument.body, "backgroundColor", flavorColor)
     return theme
 }
 

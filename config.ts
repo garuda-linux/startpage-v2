@@ -1,9 +1,7 @@
-import { SearchEngineList, StartpageTheme } from "./src/app/types"
+import { DefaultSettings, SearchEngineList, StartpageTheme, WallpaperList } from "./src/app/types"
 
 const isProd = true
-export const GARUDA_FORUM_URL = isProd
-    ? "https://forum.garudalinux.org"
-    : "http://localhost:8010/proxy"
+export const GARUDA_FORUM_URL = isProd ? "https://forum.garudalinux.org" : "http://localhost:8010/proxy"
 
 // These are the items inside the menu.
 export const menubarItems = [
@@ -184,10 +182,37 @@ export const searchEngineMappings: SearchEngineList = [
 ]
 
 // These are the settings defaults used
-export const defaultSettings = {
+export const defaultSettings: DefaultSettings = {
     searchEngine: "searxng" as SearchEngine,
     theme: "mocha" as StartpageTheme,
     welcomeText: " Welcome! 👋🏻",
     searchEngineUrl: "Set a custom search engine URL (omit %s)",
     searchEngineName: "Custom",
+    wallpaper: "",
+    wallpaperCustomUrl: "",
+    wallpaperFit: false,
+    wallpaperBlur: false,
 }
+
+// How many forum posts to load
+export const amountForumPostsHome = 8
+export const amountForumPostsSettings = 7
+
+// Which wallpapers are available to choose from
+// Url needs to be either a local file or a URL, if local, it must be relative
+// to being in the public folder.
+export const wallpapers: WallpaperList = [
+    {
+        name: "None",
+        url: "",
+    },
+    {
+        name: "Shaded Landscape",
+        url: "wallpapers/shaded-landscape.png",
+    },
+    {
+        name: "Evening Sky",
+        url: "wallpapers/evening-sky.png",
+    },
+    { name: "Custom", url: "custom" },
+]

@@ -25,11 +25,12 @@ html {
 }
 
 body {
-  margin: 0;
+  @apply text-sm selection:bg-mauve selection:text-base;
+  background-position: center;
+  font-family: "Fira Sans", sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-family: "Fira Sans", sans-serif;
-  @apply text-sm selection:bg-mauve selection:text-base;
+  margin: 0;
 }
 
 code,
@@ -42,4 +43,14 @@ samp {
   font-family: "JetBrains Mono", monospace;
   font-optical-sizing: auto;
   @apply text-sm selection:bg-mauve selection:text-base;
+}
+
+.bg-blur {
+  background-image: url("https://static.zenrows.com/content/large_archived_version_of_g2_reviews_page_e9898ad3ce.jpg");
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

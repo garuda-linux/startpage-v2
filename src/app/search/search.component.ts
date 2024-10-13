@@ -27,8 +27,7 @@ export class SearchComponent {
         })
         if (this.searchEngine === "custom") {
             this.searchEngineData.url = this.appService.settings.searchEngineUrl
-            this.searchEngineData.prettyName = this.appService.settings
-                .searchEngineName
+            this.searchEngineData.prettyName = this.appService.settings.searchEngineName
                 ? this.appService.settings.searchEngineName
                 : "Custom"
         }

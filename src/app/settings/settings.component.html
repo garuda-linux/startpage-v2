@@ -1,69 +1,99 @@
 <div class="sm:pt-20 pt-28 mb-2.5 md:flex h-svh">
   <div class="md:w-3/4">
-    <div class="px-10 ">
+    <div class="px-10">
       <h1 class="bold text-maroon text-lg">Configure startpage settings</h1>
-      <div class="">
-        <div class="mt-10">
-          <form>
-            <label for="select-search-engine" class="block mb-2 text-md text-text font-medium">Search
-              engine</label>
-            <select
-              name="select-search-engine"
-              id="select-search-engine"
-              [formControl]="searchEngine"
-              class="block w-full md:w-1/2 px-4 py-3 text-base text-maroon rounded-lg bg-surface0 focus:ring-maroon focus:border-maroon">
-              <option selected>Choose your search engine</option>
-              @for (engine of searchEngineMappings; track engine) {
-                <option value="{{ engine.name }}">{{ engine.prettyName }}</option>
-              }
-            </select>
-          </form>
+      <div class="md:flex">
+        <div class="md:flex-grow">
           <form class="mt-10">
             <label for="select-theme" class="block mb-2 text-text text-md font-medium">Theme</label>
             <select
               name="select-theme"
               id="select-theme"
               [formControl]="theme"
-              class="block w-full md:w-1/2 px-4 py-3 text-base text-maroon rounded-lg bg-surface0 focus:ring-maroon focus:border-maroon">
-              <option selected>Choose your theme</option>
+              class="block w-full md:w-3/4 px-4 py-3 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
               @for (flavor of flavors; track flavor) {
                 <option value="{{ flavor[0] }}">{{ flavor[1].name }}</option>
               }
             </select>
           </form>
-        </div>
-        @if (searchEngine.value === "custom") {
           <div class="mt-10">
-            <label for="input-search-engine" class="block mb-2 text-md text-text">Custom search URL</label>
-            <input type="text" id="input-search-engine"
-                   [formControl]="searchEngineUrl"
-                   class="block w-full md:w-1/2 p-2 text-base text-maroon bg-surface0 focus:ring-maroon focus:border-maroon rounded-lg">
+            <form>
+              <label for="select-search-engine" class="block mb-2 text-md text-text font-medium">Search
+                engine</label>
+              <select
+                name="select-search-engine"
+                id="select-search-engine"
+                [formControl]="searchEngine"
+                class="block w-full md:w-3/4 px-4 py-3 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
+                @for (engine of searchEngineMappings; track engine) {
+                  <option value="{{ engine.name }}">{{ engine.prettyName }}</option>
+                }
+              </select>
+            </form>
           </div>
+          @if (searchEngine.value === "custom") {
+            <div class="mt-10">
+              <label for="input-search-engine" class="block mb-2 text-md text-text">Custom search URL</label>
+              <input type="text" id="input-search-engine"
+                     [formControl]="searchEngineUrl"
+                     class="block w-full md:w-3/4 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
+            </div>
+            <div class="mt-10">
+              <label for="input-search-name" class="block mb-2 text-md text-text">Custom search engine name</label>
+              <input type="text" id="input-search-name"
+                     [formControl]="searchEngineName"
+                     class="block w-full md:w-3/4 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
+            </div>
+          }
           <div class="mt-10">
-            <label for="input-search-name" class="block mb-2 text-md text-text">Custom search engine name</label>
-            <input type="text" id="input-search-name"
-                   [formControl]="searchEngineName"
-                   class="block w-full md:w-1/2 p-2 text-base text-maroon bg-surface0 focus:ring-maroon focus:border-maroon rounded-lg">
+            <label for="input-welcome" class="block mb-2 text-md text-text">Custom welcome message</label>
+            <input type="text" id="input-welcome"
+                   [formControl]="welcomeText"
+                   class="block w-full md:w-3/4 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
           </div>
-        }
-        <div class="mt-10">
-          <label for="input-welcome" class="block mb-2 text-md text-text">Custom welcome message</label>
-          <input type="text" id="input-welcome"
-                 [formControl]="welcomeText"
-                 class="block w-full md:w-1/2 p-2 text-base text-maroon bg-surface0 focus:ring-maroon focus:border-maroon rounded-lg">
+          <button type="submit"
+                  (click)="saveSettings()"
+                  class="mt-10 bg-surface0/60 w-40 text-maroon hover:bg-surface0/60 backdrop-blur focus:outline-none focus:ring-4 focus:ring-maroon font-medium rounded-lg text-sm px-4 py-2">
+            Save
+          </button>
         </div>
-        <button type="submit"
-                (click)="saveSettings()"
-                class="mt-10 bg-surface1 text-maroon hover:bg-surface0 focus:outline-none focus:ring-4 focus:ring-maroon font-medium rounded-lg text-sm px-4 py-2">
-          Save
-        </button>
+        <div class="md:flex-grow">
+          <form class="mt-10">
+            <label for="select-wallpaper" class="block mb-2 text-text text-md font-medium">Background</label>
+            <select
+              name="select-wallpaper"
+              id="select-wallpaper"
+              [formControl]="wallpaper"
+              class="block w-full md:w-3/4 px-4 py-3 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
+              @for (wallpaper of wallpapers; track wallpaper) {
+                <option value="{{ wallpaper.url }}">{{ wallpaper.name }}</option>
+              }
+            </select>
+          </form>
+          @if (wallpaper.value === "custom") {
+            <div class="mt-10">
+              <label for="input-wallpaper" class="block mb-2 text-md text-text">Custom wallpaper URL</label>
+              <input type="text" id="input-wallpaper"
+                     [formControl]="wallpaperCustomUrl"
+                     class="block w-full md:w-3/4 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
+            </div>
+          }
+          <div class="mt-10">
+            <label class="inline-flex items-center cursor-pointer">
+              <input type="checkbox" [formControl]="wallpaperFit" class="sr-only peer">
+              <div
+                class="relative w-11 h-6 bg-surface0/60 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"></div>
+              <span class="ms-3 mr-10 text-sm font-medium text-text">Fit wallpaper</span>
+            </label>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="md:w-1/3 flex-auto mx-14 md:mx-10">
     <h2 class="font-bold text-lg text-center mt-16 text-text mb-5">Latest news</h2>
-    <app-news></app-news>
+    <app-news [amount]="amountForumPostsSettings"></app-news>
   </div>
 </div>
 

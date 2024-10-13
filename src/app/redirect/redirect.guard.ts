@@ -1,10 +1,5 @@
 import { Injectable } from "@angular/core"
-import {
-    ActivatedRouteSnapshot,
-    CanActivate,
-    Router,
-    RouterStateSnapshot,
-} from "@angular/router"
+import { ActivatedRouteSnapshot, CanActivate, Router } from "@angular/router"
 
 @Injectable({
     providedIn: "root",
@@ -12,10 +7,7 @@ import {
 export class RedirectGuard implements CanActivate {
     constructor(private router: Router) {}
 
-    canActivate(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot,
-    ): boolean {
+    canActivate(route: ActivatedRouteSnapshot): boolean {
         window.location.href = route.data["externalUrl"]
         return true
     }

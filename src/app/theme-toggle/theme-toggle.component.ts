@@ -55,11 +55,7 @@ export class ThemeToggleComponent implements AfterViewInit {
                 break
             case "frappe":
                 classList.remove("frappe")
-                this.currentTheme = loadTheme(
-                    "macchiato",
-                    this.renderer,
-                    this.el,
-                )
+                this.currentTheme = loadTheme("macchiato", this.renderer, this.el)
                 settings.theme = "macchiato"
                 this.buttonText = "Let me order Macchiato ☕️"
                 break

@@ -1,17 +1,11 @@
 import { NgClass, NgStyle } from "@angular/common"
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ViewChild,
-} from "@angular/core"
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from "@angular/core"
 import { RouterLink } from "@angular/router"
 import { menubarItems } from "../../../config"
 import { AppService } from "../app.service"
 import { generateRouterLink } from "../functions"
 import { ThemeToggleComponent } from "../theme-toggle/theme-toggle.component"
-import { MenuarBarItems } from "../types"
+import { MenuBarItems } from "../types"
 
 @Component({
     selector: "app-menubar",
@@ -22,7 +16,7 @@ import { MenuarBarItems } from "../types"
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenubarComponent implements AfterViewInit {
-    items: MenuarBarItems = menubarItems
+    items: MenuBarItems = menubarItems
     titleText = "Welcome! 👋🏻"
 
     @ViewChild(ThemeToggleComponent) themeToggle!: ThemeToggleComponent

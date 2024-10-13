@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core"
+import { ElementRef, Injectable, Renderer2 } from "@angular/core"
 import { defaultSettings } from "../../config"
 import { StartpageSettings } from "./types"
 
@@ -20,7 +20,7 @@ export class AppService {
         if (settings !== null) {
             this.settings = JSON.parse(settings) as StartpageSettings
         } else {
-            this.settings = defaultSettings
+            this.settings = defaultSettings as StartpageSettings
         }
         return this.settings
     }
@@ -35,5 +35,30 @@ export class AppService {
             this.settings = settings
         }
         localStorage.setItem("settings", JSON.stringify(this.settings))
+    }
+
+    /**
+     * Loads a new startpage background.
+     * @param el ElementRef to the body element.
+     * @param renderer Renderer2 to the body element.
+     * @param wallpaper URL to the wallpaper to load.
+     */
+    loadWallpaper(el: ElementRef, renderer: Renderer2, wallpaper: string | null): void {
+        if (wallpaper === null) {
+            renderer.removeStyle(el.nativeElement.ownerDocument.body, "backgroundImage")
+        } else {
+            renderer.setStyle(el.nativeElement.ownerDocument.body, "background-image", `url(${wallpaper})`)
+        }
+    }
+
+    applyWallpaperStyle(el: ElementRef, renderer: Renderer2): void {
+        renderer.setStyle(
+            el.nativeElement.ownerDocument.body,
+            "background-size",
+            this.settings.wallpaperFit ? "contain" : "",
+        )
+
+        // const blur = this.settings.wallpaperBlur ? "blur(16px)" : ""
+        // renderer.setStyle(el.nativeElement.ownerDocument.body, "filter", blur)
     }
 }

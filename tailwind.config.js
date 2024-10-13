@@ -11,9 +11,5 @@ module.exports = {
     theme: {
         extend: {},
     },
-    plugins: [
-        require("@catppuccin/tailwindcss"),
-        require("autoprefixer"),
-        require("flowbite/plugin"),
-    ],
+    plugins: [require("@catppuccin/tailwindcss"), require("autoprefixer"), require("flowbite/plugin")],
 }

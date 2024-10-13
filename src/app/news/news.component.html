@@ -8,7 +8,7 @@
         <h3 class="text-lg font-semibold text-maroon">{{ topic.title }}</h3>
         <p class="mb-4 text-base font-normal text-mauve">{{ topic.excerpt }}</p>
         <a href="{{ topic.link }}"
-           class="inline-flex items-center px-4 py-2 text-sm font-medium text-text bg-surface0 rounded-lg hover:bg-mauve hover:text-base">
+           class="inline-flex items-center px-4 py-2 text-sm font-medium text-text bg-surface0/50 backdrop-blur rounded-lg hover:bg-mauve hover:text-base">
           Read more
           <svg class="w-3 h-3 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                viewBox="0 0 14 10">
@@ -22,15 +22,57 @@
     }
   </ol>
 } @else {
-  <div role="status" class="max-w-sm animate-pulse">
-    <div class="h-2.5 bg-gray-200 rounded-full w-48 mb-4"></div>
-    <div class="h-2 bg-gray-200 rounded-full max-w-[360px] mb-2.5"></div>
-    <div class="h-2 bg-gray-200 rounded-full mb-2.5"></div>
-    <div class="h-2 bg-gray-200 rounded-full max-w-[330px] mb-2.5"></div>
-    <div class="h-2 bg-gray-200 rounded-full max-w-[300px] mb-2.5"></div>
-    <div class="h-2 bg-gray-200 rounded-full max-w-[360px]"></div>
+  <div role="status" class="w-full animate-pulse">
     <span class="sr-only">Loading...</span>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
+    <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
   </div>
 }
-
 

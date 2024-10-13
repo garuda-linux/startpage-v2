@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common"
 import { HttpClient } from "@angular/common/http"
-import { ChangeDetectorRef, Component } from "@angular/core"
+import { ChangeDetectorRef, Component, Input } from "@angular/core"
 import { RouterLink } from "@angular/router"
 import { GARUDA_FORUM_URL } from "../../../config"
 import { DatePipe } from "../date-pipe/date.pipe"
@@ -16,10 +16,13 @@ import { DiscourseFeed, Topic } from "../types"
     providers: [DatePipe, EmojiPipe],
 })
 export class NewsComponent {
-    rssUrl = `${GARUDA_FORUM_URL}/c/announcements/16.json`
     avatarSize = "100"
-    topicsList: Topic[] = []
     loading = true
+    rssUrl = `${GARUDA_FORUM_URL}/c/announcements/16.json`
+    topicsList: Topic[] = []
+
+    @Input() showAvatars = true
+    @Input() amount = 10
 
     constructor(
         private cdr: ChangeDetectorRef,
@@ -35,13 +38,10 @@ export class NewsComponent {
                 // @ts-ignore
                 return new Date(b.created_at) - new Date(a.created_at)
             })
-            this.topicsList = data.topic_list.topics.slice(0, 10)
+            this.topicsList = data.topic_list.topics.slice(0, this.amount - 1)
 
             for (const topic of this.topicsList) {
-                topic.avatar_template = this.getPosterAvatar(
-                    data,
-                    topic.posters[0].user_id,
-                )
+                topic.avatar_template = this.getPosterAvatar(data, topic.posters[0].user_id)
                 // Get rid of the emojis showing up in the titles
                 topic.title = topic.title.replace(/:.*?:/g, "")
                 topic.link = `${GARUDA_FORUM_URL}/t/${topic.slug}`
@@ -59,8 +59,6 @@ export class NewsComponent {
             }
             return false
         })
-        return user
-            ? user.avatar_template.replace("{size}", this.avatarSize)
-            : ""
+        return user ? user.avatar_template.replace("{size}", this.avatarSize) : ""
     }
 }

@@ -6,11 +6,7 @@ import { NxWelcomeComponent } from "./nx-welcome.component"
 describe("AppComponent", () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                AppComponent,
-                NxWelcomeComponent,
-                RouterModule.forRoot([]),
-            ],
+            imports: [AppComponent, NxWelcomeComponent, RouterModule.forRoot([])],
         }).compileComponents()
     })
 
@@ -18,9 +14,7 @@ describe("AppComponent", () => {
         const fixture = TestBed.createComponent(AppComponent)
         fixture.detectChanges()
         const compiled = fixture.nativeElement as HTMLElement
-        expect(compiled.querySelector("h1")?.textContent).toContain(
-            "Welcome startpage-v22",
-        )
+        expect(compiled.querySelector("h1")?.textContent).toContain("Welcome startpage-v22")
     })
 
     it(`should have as title 'startpage-v22'`, () => {

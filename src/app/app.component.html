@@ -1,4 +1,8 @@
-<div class="bg-base">
-  <app-menubar id="menubar"></app-menubar>
-  <router-outlet></router-outlet>
+<div>
+  <div style="z-index: 10">
+    <app-menubar id="menubar"></app-menubar>
+    <router-outlet></router-outlet>
+  </div>
 </div>
+
+<div id="background" class="bg-blur"></div>

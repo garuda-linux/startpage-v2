@@ -1,6 +1,7 @@
 import { CommonModule, NgOptimizedImage } from "@angular/common"
-import { Component } from "@angular/core"
+import { ChangeDetectionStrategy, Component } from "@angular/core"
 import { FormsModule } from "@angular/forms"
+import { amountForumPostsHome } from "../../../config"
 import { LinkSectionComponent } from "../link-section/link-section.component"
 import { LinkComponent } from "../link/link.component"
 import { NewsComponent } from "../news/news.component"
@@ -22,5 +23,8 @@ import { ToastComponent } from "../toast/toast.component"
     ],
     templateUrl: "./home.component.html",
     styleUrl: "./home.component.css",
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent {}
+export class HomeComponent {
+    protected readonly amountForumPostsHome = amountForumPostsHome
+}
