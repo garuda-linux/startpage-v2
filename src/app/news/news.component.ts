@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common"
 import { HttpClient } from "@angular/common/http"
-import { Component } from "@angular/core"
+import { ChangeDetectorRef, Component } from "@angular/core"
 import { RouterLink } from "@angular/router"
 import { GARUDA_FORUM_URL } from "../../../config"
 import { DatePipe } from "../date-pipe/date.pipe"
@@ -21,7 +21,10 @@ export class NewsComponent {
     topicsList: Topic[] = []
     loading = true
 
-    constructor(private http: HttpClient) {
+    constructor(
+        private cdr: ChangeDetectorRef,
+        private http: HttpClient,
+    ) {
         void this.getFeed()
     }
 
@@ -45,6 +48,7 @@ export class NewsComponent {
             }
 
             this.loading = false
+            this.cdr.detectChanges()
         })
     }
 
@@ -58,18 +62,5 @@ export class NewsComponent {
         return user
             ? user.avatar_template.replace("{size}", this.avatarSize)
             : ""
-    }
-
-    protected readonly GARUDA_FORUM_URL = GARUDA_FORUM_URL
-
-    navigateTo(event: Topic) {
-        setTimeout(
-            () =>
-                window.open(
-                    `https://forum.garudalinux.org/t/${event.slug}`,
-                    "_blank",
-                ),
-            500,
-        )
     }
 }
