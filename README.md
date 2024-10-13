@@ -4,12 +4,16 @@ This is Garuda's new startpage.
 It is a simple page with a search bar and a few links to other pages.
 The page is built with Angular.
 
+<img src="/assets/startpage.png" alt="Startpage picture">
+
 ## Changing links
 
 To change the links, edit the `constants.ts` file in the `src/assets` folder.
 
 - `contactLinks` is a list of links to contact pages.
 - `serviceLinks` is a list of links to our web services.
+- `SearchEngine` and `searchEngineMappings` to add or remove search engines from the list.
+- `defaultSettings` is the default settings for the page.
 
 ## Get the tools
 
