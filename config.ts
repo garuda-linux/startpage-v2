@@ -195,7 +195,7 @@ export const defaultSettings: DefaultSettings = {
 }
 
 // How many forum posts to load
-export const amountForumPostsHome = 8
+export const amountForumPostsHome = 9
 export const amountForumPostsSettings = 7
 
 // Which wallpapers are available to choose from
@@ -219,3 +219,6 @@ export const wallpapers: WallpaperList = [
 
 // Don't delete
 export const c = "nft5zX8CPAL4TW"
+
+// Jokes API Url (can be altered with presets here: https://v2.jokeapi.dev/)
+export const jokesApiUrl = "https://v2.jokeapi.dev/joke/Programming?type=single"

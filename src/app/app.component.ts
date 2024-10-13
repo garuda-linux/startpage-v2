@@ -27,12 +27,10 @@ export class AppComponent implements OnInit {
         private renderer: Renderer2,
     ) {
         this.settings = this.appService.loadSettings()
-        console.log(this.settings)
         if (this.settings.theme) {
             loadTheme(this.settings.theme, this.renderer, this.el)
         }
         if (this.settings.wallpaper) {
-            console.log(this.settings.wallpaper)
             this.appService.loadWallpaper(this.el, this.renderer, this.settings.wallpaper)
         } else {
             this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, "backgroundColor", "#1e1e2e")

@@ -1,10 +1,10 @@
-import { CommonModule, DOCUMENT } from '@angular/common';
-import { Component, Inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { c, SearchEngine, searchEngineMappings } from '../../../config';
-import { AppService } from '../app.service';
-import { SearchEngineEntry } from '../types';
+import { CommonModule, DOCUMENT } from "@angular/common"
+import { Component, Inject } from "@angular/core"
+import { FormsModule } from "@angular/forms"
+import { RouterLink } from "@angular/router"
+import { SearchEngine, c, searchEngineMappings } from "../../../config"
+import { AppService } from "../app.service"
+import { SearchEngineEntry } from "../types"
 
 @Component({
     selector: "app-search",
