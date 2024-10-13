@@ -18,6 +18,7 @@ export function loadTheme(theme: string, renderer: Renderer2, el: ElementRef) {
     appCtp.classList.add(theme)
 
     const flavor = theme as unknown as CatppuccinFlavor
+
     // @ts-expect-error - this is always a valid color
     const flavorColor = flavors[flavor].colors.base.hex
     renderer.setStyle(

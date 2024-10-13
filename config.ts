@@ -1,6 +1,6 @@
-import { SearchEngineList } from "./src/app/types"
+import { SearchEngineList, StartpageTheme } from "./src/app/types"
 
-const isProd = false
+const isProd = true
 export const GARUDA_FORUM_URL = isProd
     ? "https://forum.garudalinux.org"
     : "http://localhost:8010/proxy"
@@ -182,3 +182,12 @@ export const searchEngineMappings: SearchEngineList = [
         url: "",
     },
 ]
+
+// These are the settings defaults used
+export const defaultSettings = {
+    searchEngine: "searxng" as SearchEngine,
+    theme: "mocha" as StartpageTheme,
+    welcomeText: " Welcome! 👋🏻",
+    searchEngineUrl: "Set a custom search engine URL (omit %s)",
+    searchEngineName: "Custom",
+}

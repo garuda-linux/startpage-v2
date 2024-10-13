@@ -130,3 +130,13 @@ export interface SearchEngineEntry {
     url: string
 }
 export type SearchEngineList = SearchEngineEntry[]
+
+export interface StartpageSettings {
+    searchEngine: SearchEngine
+    searchEngineName: string
+    searchEngineUrl: string
+    theme: StartpageTheme
+    welcomeText: string
+}
+
+export type StartpageTheme = "mocha" | "latte" | "frappe" | "macchiato"

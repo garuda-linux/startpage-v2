@@ -30,20 +30,30 @@ export class AppComponent implements OnInit {
         private renderer: Renderer2,
     ) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         if (isPlatformBrowser(this.platformId)) {
             initFlowbite()
         }
 
-        const theme = localStorage.getItem("theme")
-        if (theme && theme !== "mocha") {
-            loadTheme(theme, this.renderer, this.el)
+        const theme = localStorage.getItem("settings")
+        if (theme) {
+            const parsedSettings = JSON.parse(theme)
+
+            if (parsedSettings.theme) {
+                loadTheme(parsedSettings.theme, this.renderer, this.el)
+            } else {
+                this.setDefaultTheme()
+            }
         } else {
-            this.renderer.setStyle(
-                this.el.nativeElement.ownerDocument.body,
-                "backgroundColor",
-                "#1e1e2e",
-            )
+            this.setDefaultTheme()
         }
+    }
+
+    private setDefaultTheme(): void {
+        this.renderer.setStyle(
+            this.el.nativeElement.ownerDocument.body,
+            "backgroundColor",
+            "#1e1e2e",
+        )
     }
 }

@@ -3,6 +3,7 @@ import { Component } from "@angular/core"
 import { FormsModule } from "@angular/forms"
 import { RouterLink } from "@angular/router"
 import { SearchEngine, searchEngineMappings } from "../../../config"
+import { AppService } from "../app.service"
 import { SearchEngineEntry } from "../types"
 
 @Component({
@@ -15,34 +16,25 @@ import { SearchEngineEntry } from "../types"
 export class SearchComponent {
     searchTerm = ""
     searchEngine: SearchEngine = "searxng"
-    searchEngineData: SearchEngineEntry | undefined
-    searchEngineMappings: Map<SearchEngine, SearchEngineEntry> = new Map<
-        SearchEngine,
-        SearchEngineEntry
-    >()
+    searchEngineData: SearchEngineEntry
 
-    constructor() {
-        const savedEngine = localStorage.getItem("searchEngine") as SearchEngine
-        if (savedEngine) {
-            this.searchEngine = savedEngine
-        } else {
-            localStorage.setItem("searchEngine", "searxng")
-        }
+    constructor(private appService: AppService) {
+        this.searchEngine = this.appService.settings.searchEngine
 
-        for (const engine of searchEngineMappings) {
-            this.searchEngineMappings.set(engine.name as SearchEngine, engine)
-        }
-
-        this.searchEngineData = this.searchEngineMappings.get(this.searchEngine)
+        // @ts-expect-error: is always defined
+        this.searchEngineData = searchEngineMappings.find((engine) => {
+            return engine.name === this.searchEngine
+        })
         if (this.searchEngine === "custom") {
-            const customEngine = localStorage.getItem("searchEngineCustom")
-            if (!customEngine && !this.searchEngineData) return
-            // @ts-ignore
-            this.searchEngineData.url = customEngine
+            this.searchEngineData.url = this.appService.settings.searchEngineUrl
+            this.searchEngineData.prettyName = this.appService.settings
+                .searchEngineName
+                ? this.appService.settings.searchEngineName
+                : "Custom"
         }
     }
 
     navToSearchEngine() {
-        window.location.href = `${this.searchEngineData?.url}${this.searchTerm}`
+        window.location.href = `${this.searchEngineData.url}${this.searchTerm}`
     }
 }
