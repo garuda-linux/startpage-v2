@@ -175,7 +175,7 @@ export const searchEngineMappings: SearchEngineList = [
     {
         name: "searxng-privau",
         prettyName: "SearxNG (priv.au)",
-        url: "https://priv.au"
+        url: "https://priv.au",
     },
     {
         name: "google",
