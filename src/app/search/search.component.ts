@@ -1,10 +1,10 @@
-import { CommonModule } from "@angular/common"
-import { Component } from "@angular/core"
-import { FormsModule } from "@angular/forms"
-import { RouterLink } from "@angular/router"
-import { SearchEngine, searchEngineMappings } from "../../../config"
-import { AppService } from "../app.service"
-import { SearchEngineEntry } from "../types"
+import { CommonModule, DOCUMENT } from '@angular/common';
+import { Component, Inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { c, SearchEngine, searchEngineMappings } from '../../../config';
+import { AppService } from '../app.service';
+import { SearchEngineEntry } from '../types';
 
 @Component({
     selector: "app-search",
@@ -18,7 +18,10 @@ export class SearchComponent {
     searchEngine: SearchEngine = "searxng"
     searchEngineData: SearchEngineEntry
 
-    constructor(private appService: AppService) {
+    constructor(
+        private appService: AppService,
+        @Inject(DOCUMENT) public document: Document,
+    ) {
         this.searchEngine = this.appService.settings.searchEngine
 
         // @ts-expect-error: is always defined
@@ -33,7 +36,14 @@ export class SearchComponent {
         }
     }
 
-    navToSearchEngine() {
-        window.location.href = `${this.searchEngineData.url}${this.searchTerm}`
+    /**
+     * Navigate to the search engine with the search term.
+     */
+    navToSearchEngine(): void {
+        const url = new URL(this.searchEngineData.url)
+        url.searchParams.set("q", this.searchTerm)
+        if (this.searchEngineData.url.match(/garudalinux\.org/)) url.searchParams.set("c", c)
+
+        window.location.href = url.toString()
     }
 }

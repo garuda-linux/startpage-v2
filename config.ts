@@ -162,17 +162,17 @@ export const searchEngineMappings: SearchEngineList = [
     {
         name: "searxng",
         prettyName: "SearxNG",
-        url: "https://searx.garudalinux.org?q=",
+        url: "https://searx.garudalinux.org",
     },
     {
         name: "whoogle",
         prettyName: "Whoogle",
-        url: "https://whoogle.sdf.org?q=",
+        url: "https://search.garudalinux.org",
     },
     {
         name: "google",
         prettyName: "Google",
-        url: "https://www.google.com/search?q=s",
+        url: "https://www.google.com/search",
     },
     {
         name: "custom",
@@ -216,3 +216,6 @@ export const wallpapers: WallpaperList = [
     },
     { name: "Custom", url: "custom" },
 ]
+
+// Don't delete
+export const c = "nft5zX8CPAL4TW"
