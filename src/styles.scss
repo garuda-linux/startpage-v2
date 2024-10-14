@@ -26,13 +26,11 @@ html {
 
 body {
   @apply text-sm selection:bg-mauve selection:text-base;
-  background-position: center;
   font-family: "Fira Sans", sans-serif;
   font-style: normal;
   font-weight: 400;
   left: 0;
   margin: 0;
-  position: fixed;
   right: 0;
   z-index: 10;
 }
@@ -59,7 +57,7 @@ samp {
   content: "";
   display: block;
   height: 100%;
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100%;
 }
@@ -71,4 +69,5 @@ samp {
 .non-blurred {
   position: relative;
   z-index: 1;
+  overflow: scroll;
 }

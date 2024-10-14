@@ -80,15 +80,14 @@
             </div>
           }
           <div class="mt-10">
-            @if (false) {
-              <label class="inline-flex center items-center cursor-pointer">
-                <input type="checkbox" [formControl]="wallpaperFit" class="sr-only peer"
-                       (change)="loadWallpaperStyle('contain')">
-                <div
-                  class="relative w-11 h-6 bg-surface0/60 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"></div>
-                <span class="ms-3 mr-10 text-sm font-medium text-text">Fit wallpaper</span>
-              </label>
-            }
+            <label class="inline-flex center justify-center
+            items-center cursor-pointer">
+              <input type="checkbox" [formControl]="wallpaperFit" class="sr-only peer"
+                     (change)="loadWallpaperStyle('contain')">
+              <div
+                class="relative w-11 h-6 bg-surface0/60  peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"></div>
+              <span class="ms-3 mr-10 text-sm font-medium text-text">Fit wallpaper</span>
+            </label>
             <label class="inline-flex center items-center cursor-pointer">
               <input type="checkbox" [formControl]="wallpaperBlur" class="sr-only peer"
                      (change)="loadWallpaperStyle('blur')">
@@ -98,7 +97,7 @@
             </label>
             <label class="inline-flex center items-center cursor-pointer">
               <input type="checkbox" [formControl]="jokesEnabled" class="sr-only peer"
-                     (change)="saveSettings()">>
+                     (change)="saveSettings()">
               <div
                 class="relative w-11 h-6 bg-surface0/60 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"></div>
               <span class="ms-3 mr-10 text-sm font-medium text-text">Enable jokes</span>
