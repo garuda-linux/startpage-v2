@@ -191,15 +191,16 @@ export const searchEngineMappings: SearchEngineList = [
 
 // These are the settings defaults used
 export const defaultSettings: DefaultSettings = {
+    jokesEnabled: true,
     searchEngine: "searxng-privau" as SearchEngine,
-    theme: "mocha" as StartpageTheme,
-    welcomeText: " Welcome! 👋🏻",
-    searchEngineUrl: "Set a custom search engine URL (omit %s)",
     searchEngineName: "Custom",
+    searchEngineUrl: "Set a custom search engine URL (omit %s)",
+    theme: "mocha" as StartpageTheme,
     wallpaper: "",
+    wallpaperBlur: false,
     wallpaperCustomUrl: "",
     wallpaperFit: false,
-    wallpaperBlur: false,
+    welcomeText: " Welcome! 👋🏻",
 }
 
 // How many forum posts to load
@@ -227,6 +228,3 @@ export const wallpapers: WallpaperList = [
 
 // Don't delete
 export const c = "nft5zX8CPAL4TW"
-
-// Jokes API Url (can be altered with presets here: https://v2.jokeapi.dev/)
-export const jokesApiUrl = "https://v2.jokeapi.dev/joke/Programming?type=single"

@@ -1,7 +1,6 @@
-import { CommonModule, NgOptimizedImage } from "@angular/common"
-import { AfterViewInit, Component, Input } from "@angular/core"
-import { RouterLink } from "@angular/router"
-import { generateRouterLink } from "../functions"
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: "app-link",
@@ -10,15 +9,10 @@ import { generateRouterLink } from "../functions"
     templateUrl: "./link.component.html",
     styleUrl: "./link.component.css",
 })
-export class LinkComponent implements AfterViewInit {
+export class LinkComponent {
     @Input() link!: string
     @Input() title!: string
     @Input() icon!: string
     @Input() subtitle!: string
     @Input() tag!: string
-    routerLink: string | undefined
-
-    ngAfterViewInit() {
-        this.routerLink = generateRouterLink(this.title)
-    }
 }

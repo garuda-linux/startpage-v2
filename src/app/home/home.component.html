@@ -1,7 +1,9 @@
 <div class="sm:pt-24 pt-28 sm:mb-2.5 mb-24 md:flex">
   <div class="md:w-3/4 mt-10">
     <app-search></app-search>
-    <app-jokes></app-jokes>
+    @if (jokesEnabled) {
+      <app-jokes></app-jokes>
+    }
     <app-link-section></app-link-section>
   </div>
 

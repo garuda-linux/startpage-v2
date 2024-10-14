@@ -1,13 +1,16 @@
-import { ElementRef, Injectable, Renderer2 } from "@angular/core"
-import { defaultSettings } from "../../config"
-import { StartpageSettings } from "./types"
+import { ElementRef, Injectable, Renderer2 } from '@angular/core';
+import { defaultSettings } from '../../config';
+import { StartpageSettings } from './types';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: "root",
 })
 export class AppService {
-    public settings: StartpageSettings = {} as StartpageSettings
+    public settings = {} as StartpageSettings
     public data: any = {}
+
+    public getSettings = new BehaviorSubject<StartpageSettings>(this.settings)
 
     constructor() {
         this.loadSettings()
@@ -16,14 +19,14 @@ export class AppService {
     /**
      * Load settings from local storage.
      */
-    loadSettings(): StartpageSettings {
+    loadSettings(): void {
         const settings = localStorage.getItem("settings")
         if (settings !== null) {
             this.settings = JSON.parse(settings) as StartpageSettings
+            this.getSettings.next(this.settings)
         } else {
             this.settings = defaultSettings as StartpageSettings
         }
-        return this.settings
     }
 
     /**

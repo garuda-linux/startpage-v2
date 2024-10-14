@@ -1,8 +1,6 @@
-import { CommonModule } from "@angular/common"
-import { HttpClient } from "@angular/common/http"
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core"
-import { jokesApiUrl } from "../../../config"
-import { JokeApiResponse } from "../types"
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import jokes from './jokes';
 
 @Component({
     selector: "app-jokes",
@@ -15,20 +13,7 @@ import { JokeApiResponse } from "../types"
 export class JokesComponent implements OnInit {
     joke = ""
 
-    constructor(
-        private cdr: ChangeDetectorRef,
-        private http: HttpClient,
-    ) {}
-
     ngOnInit(): void {
-        this.http.get<JokeApiResponse>(jokesApiUrl).subscribe({
-            next: (data): void => {
-                this.joke = data.joke
-                this.cdr.detectChanges()
-            },
-            error: (err): void => {
-                console.error("Failed to fetch joke.", err)
-            },
-        })
+        this.joke = jokes[Math.floor(Math.random() * jokes.length)]
     }
 }

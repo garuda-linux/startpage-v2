@@ -1,12 +1,12 @@
-import { isPlatformBrowser } from "@angular/common"
-import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, Renderer2 } from "@angular/core"
-import { RouterModule } from "@angular/router"
-import { initFlowbite } from "flowbite"
-import { AppService } from "./app.service"
-import { loadTheme } from "./functions"
-import { MenubarComponent } from "./menubar/menubar.component"
-import { RedirectGuard } from "./redirect/redirect.guard"
-import { StartpageSettings } from "./types"
+import { isPlatformBrowser } from '@angular/common';
+import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { initFlowbite } from 'flowbite';
+import { AppService } from './app.service';
+import { loadTheme } from './functions';
+import { MenubarComponent } from './menubar/menubar.component';
+import { RedirectGuard } from './redirect/redirect.guard';
+import { StartpageSettings } from './types';
 
 @Component({
     standalone: true,
@@ -26,7 +26,9 @@ export class AppComponent implements OnInit {
         private el: ElementRef,
         private renderer: Renderer2,
     ) {
-        this.settings = this.appService.loadSettings()
+        this.appService.getSettings.subscribe((settings) => {
+            this.settings = settings
+        })
         if (this.settings.theme) {
             loadTheme(this.settings.theme, this.renderer, this.el)
         }

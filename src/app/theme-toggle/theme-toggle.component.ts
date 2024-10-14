@@ -1,8 +1,8 @@
-import { CommonModule } from "@angular/common"
-import { AfterViewInit, Component, ElementRef, Renderer2 } from "@angular/core"
-import { AppService } from "../app.service"
-import { loadTheme } from "../functions"
-import { ToastComponent } from "../toast/toast.component"
+import { CommonModule } from '@angular/common';
+import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { AppService } from '../app.service';
+import { loadTheme } from '../functions';
+import { ToastComponent } from '../toast/toast.component';
 
 @Component({
     selector: "app-theme-toggle",
@@ -11,7 +11,7 @@ import { ToastComponent } from "../toast/toast.component"
     templateUrl: "./theme-toggle.component.html",
     styleUrl: "./theme-toggle.component.css",
 })
-export class ThemeToggleComponent implements AfterViewInit {
+export class ThemeToggleComponent {
     currentTheme: undefined | string = "mocha"
     showToast = false
     text = "Try changing the theme! 🎨"
@@ -21,15 +21,12 @@ export class ThemeToggleComponent implements AfterViewInit {
         private appService: AppService,
         private el: ElementRef,
         private renderer: Renderer2,
-    ) {}
-
-    ngAfterViewInit(): void {
-        const settings = this.appService.loadSettings()
-        if (settings.theme) {
-            this.currentTheme = settings.theme
-        } else {
-            this.showToast = true
-        }
+    ) {
+        this.appService.getSettings.subscribe({
+            next: (settings) => {
+                this.currentTheme = settings.theme
+            },
+        })
     }
 
     toggleTheme(): void {

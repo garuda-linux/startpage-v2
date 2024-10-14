@@ -49,6 +49,7 @@ export class SettingsComponent implements AfterViewInit {
     // Default settings
     settings = defaultSettings as StartpageSettings
 
+    jokesEnabled = new FormControl()
     theme = new FormControl("Choose your theme")
     searchEngine = new FormControl("Choose your search engine")
     searchEngineUrl = new FormControl("Set a custom search engine URL (omit %s)")
@@ -87,6 +88,7 @@ export class SettingsComponent implements AfterViewInit {
 
     saveSettings(): void {
         const settings: StartpageSettings = {
+            jokesEnabled: this.jokesEnabled.value,
             searchEngine: this.searchEngine.value as SearchEngine,
             searchEngineName: this.searchEngineName.value as string,
             searchEngineUrl: this.searchEngineUrl.value as string,
@@ -99,6 +101,7 @@ export class SettingsComponent implements AfterViewInit {
         }
 
         this.appService.saveSettings(settings)
+        this.appService.getSettings.next(settings)
 
         if (settings.theme !== this.settings.theme) {
             loadTheme(settings.theme, this.renderer, this.el)

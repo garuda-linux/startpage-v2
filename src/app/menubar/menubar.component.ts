@@ -1,11 +1,10 @@
-import { NgClass, NgStyle } from "@angular/common"
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from "@angular/core"
-import { RouterLink } from "@angular/router"
-import { menubarItems } from "../../../config"
-import { AppService } from "../app.service"
-import { generateRouterLink } from "../functions"
-import { ThemeToggleComponent } from "../theme-toggle/theme-toggle.component"
-import { MenuBarItems } from "../types"
+import { NgClass, NgStyle } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { menubarItems } from '../../../config';
+import { AppService } from '../app.service';
+import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
+import { MenuBarItems, StartpageSettings } from '../types';
 
 @Component({
     selector: "app-menubar",
@@ -13,27 +12,16 @@ import { MenuBarItems } from "../types"
     imports: [NgClass, NgStyle, RouterLink, ThemeToggleComponent],
     templateUrl: "./menubar.component.html",
     styleUrl: "./menubar.component.css",
-    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MenubarComponent implements AfterViewInit {
+export class MenubarComponent {
     items: MenuBarItems = menubarItems
-    titleText = "Welcome! 👋🏻"
+    settings: StartpageSettings = {} as StartpageSettings
 
     @ViewChild(ThemeToggleComponent) themeToggle!: ThemeToggleComponent
 
-    constructor(
-        private appService: AppService,
-        private cdr: ChangeDetectorRef,
-    ) {}
-
-    ngAfterViewInit() {
-        for (const item of this.items) {
-            item.routerLink = generateRouterLink(item.title)
-        }
-
-        if (this.appService.settings.welcomeText) {
-            this.titleText = this.appService.settings.welcomeText
-        }
-        this.cdr.detectChanges()
+    constructor(private appService: AppService) {
+        this.appService.getSettings.subscribe((settings) => {
+            this.settings = settings
+        })
     }
 }

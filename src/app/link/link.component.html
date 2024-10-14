@@ -1,9 +1,11 @@
-<div class="w-full h-full max-w-sm bg-surface0/50 rounded-lg shadow">
-  <div class="flex flex-col items-center pb-5 backdrop-blur"
-       [routerLink]="routerLink">
-    <img class="mt-5 w-10 h-10 rounded-full shadow-lg" src="{{ icon }}"
-         alt="{{ title }} image" />
-    <h5 class="text-xl font-medium text-text">{{ title }}</h5>
-    <span class="mx-5 text-center text-sm text-mauve">{{ subtitle }}</span>
+<a href="{{ link }}">
+  <div class="w-full h-full max-w-sm bg-surface0/50 rounded-lg shadow">
+    <div class="flex flex-col items-center pb-5 backdrop-blur">
+      <img class="mt-5 w-10 h-10 rounded-full shadow-lg"
+           src="{{ icon }}"
+           alt="{{ title }} image" />
+      <h5 class="text-xl font-medium text-text">{{ title }}</h5>
+      <span class="mx-5 text-center text-sm text-mauve">{{ subtitle }}</span>
+    </div>
   </div>
-</div>
+</a>

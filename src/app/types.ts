@@ -133,6 +133,7 @@ export type SearchEngineList = SearchEngineEntry[]
 
 export interface StartpageSettings {
     [key: string]: any
+    jokesEnabled: boolean
     searchEngine: SearchEngine
     searchEngineName: string
     searchEngineUrl: string
