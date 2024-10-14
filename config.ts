@@ -196,11 +196,11 @@ export const defaultSettings: DefaultSettings = {
     searchEngineName: "Custom",
     searchEngineUrl: "Set a custom search engine URL (omit %s)",
     theme: "mocha" as StartpageTheme,
-    wallpaper: "",
-    wallpaperBlur: false,
+    wallpaper: "wallpapers/evening-sky.png",
+    wallpaperBlur: true,
     wallpaperCustomUrl: "",
     wallpaperFit: false,
-    welcomeText: " Welcome! 👋🏻",
+    welcomeText: "Welcome! 👋🏻",
 }
 
 // How many forum posts to load

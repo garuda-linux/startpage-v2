@@ -1,28 +1,28 @@
-import { CommonModule } from "@angular/common"
+import { CommonModule } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ElementRef,
-    Renderer2,
-} from "@angular/core"
-import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms"
-import { flavorEntries } from "@catppuccin/palette"
+    Renderer2
+} from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { flavorEntries } from '@catppuccin/palette';
 import {
-    SearchEngine,
     amountForumPostsSettings,
     defaultSettings,
+    SearchEngine,
     searchEngineMappings,
-    wallpapers,
-} from "../../../config"
-import { AppService } from "../app.service"
-import { loadTheme } from "../functions"
-import { LinkSectionComponent } from "../link-section/link-section.component"
-import { NewsComponent } from "../news/news.component"
-import { SearchComponent } from "../search/search.component"
-import { ToastComponent } from "../toast/toast.component"
-import { StartpageSettings, StartpageTheme } from "../types"
+    wallpapers
+} from '../../../config';
+import { AppService } from '../app.service';
+import { loadTheme } from '../functions';
+import { LinkSectionComponent } from '../link-section/link-section.component';
+import { NewsComponent } from '../news/news.component';
+import { SearchComponent } from '../search/search.component';
+import { ToastComponent } from '../toast/toast.component';
+import { StartpageSettings, StartpageTheme } from '../types';
 
 @Component({
     selector: "app-settings",
@@ -107,15 +107,9 @@ export class SettingsComponent implements AfterViewInit {
             loadTheme(settings.theme, this.renderer, this.el)
         }
 
-        if (settings.wallpaper === "custom") {
-            this.appService.loadWallpaper(this.el, this.renderer, settings["wallpaperCustomUrl"])
-            this.appService.applyWallpaperStyle(this.el, this.renderer)
-        } else if (settings.wallpaper !== "") {
-            this.appService.loadWallpaper(this.el, this.renderer, settings.wallpaper)
-            this.appService.applyWallpaperStyle(this.el, this.renderer)
-        } else if (settings.wallpaper === "") {
-            this.appService.loadWallpaper(this.el, this.renderer, null)
-        }
+        this.loadWallpaper(settings)
+        this.loadWallpaperStyle()
+
         this.settings = settings
 
         this.showToast = true
@@ -125,5 +119,19 @@ export class SettingsComponent implements AfterViewInit {
         }, 2500)
 
         this.cdr.detectChanges()
+    }
+
+    loadWallpaper(settings: StartpageSettings): void {
+        if (settings.wallpaper === "custom") {
+            this.appService.loadWallpaper(this.el, this.renderer, settings["wallpaperCustomUrl"])
+        } else if (settings.wallpaper !== "") {
+            this.appService.loadWallpaper(this.el, this.renderer, settings.wallpaper)
+        } else if (settings.wallpaper === "") {
+            this.appService.loadWallpaper(this.el, this.renderer, null)
+        }
+    }
+
+    loadWallpaperStyle(kind?: string): void {
+        this.appService.applyWallpaperStyle(this.el, this.renderer, kind)
     }
 }
