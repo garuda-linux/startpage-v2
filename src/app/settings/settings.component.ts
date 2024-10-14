@@ -109,10 +109,10 @@ export class SettingsComponent implements AfterViewInit {
 
         if (settings.wallpaper === "custom") {
             this.appService.loadWallpaper(this.el, this.renderer, settings["wallpaperCustomUrl"])
-            this.applyWallpaperStyle()
-        } else if (settings.wallpaper !== "" && settings.wallpaper !== this.settings.wallpaper) {
+            this.appService.applyWallpaperStyle(this.el, this.renderer)
+        } else if (settings.wallpaper !== "") {
             this.appService.loadWallpaper(this.el, this.renderer, settings.wallpaper)
-            this.applyWallpaperStyle()
+            this.appService.applyWallpaperStyle(this.el, this.renderer)
         } else if (settings.wallpaper === "") {
             this.appService.loadWallpaper(this.el, this.renderer, null)
         }
@@ -125,9 +125,5 @@ export class SettingsComponent implements AfterViewInit {
         }, 2500)
 
         this.cdr.detectChanges()
-    }
-
-    applyWallpaperStyle(): void {
-        this.appService.applyWallpaperStyle(this.el, this.renderer)
     }
 }

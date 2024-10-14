@@ -1,8 +1,8 @@
-import { CommonModule } from '@angular/common';
-import { Component, ElementRef, Renderer2 } from '@angular/core';
-import { AppService } from '../app.service';
-import { loadTheme } from '../functions';
-import { ToastComponent } from '../toast/toast.component';
+import { CommonModule } from "@angular/common"
+import { Component, ElementRef, Renderer2 } from "@angular/core"
+import { AppService } from "../app.service"
+import { loadTheme } from "../functions"
+import { ToastComponent } from "../toast/toast.component"
 
 @Component({
     selector: "app-theme-toggle",

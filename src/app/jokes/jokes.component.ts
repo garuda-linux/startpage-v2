@@ -1,6 +1,6 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import jokes from './jokes';
+import { CommonModule } from "@angular/common"
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core"
+import jokes from "./jokes"
 
 @Component({
     selector: "app-jokes",

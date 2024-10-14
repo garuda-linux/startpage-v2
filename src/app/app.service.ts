@@ -1,7 +1,7 @@
-import { ElementRef, Injectable, Renderer2 } from '@angular/core';
-import { defaultSettings } from '../../config';
-import { StartpageSettings } from './types';
-import { BehaviorSubject } from 'rxjs';
+import { ElementRef, Injectable, Renderer2 } from "@angular/core"
+import { BehaviorSubject } from "rxjs"
+import { defaultSettings } from "../../config"
+import { StartpageSettings } from "./types"
 
 @Injectable({
     providedIn: "root",
@@ -61,14 +61,17 @@ export class AppService {
      * @param renderer Renderer2 to the origin element.
      */
     applyWallpaperStyle(el: ElementRef, renderer: Renderer2): void {
-        renderer.setStyle(
-            el.nativeElement.ownerDocument.body,
-            "background-size",
-            this.settings.wallpaperFit ? "contain" : "",
-        )
+        if (this.settings.wallpaperFit) {
+            renderer.addClass(el.nativeElement.ownerDocument.body, "bg-contain")
+        } else {
+            renderer.removeClass(el.nativeElement.ownerDocument.body, "bg-contain")
+        }
 
-        // const blur = this.settings.wallpaperBlur ? "blur(16px)" : ""
-        // renderer.setStyle(el.nativeElement.ownerDocument.body, "filter", blur)
+        if (this.settings.wallpaperBlur) {
+            renderer.addClass(el.nativeElement.ownerDocument.body, "background-blurred")
+        } else {
+            renderer.removeClass(el.nativeElement.ownerDocument.body, "background-blurred")
+        }
     }
 
     /**

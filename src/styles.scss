@@ -30,7 +30,11 @@ body {
   font-family: "Fira Sans", sans-serif;
   font-style: normal;
   font-weight: 400;
+  left: 0;
   margin: 0;
+  position: fixed;
+  right: 0;
+  z-index: 10;
 }
 
 code,
@@ -45,12 +49,27 @@ samp {
   @apply text-sm selection:bg-mauve selection:text-base;
 }
 
-.bg-blur {
-  background-image: url("https://static.zenrows.com/content/large_archived_version_of_g2_reviews_page_e9898ad3ce.jpg");
-  filter: blur(8px);
-  -webkit-filter: blur(8px);
+.bg-contain {
+  background-size: contain;
+}
+
+.background-blurred .background-filter::after {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  content: "";
+  display: block;
   height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.background-filter {
+  position: relative;
+}
+
+.non-blurred {
+  position: relative;
+  z-index: 1;
+  overflow: scroll;
 }
