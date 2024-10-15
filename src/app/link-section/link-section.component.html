@@ -1,3 +1,15 @@
+@if (customLinks !== "" && parsedLinks.length > 0) {<div class="p-10">
+  <div>
+  </div>
+  <div class="grid grid-cols-2 gap-10 lg:grid-cols-3 md:gap-10 xl:grid-cols-4">
+    @for (link of parsedLinks; track link) {
+      <app-link [link]="link.link" [title]="link.title" [icon]="link.icon" [subtitle]="link.subtitle"
+                [tag]="link.title"></app-link>
+    }
+  </div>
+</div>
+}
+
 <div class="p-10">
   <div>
   </div>

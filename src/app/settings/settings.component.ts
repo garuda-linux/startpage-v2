@@ -23,7 +23,7 @@ import { LinkSectionComponent } from "../link-section/link-section.component"
 import { NewsComponent } from "../news/news.component"
 import { SearchComponent } from "../search/search.component"
 import { ToastComponent } from "../toast/toast.component"
-import { StartpageSettings, StartpageTheme } from "../types"
+import { ServiceLinks, StartpageSettings, StartpageTheme } from '../types';
 
 @Component({
     selector: "app-settings",
@@ -51,18 +51,19 @@ export class SettingsComponent implements AfterViewInit {
     // Default settings
     settings = defaultSettings as StartpageSettings
 
+    customLinks = new FormControl()
     jokesEnabled = new FormControl()
     logo = new FormControl()
-    logoUrl = new FormControl("")
-    theme = new FormControl("Choose your theme")
-    searchEngine = new FormControl("Choose your search engine")
-    searchEngineUrl = new FormControl("Set a custom search engine URL (omit %s)")
-    searchEngineName = new FormControl("")
-    welcomeText = new FormControl(" Welcome! 👋🏻")
+    logoUrl = new FormControl()
+    theme = new FormControl()
+    searchEngine = new FormControl()
+    searchEngineUrl = new FormControl()
+    searchEngineName = new FormControl()
+    welcomeText = new FormControl()
     wallpaper = new FormControl()
-    wallpaperCustomUrl = new FormControl("")
-    wallpaperFit = new FormControl(false)
-    wallpaperBlur = new FormControl(false)
+    wallpaperCustomUrl = new FormControl()
+    wallpaperFit = new FormControl()
+    wallpaperBlur = new FormControl()
 
     showToast = false
 
@@ -92,6 +93,7 @@ export class SettingsComponent implements AfterViewInit {
 
     saveSettings(): void {
         const settings: StartpageSettings = {
+            customLinks: this.customLinks.value as ServiceLinks,
             jokesEnabled: this.jokesEnabled.value,
             logo: this.logo.value,
             logoUrl: this.logoUrl.value as string,

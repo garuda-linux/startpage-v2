@@ -42,13 +42,20 @@
               <label for="input-search-name" class="block mb-2 text-md text-text">Custom search engine name</label>
               <input type="text" id="input-search-name"
                      [formControl]="searchEngineName"
-                     class="block w-full md:w-3/4 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
+                     class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
             </div>
           }
           <div class="mt-10">
             <label for="input-welcome" class="block mb-2 text-md text-text">Custom welcome message</label>
             <input type="text" id="input-welcome"
                    [formControl]="welcomeText"
+                   (keydown.enter)="saveSettings()"
+                   class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
+          </div>
+          <div class="mt-10">
+            <label for="input-welcome" class="block mb-2 text-md text-text">Custom service links</label>
+            <input type="text" id="input-links" placeholder="Leave empty for none."
+                   [formControl]="customLinks"
                    (keydown.enter)="saveSettings()"
                    class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
           </div>

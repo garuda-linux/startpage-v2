@@ -14,6 +14,10 @@ export class JokesComponent implements OnInit {
     joke = ""
 
     ngOnInit(): void {
+        this.setJoke()
+    }
+
+    setJoke(): void {
         this.joke = jokes[Math.floor(Math.random() * jokes.length)]
     }
 }
