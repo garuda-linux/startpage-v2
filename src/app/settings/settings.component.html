@@ -80,6 +80,28 @@
             </div>
           }
           <div class="mt-10">
+            <form>
+              <label for="select-logo" class="block mb-2 text-md text-text font-medium">Logo</label>
+              <select
+                name="select-logo"
+                id="select-logo"
+                [formControl]="logo"
+                class="block w-full md:w-3/4 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
+                @for (logo of logos; track logo) {
+                  <option value="{{ logo.url }}">{{ logo.name }}</option>
+                }
+              </select>
+            </form>
+          </div>
+          @if (logo.value === "custom") {
+            <div class="mt-10">
+              <label for="input-search-name" class="block mb-2 text-md text-text">Custom logo URL</label>
+              <input type="text" id="input-logo-url"
+                     [formControl]="logoUrl"
+                     class="block w-full md:w-3/4 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
+            </div>
+          }
+          <div class="mt-10">
             <label class="inline-flex center justify-center
             items-center cursor-pointer">
               <input type="checkbox" [formControl]="wallpaperFit" class="sr-only peer"

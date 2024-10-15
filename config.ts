@@ -1,6 +1,6 @@
-import { DefaultSettings, SearchEngineList, StartpageTheme, WallpaperList } from "./src/app/types"
+import { DefaultSettings, LogoList, SearchEngineList, StartpageTheme, WallpaperList } from "./src/app/types"
 
-const isProd = true
+const isProd = false
 export const GARUDA_FORUM_URL = isProd ? "https://forum.garudalinux.org" : "http://localhost:8010/proxy"
 
 // These are the items inside the menu.
@@ -192,6 +192,8 @@ export const searchEngineMappings: SearchEngineList = [
 // These are the settings defaults used
 export const defaultSettings: DefaultSettings = {
     jokesEnabled: true,
+    logo: "logos/violet-orange.png",
+    logoUrl: "",
     searchEngine: "searxng-privau" as SearchEngine,
     searchEngineName: "Custom",
     searchEngineUrl: "Set a custom search engine URL (omit %s)",
@@ -228,3 +230,21 @@ export const wallpapers: WallpaperList = [
 
 // Don't delete
 export const c = "nft5zX8CPAL4TW"
+
+// List for logo shown on the main page. Needs to have a fitting file in the public/logos folder.
+export const logos: LogoList = [
+    { name: "Black Metal", url: "logos/black-metal.png" },
+    { name: "Blue Metal", url: "logos/blue-metal.png" },
+    { name: "Blue", url: "logos/blue.png" },
+    { name: "Dr460nized", url: "logos/dr460nized.png" },
+    { name: "Green", url: "logos/green.png" },
+    { name: "Metal", url: "logos/metal.png" },
+    { name: "Orange", url: "logos/orange.png" },
+    { name: "Petrol", url: "logos/petrol.png" },
+    { name: "Pink", url: "logos/pink.png" },
+    { name: "Red", url: "logos/red.png" },
+    { name: "Solid", url: "logos/solid.png" },
+    { name: "Violet Orange", url: "logos/violet-orange.png" },
+    { name: "Custom", url: "custom" },
+]
+export const defaultLogo = "logos/violet-orange.png"

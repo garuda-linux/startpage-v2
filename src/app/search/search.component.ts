@@ -1,8 +1,8 @@
 import { CommonModule, DOCUMENT } from "@angular/common"
-import { Component, Inject } from "@angular/core"
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from "@angular/core"
 import { FormsModule } from "@angular/forms"
 import { RouterLink } from "@angular/router"
-import { SearchEngine, c, searchEngineMappings } from "../../../config"
+import { SearchEngine, defaultLogo, searchEngineMappings } from "../../../config"
 import { AppService } from "../app.service"
 import { SearchEngineEntry } from "../types"
 
@@ -12,14 +12,17 @@ import { SearchEngineEntry } from "../types"
     imports: [CommonModule, FormsModule, RouterLink],
     templateUrl: "./search.component.html",
     styleUrl: "./search.component.css",
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit {
     searchTerm = ""
     searchEngine: SearchEngine = "searxng"
     searchEngineData: SearchEngineEntry
+    logo = "/logos/violet-orange.png"
 
     constructor(
         private appService: AppService,
+        private cdr: ChangeDetectorRef,
         @Inject(DOCUMENT) public document: Document,
     ) {
         this.searchEngine = this.appService.settings.searchEngine
@@ -34,6 +37,23 @@ export class SearchComponent {
                 ? this.appService.settings.searchEngineName
                 : "Custom"
         }
+    }
+
+    ngOnInit(): void {
+        this.appService.getSettings.subscribe((settings) => {
+            this.searchEngine = settings.searchEngine
+
+            console.log(this.searchEngine)
+            if (settings.logo === "custom" && this.appService.settings.logoUrl !== undefined) {
+                this.logo = this.appService.settings.logoUrl
+            } else if (settings.logo === undefined) {
+                this.logo = defaultLogo
+                this.appService.settings.logo = defaultLogo
+            } else {
+                this.logo = settings.logo
+            }
+            this.cdr.detectChanges()
+        })
     }
 
     /**

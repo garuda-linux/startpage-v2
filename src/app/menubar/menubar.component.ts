@@ -1,10 +1,10 @@
-import { NgClass, NgStyle } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { menubarItems } from '../../../config';
-import { AppService } from '../app.service';
-import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
-import { MenuBarItems } from '../types';
+import { NgClass, NgStyle } from "@angular/common"
+import { Component, ViewChild } from "@angular/core"
+import { RouterLink } from "@angular/router"
+import { menubarItems } from "../../../config"
+import { AppService } from "../app.service"
+import { ThemeToggleComponent } from "../theme-toggle/theme-toggle.component"
+import { MenuBarItems } from "../types"
 
 @Component({
     selector: "app-menubar",

@@ -1,7 +1,7 @@
-import { ElementRef, Injectable, Renderer2 } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { defaultSettings } from '../../config';
-import { StartpageSettings } from './types';
+import { ElementRef, Injectable, Renderer2 } from "@angular/core"
+import { BehaviorSubject } from "rxjs"
+import { defaultSettings } from "../../config"
+import { StartpageSettings } from "./types"
 
 @Injectable({
     providedIn: "root",

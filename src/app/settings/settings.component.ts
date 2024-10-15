@@ -1,28 +1,29 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule } from "@angular/common"
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ElementRef,
-    Renderer2
-} from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { flavorEntries } from '@catppuccin/palette';
+    Renderer2,
+} from "@angular/core"
+import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms"
+import { flavorEntries } from "@catppuccin/palette"
 import {
+    SearchEngine,
     amountForumPostsSettings,
     defaultSettings,
-    SearchEngine,
+    logos,
     searchEngineMappings,
-    wallpapers
-} from '../../../config';
-import { AppService } from '../app.service';
-import { loadTheme } from '../functions';
-import { LinkSectionComponent } from '../link-section/link-section.component';
-import { NewsComponent } from '../news/news.component';
-import { SearchComponent } from '../search/search.component';
-import { ToastComponent } from '../toast/toast.component';
-import { StartpageSettings, StartpageTheme } from '../types';
+    wallpapers,
+} from "../../../config"
+import { AppService } from "../app.service"
+import { loadTheme } from "../functions"
+import { LinkSectionComponent } from "../link-section/link-section.component"
+import { NewsComponent } from "../news/news.component"
+import { SearchComponent } from "../search/search.component"
+import { ToastComponent } from "../toast/toast.component"
+import { StartpageSettings, StartpageTheme } from "../types"
 
 @Component({
     selector: "app-settings",
@@ -43,6 +44,7 @@ import { StartpageSettings, StartpageTheme } from '../types';
 export class SettingsComponent implements AfterViewInit {
     protected readonly amountForumPostsSettings = amountForumPostsSettings
     protected readonly flavors = flavorEntries
+    protected readonly logos = logos
     protected readonly searchEngineMappings = searchEngineMappings
     protected readonly wallpapers = wallpapers
 
@@ -50,6 +52,8 @@ export class SettingsComponent implements AfterViewInit {
     settings = defaultSettings as StartpageSettings
 
     jokesEnabled = new FormControl()
+    logo = new FormControl()
+    logoUrl = new FormControl("")
     theme = new FormControl("Choose your theme")
     searchEngine = new FormControl("Choose your search engine")
     searchEngineUrl = new FormControl("Set a custom search engine URL (omit %s)")
@@ -89,13 +93,15 @@ export class SettingsComponent implements AfterViewInit {
     saveSettings(): void {
         const settings: StartpageSettings = {
             jokesEnabled: this.jokesEnabled.value,
+            logo: this.logo.value,
+            logoUrl: this.logoUrl.value as string,
             searchEngine: this.searchEngine.value as SearchEngine,
             searchEngineName: this.searchEngineName.value as string,
             searchEngineUrl: this.searchEngineUrl.value as string,
             theme: this.theme.value as StartpageTheme,
-            wallpaper: this.wallpaper.value as string,
+            wallpaper: this.wallpaper.value,
             wallpaperBlur: this.wallpaperBlur.value as boolean,
-            wallpaperCustomUrl: this.wallpaperCustomUrl.value as string,
+            wallpaperCustomUrl: this.wallpaperCustomUrl.value,
             wallpaperFit: this.wallpaperFit.value as boolean,
             welcomeText: this.welcomeText.value as string,
         }

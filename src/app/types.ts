@@ -1,4 +1,4 @@
-import { SearchEngine } from "../../config"
+import { SearchEngine, logos } from "../../config"
 
 export interface DiscourseFeed {
     users: User[]
@@ -134,6 +134,8 @@ export type SearchEngineList = SearchEngineEntry[]
 export interface StartpageSettings {
     [key: string]: any
     jokesEnabled: boolean
+    logo: string
+    logoUrl?: string
     searchEngine: SearchEngine
     searchEngineName: string
     searchEngineUrl: string
@@ -156,21 +158,8 @@ export interface WallpaperEntry {
 }
 export type WallpaperList = WallpaperEntry[]
 
-export interface JokeApiResponse {
-    error: boolean
-    category: string
-    type: string
-    joke: string
-    delivery: string
-    flags: {
-        nsfw: boolean
-        religious: boolean
-        political: boolean
-        racist: boolean
-        sexist: boolean
-        explicit: boolean
-    }
-    safe: boolean
-    id: number
-    lang: string
+export interface Logo {
+    name: string
+    url: string
 }
+export type LogoList = Logo[]
