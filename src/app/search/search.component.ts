@@ -1,4 +1,4 @@
-import { CommonModule, DOCUMENT } from "@angular/common"
+import { CommonModule, DOCUMENT, NgOptimizedImage } from "@angular/common"
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from "@angular/core"
 import { FormsModule } from "@angular/forms"
 import { RouterLink } from "@angular/router"
@@ -9,7 +9,7 @@ import { SearchEngineEntry } from "../types"
 @Component({
     selector: "app-search",
     standalone: true,
-    imports: [CommonModule, FormsModule, RouterLink],
+    imports: [CommonModule, FormsModule, RouterLink, NgOptimizedImage],
     templateUrl: "./search.component.html",
     styleUrl: "./search.component.css",
     changeDetection: ChangeDetectionStrategy.OnPush,

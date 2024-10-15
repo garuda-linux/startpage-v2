@@ -1,6 +1,6 @@
 import { DefaultSettings, LogoList, SearchEngineList, StartpageTheme, WallpaperList } from "./src/app/types"
 
-const isProd = false
+const isProd = true
 export const GARUDA_FORUM_URL = isProd ? "https://forum.garudalinux.org" : "http://localhost:8010/proxy"
 
 // These are the items inside the menu.

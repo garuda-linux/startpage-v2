@@ -1,6 +1,6 @@
 <div class="sm:pt-20 pt-28 mb-2.5 md:flex h-svh">
   <div class="md:w-5/6">
-    <div class="px-10">
+    <div class="px-10 mt-5">
       <h1 class="bold text-maroon text-lg text-center">Configure startpage settings</h1>
       <div class="md:flex">
         <div class="md:flex-grow">
@@ -10,7 +10,7 @@
               name="select-theme"
               id="select-theme"
               [formControl]="theme"
-              class="block w-full md:w-3/4 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
+              class="block w-full md:w-5/6 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
               @for (flavor of flavors; track flavor) {
                 <option value="{{ flavor[0] }}">{{ flavor[1].name }}</option>
               }
@@ -24,7 +24,7 @@
                 name="select-search-engine"
                 id="select-search-engine"
                 [formControl]="searchEngine"
-                class="block w-full md:w-3/4 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
+                class="block w-full md:w-5/6 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
                 @for (engine of searchEngineMappings; track engine) {
                   <option value="{{ engine.name }}">{{ engine.prettyName }}</option>
                 }
@@ -36,7 +36,7 @@
               <label for="input-search-engine" class="block mb-2 text-md text-text">Custom search URL</label>
               <input type="text" id="input-search-engine"
                      [formControl]="searchEngineUrl"
-                     class="block w-full md:w-3/4 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
+                     class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
             </div>
             <div class="mt-10">
               <label for="input-search-name" class="block mb-2 text-md text-text">Custom search engine name</label>
@@ -50,7 +50,7 @@
             <input type="text" id="input-welcome"
                    [formControl]="welcomeText"
                    (keydown.enter)="saveSettings()"
-                   class="block w-full md:w-3/4 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
+                   class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
           </div>
           <button type="submit"
                   (click)="saveSettings()"
@@ -65,7 +65,7 @@
               name="select-wallpaper"
               id="select-wallpaper"
               [formControl]="wallpaper"
-              class="block w-full md:w-3/4 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
+              class="block w-full md:w-1/2 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
               @for (wallpaper of wallpapers; track wallpaper) {
                 <option value="{{ wallpaper.url }}">{{ wallpaper.name }}</option>
               }
@@ -76,7 +76,7 @@
               <label for="input-wallpaper" class="block mb-2  text-md text-text">Custom wallpaper URL</label>
               <input type="text" id="input-wallpaper"
                      [formControl]="wallpaperCustomUrl"
-                     class="block w-full md:w-3/4 p2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
+                     class="block w-full md:w-1/2 p2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
             </div>
           }
           <div class="mt-10">
@@ -86,7 +86,7 @@
                 name="select-logo"
                 id="select-logo"
                 [formControl]="logo"
-                class="block w-full md:w-3/4 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
+                class="block w-full md:w-1/2 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
                 @for (logo of logos; track logo) {
                   <option value="{{ logo.url }}">{{ logo.name }}</option>
                 }
@@ -98,7 +98,7 @@
               <label for="input-search-name" class="block mb-2 text-md text-text">Custom logo URL</label>
               <input type="text" id="input-logo-url"
                      [formControl]="logoUrl"
-                     class="block w-full md:w-3/4 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
+                     class="block w-full md:w-1/2 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
             </div>
           }
           <div class="mt-10">
