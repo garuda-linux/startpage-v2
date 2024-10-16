@@ -36,6 +36,11 @@ export class LinkSectionComponent {
     }
 
     private parseLinks(): void {
+        if (!this.customLinks || this.customLinks === "") {
+            this.parsedLinks = []
+            return
+        }
+
         try {
             this.parsedLinks = JSON.parse(this.customLinks)
         } catch (err: any) {
