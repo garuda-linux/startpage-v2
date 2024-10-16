@@ -52,6 +52,7 @@ export class SettingsComponent implements AfterViewInit {
     settings = defaultSettings as StartpageSettings
 
     customLinks = new FormControl()
+    defaultLinks = new FormControl()
     jokesEnabled = new FormControl()
     logo = new FormControl()
     logoUrl = new FormControl()
@@ -94,18 +95,19 @@ export class SettingsComponent implements AfterViewInit {
     saveSettings(): void {
         const settings: StartpageSettings = {
             customLinks: this.customLinks.value as ServiceLinks,
+            defaultLinks: this.defaultLinks.value,
             jokesEnabled: this.jokesEnabled.value,
             logo: this.logo.value,
-            logoUrl: this.logoUrl.value as string,
+            logoUrl: this.logoUrl.value ,
             searchEngine: this.searchEngine.value as SearchEngine,
-            searchEngineName: this.searchEngineName.value as string,
-            searchEngineUrl: this.searchEngineUrl.value as string,
+            searchEngineName: this.searchEngineName.value ,
+            searchEngineUrl: this.searchEngineUrl.value ,
             theme: this.theme.value as StartpageTheme,
             wallpaper: this.wallpaper.value,
-            wallpaperBlur: this.wallpaperBlur.value as boolean,
+            wallpaperBlur: this.wallpaperBlur.value,
             wallpaperCustomUrl: this.wallpaperCustomUrl.value,
-            wallpaperFit: this.wallpaperFit.value as boolean,
-            welcomeText: this.welcomeText.value as string,
+            wallpaperFit: this.wallpaperFit.value ,
+            welcomeText: this.welcomeText.value ,
         }
 
         this.appService.saveSettings(settings)

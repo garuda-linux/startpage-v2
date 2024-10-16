@@ -133,6 +133,7 @@ export type SearchEngineList = SearchEngineEntry[]
 
 export interface StartpageSettings {
     [key: string]: any
+    defaultLinks: boolean
     jokesEnabled: boolean
     logo: string
     logoUrl?: string

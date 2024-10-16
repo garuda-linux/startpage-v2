@@ -6,7 +6,7 @@ The page is built with Angular.
 
 <img src="/assets/startpage.png" alt="Startpage picture">
 
-## Changing links
+## Changing static settings
 
 To change the links, edit [config.ts](./config.ts) in the root directory.
 
@@ -22,7 +22,39 @@ To change the links, edit [config.ts](./config.ts) in the root directory.
 
 Additionally,
 [jokes.ts](./src/app/jokes/jokes.ts) contains the list of excuses/jokes that will be shown on the main page.
+
 ## Get the tools
+
+## Changing runtime (user facing) settings
+
+The settings are stored in the local storage of the browser.
+To change the settings, click on the settings icon in the top right corner of the page.
+The following can be adjusted:
+
+- Welcome message
+- The search engine (with custom search engines)
+    - Paste the search url in the search engine input field, e.g. `https://search.garudalinux.org/search?q=`
+        - Omit any appended `%s`
+- The wallpaper
+- Whether to fit or fill the wallpaper
+- Blur the wallpaper
+- Enable or disables developer excuses
+- Show or hide default links
+- Theming (all Catppuccin flavours)
+- Add custom links above the wallpaper
+    - This can be any link, the only requirement is providing a valid JSON in the custom service links section
+    - Valid is something following the format:
+      ```json
+      [
+        { "link": "https://discouse.nixos.org",    
+         "title": "NixOS Forum",
+         "icon": "https://discourse.nixos.org/uploads/default/original/2X/c/cb4fe584627b37e7c1d5424e9cec0bb30fdb6c4d.png",     
+         "subtitle": "NixOS Forum"   
+        }
+      ]
+      ```
+
+## Development
 
 To get started with this workspace, you need to install the following tools:
 

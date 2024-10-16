@@ -197,6 +197,7 @@ export const searchEngineMappings: SearchEngineList = [
 // These are the settings defaults used
 export const defaultSettings: DefaultSettings = {
     customLinks: "",
+    defaultLinks: true,
     jokesEnabled: true,
     logo: "logos/violet-orange.png",
     logoUrl: "",
