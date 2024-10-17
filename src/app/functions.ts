@@ -1,5 +1,6 @@
-import { ElementRef, Renderer2 } from "@angular/core"
-import { CatppuccinFlavor, flavors } from "@catppuccin/palette"
+import { ElementRef, Renderer2 } from '@angular/core';
+import { CatppuccinFlavor, flavors } from '@catppuccin/palette';
+import { Title } from '@angular/platform-browser';
 
 /**
  * Loads the selected theme.
@@ -32,4 +33,18 @@ export function loadTheme(theme: string, renderer: Renderer2, el: ElementRef) {
  */
 export function generateRouterLink(title: string): string {
     return title.toLowerCase().replace(/\s/g, "-")
+}
+
+/**
+ * Set the page title.
+ * @param titleService The title service to use.
+ * @param customTitle The custom title to set.
+ */
+export function setPageTitle(titleService: Title, customTitle: string | undefined) {
+    console.log(customTitle)
+    if (customTitle !== "" && customTitle !== undefined && customTitle !== null) {
+        titleService.setTitle(customTitle)
+    } else {
+        titleService.setTitle("Garuda Startpage")
+    }
 }

@@ -1,5 +1,5 @@
-<div class="sm:pt-10 pt-16 mb-2.5 md:flex h-svh w-lvw">
-  <div class="md:w-5/6">
+<div class="sm:pt-10 pt-16 mb-10 md:flex sm:h-svh w-lvw">
+  <div class="md:w-3/4">
     <div class="px-10 mt-5">
       <div class="md:flex">
         <div class="md:flex-grow">
@@ -53,40 +53,20 @@
           </div>
           <div class="mt-10">
             <label for="input-welcome" class="block mb-2 text-md text-text">Custom service links
-              <a data-popover-target="popover-custom-links">?</a>
-              <div data-popover id="popover-custom-links" role="tooltip"
-                   class="absolute z-10 invisible inline-block w-200 text-sm text-text transition-opacity duration-300 bg-surface1/60 rounded-lg shadow-sm opacity-0">
-                <div
-                  class="px-3 py-2 rounded-t-lg">
-                  <h3 class="font-semibold text-mauve">Correct format</h3>
-                </div>
-                <div class="px-3">
-                  <pre class="text-xs p-2 rounded-lg">
-                    <code>
-[
-  &#123;
-      "link": "https://discourse.nixos.org",
-      "title": "NixOS Forum",
-      "icon": "https://discourse.nixos.org/uploads/default/original/2X/c/cb4fe584627b37e7c1d5424e9cec0bb30fdb6c4d.png",
-      "subtitle": "NixOS Forum"
-  &#125;,
-  &#123;
-      "link": "https://discourse.nixos.org",
-      "title": "NixOS Forum",
-      "icon": "https://discourse.nixos.org/uploads/default/original/2X/c/cb4fe584627b37e7c1d5424e9cec0bb30fdb6c4d.png",
-      "subtitle": "NixOS Forum"
-  &#125;
-]
-                    </code>
-                  </pre>
-                </div>
-                <div data-popper-arrow></div>
-              </div>
+              <a href="https://gitlab.com/garuda-linux/website/startpage-v2#changing-runtime-user-facing-settings">?</a>
+              <input type="text" id="input-links" placeholder="Leave empty for none."
+                     [formControl]="customLinks"
+                     (keydown.enter)="saveSettings()"
+                     class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
             </label>
-            <input type="text" id="input-links" placeholder="Leave empty for none."
-                   [formControl]="customLinks"
-                   (keydown.enter)="saveSettings()"
-                   class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
+          </div>
+          <div class="mt-10">
+            <label for="input-welcome" class="block mb-2 text-md text-text">Custom page title
+              <input type="text" id="input-title" placeholder="Leave empty for default."
+                     [formControl]="customTitle"
+                     (keydown.enter)="saveSettings()"
+                     class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
+            </label>
           </div>
           <button type="submit"
                   (click)="saveSettings()"
@@ -101,7 +81,7 @@
               name="select-wallpaper"
               id="select-wallpaper"
               [formControl]="wallpaper"
-              class="block w-full md:w-1/2 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
+              class="block w-full md:w-5/6 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
               @for (wallpaper of wallpapers; track wallpaper) {
                 <option value="{{ wallpaper.url }}">{{ wallpaper.name }}</option>
               }
@@ -112,7 +92,7 @@
               <label for="input-wallpaper" class="block mb-2  text-md text-text">Custom wallpaper URL</label>
               <input type="text" id="input-wallpaper"
                      [formControl]="wallpaperCustomUrl"
-                     class="block w-full md:w-1/2 p2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
+                     class="block w-full md:w-5/6 p2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
             </div>
           }
           <div class="mt-10">
@@ -122,7 +102,7 @@
                 name="select-logo"
                 id="select-logo"
                 [formControl]="logo"
-                class="block w-full md:w-1/2 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
+                class="block w-full md:w-5/6 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
                 @for (logo of logos; track logo) {
                   <option value="{{ logo.url }}">{{ logo.name }}</option>
                 }
@@ -134,7 +114,7 @@
               <label for="input-search-name" class="block mb-2 text-md text-text">Custom logo URL</label>
               <input type="text" id="input-logo-url"
                      [formControl]="logoUrl"
-                     class="block w-full md:w-1/2 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
+                     class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
             </div>
           }
           <div class="mt-10">
@@ -185,7 +165,7 @@
     </div>
   </div>
 
-  <div class="md:w-1/5 flex-auto mx-14 mt-20 sm:mt-14 pb-2.5 md:mx-10">
+  <div class="md:w-1/5 hidden sm:block flex-auto mx-14 mt-20 sm:mt-14 pb-2.5 md:mx-14">
     <h2 class="font-bold text-lg text-center text-text mb-5">Latest news</h2>
     <app-news [amount]="amountForumPostsSettings"></app-news>
   </div>

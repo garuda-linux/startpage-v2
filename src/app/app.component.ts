@@ -1,12 +1,13 @@
-import { isPlatformBrowser } from "@angular/common"
-import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, Renderer2 } from "@angular/core"
-import { RouterModule } from "@angular/router"
-import { initFlowbite } from "flowbite"
-import { AppService } from "./app.service"
-import { loadTheme } from "./functions"
-import { MenubarComponent } from "./menubar/menubar.component"
-import { RedirectGuard } from "./redirect/redirect.guard"
-import { StartpageSettings } from "./types"
+import { isPlatformBrowser } from '@angular/common';
+import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { initFlowbite } from 'flowbite';
+import { AppService } from './app.service';
+import { loadTheme, setPageTitle } from './functions';
+import { MenubarComponent } from './menubar/menubar.component';
+import { RedirectGuard } from './redirect/redirect.guard';
+import { StartpageSettings } from './types';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     standalone: true,
@@ -25,6 +26,7 @@ export class AppComponent implements OnInit {
         @Inject(PLATFORM_ID) private platformId: object,
         private el: ElementRef,
         private renderer: Renderer2,
+        private titleService: Title,
     ) {
         this.appService.getSettings.subscribe((settings) => {
             this.settings = settings
@@ -32,6 +34,7 @@ export class AppComponent implements OnInit {
         if (this.settings.theme) {
             loadTheme(this.settings.theme, this.renderer, this.el)
         }
+        setPageTitle(this.titleService, this.settings.customTitle)
         this.appService.applyWallpaperStyle(this.el, this.renderer)
         this.appService.loadWallpaper(this.el, this.renderer, this.appService.settings.wallpaper)
     }

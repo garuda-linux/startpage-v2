@@ -18,12 +18,13 @@ import {
     wallpapers,
 } from "../../../config"
 import { AppService } from "../app.service"
-import { loadTheme } from "../functions"
+import { loadTheme, setPageTitle } from '../functions';
 import { LinkSectionComponent } from "../link-section/link-section.component"
 import { NewsComponent } from "../news/news.component"
 import { SearchComponent } from "../search/search.component"
 import { ToastComponent } from "../toast/toast.component"
 import { ServiceLinks, StartpageSettings, StartpageTheme } from '../types';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: "app-settings",
@@ -52,6 +53,7 @@ export class SettingsComponent implements AfterViewInit {
     settings = defaultSettings as StartpageSettings
 
     customLinks = new FormControl()
+    customTitle = new FormControl()
     defaultLinks = new FormControl()
     jokesEnabled = new FormControl()
     logo = new FormControl()
@@ -73,6 +75,7 @@ export class SettingsComponent implements AfterViewInit {
         private cdr: ChangeDetectorRef,
         private el: ElementRef,
         private renderer: Renderer2,
+        private titleService: Title
     ) {}
 
     ngAfterViewInit(): void {
@@ -95,6 +98,7 @@ export class SettingsComponent implements AfterViewInit {
     saveSettings(): void {
         const settings: StartpageSettings = {
             customLinks: this.customLinks.value as ServiceLinks,
+            customTitle: this.customTitle.value,
             defaultLinks: this.defaultLinks.value,
             jokesEnabled: this.jokesEnabled.value,
             logo: this.logo.value,
@@ -119,6 +123,7 @@ export class SettingsComponent implements AfterViewInit {
 
         this.loadWallpaper(settings)
         this.loadWallpaperStyle()
+        setPageTitle(this.titleService, settings.customTitle)
 
         this.settings = settings
 
