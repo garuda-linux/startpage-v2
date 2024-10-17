@@ -51,7 +51,6 @@ export class AppService {
         if (wallpaper === null) {
             renderer.removeStyle(el.nativeElement.ownerDocument.body, "backgroundImage")
         } else {
-            console.log(wallpaper)
             renderer.setStyle(el.nativeElement.ownerDocument.body, "background-image", `url(${wallpaper})`)
         }
     }

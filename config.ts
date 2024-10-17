@@ -197,6 +197,7 @@ export const searchEngineMappings: SearchEngineList = [
 // These are the settings defaults used
 export const defaultSettings: DefaultSettings = {
     customLinks: "",
+    customTitle: "Garuda Startpage",
     defaultLinks: true,
     jokesEnabled: true,
     logo: "logos/violet-orange.png",
@@ -205,7 +206,7 @@ export const defaultSettings: DefaultSettings = {
     searchEngineName: "Custom",
     searchEngineUrl: "Set a custom search engine URL (omit %s)",
     theme: "mocha" as StartpageTheme,
-    wallpaper: "wallpapers/evening-sky.png",
+    wallpaper: "",
     wallpaperBlur: true,
     wallpaperCustomUrl: "",
     wallpaperFit: false,

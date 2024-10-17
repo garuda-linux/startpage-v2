@@ -40,6 +40,7 @@ The following can be adjusted:
 - Blur the wallpaper
 - Enable or disables developer excuses
 - Show or hide default links
+- Page title shown in the browser tab
 - Theming (all Catppuccin flavours)
 - Add custom links above the wallpaper
     - This can be any link, the only requirement is providing a valid JSON in the custom service links section
