@@ -8,6 +8,7 @@ import {
     Renderer2,
 } from "@angular/core"
 import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms"
+import { Title } from "@angular/platform-browser"
 import { flavorEntries } from "@catppuccin/palette"
 import {
     SearchEngine,
@@ -18,13 +19,12 @@ import {
     wallpapers,
 } from "../../../config"
 import { AppService } from "../app.service"
-import { loadTheme, setPageTitle } from '../functions';
+import { loadTheme, setPageTitle } from "../functions"
 import { LinkSectionComponent } from "../link-section/link-section.component"
 import { NewsComponent } from "../news/news.component"
 import { SearchComponent } from "../search/search.component"
 import { ToastComponent } from "../toast/toast.component"
-import { ServiceLinks, StartpageSettings, StartpageTheme } from '../types';
-import { Title } from '@angular/platform-browser';
+import { ServiceLinks, StartpageSettings, StartpageTheme } from "../types"
 
 @Component({
     selector: "app-settings",
@@ -75,7 +75,7 @@ export class SettingsComponent implements AfterViewInit {
         private cdr: ChangeDetectorRef,
         private el: ElementRef,
         private renderer: Renderer2,
-        private titleService: Title
+        private titleService: Title,
     ) {}
 
     ngAfterViewInit(): void {
@@ -102,16 +102,16 @@ export class SettingsComponent implements AfterViewInit {
             defaultLinks: this.defaultLinks.value,
             jokesEnabled: this.jokesEnabled.value,
             logo: this.logo.value,
-            logoUrl: this.logoUrl.value ,
+            logoUrl: this.logoUrl.value,
             searchEngine: this.searchEngine.value as SearchEngine,
-            searchEngineName: this.searchEngineName.value ,
-            searchEngineUrl: this.searchEngineUrl.value ,
+            searchEngineName: this.searchEngineName.value,
+            searchEngineUrl: this.searchEngineUrl.value,
             theme: this.theme.value as StartpageTheme,
             wallpaper: this.wallpaper.value,
             wallpaperBlur: this.wallpaperBlur.value,
             wallpaperCustomUrl: this.wallpaperCustomUrl.value,
-            wallpaperFit: this.wallpaperFit.value ,
-            welcomeText: this.welcomeText.value ,
+            wallpaperFit: this.wallpaperFit.value,
+            welcomeText: this.welcomeText.value,
         }
 
         this.appService.saveSettings(settings)

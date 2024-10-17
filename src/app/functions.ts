@@ -1,6 +1,6 @@
-import { ElementRef, Renderer2 } from '@angular/core';
-import { CatppuccinFlavor, flavors } from '@catppuccin/palette';
-import { Title } from '@angular/platform-browser';
+import { ElementRef, Renderer2 } from "@angular/core"
+import { Title } from "@angular/platform-browser"
+import { CatppuccinFlavor, flavors } from "@catppuccin/palette"
 
 /**
  * Loads the selected theme.

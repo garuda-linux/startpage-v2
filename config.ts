@@ -1,13 +1,13 @@
 import {
-  ContactLinks,
-  DefaultSettings,
-  LogoList,
-  MenuBarLink,
-  SearchEngineList,
-  ServiceLinks,
-  StartpageTheme,
-  WallpaperList
-} from './src/app/types';
+    ContactLinks,
+    DefaultSettings,
+    LogoList,
+    MenuBarLink,
+    SearchEngineList,
+    ServiceLinks,
+    StartpageTheme,
+    WallpaperList,
+} from "./src/app/types"
 
 const isProd = true
 export const GARUDA_FORUM_URL = isProd ? "https://forum.garudalinux.org" : "http://localhost:8010/proxy"

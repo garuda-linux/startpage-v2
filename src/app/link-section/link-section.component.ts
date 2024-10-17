@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { contactLinks, serviceLinks } from '../../../config';
-import { LinkComponent } from '../link/link.component';
-import { AppService } from '../app.service';
-import { ServiceLinks } from '../types';
-import { ToastComponent } from '../toast/toast.component';
+import { CommonModule } from "@angular/common"
+import { Component } from "@angular/core"
+import { FormsModule } from "@angular/forms"
+import { contactLinks, serviceLinks } from "../../../config"
+import { AppService } from "../app.service"
+import { LinkComponent } from "../link/link.component"
+import { ToastComponent } from "../toast/toast.component"
+import { ServiceLinks } from "../types"
 
 @Component({
     selector: "app-link-section",
