@@ -76,6 +76,8 @@ pnpm serve
 ```
 
 Visit [http://localhost:4200](http://localhost:4200) to see the app with live reload.
+Make sure to set `isProd` to false in the `config.ts` file to make the forum posts load.
+Don't commit this change! :) 
 
 To create a production bundle:
 
