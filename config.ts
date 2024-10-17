@@ -245,6 +245,7 @@ export const logos: LogoList = [
     { name: "Blue", url: "logos/blue.png" },
     { name: "Dr460nized", url: "logos/dr460nized.png" },
     { name: "Green", url: "logos/green.png" },
+    { name: "Maroon Lavender", url: "logos/maroon-lavender.png" },
     { name: "Metal", url: "logos/metal.png" },
     { name: "Orange", url: "logos/orange.png" },
     { name: "Petrol", url: "logos/petrol.png" },
