@@ -73,7 +73,7 @@ export const contactLinks = [
     {
         link: "https://bsky.app/profile/garudalinux.bsky.social",
         title: "Bluesky",
-        logo: "pictures/bluesky.png",
+        logo: "pictures/bluesky.svg",
         subtitle: "Get some news from Garuda",
         tag: "Bluesky",
     },
