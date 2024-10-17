@@ -1,10 +1,19 @@
-import { DefaultSettings, SearchEngineList, StartpageTheme, WallpaperList } from "./src/app/types"
+import {
+  ContactLinks,
+  DefaultSettings,
+  LogoList,
+  MenuBarLink,
+  SearchEngineList,
+  ServiceLinks,
+  StartpageTheme,
+  WallpaperList
+} from './src/app/types';
 
 const isProd = true
 export const GARUDA_FORUM_URL = isProd ? "https://forum.garudalinux.org" : "http://localhost:8010/proxy"
 
 // These are the items inside the menu.
-export const menubarItems = [
+export const menubarItems: MenuBarLink[] = [
     {
         label: "Homepage",
         url: "https://garudalinux.org",
@@ -48,39 +57,35 @@ export const menubarItems = [
 ]
 
 // Change this to add or remove links from the contacts section.
-export const contactLinks = [
+export const contactLinks: ContactLinks = [
     {
         link: "https://forum.garudalinux.org",
         title: "Forum",
         logo: "pictures/garuda-logo-orange.png",
         subtitle: "Use the official forum",
-        tag: "Forum",
     },
     {
         link: "https://telegram.me/garudalinux",
         title: "Telegram",
         logo: "pictures/telegram.svg",
         subtitle: "Chat with us on Telegram",
-        tag: "Telegram",
     },
     {
         link: "https://garudalinux.org/discord",
         title: "Discord",
         logo: "pictures/discord.svg",
         subtitle: "Chat with us on Discord",
-        tag: "Discord",
     },
     {
         link: "https://bsky.app/profile/garudalinux.bsky.social",
         title: "Bluesky",
         logo: "pictures/bluesky.svg",
         subtitle: "Get some news from Garuda",
-        tag: "Bluesky",
     },
 ]
 
 // Change this to add or remove links from the services section.
-export const serviceLinks = [
+export const serviceLinks: ServiceLinks = [
     {
         link: "https://searx.garudalinux.org",
         title: "SearxNG",
@@ -191,16 +196,20 @@ export const searchEngineMappings: SearchEngineList = [
 
 // These are the settings defaults used
 export const defaultSettings: DefaultSettings = {
+    customLinks: "",
+    defaultLinks: true,
     jokesEnabled: true,
+    logo: "logos/violet-orange.png",
+    logoUrl: "",
     searchEngine: "searxng-privau" as SearchEngine,
     searchEngineName: "Custom",
     searchEngineUrl: "Set a custom search engine URL (omit %s)",
     theme: "mocha" as StartpageTheme,
-    wallpaper: "",
-    wallpaperBlur: false,
+    wallpaper: "wallpapers/evening-sky.png",
+    wallpaperBlur: true,
     wallpaperCustomUrl: "",
     wallpaperFit: false,
-    welcomeText: " Welcome! 👋🏻",
+    welcomeText: "Welcome! 👋🏻",
 }
 
 // How many forum posts to load
@@ -228,3 +237,39 @@ export const wallpapers: WallpaperList = [
 
 // Don't delete
 export const c = "nft5zX8CPAL4TW"
+
+// List for logo shown on the main page. Needs to have a fitting file in the public/logos folder.
+export const logos: LogoList = [
+    { name: "Black Metal", url: "logos/black-metal.png" },
+    { name: "Blue Metal", url: "logos/blue-metal.png" },
+    { name: "Blue", url: "logos/blue.png" },
+    { name: "Dr460nized", url: "logos/dr460nized.png" },
+    { name: "Green", url: "logos/green.png" },
+    { name: "Metal", url: "logos/metal.png" },
+    { name: "Orange", url: "logos/orange.png" },
+    { name: "Petrol", url: "logos/petrol.png" },
+    { name: "Pink", url: "logos/pink.png" },
+    { name: "Red", url: "logos/red.png" },
+    { name: "Solid", url: "logos/solid.png" },
+    { name: "Violet Orange", url: "logos/violet-orange.png" },
+    { name: "Custom", url: "custom" },
+]
+export const defaultLogo = "logos/violet-orange.png"
+
+// Configure custom service links
+// Needs to be a valid JSON with the following format:
+//  [
+//   {
+//       "link": "https://discourse.nixos.org",
+//       "title": "NixOS Forum",
+//       "icon": "https://discourse.nixos.org/uploads/default/original/2X/c/cb4fe584627b37e7c1d5424e9cec0bb30fdb6c4d.png",
+//       "subtitle": "NixOS Forum"
+//   },
+//   {
+//         "link": "https://discourse.nixos.org",
+//         "title": "NixOS Forum",
+//         "icon": "https://discourse.nixos.org/uploads/default/original/2X/c/cb4fe584627b37e7c1d5424e9cec0bb30fdb6c4d.png",
+//         "subtitle": "NixOS Forum"
+//   }
+//  ]
+// Icon needs to be a valid URL in this case.

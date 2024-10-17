@@ -1,7 +1,7 @@
-import { ElementRef, Injectable, Renderer2 } from '@angular/core';
-import { defaultSettings } from '../../config';
-import { StartpageSettings } from './types';
-import { BehaviorSubject } from 'rxjs';
+import { ElementRef, Injectable, Renderer2 } from "@angular/core"
+import { BehaviorSubject } from "rxjs"
+import { defaultSettings } from "../../config"
+import { StartpageSettings } from "./types"
 
 @Injectable({
     providedIn: "root",
@@ -51,6 +51,7 @@ export class AppService {
         if (wallpaper === null) {
             renderer.removeStyle(el.nativeElement.ownerDocument.body, "backgroundImage")
         } else {
+            console.log(wallpaper)
             renderer.setStyle(el.nativeElement.ownerDocument.body, "background-image", `url(${wallpaper})`)
         }
     }
@@ -59,16 +60,37 @@ export class AppService {
      * Apply wallpaper style to the body element.
      * @param el ElementRef to the origin element.
      * @param renderer Renderer2 to the origin element.
+     * @param kind Kind of wallpaper style to apply.
      */
-    applyWallpaperStyle(el: ElementRef, renderer: Renderer2): void {
-        renderer.setStyle(
-            el.nativeElement.ownerDocument.body,
-            "background-size",
-            this.settings.wallpaperFit ? "contain" : "",
-        )
+    applyWallpaperStyle(el: ElementRef, renderer: Renderer2, kind?: string): void {
+        switch (kind) {
+            case "contain":
+                this.applyBgContain(el, renderer)
+                break
+            case "blur":
+                this.applyBgBlur(el, renderer)
+                break
+            default:
+                this.applyBgContain(el, renderer)
+                this.applyBgBlur(el, renderer)
+                break
+        }
+    }
 
-        // const blur = this.settings.wallpaperBlur ? "blur(16px)" : ""
-        // renderer.setStyle(el.nativeElement.ownerDocument.body, "filter", blur)
+    private applyBgBlur(el: ElementRef, renderer: Renderer2): void {
+        if (this.settings.wallpaperBlur) {
+            renderer.addClass(el.nativeElement.ownerDocument.body, "background-blurred")
+        } else {
+            renderer.removeClass(el.nativeElement.ownerDocument.body, "background-blurred")
+        }
+    }
+
+    private applyBgContain(el: ElementRef, renderer: Renderer2): void {
+        if (this.settings.wallpaperFit) {
+            renderer.addClass(el.nativeElement.ownerDocument.body, "bg-contain")
+        } else {
+            renderer.removeClass(el.nativeElement.ownerDocument.body, "bg-contain")
+        }
     }
 
     /**

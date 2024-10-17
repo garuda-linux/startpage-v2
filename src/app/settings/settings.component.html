@@ -1,6 +1,6 @@
 <div class="sm:pt-20 pt-28 mb-2.5 md:flex h-svh">
   <div class="md:w-5/6">
-    <div class="px-10">
+    <div class="px-10 mt-5">
       <h1 class="bold text-maroon text-lg text-center">Configure startpage settings</h1>
       <div class="md:flex">
         <div class="md:flex-grow">
@@ -10,7 +10,7 @@
               name="select-theme"
               id="select-theme"
               [formControl]="theme"
-              class="block w-full md:w-3/4 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
+              class="block w-full md:w-5/6 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
               @for (flavor of flavors; track flavor) {
                 <option value="{{ flavor[0] }}">{{ flavor[1].name }}</option>
               }
@@ -24,7 +24,7 @@
                 name="select-search-engine"
                 id="select-search-engine"
                 [formControl]="searchEngine"
-                class="block w-full md:w-3/4 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
+                class="block w-full md:w-5/6 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
                 @for (engine of searchEngineMappings; track engine) {
                   <option value="{{ engine.name }}">{{ engine.prettyName }}</option>
                 }
@@ -36,20 +36,58 @@
               <label for="input-search-engine" class="block mb-2 text-md text-text">Custom search URL</label>
               <input type="text" id="input-search-engine"
                      [formControl]="searchEngineUrl"
-                     class="block w-full md:w-3/4 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
+                     class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
             </div>
             <div class="mt-10">
               <label for="input-search-name" class="block mb-2 text-md text-text">Custom search engine name</label>
               <input type="text" id="input-search-name"
                      [formControl]="searchEngineName"
-                     class="block w-full md:w-3/4 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
+                     class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
             </div>
           }
           <div class="mt-10">
             <label for="input-welcome" class="block mb-2 text-md text-text">Custom welcome message</label>
             <input type="text" id="input-welcome"
                    [formControl]="welcomeText"
-                   class="block w-full md:w-3/4 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
+                   (keydown.enter)="saveSettings()"
+                   class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
+          </div>
+          <div class="mt-10">
+            <label for="input-welcome" class="block mb-2 text-md text-text">Custom service links
+              <a data-popover-target="popover-custom-links">?</a>
+              <div data-popover id="popover-custom-links" role="tooltip"
+                   class="absolute z-10 invisible inline-block w-200 text-sm text-text transition-opacity duration-300 bg-surface1/60 rounded-lg shadow-sm opacity-0">
+                <div
+                  class="px-3 py-2 rounded-t-lg">
+                  <h3 class="font-semibold text-mauve">Correct format</h3>
+                </div>
+                <div class="px-3">
+                  <pre class="text-xs p-2 rounded-lg">
+                    <code>
+[
+  &#123;
+      "link": "https://discourse.nixos.org",
+      "title": "NixOS Forum",
+      "icon": "https://discourse.nixos.org/uploads/default/original/2X/c/cb4fe584627b37e7c1d5424e9cec0bb30fdb6c4d.png",
+      "subtitle": "NixOS Forum"
+  &#125;,
+  &#123;
+      "link": "https://discourse.nixos.org",
+      "title": "NixOS Forum",
+      "icon": "https://discourse.nixos.org/uploads/default/original/2X/c/cb4fe584627b37e7c1d5424e9cec0bb30fdb6c4d.png",
+      "subtitle": "NixOS Forum"
+  &#125;
+]
+                    </code>
+                  </pre>
+                </div>
+                <div data-popper-arrow></div>
+              </div>
+            </label>
+            <input type="text" id="input-links" placeholder="Leave empty for none."
+                   [formControl]="customLinks"
+                   (keydown.enter)="saveSettings()"
+                   class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
           </div>
           <button type="submit"
                   (click)="saveSettings()"
@@ -64,7 +102,7 @@
               name="select-wallpaper"
               id="select-wallpaper"
               [formControl]="wallpaper"
-              class="block w-full md:w-3/4 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
+              class="block w-full md:w-1/2 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
               @for (wallpaper of wallpapers; track wallpaper) {
                 <option value="{{ wallpaper.url }}">{{ wallpaper.name }}</option>
               }
@@ -75,21 +113,62 @@
               <label for="input-wallpaper" class="block mb-2  text-md text-text">Custom wallpaper URL</label>
               <input type="text" id="input-wallpaper"
                      [formControl]="wallpaperCustomUrl"
-                     class="block w-full md:w-3/4 p2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
+                     class="block w-full md:w-1/2 p2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
             </div>
           }
           <div class="mt-10">
-            <label class="inline-flex center items-center cursor-pointer">
-              <input type="checkbox" [formControl]="wallpaperFit" class="sr-only peer">
+            <form>
+              <label for="select-logo" class="block mb-2 text-md text-text font-medium">Logo</label>
+              <select
+                name="select-logo"
+                id="select-logo"
+                [formControl]="logo"
+                class="block w-full md:w-1/2 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
+                @for (logo of logos; track logo) {
+                  <option value="{{ logo.url }}">{{ logo.name }}</option>
+                }
+              </select>
+            </form>
+          </div>
+          @if (logo.value === "custom") {
+            <div class="mt-10">
+              <label for="input-search-name" class="block mb-2 text-md text-text">Custom logo URL</label>
+              <input type="text" id="input-logo-url"
+                     [formControl]="logoUrl"
+                     class="block w-full md:w-1/2 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
+            </div>
+          }
+          <div class="mt-10">
+            <label class="inline-flex center justify-center
+            items-center cursor-pointer">
+              <input type="checkbox" [formControl]="wallpaperFit" class="sr-only peer"
+                     (change)="loadWallpaperStyle('contain')">
               <div
-                class="relative w-11 h-6 bg-surface0/60 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"></div>
+                class="relative w-11 h-6 bg-surface0/60  peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"></div>
               <span class="ms-3 mr-10 text-sm font-medium text-text">Fit wallpaper</span>
             </label>
             <label class="inline-flex center items-center cursor-pointer">
-              <input type="checkbox" [formControl]="jokesEnabled" class="sr-only peer">
+              <input type="checkbox" [formControl]="wallpaperBlur" class="sr-only peer"
+                     (change)="loadWallpaperStyle('blur')">
+              <div
+                class="relative w-11 h-6 bg-surface0/60 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"></div>
+              <span class="ms-3 mr-10 text-sm font-medium text-text">Blur background</span>
+            </label>
+            <label class="inline-flex center items-center cursor-pointer">
+              <input type="checkbox" [formControl]="jokesEnabled" class="sr-only peer"
+                     (change)="saveSettings()">
               <div
                 class="relative w-11 h-6 bg-surface0/60 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"></div>
               <span class="ms-3 mr-10 text-sm font-medium text-text">Enable jokes</span>
+            </label>
+          </div>
+          <div class="mt-5">
+            <label class="inline-flex center items-center cursor-pointer">
+              <input type="checkbox" [formControl]="defaultLinks" class="sr-only peer"
+                     (change)="saveSettings()">
+              <div
+                class="relative w-11 h-6 bg-surface0/60 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"></div>
+              <span class="ms-3 mr-10 text-sm font-medium text-text">Enable default links</span>
             </label>
           </div>
           <button type="submit"

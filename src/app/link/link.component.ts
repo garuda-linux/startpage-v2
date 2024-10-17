@@ -1,6 +1,6 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { CommonModule, NgOptimizedImage } from "@angular/common"
+import { Component, Input } from "@angular/core"
+import { RouterLink } from "@angular/router"
 
 @Component({
     selector: "app-link",

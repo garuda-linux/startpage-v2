@@ -1,6 +1,6 @@
 @if (show) {
   <div id="toast-reminder"
-       class="fixed justify-end flex items-center w-full z-50 max-w-[18rem] p-4 space-x-4 text-maroon  bg-surface0/60 backdrop-blur rounded-lg shadow top-5 right-5"
+       class="fixed justify-end flex items-center w-full z-50 max-w-[18rem] p-4 space-x-4 {{ textColor }}  bg-surface0/60 backdrop-blur rounded-lg shadow top-5 right-5"
        role="alert">
     <div class="text-sm font-normal">{{ text }}</div>
     @if (showCloseButton) {

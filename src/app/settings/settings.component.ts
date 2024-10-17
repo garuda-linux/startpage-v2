@@ -13,6 +13,7 @@ import {
     SearchEngine,
     amountForumPostsSettings,
     defaultSettings,
+    logos,
     searchEngineMappings,
     wallpapers,
 } from "../../../config"
@@ -22,7 +23,7 @@ import { LinkSectionComponent } from "../link-section/link-section.component"
 import { NewsComponent } from "../news/news.component"
 import { SearchComponent } from "../search/search.component"
 import { ToastComponent } from "../toast/toast.component"
-import { StartpageSettings, StartpageTheme } from "../types"
+import { ServiceLinks, StartpageSettings, StartpageTheme } from '../types';
 
 @Component({
     selector: "app-settings",
@@ -43,22 +44,27 @@ import { StartpageSettings, StartpageTheme } from "../types"
 export class SettingsComponent implements AfterViewInit {
     protected readonly amountForumPostsSettings = amountForumPostsSettings
     protected readonly flavors = flavorEntries
+    protected readonly logos = logos
     protected readonly searchEngineMappings = searchEngineMappings
     protected readonly wallpapers = wallpapers
 
     // Default settings
     settings = defaultSettings as StartpageSettings
 
+    customLinks = new FormControl()
+    defaultLinks = new FormControl()
     jokesEnabled = new FormControl()
-    theme = new FormControl("Choose your theme")
-    searchEngine = new FormControl("Choose your search engine")
-    searchEngineUrl = new FormControl("Set a custom search engine URL (omit %s)")
-    searchEngineName = new FormControl("")
-    welcomeText = new FormControl(" Welcome! 👋🏻")
+    logo = new FormControl()
+    logoUrl = new FormControl()
+    theme = new FormControl()
+    searchEngine = new FormControl()
+    searchEngineUrl = new FormControl()
+    searchEngineName = new FormControl()
+    welcomeText = new FormControl()
     wallpaper = new FormControl()
-    wallpaperCustomUrl = new FormControl("")
-    wallpaperFit = new FormControl(false)
-    wallpaperBlur = new FormControl(false)
+    wallpaperCustomUrl = new FormControl()
+    wallpaperFit = new FormControl()
+    wallpaperBlur = new FormControl()
 
     showToast = false
 
@@ -88,16 +94,20 @@ export class SettingsComponent implements AfterViewInit {
 
     saveSettings(): void {
         const settings: StartpageSettings = {
+            customLinks: this.customLinks.value as ServiceLinks,
+            defaultLinks: this.defaultLinks.value,
             jokesEnabled: this.jokesEnabled.value,
+            logo: this.logo.value,
+            logoUrl: this.logoUrl.value ,
             searchEngine: this.searchEngine.value as SearchEngine,
-            searchEngineName: this.searchEngineName.value as string,
-            searchEngineUrl: this.searchEngineUrl.value as string,
+            searchEngineName: this.searchEngineName.value ,
+            searchEngineUrl: this.searchEngineUrl.value ,
             theme: this.theme.value as StartpageTheme,
-            wallpaper: this.wallpaper.value as string,
-            wallpaperBlur: this.wallpaperBlur.value as boolean,
-            wallpaperCustomUrl: this.wallpaperCustomUrl.value as string,
-            wallpaperFit: this.wallpaperFit.value as boolean,
-            welcomeText: this.welcomeText.value as string,
+            wallpaper: this.wallpaper.value,
+            wallpaperBlur: this.wallpaperBlur.value,
+            wallpaperCustomUrl: this.wallpaperCustomUrl.value,
+            wallpaperFit: this.wallpaperFit.value ,
+            welcomeText: this.welcomeText.value ,
         }
 
         this.appService.saveSettings(settings)
@@ -107,15 +117,9 @@ export class SettingsComponent implements AfterViewInit {
             loadTheme(settings.theme, this.renderer, this.el)
         }
 
-        if (settings.wallpaper === "custom") {
-            this.appService.loadWallpaper(this.el, this.renderer, settings["wallpaperCustomUrl"])
-            this.applyWallpaperStyle()
-        } else if (settings.wallpaper !== "" && settings.wallpaper !== this.settings.wallpaper) {
-            this.appService.loadWallpaper(this.el, this.renderer, settings.wallpaper)
-            this.applyWallpaperStyle()
-        } else if (settings.wallpaper === "") {
-            this.appService.loadWallpaper(this.el, this.renderer, null)
-        }
+        this.loadWallpaper(settings)
+        this.loadWallpaperStyle()
+
         this.settings = settings
 
         this.showToast = true
@@ -127,7 +131,17 @@ export class SettingsComponent implements AfterViewInit {
         this.cdr.detectChanges()
     }
 
-    applyWallpaperStyle(): void {
-        this.appService.applyWallpaperStyle(this.el, this.renderer)
+    loadWallpaper(settings: StartpageSettings): void {
+        if (settings.wallpaper === "custom") {
+            this.appService.loadWallpaper(this.el, this.renderer, settings["wallpaperCustomUrl"])
+        } else if (settings.wallpaper !== "") {
+            this.appService.loadWallpaper(this.el, this.renderer, settings.wallpaper)
+        } else if (settings.wallpaper === "") {
+            this.appService.loadWallpaper(this.el, this.renderer, null)
+        }
+    }
+
+    loadWallpaperStyle(kind?: string): void {
+        this.appService.applyWallpaperStyle(this.el, this.renderer, kind)
     }
 }
