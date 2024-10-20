@@ -1,14 +1,14 @@
-import { isPlatformBrowser } from "@angular/common";
+import { DOCUMENT, isPlatformBrowser } from "@angular/common";
 import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, Renderer2 } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { RouterModule, RouterOutlet } from "@angular/router";
 import { initFlowbite } from "flowbite";
+import { routeTransitionAnimations } from "./app.routes";
 import { AppService } from "./app.service";
 import { loadTheme, setPageTitle } from "./functions";
 import { MenubarComponent } from "./menubar/menubar.component";
 import { RedirectGuard } from "./redirect/redirect.guard";
 import { StartpageSettings } from "./types";
-import { routeTransitionAnimations } from "./app.routes";
 
 @Component({
     standalone: true,
@@ -24,8 +24,9 @@ export class AppComponent implements OnInit {
     settings: StartpageSettings = {} as StartpageSettings;
 
     constructor(
-        private appService: AppService,
+        @Inject(DOCUMENT) private document: Document,
         @Inject(PLATFORM_ID) private platformId: object,
+        private appService: AppService,
         private el: ElementRef,
         private renderer: Renderer2,
         private titleService: Title,
@@ -35,6 +36,11 @@ export class AppComponent implements OnInit {
         });
         if (this.settings.theme) {
             loadTheme(this.settings.theme, this.renderer, this.el);
+        }
+        if (this.settings.fontMode) {
+            this.document.documentElement.classList.add("dark");
+        } else {
+            this.document.documentElement.classList.remove("dark");
         }
         setPageTitle(this.titleService, this.settings.customTitle);
         this.appService.applyWallpaperStyle(this.el, this.renderer);

@@ -1,5 +1,5 @@
-const { createGlobPatternsForDependencies } = require("@nx/angular/tailwind")
-const { join } = require("node:path")
+const { createGlobPatternsForDependencies } = require("@nx/angular/tailwind");
+const { join } = require("node:path");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -8,8 +8,9 @@ module.exports = {
         ...createGlobPatternsForDependencies(__dirname),
         "./node_modules/flowbite/**/*.js",
     ],
+    darkMode: "class",
     theme: {
         extend: {},
     },
     plugins: [require("@catppuccin/tailwindcss"), require("autoprefixer"), require("flowbite/plugin")],
-}
+};

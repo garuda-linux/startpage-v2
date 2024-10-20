@@ -1,21 +1,26 @@
 <div class="w-full">
-  <img ngSrc="{{ logo }}" alt="Garuda Logo" width="100" height="100" class="grow  mx-auto mb-5" />
+    <img ngSrc="{{ logo }}" alt="Garuda Logo" width="100" height="100" class="grow mx-auto mb-5" />
 </div>
 <div class="pt-5">
-  <form class="max-w-md sm:mx-auto mx-10">
-    <label for="search"
-           class="mb-2 text-sm font-medium sr-only backdrop-blur">Search</label>
-    <div class="relative">
-      <input type="search" id="search" name="search"
-             class="block w-full p-4 ps-10 text-sm rounded-lg bg-surface0/50 text-maroon backdrop-blur focus:ring-maroon focus:border-maroon"
-             placeholder="Search with {{ this.searchEngineData.prettyName }}" required
-             [(ngModel)]="searchTerm" />
-      <button type="submit"
-              class="absolute end-2.5 bottom-2.5 bg-surface1/50 hover:animate-ping click: hover:bg-surface2/50 backdrop-blur text-maroon focus:ring-4
-                  focus:outline-none focus:ring-maroon font-medium rounded-lg text-sm px-4 py-2"
-              (click)="navToSearchEngine()">
-        Search
-      </button>
-    </div>
-  </form>
+    <form class="max-w-md sm:mx-auto mx-10">
+        <label for="search" class="mb-2 text-sm font-medium sr-only backdrop-blur">Search</label>
+        <div class="relative">
+            <input
+                type="search"
+                id="search"
+                name="search"
+                class="block w-full p-4 ps-10 text-sm rounded-lg bg-surface0/50 text-maroon backdrop-blur focus:ring-maroon focus:border-maroon dark:bg-surface0/80"
+                placeholder="Search with {{ this.searchEngineData.prettyName }}"
+                required
+                [(ngModel)]="searchTerm"
+            />
+            <button
+                type="submit"
+                class="absolute end-2.5 bottom-2.5 bg-surface1/50 hover:animate-ping click: hover:bg-surface2/50 backdrop-blur text-maroon focus:ring-4 focus:outline-none focus:ring-maroon font-medium rounded-lg text-sm px-4 py-2 dark:bg-surface2/80"
+                (click)="navToSearchEngine()"
+            >
+                Search
+            </button>
+        </div>
+    </form>
 </div>

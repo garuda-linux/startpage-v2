@@ -7,10 +7,10 @@ import {
     ServiceLinks,
     StartpageTheme,
     WallpaperList,
-} from "./src/app/types"
+} from "./src/app/types";
 
-const isProd = true
-export const GARUDA_FORUM_URL = isProd ? "https://forum.garudalinux.org" : "http://localhost:8010/proxy"
+const isProd = true;
+export const GARUDA_FORUM_URL = isProd ? "https://forum.garudalinux.org" : "http://localhost:8010/proxy";
 
 // These are the items inside the menu.
 export const menubarItems: MenuBarLink[] = [
@@ -54,7 +54,7 @@ export const menubarItems: MenuBarLink[] = [
         routerLink: "/settings",
         title: "Settings",
     },
-]
+];
 
 // Change this to add or remove links from the contacts section.
 export const contactLinks: ContactLinks = [
@@ -82,7 +82,7 @@ export const contactLinks: ContactLinks = [
         logo: "pictures/bluesky.svg",
         subtitle: "Get some news from Garuda",
     },
-]
+];
 
 // Change this to add or remove links from the services section.
 export const serviceLinks: ServiceLinks = [
@@ -159,10 +159,10 @@ export const serviceLinks: ServiceLinks = [
         icon: "pictures/freshping.svg",
         subtitle: "Uptime stats",
     },
-]
+];
 
 // Available search engines and their URLs (without %s)
-export type SearchEngine = "searxng" | "searxng-privau" | "whoogle" | "google" | "custom"
+export type SearchEngine = "searxng" | "searxng-privau" | "whoogle" | "google" | "custom";
 export const searchEngineMappings: SearchEngineList = [
     {
         name: "searxng",
@@ -192,7 +192,7 @@ export const searchEngineMappings: SearchEngineList = [
         prettyName: "Custom",
         url: "",
     },
-]
+];
 
 // These are the settings defaults used
 export const defaultSettings: DefaultSettings = {
@@ -211,11 +211,11 @@ export const defaultSettings: DefaultSettings = {
     wallpaperCustomUrl: "",
     wallpaperFit: false,
     welcomeText: "Welcome! 👋🏻",
-}
+};
 
 // How many forum posts to load
-export const amountForumPostsHome = 9
-export const amountForumPostsSettings = 7
+export const amountForumPostsHome = 9;
+export const amountForumPostsSettings = 7;
 
 // Which wallpapers are available to choose from
 // Url needs to be either a local file or a URL, if local, it must be relative
@@ -234,10 +234,10 @@ export const wallpapers: WallpaperList = [
         url: "wallpapers/evening-sky.png",
     },
     { name: "Custom", url: "custom" },
-]
+];
 
 // Don't delete
-export const c = "nft5zX8CPAL4TW"
+export const c = "nft5zX8CPAL4TW";
 
 // List for logo shown on the main page. Needs to have a fitting file in the public/logos folder.
 export const logos: LogoList = [
@@ -255,8 +255,8 @@ export const logos: LogoList = [
     { name: "Solid", url: "logos/solid.png" },
     { name: "Violet Orange", url: "logos/violet-orange.png" },
     { name: "Custom", url: "custom" },
-]
-export const defaultLogo = "logos/violet-orange.png"
+];
+export const defaultLogo = "logos/violet-orange.png";
 
 // Configure custom service links
 // Needs to be a valid JSON with the following format:

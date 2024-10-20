@@ -1,174 +1,249 @@
 <div class="sm:pt-10 pt-16 sm:mb-24 mb-10 md:flex sm:h-svh w-lvw">
-  <div class="md:w-3/4">
-    <div class="px-10 mt-5">
-      <div class="md:flex">
-        <div class="md:flex-grow">
-          <form class="mt-10">
-            <label for="select-theme" class="block mb-2 text-text text-md font-medium">Theme</label>
-            <select
-              name="select-theme"
-              id="select-theme"
-              [formControl]="theme"
-              class="block w-full md:w-5/6 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
-              @for (flavor of flavors; track flavor) {
-                <option value="{{ flavor[0] }}">{{ flavor[1].name }}</option>
-              }
-            </select>
-          </form>
-          <div class="mt-10">
-            <form>
-              <label for="select-search-engine" class="block mb-2 text-md text-text font-medium">Search
-                engine</label>
-              <select
-                name="select-search-engine"
-                id="select-search-engine"
-                [formControl]="searchEngine"
-                class="block w-full md:w-5/6 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
-                @for (engine of searchEngineMappings; track engine) {
-                  <option value="{{ engine.name }}">{{ engine.prettyName }}</option>
-                }
-              </select>
-            </form>
-          </div>
-          @if (searchEngine.value === "custom") {
-            <div class="mt-10">
-              <label for="input-search-engine" class="block mb-2 text-md text-text">Custom search URL</label>
-              <input type="text" id="input-search-engine"
-                     [formControl]="searchEngineUrl"
-                     class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
+    <div class="md:w-3/4">
+        <div class="md:px-10 px-5 mt-5">
+            <div class="md:flex block p-6 dark:bg-surface0/80 mt-8 md:mt-12 rounded-lg pb-10">
+                <div class="md:flex-grow">
+                    <form>
+                        <label for="select-theme" class="block mb-2 text-text text-md font-medium">Theme</label>
+                        <select
+                            name="select-theme"
+                            id="select-theme"
+                            [formControl]="theme"
+                            class="block w-full md:w-5/6 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon"
+                        >
+                            @for (flavor of flavors; track flavor) {
+                                <option value="{{ flavor[0] }}">{{ flavor[1].name }}</option>
+                            }
+                        </select>
+                    </form>
+                    <div class="mt-10">
+                        <form>
+                            <label for="select-search-engine" class="block mb-2 text-md text-text font-medium"
+                                >Search engine</label
+                            >
+                            <select
+                                name="select-search-engine"
+                                id="select-search-engine"
+                                [formControl]="searchEngine"
+                                class="block w-full md:w-5/6 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon"
+                            >
+                                @for (engine of searchEngineMappings; track engine) {
+                                    <option value="{{ engine.name }}">{{ engine.prettyName }}</option>
+                                }
+                            </select>
+                        </form>
+                    </div>
+                    @if (searchEngine.value === "custom") {
+                        <div class="mt-10">
+                            <label for="input-search-engine" class="block mb-2 text-md text-text"
+                                >Custom search URL</label
+                            >
+                            <input
+                                type="text"
+                                id="input-search-engine"
+                                [formControl]="searchEngineUrl"
+                                class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg"
+                            />
+                        </div>
+                        <div class="mt-10">
+                            <label for="input-search-name" class="block mb-2 text-md text-text"
+                                >Custom search engine name</label
+                            >
+                            <input
+                                type="text"
+                                id="input-search-name"
+                                [formControl]="searchEngineName"
+                                class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg"
+                            />
+                        </div>
+                    }
+                    <div class="mt-10">
+                        <label for="input-welcome" class="block mb-2 text-md text-text">Custom welcome message</label>
+                        <input
+                            type="text"
+                            id="input-welcome"
+                            [formControl]="welcomeText"
+                            (keydown.enter)="saveSettings()"
+                            class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg"
+                        />
+                    </div>
+                    <div class="mt-10">
+                        <label for="input-welcome" class="block mb-2 text-md text-text"
+                            >Custom service links
+                            <a
+                                href="https://gitlab.com/garuda-linux/website/startpage-v2#changing-runtime-user-facing-settings"
+                                >?</a
+                            >
+                        </label>
+                        <input
+                            type="text"
+                            id="input-links"
+                            placeholder="Leave empty for none."
+                            [formControl]="customLinks"
+                            (keydown.enter)="saveSettings()"
+                            class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg"
+                        />
+                    </div>
+                    <div class="mt-10">
+                        <label for="input-welcome" class="block mb-2 text-md text-text">Custom page title </label>
+                        <input
+                            type="text"
+                            id="input-title"
+                            placeholder="Leave empty for default."
+                            [formControl]="customTitle"
+                            (keydown.enter)="saveSettings()"
+                            class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg"
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        (click)="saveSettings()"
+                        class="mt-10 hidden sm:block bg-surface0/60 w-40 text-maroon hover:bg-surface0/60 backdrop-blur focus:outline-none focus:ring-4 focus:ring-maroon font-medium rounded-lg text-sm px-4 py-2"
+                    >
+                        Save
+                    </button>
+                </div>
+                <div class="md:flex-grow">
+                    <form class="mt-10 md:mt-0">
+                        <label for="select-wallpaper" class="block mb-2 text-text text-md font-medium"
+                            >Background</label
+                        >
+                        <select
+                            name="select-wallpaper"
+                            id="select-wallpaper"
+                            [formControl]="wallpaper"
+                            class="block w-full md:w-5/6 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon"
+                        >
+                            @for (wallpaper of wallpapers; track wallpaper) {
+                                <option value="{{ wallpaper.url }}">{{ wallpaper.name }}</option>
+                            }
+                        </select>
+                    </form>
+                    @if (wallpaper.value === "custom") {
+                        <div class="mt-10">
+                            <label for="input-wallpaper" class="block mb-2 text-md text-text"
+                                >Custom wallpaper URL</label
+                            >
+                            <input
+                                type="text"
+                                id="input-wallpaper"
+                                [formControl]="wallpaperCustomUrl"
+                                class="block w-full md:w-5/6 p2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg"
+                            />
+                        </div>
+                    }
+                    <div class="mt-10">
+                        <form>
+                            <label for="select-logo" class="block mb-2 text-md text-text font-medium">Logo</label>
+                            <select
+                                name="select-logo"
+                                id="select-logo"
+                                [formControl]="logo"
+                                class="block w-full md:w-5/6 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon"
+                            >
+                                @for (logo of logos; track logo) {
+                                    <option value="{{ logo.url }}">{{ logo.name }}</option>
+                                }
+                            </select>
+                        </form>
+                    </div>
+                    @if (logo.value === "custom") {
+                        <div class="mt-10">
+                            <label for="input-search-name" class="block mb-2 text-md text-text">Custom logo URL</label>
+                            <input
+                                type="text"
+                                id="input-logo-url"
+                                [formControl]="logoUrl"
+                                class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg"
+                            />
+                        </div>
+                    }
+                    <div class="mt-10">
+                        <label class="inline-flex center justify-center items-center cursor-pointer">
+                            <input
+                                type="checkbox"
+                                [formControl]="wallpaperFit"
+                                class="sr-only peer"
+                                (change)="loadWallpaperStyle('contain')"
+                            />
+                            <div
+                                class="relative w-11 h-6 bg-surface0/60 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"
+                            ></div>
+                            <span class="ms-3 mr-10 text-sm font-medium text-text">Fit wallpaper</span>
+                        </label>
+                    </div>
+                    <div class="mt-5">
+                        <label class="inline-flex center items-center cursor-pointer">
+                            <input
+                                type="checkbox"
+                                [formControl]="wallpaperBlur"
+                                class="sr-only peer"
+                                (change)="loadWallpaperStyle('blur')"
+                            />
+                            <div
+                                class="relative w-11 h-6 bg-surface0/60 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"
+                            ></div>
+                            <span class="ms-3 mr-10 text-sm font-medium text-text">Blur background</span>
+                        </label>
+                    </div>
+                    <div class="mt-5">
+                        <label class="inline-flex center items-center cursor-pointer">
+                            <input
+                                type="checkbox"
+                                [formControl]="jokesEnabled"
+                                class="sr-only peer"
+                                (change)="saveSettings()"
+                            />
+                            <div
+                                class="relative w-11 h-6 bg-surface0/60 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"
+                            ></div>
+                            <span class="ms-3 mr-10 text-sm font-medium text-text">Enable jokes</span>
+                        </label>
+                    </div>
+                    <div class="mt-5">
+                        <label class="inline-flex center items-center cursor-pointer">
+                            <input
+                                type="checkbox"
+                                [formControl]="defaultLinks"
+                                class="sr-only peer"
+                                (change)="saveSettings()"
+                            />
+                            <div
+                                class="relative w-11 h-6 bg-surface0/60 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"
+                            ></div>
+                            <span class="ms-3 mr-10 text-sm font-medium text-text">Enable default links</span>
+                        </label>
+                    </div>
+                    <div class="mt-5">
+                        <label class="inline-flex center items-center cursor-pointer">
+                            <input
+                                type="checkbox"
+                                [formControl]="fontMode"
+                                class="sr-only peer"
+                                (change)="saveSettings()"
+                            />
+                            <div
+                                class="relative w-11 h-6 bg-surface0/60 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"
+                            ></div>
+                            <span class="ms-3 mr-10 text-sm font-medium text-text">Light wallpaper mode</span>
+                        </label>
+                    </div>
+                    <button
+                        type="submit"
+                        (click)="saveSettings()"
+                        style="margin-left: 25%"
+                        class="mt-10 mx-auto sm:hidden bg-surface0/60 w-40 text-maroon hover:bg-surface0/60 backdrop-blur focus:outline-none focus:ring-4 focus:ring-maroon font-medium rounded-lg text-sm px-4 py-2 dark:bg-surface2/70"
+                    >
+                        Save
+                    </button>
+                </div>
             </div>
-            <div class="mt-10">
-              <label for="input-search-name" class="block mb-2 text-md text-text">Custom search engine name</label>
-              <input type="text" id="input-search-name"
-                     [formControl]="searchEngineName"
-                     class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
-            </div>
-          }
-          <div class="mt-10">
-            <label for="input-welcome" class="block mb-2 text-md text-text">Custom welcome message</label>
-            <input type="text" id="input-welcome"
-                   [formControl]="welcomeText"
-                   (keydown.enter)="saveSettings()"
-                   class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
-          </div>
-          <div class="mt-10">
-            <label for="input-welcome" class="block mb-2 text-md text-text">Custom service links
-              <a href="https://gitlab.com/garuda-linux/website/startpage-v2#changing-runtime-user-facing-settings">?</a>
-              <input type="text" id="input-links" placeholder="Leave empty for none."
-                     [formControl]="customLinks"
-                     (keydown.enter)="saveSettings()"
-                     class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
-            </label>
-          </div>
-          <div class="mt-10">
-            <label for="input-welcome" class="block mb-2 text-md text-text">Custom page title
-              <input type="text" id="input-title" placeholder="Leave empty for default."
-                     [formControl]="customTitle"
-                     (keydown.enter)="saveSettings()"
-                     class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
-            </label>
-          </div>
-          <button type="submit"
-                  (click)="saveSettings()"
-                  class="mt-10 hidden sm:block bg-surface0/60 w-40 text-maroon hover:bg-surface0/60 backdrop-blur focus:outline-none focus:ring-4 focus:ring-maroon font-medium rounded-lg text-sm px-4 py-2">
-            Save
-          </button>
         </div>
-        <div class="md:flex-grow">
-          <form class="mt-10">
-            <label for="select-wallpaper" class="block mb-2 text-text text-md font-medium">Background</label>
-            <select
-              name="select-wallpaper"
-              id="select-wallpaper"
-              [formControl]="wallpaper"
-              class="block w-full md:w-5/6 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
-              @for (wallpaper of wallpapers; track wallpaper) {
-                <option value="{{ wallpaper.url }}">{{ wallpaper.name }}</option>
-              }
-            </select>
-          </form>
-          @if (wallpaper.value === "custom") {
-            <div class="mt-10">
-              <label for="input-wallpaper" class="block mb-2  text-md text-text">Custom wallpaper URL</label>
-              <input type="text" id="input-wallpaper"
-                     [formControl]="wallpaperCustomUrl"
-                     class="block w-full md:w-5/6 p2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
-            </div>
-          }
-          <div class="mt-10">
-            <form>
-              <label for="select-logo" class="block mb-2 text-md text-text font-medium">Logo</label>
-              <select
-                name="select-logo"
-                id="select-logo"
-                [formControl]="logo"
-                class="block w-full md:w-5/6 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon">
-                @for (logo of logos; track logo) {
-                  <option value="{{ logo.url }}">{{ logo.name }}</option>
-                }
-              </select>
-            </form>
-          </div>
-          @if (logo.value === "custom") {
-            <div class="mt-10">
-              <label for="input-search-name" class="block mb-2 text-md text-text">Custom logo URL</label>
-              <input type="text" id="input-logo-url"
-                     [formControl]="logoUrl"
-                     class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg">
-            </div>
-          }
-          <div class="mt-10">
-            <label class="inline-flex center justify-center
-            items-center cursor-pointer">
-              <input type="checkbox" [formControl]="wallpaperFit" class="sr-only peer"
-                     (change)="loadWallpaperStyle('contain')">
-              <div
-                class="relative w-11 h-6 bg-surface0/60  peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"></div>
-              <span class="ms-3 mr-10 text-sm font-medium text-text">Fit wallpaper</span>
-            </label>
-          </div>
-          <div class="mt-5">
-            <label class="inline-flex center items-center cursor-pointer">
-              <input type="checkbox" [formControl]="wallpaperBlur" class="sr-only peer"
-                     (change)="loadWallpaperStyle('blur')">
-              <div
-                class="relative w-11 h-6 bg-surface0/60 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"></div>
-              <span class="ms-3 mr-10 text-sm font-medium text-text">Blur background</span>
-            </label>
-          </div>
-          <div class="mt-5">
-            <label class="inline-flex center items-center cursor-pointer">
-              <input type="checkbox" [formControl]="jokesEnabled" class="sr-only peer"
-                     (change)="saveSettings()">
-              <div
-                class="relative w-11 h-6 bg-surface0/60 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"></div>
-              <span class="ms-3 mr-10 text-sm font-medium text-text">Enable jokes</span>
-            </label>
-          </div>
-          <div class="mt-5">
-            <label class="inline-flex center items-center cursor-pointer">
-              <input type="checkbox" [formControl]="defaultLinks" class="sr-only peer"
-                     (change)="saveSettings()">
-              <div
-                class="relative w-11 h-6 bg-surface0/60 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"></div>
-              <span class="ms-3 mr-10 text-sm font-medium text-text">Enable default links</span>
-            </label>
-          </div>
-          <button type="submit"
-                  (click)="saveSettings()"
-                  style="margin-left: 25%"
-                  class="mt-10 mx-auto sm:hidden bg-surface0/60 w-40 text-maroon hover:bg-surface0/60 backdrop-blur focus:outline-none focus:ring-4 focus:ring-maroon font-medium rounded-lg text-sm px-4 py-2">
-            Save
-          </button>
-        </div>
-      </div>
     </div>
-  </div>
 
-  <div class="md:w-1/5 hidden sm:block flex-auto mx-14 mt-20 sm:mt-14 pb-2.5 sm:mx-14">
-    <h2 class="font-bold text-lg text-center text-text mb-5">Latest news</h2>
-    <app-news [amount]="amountForumPostsSettings"></app-news>
-  </div>
+    <div class="md:w-1/5 hidden sm:block flex-auto mx-14 mt-20 sm:mt-12 pb-2.5 sm:mx-14">
+        <app-news [amount]="amountForumPostsSettings"></app-news>
+    </div>
 </div>
 
 <app-toast [show]="showToast" [text]="'Settings saved!'"></app-toast>

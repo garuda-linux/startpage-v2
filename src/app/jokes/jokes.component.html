@@ -1,7 +1,7 @@
 @if (joke !== "") {
-  <div class="sm:w-3/4 w-5/6 mx-auto mt-10">
-    <blockquote class="text-xl text-center italic font-semibold">
-      <p (click)="setJoke()" class="text-maroon">{{ joke }}</p>
-    </blockquote>
-  </div>
+    <div class="sm:w-3/4 w-5/6 mx-auto mt-10 block p-6 dark:bg-surface0/80 md:mt-12 rounded-lg">
+        <blockquote class="text-xl text-center italic font-semibold">
+            <p (click)="setJoke()" class="text-maroon">{{ joke }}</p>
+        </blockquote>
+    </div>
 }
