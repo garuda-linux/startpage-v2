@@ -70,6 +70,7 @@
         },
         "lint": {
             "executor": "@nx/eslint:lint",
+            "inputs": ["{workspaceRoot}/eslint.config.js"],
             "options": {
                 "lintFilePatterns": ["./src"]
             }

@@ -1,20 +1,20 @@
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { FlatCompat } from '@eslint/eslintrc';
-import js from '@eslint/js';
-import nx from '@nx/eslint-plugin';
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { FlatCompat } from "@eslint/eslintrc";
+import js from "@eslint/js";
+import nx from "@nx/eslint-plugin";
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
     baseDirectory: __dirname,
     recommendedConfig: js.configs.recommended,
     allConfig: js.configs.all,
-})
+});
 
 export default [
     {
-        ignores: ["**/*", "**/node_modules"],
+        ignores: ["**/node_modules"],
     },
     {
         plugins: {
@@ -57,4 +57,4 @@ export default [
         files: ["**/*.js", "**/*.jsx"],
         rules: {},
     },
-]
+];
