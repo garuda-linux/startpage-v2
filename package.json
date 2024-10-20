@@ -21,6 +21,7 @@
         "@biomejs/biome": "^1.9.3",
         "@catppuccin/palette": "^1.4.0",
         "@catppuccin/tailwindcss": "^0.1.6",
+        "@eslint/eslintrc": "^3.1.0",
         "@fontsource/fira-sans": "^5.1.0",
         "@fontsource/jetbrains-mono": "^5.1.1",
         "emoji-js": "^3.8.0",
