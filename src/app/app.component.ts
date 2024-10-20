@@ -1,13 +1,14 @@
-import { isPlatformBrowser } from "@angular/common"
-import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, Renderer2 } from "@angular/core"
-import { Title } from "@angular/platform-browser"
-import { RouterModule } from "@angular/router"
-import { initFlowbite } from "flowbite"
-import { AppService } from "./app.service"
-import { loadTheme, setPageTitle } from "./functions"
-import { MenubarComponent } from "./menubar/menubar.component"
-import { RedirectGuard } from "./redirect/redirect.guard"
-import { StartpageSettings } from "./types"
+import { isPlatformBrowser } from "@angular/common";
+import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, Renderer2 } from "@angular/core";
+import { Title } from "@angular/platform-browser";
+import { RouterModule, RouterOutlet } from "@angular/router";
+import { initFlowbite } from "flowbite";
+import { AppService } from "./app.service";
+import { loadTheme, setPageTitle } from "./functions";
+import { MenubarComponent } from "./menubar/menubar.component";
+import { RedirectGuard } from "./redirect/redirect.guard";
+import { StartpageSettings } from "./types";
+import { routeTransitionAnimations } from "./app.routes";
 
 @Component({
     standalone: true,
@@ -16,10 +17,11 @@ import { StartpageSettings } from "./types"
     templateUrl: "./app.component.html",
     styleUrl: "./app.component.scss",
     providers: [RedirectGuard, AppService],
+    animations: [routeTransitionAnimations],
 })
 export class AppComponent implements OnInit {
-    title = "Garuda Startpage"
-    settings: StartpageSettings = {} as StartpageSettings
+    title = "Garuda Startpage";
+    settings: StartpageSettings = {} as StartpageSettings;
 
     constructor(
         private appService: AppService,
@@ -29,19 +31,23 @@ export class AppComponent implements OnInit {
         private titleService: Title,
     ) {
         this.appService.getSettings.subscribe((settings) => {
-            this.settings = settings
-        })
+            this.settings = settings;
+        });
         if (this.settings.theme) {
-            loadTheme(this.settings.theme, this.renderer, this.el)
+            loadTheme(this.settings.theme, this.renderer, this.el);
         }
-        setPageTitle(this.titleService, this.settings.customTitle)
-        this.appService.applyWallpaperStyle(this.el, this.renderer)
-        this.appService.loadWallpaper(this.el, this.renderer, this.appService.settings.wallpaper)
+        setPageTitle(this.titleService, this.settings.customTitle);
+        this.appService.applyWallpaperStyle(this.el, this.renderer);
+        this.appService.loadWallpaper(this.el, this.renderer, this.appService.settings.wallpaper);
     }
 
     ngOnInit(): void {
         if (isPlatformBrowser(this.platformId)) {
-            initFlowbite()
+            initFlowbite();
         }
+    }
+
+    prepareRoute(outlet: RouterOutlet): any {
+        return outlet && outlet.activatedRouteData && outlet.activatedRouteData["animationState"];
     }
 }

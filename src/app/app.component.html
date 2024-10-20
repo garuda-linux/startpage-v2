@@ -1,6 +1,8 @@
 <div class="background-filter">
-  <div class="non-blurred overflow-hidden">
-    <app-menubar id="menubar"></app-menubar>
-    <router-outlet></router-outlet>
-  </div>
+    <div class="non-blurred overflow-hidden">
+        <app-menubar id="menubar"></app-menubar>
+        <div [@routerTransition]="prepareRoute(outlet)">
+            <router-outlet #outlet="outlet"></router-outlet>
+        </div>
+    </div>
 </div>
