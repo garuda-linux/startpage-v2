@@ -48,7 +48,9 @@ samp {
 }
 
 .bg-contain {
-  background-size: contain;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .background-blurred .background-filter::after {
