@@ -1,41 +1,67 @@
-<nav
-  class="bg-base/50 backdrop-blur fixed z-20 top-0 start-0 w-lvw">
-  <div class="flex flex-wrap items-center justify-between md:justify-end mx-auto p-4">
-    <a class="flex md:mr-auto  items-center space-x-3 rtl:space-x-reverse" routerLink="/">
-      <img src="/favicon.png" class="h-8" alt="Garuda Logo">
-      <span class="self-center text-xl font-semibold hover:text-mauve whitespace-nowrap text-maroon"> {{ welcomeText }}</span>
-    </a>
-    <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-      <button data-collapse-toggle="navbar-sticky" type="button"
-              class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden hover:bg-surface0 focus:outline-none focus:ring-2 focus:ring-maroon"
-              aria-controls="navbar-sticky" aria-expanded="false"><span class="sr-only">Open main menu</span>
-        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-          <path class="text-maroon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="2"
-                d="M1 1h15M1 7h15M1 13h15" />
-        </svg>
-      </button>
+<nav class="bg-base/50 backdrop-blur fixed z-20 top-0 start-0 w-lvw">
+    <div class="flex flex-wrap items-center justify-between md:justify-end mx-auto p-4">
+        <a class="flex md:mr-auto items-center space-x-3 rtl:space-x-reverse" routerLink="/">
+            <img src="/favicon.png" class="h-8" alt="Garuda Logo" />
+            <span class="self-center text-xl font-semibold hover:text-mauve whitespace-nowrap text-maroon">
+                {{ welcomeText }}</span
+            >
+        </a>
+        <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+            <button
+                type="button"
+                (click)="navbar.classList.remove('hidden')"
+                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden hover:bg-surface0 focus:outline-none focus:ring-2 focus:ring-maroon"
+                aria-controls="navbar-sticky"
+            >
+                <span class="sr-only">Open main menu</span>
+                <svg
+                    class="w-5 h-5"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 17 14"
+                >
+                    <path
+                        class="text-maroon"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M1 1h15M1 7h15M1 13h15"
+                    />
+                </svg>
+            </button>
+        </div>
+        <div
+            class="items-center justify-between hidden w-full md:w-fit md:flex md:text-right md:order-1 md:mr-5"
+            #navbar
+        >
+            <ul
+                class="flex flex-col p-4 md:p-0 mt-4 font-medium rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0"
+            >
+                @for (item of items; track item) {
+                    @if (item.url !== undefined) {
+                        <li>
+                            <a
+                                href="{{ item.url }}"
+                                (click)="navbar.classList.add('hidden')"
+                                class="block text-lg py-2 px-3 text-maroon rounded hover:bg-surface0 hover:text-mauve md:hover:bg-transparent md:hover:text-mauve md:p-0"
+                                >{{ item.title }}</a
+                            >
+                        </li>
+                    } @else if (item.routerLink !== undefined) {
+                        <li [routerLink]="item.routerLink">
+                            <a
+                                (click)="navbar.classList.add('hidden')"
+                                class="cursor-pointer block text-lg py-2 px-3 text-maroon rounded hover:bg-surface0 hover:text-mauve md:hover:bg-transparent md:hover:text-mauve md:p-0"
+                                >{{ item.title }}</a
+                            >
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
     </div>
-    <div class="items-center justify-between hidden w-full md:w-fit md:flex md:text-right md:order-1 md:mr-5"
-         id="navbar-sticky">
-      <ul
-        class="flex flex-col p-4 md:p-0 mt-4 font-medium rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0">
-        @for (item of items; track item) {
-          @if (item.url !== undefined) {
-            <li>
-              <a href="{{ item.url }}"
-                 class="block text-lg py-2 px-3 text-maroon rounded hover:bg-surface0 hover:text-mauve md:hover:bg-transparent md:hover:text-mauve md:p-0">{{ item.title }}</a>
-            </li>
-          } @else if (item.routerLink !== undefined) {
-            <li [routerLink]="item.routerLink">
-              <a
-                class="cursor-pointer block text-lg py-2 px-3 text-maroon rounded hover:bg-surface0 hover:text-mauve md:hover:bg-transparent md:hover:text-mauve md:p-0">{{ item.title }}</a>
-            </li>
-          }
-        }
-      </ul>
-    </div>
-  </div>
 </nav>
 
 <app-theme-toggle id="theme-toggle" class="hidden"></app-theme-toggle>
