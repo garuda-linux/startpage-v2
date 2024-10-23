@@ -3,7 +3,7 @@ import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, Renderer2 } from "@
 import { Title } from "@angular/platform-browser";
 import { RouterModule, RouterOutlet } from "@angular/router";
 import { initFlowbite } from "flowbite";
-import { routeTransitionAnimations } from "./app.routes";
+import { routeAnimations } from "./app.routes";
 import { AppService } from "./app.service";
 import { loadTheme, setPageTitle } from "./functions";
 import { MenubarComponent } from "./menubar/menubar.component";
@@ -17,7 +17,7 @@ import { StartpageSettings } from "./types";
     templateUrl: "./app.component.html",
     styleUrl: "./app.component.scss",
     providers: [RedirectGuard, AppService],
-    animations: [routeTransitionAnimations],
+    animations: [routeAnimations],
 })
 export class AppComponent implements OnInit {
     title = "Garuda Startpage";
@@ -53,7 +53,12 @@ export class AppComponent implements OnInit {
         }
     }
 
-    prepareRoute(outlet: RouterOutlet): any {
-        return outlet && outlet.activatedRouteData && outlet.activatedRouteData["animationState"];
+    /**
+     * Returns the animation state of the next page for page transitions
+     * @param outlet Router outlet element
+     * @returns The animation state of the target route
+     */
+    prepareRoute(outlet: RouterOutlet): string {
+        return outlet.activatedRouteData["animationState"];
     }
 }
