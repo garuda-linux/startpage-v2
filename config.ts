@@ -77,7 +77,7 @@ export const contactLinks: ContactLinks = [
         subtitle: "Chat with us on Discord",
     },
     {
-        link: "https://bsky.app/profile/garudalinux.bsky.social",
+        link: "https://bsky.app/profile/garudalinux.org",
         title: "Bluesky",
         logo: "pictures/bluesky.svg",
         subtitle: "Get some news from Garuda",
