@@ -152,13 +152,7 @@ export const serviceLinks: ServiceLinks = [
         title: "Statuspage",
         icon: "pictures/freshstatus.svg",
         subtitle: "Status page",
-    },
-    {
-        link: "https://stats.garudalinux.org",
-        title: "Uptimes",
-        icon: "pictures/freshping.svg",
-        subtitle: "Uptime stats",
-    },
+    }
 ];
 
 // Available search engines and their URLs (without %s)
