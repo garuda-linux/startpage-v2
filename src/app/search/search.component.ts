@@ -9,7 +9,7 @@ import { SearchEngineEntry } from "../types";
 @Component({
     selector: "app-search",
     standalone: true,
-    imports: [CommonModule, FormsModule, RouterLink, NgOptimizedImage],
+    imports: [CommonModule, FormsModule, NgOptimizedImage],
     templateUrl: "./search.component.html",
     styleUrl: "./search.component.css",
     changeDetection: ChangeDetectionStrategy.OnPush,

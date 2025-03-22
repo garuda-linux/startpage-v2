@@ -1,6 +1,6 @@
-import { CommonModule } from "@angular/common"
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core"
-import jokes from "./jokes"
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import jokes from "./jokes";
 
 @Component({
     selector: "app-jokes",
@@ -11,13 +11,13 @@ import jokes from "./jokes"
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class JokesComponent implements OnInit {
-    joke = ""
+    joke = "";
 
     ngOnInit(): void {
-        this.setJoke()
+        this.setJoke();
     }
 
     setJoke(): void {
-        this.joke = jokes[Math.floor(Math.random() * jokes.length)]
+        this.joke = jokes[Math.floor(Math.random() * jokes.length)];
     }
 }

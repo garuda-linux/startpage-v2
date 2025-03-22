@@ -18,6 +18,7 @@ import {
     logos,
     searchEngineMappings,
     wallpapers,
+    SidebarComponent,
 } from "../../../config";
 import { AppService } from "../app.service";
 import { loadTheme, setPageTitle } from "../functions";
@@ -30,15 +31,7 @@ import { ServiceLinks, StartpageSettings, StartpageTheme } from "../types";
 @Component({
     selector: "app-settings",
     standalone: true,
-    imports: [
-        CommonModule,
-        LinkSectionComponent,
-        NewsComponent,
-        SearchComponent,
-        FormsModule,
-        ReactiveFormsModule,
-        ToastComponent,
-    ],
+    imports: [CommonModule, NewsComponent, FormsModule, ReactiveFormsModule, ToastComponent],
     templateUrl: "./settings.component.html",
     styleUrl: "./settings.component.css",
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -64,6 +57,8 @@ export class SettingsComponent implements AfterViewInit {
     searchEngine = new FormControl();
     searchEngineUrl = new FormControl();
     searchEngineName = new FormControl();
+    sidebarComponent = new FormControl();
+    rssFeedUrl = new FormControl();
     welcomeText = new FormControl();
     wallpaper = new FormControl();
     wallpaperCustomUrl = new FormControl();
@@ -107,9 +102,11 @@ export class SettingsComponent implements AfterViewInit {
             jokesEnabled: this.jokesEnabled.value,
             logo: this.logo.value,
             logoUrl: this.logoUrl.value,
+            rssFeedUrl: this.rssFeedUrl.value,
             searchEngine: this.searchEngine.value as SearchEngine,
             searchEngineName: this.searchEngineName.value,
             searchEngineUrl: this.searchEngineUrl.value,
+            sidebarComponent: this.sidebarComponent.value as SidebarComponent,
             theme: this.theme.value as StartpageTheme,
             wallpaper: this.wallpaper.value,
             wallpaperBlur: this.wallpaperBlur.value,
