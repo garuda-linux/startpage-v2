@@ -23,8 +23,6 @@ export class AppService {
    * Retrieve the latest news from the Discourse forum.
    */
   getDiscourseNews(): void {
-    const topicList: Topic[] = [];
-
     this.http
       .get<DiscourseFeed>(`${this.appConfig.forumUrl}/c/announcements/16.json`)
       .pipe(
@@ -34,14 +32,19 @@ export class AppService {
         }),
       )
       .subscribe((data) => {
-        // Ensure the topics are sorted by date, then slice the first ones
         data.topic_list.topics.sort((a, b) => {
           // @ts-expect-error works fine, so fuck off
           return new Date(b.created_at) - new Date(a.created_at);
         });
-        topicList.push(...data.topic_list.topics.slice(0, this.AMOUNT));
 
-        const onlyNeededProps: StrippedTopic[] = topicList.map((topic) => {
+        // Nothing to do here, we are up to date
+        if (this.blogData().length > 0 && this.blogData()[0].created_at === data.topic_list.topics[0].created_at) {
+          this.blogDataReady.set(true);
+          return;
+        }
+
+        const topics: Topic[] = data.topic_list.topics.slice(0, this.AMOUNT);
+        const onlyNeededProps: StrippedTopic[] = topics.map((topic: Topic) => {
           return {
             link: `${this.appConfig.forumUrl}/t/${topic.slug}`,
             created_at: topic.created_at,

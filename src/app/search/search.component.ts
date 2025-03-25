@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, type OnInit, type Signal, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, type Signal, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslocoDirective } from '@jsverse/transloco';
