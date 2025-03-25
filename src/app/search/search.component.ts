@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, OnInit, Signal, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslocoDirective } from '@jsverse/transloco';
@@ -15,16 +15,11 @@ import { InputText } from 'primeng/inputtext';
   styleUrl: './search.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchComponent implements OnInit {
-  searchEngine = signal<SearchEngineEntry>({} as SearchEngineEntry);
-  searchTerm = signal<string>('');
-
-  protected readonly configService = inject(ConfigService);
-
-  ngOnInit() {
+export class SearchComponent {
+  searchEngine: Signal<SearchEngineEntry> = computed(() => {
     const activeSearchEngine: string = this.configService.settings().activeSearchEngine;
-    let searchEngine: SearchEngineEntry
-    if (activeSearchEngine === "custom") {
+    let searchEngine: SearchEngineEntry;
+    if (activeSearchEngine !== 'custom') {
       const allAvailableSearchEngines: SearchEngineList = [
         ...searchEngineMappings,
         ...this.configService.settings().searchEngines,
@@ -32,13 +27,16 @@ export class SearchComponent implements OnInit {
       searchEngine = allAvailableSearchEngines.find((engine) => engine.name === activeSearchEngine)!;
     } else {
       searchEngine = {
-        name: "custom",
+        name: 'custom',
         url: this.configService.settings().searchEngineUrl,
         prettyName: this.configService.settings().searchEngineName,
-      }
+      };
     }
-    if (searchEngine) this.searchEngine.set(searchEngine);
-  }
+    return searchEngine;
+  });
+  searchTerm = signal<string>('');
+
+  protected readonly configService = inject(ConfigService);
 
   /**
    * Open the search engine URL in a new tab with the search term.

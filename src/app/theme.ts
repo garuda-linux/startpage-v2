@@ -154,7 +154,7 @@ export const Catppuccin = definePreset(Aura, {
           color: '{surface.200}',
         },
         formField: {
-          background: latte.colors.crust.hex,
+          background: latte.colors.crust.hex + '88',
           disabledBackground: '{surface.700}',
           filledBackground: '{surface.800}',
           filledHoverBackground: '{surface.800}',
@@ -163,7 +163,7 @@ export const Catppuccin = definePreset(Aura, {
           hoverBorderColor: '{surface.500}',
           focusBorderColor: '{primary.color}',
           invalidBorderColor: latte.colors.peach.hex,
-          color: '{surface.0}',
+          color: latte.colors.text.hex,
           disabledColor: '{surface.400}',
           placeholderColor: '{surface.400}',
           invalidPlaceholderColor: latte.colors.maroon.hex,
@@ -279,7 +279,7 @@ export const Catppuccin = definePreset(Aura, {
           color: '{surface.200}',
         },
         formField: {
-          background: mocha.colors.crust.hex,
+          background: mocha.colors.crust.hex + '88',
           disabledBackground: '{surface.700}',
           filledBackground: '{surface.800}',
           filledHoverBackground: '{surface.800}',
@@ -288,7 +288,7 @@ export const Catppuccin = definePreset(Aura, {
           hoverBorderColor: '{surface.500}',
           focusBorderColor: '{primary.color}',
           invalidBorderColor: mocha.colors.peach.hex,
-          color: '{surface.0}',
+          color: mocha.colors.text.hex,
           disabledColor: '{surface.400}',
           placeholderColor: '{surface.400}',
           invalidPlaceholderColor: mocha.colors.maroon.hex,
@@ -580,94 +580,94 @@ export const Catppuccin = definePreset(Aura, {
         },
       },
     },
-  },
-  progressspinner: {
-    colorScheme: {
-      light: {
-        color: {
-          1: latte.colors.maroon.hex,
-          2: latte.colors.flamingo.hex,
-          3: latte.colors.green.hex,
-          4: latte.colors.yellow.hex,
+    progressspinner: {
+      colorScheme: {
+        light: {
+          color: {
+            1: latte.colors.maroon.hex,
+            2: latte.colors.flamingo.hex,
+            3: latte.colors.green.hex,
+            4: latte.colors.yellow.hex,
+          },
         },
-      },
-      dark: {
-        color: {
-          1: mocha.colors.maroon.hex,
-          2: mocha.colors.flamingo.hex,
-          3: mocha.colors.green.hex,
-          4: mocha.colors.yellow.hex,
+        dark: {
+          color: {
+            1: mocha.colors.maroon.hex,
+            2: mocha.colors.flamingo.hex,
+            3: mocha.colors.green.hex,
+            4: mocha.colors.yellow.hex,
+          },
         },
       },
     },
-  },
-  select: {
-    colorScheme: {
-      light: {
-        color: latte.colors.text.hex,
-        disabled: {
-          background: latte.colors.surface0.hex,
-        },
-        overlay: {
-          background: latte.colors.crust.hex,
-        },
-        option: {
-          focus: {
-            background: latte.colors.base.hex,
-          },
-          selected: {
+    select: {
+      colorScheme: {
+        light: {
+          color: latte.colors.text.hex,
+          disabled: {
             background: latte.colors.surface0.hex,
           },
-        },
-      },
-      dark: {
-        color: mocha.colors.text.hex,
-        disabled: {
-          background: mocha.colors.surface0.hex,
-        },
-        overlay: {
-          background: mocha.colors.crust.hex,
-        },
-        option: {
-          focus: {
-            background: mocha.colors.base.hex,
+          overlay: {
+            background: latte.colors.crust.hex,
           },
-          selected: {
-            background: mocha.colors.surface0.hex,
-          },
-        },
-      },
-    },
-  },
-  table: {
-    colorScheme: {
-      light: {
-        header: {
-          cell: {
-            hover: {
+          option: {
+            focus: {
+              background: latte.colors.base.hex,
+            },
+            selected: {
               background: latte.colors.surface0.hex,
             },
           },
         },
-      },
-      dark: {
-        header: {
-          cell: {
-            hover: {
+        dark: {
+          color: mocha.colors.text.hex,
+          disabled: {
+            background: mocha.colors.surface0.hex,
+          },
+          overlay: {
+            background: mocha.colors.crust.hex,
+          },
+          option: {
+            focus: {
+              background: mocha.colors.base.hex,
+            },
+            selected: {
               background: mocha.colors.surface0.hex,
             },
           },
         },
       },
     },
-  },
-  tooltip: {
-    colorScheme: {
-      light: {
-        background: latte.colors.crust.hex,
+    table: {
+      colorScheme: {
+        light: {
+          header: {
+            cell: {
+              hover: {
+                background: latte.colors.surface0.hex,
+              },
+            },
+          },
+        },
+        dark: {
+          header: {
+            cell: {
+              hover: {
+                background: mocha.colors.surface0.hex,
+              },
+            },
+          },
+        },
       },
-      dark: {
-        background: mocha.colors.crust.hex,
+    },
+    tooltip: {
+      colorScheme: {
+        light: {
+          background: latte.colors.crust.hex,
+        },
+        dark: {
+          background: mocha.colors.crust.hex,
+        },
       },
     },
   },

@@ -34,7 +34,7 @@
     "defaultLinksLabel": "Show default links",
     "jokesEnabledLabel": "Developer excuses enabled",
     "customTitle": "Custom page title",
-    "welcomeText": "Welcome",
+    "welcomeText": "Welcome message",
     "name": "Name to greet you with",
     "currentPageReport": "Showing {first} to {last} of {totalRecords} entries",
     "manageLinks": "Manage links",

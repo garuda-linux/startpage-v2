@@ -10,7 +10,7 @@ import {
   type WritableSignal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ServiceLink, ServiceLinks } from '../types';
+import { LogoList, SearchEngineList, ServiceLink, ServiceLinks, WallpaperList } from '../types';
 import { logos, SearchEngine, searchEngineMappings, wallpapers } from '../../../config';
 import { Checkbox } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
@@ -28,7 +28,7 @@ import { Table, TableModule, TableRowReorderEvent } from 'primeng/table';
 import { Toolbar } from 'primeng/toolbar';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
-import {Panel} from "primeng/panel";
+import { Panel } from 'primeng/panel';
 
 @Component({
   selector: 'app-settings',
@@ -79,9 +79,11 @@ export class SettingsComponent {
   selectedLinks = signal<ServiceLinks | null>(null);
 
   protected readonly configService = inject(ConfigService);
-  protected readonly logos = logos;
-  protected readonly searchEngineMappings = searchEngineMappings;
-  protected readonly wallpapers = wallpapers;
+  protected readonly logos: LogoList = logos.sort((a, b) => a.name.localeCompare(b.name));
+  protected readonly searchEngineMappings: SearchEngineList = searchEngineMappings.sort((a, b) =>
+    a.prettyName.localeCompare(b.prettyName),
+  );
+  protected readonly wallpapers: WallpaperList = wallpapers.sort((a, b) => a.name.localeCompare(b.name));
   private readonly confirmationService = inject(ConfirmationService);
   private readonly el = inject(ElementRef);
   private readonly messageService = inject(MessageService);

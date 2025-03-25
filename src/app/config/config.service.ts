@@ -20,7 +20,7 @@ export class ConfigService {
     defaultLinks: true,
     fitWallpaper: true,
     jokesEnabled: true,
-    logo: '',
+    logo: 'assets/logos/violet-orange.png',
     logoUrl: 'assets/logos/violet-orange.png',
     searchEngineName: '',
     searchEngineUrl: '',

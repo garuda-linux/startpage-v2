@@ -107,12 +107,6 @@ export const serviceLinks: ServiceLinks = [
     subtitle: 'Lightweight frontend for Reddit',
   },
   {
-    link: 'https://lemmy.garudalinux.org',
-    title: 'Lemmy',
-    icon: 'assets/pictures/lemmy.svg',
-    subtitle: 'Privacy-respecting Reddit alternative',
-  },
-  {
     link: 'https://social.garudalinux.org',
     title: 'Mastodon',
     icon: 'assets/pictures/mastodon.svg',
@@ -157,10 +151,16 @@ export const serviceLinks: ServiceLinks = [
   },
 ];
 
-// Available search engines and their URLs (without %s)
-export type SearchEngine = 'searxng' | 'searxng-privau' | 'whoogle' | 'google' | 'custom';
+export type SearchEngine = (typeof searchEngineMappings)[number]['name'] | 'custom';
 
-export const searchEngineMappings: SearchEngineList = [
+export interface SearchEngineEntry {
+  name: string;
+  prettyName: string;
+  url: string;
+}
+
+// Available search engines and their URLs
+export const searchEngineMappings: SearchEngineEntry[] = [
   {
     name: 'searxng',
     prettyName: 'SearxNG',
@@ -185,6 +185,26 @@ export const searchEngineMappings: SearchEngineList = [
     url: 'https://www.google.com/search?q=%s',
   },
   {
+    name: 'ecosia',
+    prettyName: 'Ecosia',
+    url: 'https://www.ecosia.org/search?q=%s',
+  },
+  {
+    name: 'duckduckgo',
+    prettyName: 'DuckDuckGo',
+    url: 'https://duckduckgo.com/?q=%s',
+  },
+  {
+    name: 'startpage',
+    prettyName: 'Startpage',
+    url: 'https://www.startpage.com/do/search?q=%s',
+  },
+  {
+    name: 'brave',
+    prettyName: 'Brave',
+    url: 'https://search.brave.com/search?q=%s',
+  },
+  {
     name: 'custom',
     prettyName: 'Custom',
     url: '',
@@ -201,11 +221,83 @@ export const wallpapers: WallpaperList = [
   },
   {
     name: 'Shaded Landscape',
-    url: 'wallpapers/shaded-landscape.png',
+    url: 'assets/wallpapers/shaded-landscape.png',
   },
   {
     name: 'Evening Sky',
-    url: 'wallpapers/evening-sky.png',
+    url: 'assets/wallpapers/evening-sky.png',
+  },
+  {
+    name: 'Abstract Swirls',
+    url: 'assets/wallpapers/abstract-swirls.jpg',
+  },
+  {
+    name: 'City Horizon',
+    url: 'assets/wallpapers/city-horizon.jpg',
+  },
+  {
+    name: 'River City',
+    url: 'assets/wallpapers/river-city.jpg',
+  },
+  {
+    name: 'City Asteroid Attack',
+    url: 'assets/wallpapers/city-asteroid-attack.jpg',
+  },
+  {
+    name: 'Clouds',
+    url: 'assets/wallpapers/clouds.jpg',
+  },
+  {
+    name: 'Puffy Stars',
+    url: 'assets/wallpapers/puffy-stars.jpg',
+  },
+  {
+    name: 'Rainy Window',
+    url: 'assets/wallpapers/rainy-window.jpeg',
+  },
+  {
+    name: 'Vivid Line',
+    url: 'assets/wallpapers/vivid-line.png',
+  },
+  {
+    name: 'Horizon Mocha',
+    url: 'assets/wallpapers/horizon-mocha.jpg',
+  },
+  {
+    name: 'Mokka SGS',
+    url: 'assets/wallpapers/mokka-sgs.png',
+  },
+  {
+    name: 'Garuda M V1',
+    url: 'assets/wallpapers/garuda-m-v1.png',
+  },
+  {
+    name: 'Mokka Tree',
+    url: 'assets/wallpapers/mokka-tree.jpg',
+  },
+  {
+    name: 'Mokkaxero',
+    url: 'assets/wallpapers/mokkaxero.jpg',
+  },
+  {
+    name: 'Puffy stars',
+    url: 'assets/wallpapers/puffy-stars.jpg',
+  },
+  {
+    name: 'Rainy window',
+    url: 'assets/wallpapers/rainy-window.jpeg',
+  },
+  {
+    name: 'River city',
+    url: 'assets/wallpapers/river-city.jpg',
+  },
+  {
+    name: 'Shaded landscape',
+    url: 'assets/wallpapers/shaded-landscape.png',
+  },
+  {
+    name: 'Vivid line',
+    url: 'assets/wallpapers/vivid-line.png',
   },
   { name: 'Custom', url: 'custom' },
 ];
