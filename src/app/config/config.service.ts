@@ -13,22 +13,22 @@ export class ConfigService {
 
   initialized = signal<boolean>(false);
   settings = signal<AppSettings>({
-    jokesEnabled: true,
+    activeSearchEngine: 'searxng-privau',
+    blurBackground: false,
     customLinks: [],
-    customTitle: '',
+    customTitle: "Garuda's Startpage",
     defaultLinks: true,
     fitWallpaper: true,
-    blurBackground: false,
-    username: '',
-    welcomeText: '',
+    jokesEnabled: true,
     logo: '',
-    wallpaper: 'none',
-    wallpaperUrl: '',
-    logoUrl: '/assets/garuda-purple.svg',
-    searchEngines: [],
+    logoUrl: 'assets/logos/violet-orange.png',
     searchEngineName: '',
     searchEngineUrl: '',
-    activeSearchEngine: 'searxng-privau',
+    searchEngines: [],
+    username: '',
+    wallpaper: 'none',
+    wallpaperUrl: '',
+    welcomeText: '',
   });
 
   constructor() {

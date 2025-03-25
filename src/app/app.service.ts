@@ -33,7 +33,7 @@ export class AppService {
           delay: 1000,
         }),
       )
-      .subscribe(async (data) => {
+      .subscribe((data) => {
         // Ensure the topics are sorted by date, then slice the first ones
         data.topic_list.topics.sort((a, b) => {
           // @ts-expect-error works fine, so fuck off
@@ -67,7 +67,7 @@ export class AppService {
       );
     }
 
-    const results = await Promise.allSettled(blogDataPromises);
+    const results: PromiseSettledResult<DiscourseThread>[] = await Promise.allSettled(blogDataPromises);
     for (const result of results) {
       if (result.status === 'fulfilled') {
         const data: DiscourseThread = result.value;
@@ -79,6 +79,8 @@ export class AppService {
             topicData: topicList.find((topic: Topic) => topic.id === data.id)!,
           },
         ]);
+      } else {
+        console.error('Error fetching blog data:', result.reason);
       }
     }
 

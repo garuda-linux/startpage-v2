@@ -1,17 +1,12 @@
-  <div class="grid grid-cols-12 md:p-10">
+<div class="grid grid-cols-12 md:p-10">
   @for (link of configService.settings().customLinks; track link.title) {
-    <a [href]="link.link" target="_blank" class="col-span-6 md:col-span-2 p-2 cursor-pointer text-center">
+    <a [href]="link.link" target="_blank" class="col-span-6 xl:col-span-2 lg:col-span-4 p-2 cursor-pointer text-center">
       <div>
-        <p-card>
-          <ng-template #header>
-            <div class="h-10">
-              <img [alt]="link.title" class="w-1/6 mx-auto mt-5" [ngSrc]="link.icon" width="100" height="100" />
-            </div>
-          </ng-template>
-          <ng-template #title>
-            {{ link.title }}
-          </ng-template>
-        </p-card>
+        <p-panel [header]="link.title" styleClass="hover:bg-primary-contrast">
+          <div class="h-10">
+            <img [alt]="link.title" class="w-1/4 mx-auto my-2.5" [ngSrc]="link.icon" width="100" height="100" />
+          </div>
+        </p-panel>
       </div>
     </a>
   }
@@ -19,19 +14,17 @@
 @if (configService.settings().defaultLinks) {
   <div class="grid grid-cols-12 md:p-10">
     @for (link of contactLinks(); track link.title) {
-      <a [href]="link.link" target="_blank" class="col-span-6 md:col-span-2 p-2 cursor-pointer text-center">
+      <a
+        [href]="link.link"
+        target="_blank"
+        class="col-span-6 xl:col-span-2 lg:col-span-4 p-2 cursor-pointer text-center"
+      >
         <div>
-          <p-card>
-            <ng-template #header>
-              <div class="h-10">
-                <img [alt]="link.title" class="w-1/6 mx-auto mt-5" [ngSrc]="link.logo" width="100" height="100" />
-              </div>
-            </ng-template>
-            <ng-template #title>
-              <div>{{ link.title }}</div>
-            </ng-template>
-            <ng-template> {{ link.subtitle }}</ng-template>
-          </p-card>
+          <p-panel [header]="link.title" styleClass="hover:bg-primary-contrast">
+            <div class="h-10">
+              <img [alt]="link.title" class="w-1/4 mx-auto my-2.5" [ngSrc]="link.logo" width="100" height="100" />
+            </div>
+          </p-panel>
         </div>
       </a>
     }

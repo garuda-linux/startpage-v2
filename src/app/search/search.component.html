@@ -13,6 +13,8 @@
     <div class="mx-auto md:w-1/2 w-3/4">
       <input
         pInputText
+        autofocus
+        variant="outlined"
         [placeholder]="t('search.placeholder') + ' ' + searchEngine().prettyName"
         [(ngModel)]="searchTerm"
         (keydown.enter)="search()"

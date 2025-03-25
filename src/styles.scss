@@ -49,10 +49,10 @@ p-scrollpanel-content-container > div > div > p {
   @apply flex;
 }
 
-.p-card {
+.p-inputtext,
+.p-button {
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  @apply hover:bg-primary-contrast !important;
 }
 
 .p-timeline-event-opposite {

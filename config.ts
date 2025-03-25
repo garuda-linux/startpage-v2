@@ -57,7 +57,7 @@ export const contactLinks: ContactLinks = [
   {
     link: 'https://forum.garudalinux.org',
     title: 'Forum',
-    logo: 'assets/pictures/garuda-logo-orange.png',
+    logo: 'assets/pictures/forum.png',
     subtitle: 'Use the official forum',
   },
   {

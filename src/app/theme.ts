@@ -417,9 +417,50 @@ export const Catppuccin = definePreset(Aura, {
       colorScheme: {
         light: {
           color: latte.colors.text.hex,
+          background: latte.colors.crust.hex + '88',
+          border: {
+            color: latte.colors.surface0.hex,
+          },
         },
         dark: {
           color: mocha.colors.text.hex,
+          background: mocha.colors.crust.hex + '88',
+          border: {
+            color: mocha.colors.surface0.hex,
+          },
+        },
+      },
+    },
+    button: {
+      colorScheme: {
+        light: {
+          secondary: {
+            background: latte.colors.crust.hex + '88',
+            border: {
+              color: latte.colors.surface0.hex,
+            },
+            hover: {
+              color: latte.colors.mauve.hex,
+              border: {
+                color: latte.colors.crust.hex,
+              },
+            },
+          },
+        },
+        dark: {
+          secondary: {
+            background: mocha.colors.crust.hex + '88',
+            border: {
+              color: mocha.colors.surface0.hex,
+            },
+            color: mocha.colors.text.hex,
+            hover: {
+              color: mocha.colors.mauve.hex,
+              border: {
+                color: mocha.colors.crust.hex,
+              },
+            },
+          },
         },
       },
     },
