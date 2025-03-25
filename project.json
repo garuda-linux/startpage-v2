@@ -25,7 +25,8 @@
         ],
         "styles": ["./src/styles.scss"],
         "scripts": [],
-        "allowedCommonJsDependencies": ["emoji-js"]
+        "allowedCommonJsDependencies": ["emoji-js"],
+        "statsJson": true
       },
       "configurations": {
         "production": {
@@ -33,7 +34,7 @@
             {
               "type": "initial",
               "maximumWarning": "1mb",
-              "maximumError": "2mb"
+              "maximumError": "5mb"
             },
             {
               "type": "anyComponentStyle",
@@ -88,6 +89,9 @@
         "staticFilePath": "dist/startpage-v3/browser",
         "spa": true
       }
+    },
+    "transloco:optimize": {
+      "command": "transloco-optimize {projectRoot}/dist/startpage-v3/browser/assets/i18n"
     }
   }
 }

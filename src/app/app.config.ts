@@ -45,9 +45,6 @@ export const appConfig: ApplicationConfig = {
         availableLangs: environment.availableLanguages,
         defaultLang: environment.defaultLanguage,
         fallbackLang: environment.defaultLanguage,
-        flatten: {
-          aot: !isDevMode(),
-        },
         missingHandler: {
           useFallbackTranslation: true,
         },

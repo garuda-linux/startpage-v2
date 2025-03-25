@@ -117,7 +117,6 @@ export class ConfigService {
   initConfig(renderer: Renderer2, el: ElementRef) {
     for (const key of Object.keys(this.settings())) {
       const value = this.settings()[key];
-      console.log('Initializing config', key, value);
       this.syncSetting(key, value, renderer, el);
     }
   }
