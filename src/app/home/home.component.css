@@ -1,12 +1,7 @@
-::ng-deep {
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-
-::ng-deep .p-card-title {
-    font-size: 1em !important;
-}
-
-::ng-deep .p-card-subtitle {
-    font-size: 0.8em !important;
+.scrollInOne {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
 }

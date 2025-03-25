@@ -1,0 +1,11 @@
+p {
+  @apply text-color;
+}
+
+ul {
+  @apply my-4 block list-inside list-disc space-y-1 text-left !important;
+}
+
+div > table {
+  margin-top: 2.5rem !important;
+}

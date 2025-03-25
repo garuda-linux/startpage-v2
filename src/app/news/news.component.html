@@ -1,89 +1,40 @@
-@if (topicsList && !loading) {
-    <h2 class="font-bold text-lg text-center text-text mb-8">Latest news</h2>
-    <ol class="relative border-s border-mauve block p-6 dark:bg-surface0/80 rounded-lg">
-        @for (topic of topicsList; track topic) {
-            <li class="mb-10 ms-4">
+<ng-container *transloco="let t">
+  <p-panel>
+    @if (!appService.blogDataReady()) {
+      <div class="h-[90vh] md:px-10 px-2.5">
+        <ng-container *ngFor="let _ of [].constructor(8)">
+          <div class="flex mb-4">
+            <div>
+              <p-skeleton width="100%" styleClass="mb-2"/>
+            </div>
+          </div>
+          <p-skeleton width="100%" height="75px"/>
+        </ng-container>
+      </div>
+    }
+    <p-scroll-panel [style]="{ height: '90vh' }">
+      <div class="grid grid-cols-12">
+        <div class="col-span-12">
+          <p-timeline [value]="appService.blogData()">
+            <ng-template #opposite let-untypedTopic>
+              <ng-container *ngIf="typedTopic(untypedTopic) as topic">
+                <small class="text-surface-300">{{ topic.topicData.created_at | date }}</small>
+              </ng-container>
+            </ng-template>
+            <ng-template #content let-untypedTopic>
+              <ng-container *ngIf="typedTopic(untypedTopic) as topic">
                 <div
-                    class="absolute w-3 h-3 bg-surface0 dark:bg-base rounded-full mt-1.5 -start-1.5 border border-maroon"
+                  tabindex="0"
+                  (click)="openLinkInNewTab(topic.topicData.link)"
+                  (keydown)="openLinkInNewTab(topic.topicData.link)"
+                  [innerHTML]="topic.topicData.fancy_title | emojiPipe"
+                  class="text-color cursor-pointer"
                 ></div>
-                <time class="mb-1 text-sm font-normal leading-none text-text">{{ topic.created_at | datePipe }}</time>
-                <h3 class="text-lg font-semibold text-maroon">{{ topic.title }}</h3>
-                <a
-                    href="{{ topic.link }}"
-                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-text bg-surface0/50 backdrop-blur rounded-lg hover:bg-surface1/60 active:bg-surface2/60 hover:text-maroon"
-                >
-                    Read more
-                    <svg
-                        class="w-3 h-3 ms-2 rtl:rotate-180"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 14 10"
-                    >
-                        <path
-                            class="text-maroon focus:text-base"
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M1 5h12m0 0L9 1m4 4L9 9"
-                        />
-                    </svg>
-                </a>
-            </li>
-        }
-    </ol>
-} @else {
-    <div role="status" class="w-full animate-pulse">
-        <span class="sr-only">Loading...</span>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-        <div class="h-2 bg-surface2/60 backdrop-blur rounded-full w-full mb-2.5"></div>
-    </div>
-}
+              </ng-container>
+            </ng-template>
+          </p-timeline>
+        </div>
+      </div>
+    </p-scroll-panel>
+  </p-panel>
+</ng-container>

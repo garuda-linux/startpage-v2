@@ -1,8 +1,38 @@
-# Add files here to ignore them from prettier formatting
-.angular
-/.nx/cache
-/.nx/workspace-data
-/coverage
-/dist
-/node_modules
+# compiled output
+dist
+tmp
+/out-tsc
+
+# dependencies
+node_modules
 pnpm-lock.yaml
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+
+# misc
+.angular
+.direnv
+.github
+.nx
+.vscode
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+/typings
+core
+db
+npm-debug.log
+repos
+testem.log
+yarn-error.log
+
+# System Files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,71 @@
+{
+  "search": {
+    "search": "Search",
+    "placeholder": "Search with"
+  },
+  "menu": {
+    "home": "Home",
+    "donate": "Donate",
+    "forum": "Forum",
+    "aboutUs": "About us",
+    "welcome": "Welcome",
+    "gitlab": "GitLab",
+    "garudaWiki": "Garuda Wiki",
+    "archWiki": "Arch Wiki",
+    "settings": "Settings"
+  },
+  "common": {
+    "gitlab": "GitLab",
+    "privacyPolicy": "Privacy Policy",
+    "coc": "Code of Conduct"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "subtitle": "The page you are looking for does not exist."
+  },
+  "imprint": {
+    "title": "Imprint",
+    "subtitle": "Information according to § 5 TMG.",
+    "contact": "Main contact",
+    "furtherContact": "Further contact methods"
+  },
+  "settings": {
+    "title": "Settings",
+    "defaultLinksLabel": "Show default links",
+    "jokesEnabledLabel": "Developer excuses enabled",
+    "customTitle": "Custom page title",
+    "welcomeText": "Welcome",
+    "name": "Name to greet you with",
+    "currentPageReport": "Showing {first} to {last} of {totalRecords} entries",
+    "manageLinks": "Manage links",
+    "search": "Search...",
+    "addLink": "Add link",
+    "deleteLink": "Delete link",
+    "linkTitle": "Title",
+    "url": "URL",
+    "icon": "Icon",
+    "actions": "Actions",
+    "iconLink": "Icon link",
+    "isRequired": "This is a required field!",
+    "searchEngineLabel": "Search engine to use",
+    "wallpaperLabel": "Wallpaper",
+    "confirmDelete": "Are you sure you want to delete the selected links?",
+    "confirmDeleteLink": "Are you sure you want to delete",
+    "confirm": "Confirm",
+    "confirmDeleteLinkHeader": "Are you sure?",
+    "linkUpdated": "Link updated",
+    "linkDeleted": "Link deleted",
+    "success": "Success",
+    "linkCreated": "Link created",
+    "logoLabel": "Logo image",
+    "customLogo": "Custom logo URL",
+    "fitWallpaper": "Fit wallpaper",
+    "blurBackground": "Blur background",
+    "searchEngineName": "Search engine name",
+    "searchEngineUrl": "Search engine URL (with %s)",
+    "customize": "Customize sections",
+    "customLinks": "Customize links",
+    "general": "General settings",
+    "linkDetails": "Link details"
+  }
+}

@@ -1,249 +1,260 @@
-<div class="sm:pt-10 pt-16 sm:mb-24 mb-10 md:flex sm:h-svh w-lvw">
-    <div class="md:w-3/4">
-        <div class="md:px-10 px-5 mt-5">
-            <div class="md:flex block p-6 dark:bg-surface0/80 mt-8 md:mt-12 rounded-lg pb-10">
-                <div class="md:flex-grow">
-                    <form>
-                        <label for="select-theme" class="block mb-2 text-text text-md font-medium">Theme</label>
-                        <select
-                            name="select-theme"
-                            id="select-theme"
-                            [formControl]="theme"
-                            class="block w-full md:w-5/6 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon"
-                        >
-                            @for (flavor of flavors; track flavor) {
-                                <option value="{{ flavor[0] }}">{{ flavor[1].name }}</option>
-                            }
-                        </select>
-                    </form>
-                    <div class="mt-10">
-                        <form>
-                            <label for="select-search-engine" class="block mb-2 text-md text-text font-medium"
-                                >Search engine</label
-                            >
-                            <select
-                                name="select-search-engine"
-                                id="select-search-engine"
-                                [formControl]="searchEngine"
-                                class="block w-full md:w-5/6 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon"
-                            >
-                                @for (engine of searchEngineMappings; track engine) {
-                                    <option value="{{ engine.name }}">{{ engine.prettyName }}</option>
-                                }
-                            </select>
-                        </form>
-                    </div>
-                    @if (searchEngine.value === "custom") {
-                        <div class="mt-10">
-                            <label for="input-search-engine" class="block mb-2 text-md text-text"
-                                >Custom search URL</label
-                            >
-                            <input
-                                type="text"
-                                id="input-search-engine"
-                                [formControl]="searchEngineUrl"
-                                class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg"
-                            />
-                        </div>
-                        <div class="mt-10">
-                            <label for="input-search-name" class="block mb-2 text-md text-text"
-                                >Custom search engine name</label
-                            >
-                            <input
-                                type="text"
-                                id="input-search-name"
-                                [formControl]="searchEngineName"
-                                class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg"
-                            />
-                        </div>
-                    }
-                    <div class="mt-10">
-                        <label for="input-welcome" class="block mb-2 text-md text-text">Custom welcome message</label>
-                        <input
-                            type="text"
-                            id="input-welcome"
-                            [formControl]="welcomeText"
-                            (keydown.enter)="saveSettings()"
-                            class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg"
-                        />
-                    </div>
-                    <div class="mt-10">
-                        <label for="input-welcome" class="block mb-2 text-md text-text"
-                            >Custom service links
-                            <a
-                                href="https://gitlab.com/garuda-linux/website/startpage-v2#changing-runtime-user-facing-settings"
-                                >?</a
-                            >
-                        </label>
-                        <input
-                            type="text"
-                            id="input-links"
-                            placeholder="Leave empty for none."
-                            [formControl]="customLinks"
-                            (keydown.enter)="saveSettings()"
-                            class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg"
-                        />
-                    </div>
-                    <div class="mt-10">
-                        <label for="input-welcome" class="block mb-2 text-md text-text">Custom page title </label>
-                        <input
-                            type="text"
-                            id="input-title"
-                            placeholder="Leave empty for default."
-                            [formControl]="customTitle"
-                            (keydown.enter)="saveSettings()"
-                            class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg"
-                        />
-                    </div>
-                    <button
-                        type="submit"
-                        (click)="saveSettings()"
-                        class="mt-10 hidden sm:block bg-surface0/60 w-40 text-maroon hover:bg-surface0/60 backdrop-blur focus:outline-none focus:ring-4 focus:ring-maroon font-medium rounded-lg text-sm px-4 py-2"
-                    >
-                        Save
-                    </button>
-                </div>
-                <div class="md:flex-grow">
-                    <form class="mt-10 md:mt-0">
-                        <label for="select-wallpaper" class="block mb-2 text-text text-md font-medium"
-                            >Background</label
-                        >
-                        <select
-                            name="select-wallpaper"
-                            id="select-wallpaper"
-                            [formControl]="wallpaper"
-                            class="block w-full md:w-5/6 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon"
-                        >
-                            @for (wallpaper of wallpapers; track wallpaper) {
-                                <option value="{{ wallpaper.url }}">{{ wallpaper.name }}</option>
-                            }
-                        </select>
-                    </form>
-                    @if (wallpaper.value === "custom") {
-                        <div class="mt-10">
-                            <label for="input-wallpaper" class="block mb-2 text-md text-text"
-                                >Custom wallpaper URL</label
-                            >
-                            <input
-                                type="text"
-                                id="input-wallpaper"
-                                [formControl]="wallpaperCustomUrl"
-                                class="block w-full md:w-5/6 p2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg"
-                            />
-                        </div>
-                    }
-                    <div class="mt-10">
-                        <form>
-                            <label for="select-logo" class="block mb-2 text-md text-text font-medium">Logo</label>
-                            <select
-                                name="select-logo"
-                                id="select-logo"
-                                [formControl]="logo"
-                                class="block w-full md:w-5/6 p-2 text-base text-maroon rounded-lg bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon"
-                            >
-                                @for (logo of logos; track logo) {
-                                    <option value="{{ logo.url }}">{{ logo.name }}</option>
-                                }
-                            </select>
-                        </form>
-                    </div>
-                    @if (logo.value === "custom") {
-                        <div class="mt-10">
-                            <label for="input-search-name" class="block mb-2 text-md text-text">Custom logo URL</label>
-                            <input
-                                type="text"
-                                id="input-logo-url"
-                                [formControl]="logoUrl"
-                                class="block w-full md:w-5/6 p-2 text-base text-maroon bg-surface0/60 backdrop-blur focus:ring-maroon focus:border-maroon rounded-lg"
-                            />
-                        </div>
-                    }
-                    <div class="mt-10">
-                        <label class="inline-flex center justify-center items-center cursor-pointer">
-                            <input
-                                type="checkbox"
-                                [formControl]="wallpaperFit"
-                                class="sr-only peer"
-                                (change)="loadWallpaperStyle('contain')"
-                            />
-                            <div
-                                class="relative w-11 h-6 bg-surface0/60 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"
-                            ></div>
-                            <span class="ms-3 mr-10 text-sm font-medium text-text">Fit wallpaper</span>
-                        </label>
-                    </div>
-                    <div class="mt-5">
-                        <label class="inline-flex center items-center cursor-pointer">
-                            <input
-                                type="checkbox"
-                                [formControl]="wallpaperBlur"
-                                class="sr-only peer"
-                                (change)="loadWallpaperStyle('blur')"
-                            />
-                            <div
-                                class="relative w-11 h-6 bg-surface0/60 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"
-                            ></div>
-                            <span class="ms-3 mr-10 text-sm font-medium text-text">Blur background</span>
-                        </label>
-                    </div>
-                    <div class="mt-5">
-                        <label class="inline-flex center items-center cursor-pointer">
-                            <input
-                                type="checkbox"
-                                [formControl]="jokesEnabled"
-                                class="sr-only peer"
-                                (change)="saveSettings()"
-                            />
-                            <div
-                                class="relative w-11 h-6 bg-surface0/60 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"
-                            ></div>
-                            <span class="ms-3 mr-10 text-sm font-medium text-text">Enable jokes</span>
-                        </label>
-                    </div>
-                    <div class="mt-5">
-                        <label class="inline-flex center items-center cursor-pointer">
-                            <input
-                                type="checkbox"
-                                [formControl]="defaultLinks"
-                                class="sr-only peer"
-                                (change)="saveSettings()"
-                            />
-                            <div
-                                class="relative w-11 h-6 bg-surface0/60 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"
-                            ></div>
-                            <span class="ms-3 mr-10 text-sm font-medium text-text">Enable default links</span>
-                        </label>
-                    </div>
-                    <div class="mt-5">
-                        <label class="inline-flex center items-center cursor-pointer">
-                            <input
-                                type="checkbox"
-                                [formControl]="fontMode"
-                                class="sr-only peer"
-                                (change)="saveSettings()"
-                            />
-                            <div
-                                class="relative w-11 h-6 bg-surface0/60 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroon dark:peer-focus:ring-mauve rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroon/60"
-                            ></div>
-                            <span class="ms-3 mr-10 text-sm font-medium text-text">Light wallpaper mode</span>
-                        </label>
-                    </div>
-                    <button
-                        type="submit"
-                        (click)="saveSettings()"
-                        style="margin-left: 25%"
-                        class="mt-10 mx-auto sm:hidden bg-surface0/60 w-40 text-maroon hover:bg-surface0/60 backdrop-blur focus:outline-none focus:ring-4 focus:ring-maroon font-medium rounded-lg text-sm px-4 py-2 dark:bg-surface2/70"
-                    >
-                        Save
-                    </button>
-                </div>
-            </div>
+<ng-container *transloco="let t">
+  <div class="md:px-10 px-5 max-w-7xl mx-auto">
+    <app-title [title]="t('settings.title')"></app-title>
+    <p-panel [header]="t('settings.general')">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-color">
+        <div class="ml-10">
+          <p-checkbox
+            id="default-links"
+            [(ngModel)]="defaultLinks"
+            [binary]="true"
+            (ngModelChange)="updateConfig('defaultLinks', $event)"
+          />
+          <label for="default-links" class="ml-2">{{ t('settings.defaultLinksLabel') }}</label>
         </div>
-    </div>
+        <div class="ml-10">
+          <p-checkbox
+            id="jokes-enabled"
+            [(ngModel)]="jokesEnabled"
+            [binary]="true"
+            (ngModelChange)="updateConfig('jokesEnabled', $event)"
+          />
+          <label for="jokes-enabled" class="ml-2">{{ t('settings.jokesEnabledLabel') }}</label>
+        </div>
+        <div class="ml-10">
+          <p-checkbox
+            id="fit-wp"
+            [(ngModel)]="fitWallpaper"
+            [binary]="true"
+            (ngModelChange)="updateConfig('fitWallpaper', $event)"
+          />
+          <label for="fit-wp" class="ml-2">{{ t('settings.fitWallpaper') }}</label>
+        </div>
+        <div class="ml-10">
+          <p-checkbox
+            id="blur-bg"
+            [(ngModel)]="blurBackground"
+            [binary]="true"
+            (ngModelChange)="updateConfig('blurBackground', $event)"
+          />
+          <label for="blur-bg" class="ml-2">{{ t('settings.blurBackground') }}</label>
+        </div>
+      </div>
+    </p-panel>
 
-    <div class="md:w-1/5 hidden sm:block flex-auto mx-14 mt-20 sm:mt-12 pb-2.5 sm:mx-14">
-        <app-news [amount]="amountForumPostsSettings"></app-news>
-    </div>
-</div>
+    <p-panel [header]="t('settings.customize')" styleClass="mt-2.5">
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5 text-color">
+        <div class="flex flex-col gap-2">
+          <label for="search-engine">{{ t('settings.searchEngineLabel') }}</label>
+          <p-select
+            [options]="searchEngineMappings"
+            optionLabel="prettyName"
+            optionValue="name"
+            (ngModelChange)="updateConfig('activeSearchEngine', $event)"
+            [(ngModel)]="activeSearchEngine"
+            id="search-engine"
+            fluid
+          />
+        </div>
 
-<app-toast [show]="showToast" [text]="'Settings saved!'"></app-toast>
+        @if (configService.settings().activeSearchEngine === 'custom') {
+          <div class="flex flex-col gap-2">
+            <label for="custom-search">{{ t('settings.searchEngineUrl') }}</label>
+            <input pInputText id="custom-search" (ngModelChange)="updateConfig('searchEngineUrl', $event)"
+                   [(ngModel)]="searchEngineUrl"/>
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="custom-search-name">{{ t('settings.searchEngineName') }}</label>
+            <input pInputText id="custom-search-name" (ngModelChange)="updateConfig('searchEngineName', $event)"
+                   [(ngModel)]="searchEngineName"/>
+          </div>
+        }
+
+        <div class="flex flex-col gap-2">
+          <label for="wallpaper">{{ t('settings.wallpaperLabel') }}</label>
+          <p-select
+            [options]="wallpapers"
+            optionLabel="name"
+            optionValue="url"
+            (ngModelChange)="updateConfig('wallpaper', $event)"
+            [(ngModel)]="wallpaper"
+            fluid
+            id="wallpaper"
+          />
+        </div>
+
+        @if (configService.settings().wallpaper === 'custom') {
+          <div class="flex flex-col gap-2">
+            <label for="custom-wallpaper">{{ t('settings.wallpaperCustomLabel') }}</label>
+            <input
+              pInputText
+              id="custom-wallpaper"
+              (ngModelChange)="updateConfig('wallpaperUrl', $event)"
+              [(ngModel)]="wallpaperUrl"
+            />
+          </div>
+        }
+
+        <div class="flex flex-col gap-2">
+          <label for="logo">{{ t('settings.logoLabel') }}</label>
+          <p-select
+            [options]="logos"
+            optionLabel="name"
+            optionValue="url"
+            (ngModelChange)="updateConfig('logo', $event)"
+            [(ngModel)]="logo"
+            fluid
+            id="logo"
+          />
+        </div>
+
+        @if (configService.settings().logo === 'custom') {
+          <div class="flex flex-col gap-2">
+            <label for="custom-logo">{{ t('settings.customLogo') }}</label>
+            <input pInputText id="custom-logo" (ngModelChange)="updateConfig('logoUrl', $event)" [(ngModel)]="logoUrl"/>
+          </div>
+        }
+
+        <div class="flex flex-col gap-2">
+          <label for="title">{{ t('settings.customTitle') }}</label>
+          <input pInputText id="title" (ngModelChange)="updateConfig('customTitle', $event)" [(ngModel)]="customTitle"/>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="name">{{ t('settings.name') }}</label>
+          <input pInputText id="name" (ngModelChange)="updateConfig('username', $event)" [(ngModel)]="username"/>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="welcome">{{ t('settings.welcomeText') }}</label>
+          <input
+            pInputText
+            id="welcome"
+            (ngModelChange)="updateConfig('welcomeText', $event)"
+            [(ngModel)]="welcomeText"
+          />
+        </div>
+      </div>
+    </p-panel>
+
+    <p-panel [header]="t('settings.customLinks')" styleClass="mt-2.5">
+        <p-toolbar styleClass="mt-10">
+          <ng-template #start>
+            <p-button [label]="t('settings.addLink')" icon="pi pi-plus" class="mr-2" (onClick)="openNew()"/>
+            <p-button
+              severity="danger"
+              [label]="t('settings.deleteLink')"
+              icon="pi pi-trash"
+              outlined
+              (onClick)="deleteSelectedLinks()"
+              [disabled]="!selectedLinks() || !selectedLinks()?.length"
+            />
+          </ng-template>
+        </p-toolbar>
+
+        <p-table
+          #linkTable
+          [value]="customLinks()"
+          [rows]="10"
+          [paginator]="true"
+          [globalFilterFields]="['title', 'url']"
+          [(selection)]="selectedLinks"
+          [rowHover]="true"
+          [reorderableColumns]="true"
+          (onRowReorder)="onRowReorder($event)"
+          dataKey="title"
+          [currentPageReportTemplate]="t('settings.currentPageReport')"
+          [showCurrentPageReport]="true"
+        >
+          <ng-template #caption>
+            <div class="flex items-center justify-between">
+              <h5 class="m-0" [innerText]="t('settings.manageLinks')"></h5>
+              <p-iconfield>
+                <p-inputicon styleClass="pi pi-search"/>
+                <input
+                  #input
+                  pInputText
+                  fluid
+                  type="text"
+                  (input)="linkTable.filterGlobal(input.value, 'contains')"
+                  [placeholder]="t('settings.search')"
+                />
+              </p-iconfield>
+            </div>
+          </ng-template>
+
+          <ng-template #header>
+            <tr>
+              <th style="width: 3rem">
+                <p-tableHeaderCheckbox/>
+              </th>
+              <th>
+                {{ t('settings.linkTitle') }}
+              </th>
+              <th pSortableColumn="link">
+                {{ t('settings.url') }}
+                <p-sortIcon field="link"/>
+              </th>
+              <th>
+                {{ t('settings.icon') }}
+              </th>
+              <th style="width: 8rem">
+                {{ t('settings.actions') }}
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template #body let-link>
+            <tr>
+              <td>
+                <p-tableCheckbox [value]="link.title"/>
+              </td>
+              <td>{{ link.title }}</td>
+              <td>{{ link.link }}</td>
+              <td>{{ link.icon }}</td>
+              <td>
+                <p-button icon="pi pi-pencil" class="mr-2" rounded outlined (click)="editLink(link)"/>
+                <p-button
+                  icon="pi pi-trash"
+                  severity="danger"
+                  rounded
+                  outlined
+                  (click)="deleteLink(link)"
+                />
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+
+        <p-dialog [(visible)]="linkDialog" [style]="{ width: '450px' }" [header]="t('settings.linkDetails')" modal>
+          <ng-template #content>
+            <div class="flex flex-col gap-6">
+              <div>
+                <label for="link-title" class="block font-bold mb-3"> {{ t('settings.title') }}</label>
+                <input type="text" pInputText id="link-title" [(ngModel)]="link().title" required fluid/>
+                <small class="text-red-500"
+                       *ngIf="linkSubmitted() && !link().title">{{ t('settings.isRequired') }}</small>
+              </div>
+              <div>
+                <label for="url" class="block font-bold mb-3"> {{ t('settings.url') }}</label>
+                <input type="text" pInputText id="url" [(ngModel)]="link().link" required fluid/>
+                <small class="text-red-500"
+                       *ngIf="linkSubmitted() && !link().link">{{ t('settings.isRequired') }}</small>
+              </div>
+              <div>
+                <label for="icon" class="block font-bold mb-3"> {{ t('settings.iconLink') }}</label>
+                <input type="text" pInputText id="icon" [(ngModel)]="link().icon" required fluid/>
+                <small class="text-red-500"
+                       *ngIf="linkSubmitted() && !link().icon">{{ t('settings.isRequired') }}</small>
+              </div>
+            </div>
+          </ng-template>
+
+          <ng-template #footer>
+            <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()"/>
+            <p-button label="Save" icon="pi pi-check" (click)="saveLink()"/>
+          </ng-template>
+        </p-dialog>
+
+        <p-confirmDialog/>
+    </p-panel>
+  </div>
+</ng-container>

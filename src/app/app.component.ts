@@ -1,64 +1,98 @@
-import { DOCUMENT, isPlatformBrowser } from "@angular/common";
-import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, Renderer2 } from "@angular/core";
-import { Title } from "@angular/platform-browser";
-import { RouterModule, RouterOutlet } from "@angular/router";
-import { initFlowbite } from "flowbite";
-import { routeAnimations } from "./app.routes";
-import { AppService } from "./app.service";
-import { loadTheme, setPageTitle } from "./functions";
-import { MenubarComponent } from "./menubar/menubar.component";
-import { RedirectGuard } from "./redirect/redirect.guard";
-import { StartpageSettings } from "./types";
+import { NgOptimizedImage, registerLocaleData } from '@angular/common';
+import localeEnGb from '@angular/common/locales/en-GB';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  OnInit,
+  Renderer2,
+  signal,
+} from '@angular/core';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { ScrollTop } from 'primeng/scrolltop';
+import { routeAnimations } from './app.routes';
+import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component';
+import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
+import { lastValueFrom } from 'rxjs';
+import { Button } from 'primeng/button';
+import { AppService } from './app.service';
+import { ShellComponent } from '@garudalinux/core';
+import { ConfigService } from './config/config.service';
+import { menubarItems } from '../../config';
+import { MenuBarLink } from './types';
 
 @Component({
-    standalone: true,
-    imports: [RouterModule, MenubarComponent],
-    selector: "app-root",
-    templateUrl: "./app.component.html",
-    styleUrl: "./app.component.scss",
-    providers: [RedirectGuard, AppService],
-    animations: [routeAnimations],
+  imports: [
+    RouterModule,
+    NgOptimizedImage,
+    ScrollTop,
+    LanguageSwitcherComponent,
+    Button,
+    ShellComponent,
+    TranslocoDirective,
+  ],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
+  animations: [routeAnimations],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-    title = "Garuda Startpage";
-    settings: StartpageSettings = {} as StartpageSettings;
+  items = signal<MenuBarLink[]>(menubarItems);
 
-    constructor(
-        @Inject(DOCUMENT) private document: Document,
-        @Inject(PLATFORM_ID) private platformId: object,
-        private appService: AppService,
-        private el: ElementRef,
-        private renderer: Renderer2,
-        private titleService: Title,
-    ) {
-        this.appService.getSettings.subscribe((settings) => {
-            this.settings = settings;
-        });
-        if (this.settings.theme) {
-            loadTheme(this.settings.theme, this.renderer, this.el);
-        }
-        if (this.settings.fontMode) {
-            this.document.documentElement.classList.add("dark");
-        } else {
-            this.document.documentElement.classList.remove("dark");
-        }
-        setPageTitle(this.titleService, this.settings.customTitle);
-        this.appService.applyWallpaperStyle(this.el, this.renderer);
-        this.appService.loadWallpaper(this.el, this.renderer, this.appService.settings.wallpaper);
+  protected readonly appService = inject(AppService);
+  protected readonly configService = inject(ConfigService);
+  private readonly el = inject(ElementRef);
+  private readonly renderer = inject(Renderer2);
+  private readonly translocoService = inject(TranslocoService);
+
+  logoLink = computed(() =>
+    this.configService.settings().logo ? '/' + this.configService.settings().logo : '/assets/garuda-purple.svg',
+  );
+
+  async ngOnInit(): Promise<void> {
+    registerLocaleData(localeEnGb);
+    void this.setupLabels(this.translocoService.getActiveLang());
+
+    this.translocoService.langChanges$.subscribe((lang) => {
+      void this.setupLabels(lang);
+    });
+
+    while (!this.configService.initialized()) {
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+    this.configService.initConfig(this.renderer, this.el);
+  }
+
+  /**
+   * Set up the labels for the menu bar items
+   * @param lang The language to set the labels for
+   */
+  async setupLabels(lang: string): Promise<void> {
+    const newItemPromises = [];
+    for (const item of this.items()) {
+      newItemPromises.push(lastValueFrom(this.translocoService.selectTranslate(item['translocoKey'], {}, lang)));
     }
 
-    ngOnInit(): void {
-        if (isPlatformBrowser(this.platformId)) {
-            initFlowbite();
-        }
+    const results: string[] = await Promise.all(newItemPromises);
+    const newItems = [];
+
+    for (const [index, item] of this.items().entries()) {
+      newItems.push({ ...item, label: results[index] });
     }
 
-    /**
-     * Returns the animation state of the next page for page transitions
-     * @param outlet Router outlet element
-     * @returns The animation state of the target route
-     */
-    prepareRoute(outlet: RouterOutlet): string {
-        return outlet.activatedRouteData["animationState"];
-    }
+    this.items.set(newItems);
+  }
+
+  /**
+   * Returns the animation state of the next page for page transitions
+   * @param outlet Router outlet element
+   * @returns The animation state of the target route
+   */
+  prepareRoute(outlet: RouterOutlet): string {
+    return outlet.activatedRouteData['animationState'];
+  }
 }

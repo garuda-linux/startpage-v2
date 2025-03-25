@@ -1,8 +1,39 @@
-<div class="background-filter">
+<ng-container *transloco="let t">
+  <div class="background-filter">
     <div class="non-blurred overflow-hidden">
-        <app-menubar id="menubar"></app-menubar>
-        <div [@routerTransition]="prepareRoute(outlet)">
-            <router-outlet #outlet="outlet"></router-outlet>
-        </div>
+      <div class="background min-h-svh">
+        <garuda-shell #shell [menuItems]="items()">
+          <img
+            priority
+            alt="logo"
+            class="cursor-pointer"
+            garudaShellBarStart
+            height="32"
+            [ngSrc]="logoLink()"
+            routerLink="/"
+            width="32"
+          />
+          <div garudaShellBarStart class="ml-5">
+            {{ configService.settings().welcomeText !== '' ? configService.settings().welcomeText : t('menu.welcome')
+            }}{{ configService.settings().username ? ' ' + configService.settings().username : '' }}
+            !
+          </div>
+          <div garudaShellBarEnd>
+            <p-button
+              (click)="appService.themeHandler.toggleDarkMode()"
+              [icon]="appService.themeHandler.darkMode() ? 'pi pi-sun' : 'pi pi-moon'"
+              outlined
+              class="mr-2"
+            >
+            </p-button>
+            <app-language-switcher hidden></app-language-switcher>
+          </div>
+          <div [@routerTransition]="prepareRoute(routerOutlet)" class="mt-5">
+            <router-outlet #routerOutlet="outlet"></router-outlet>
+          </div>
+          <p-scroll-top></p-scroll-top>
+        </garuda-shell>
+      </div>
     </div>
-</div>
+  </div>
+</ng-container>

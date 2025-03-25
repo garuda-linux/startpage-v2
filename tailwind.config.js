@@ -1,16 +1,11 @@
-const { createGlobPatternsForDependencies } = require("@nx/angular/tailwind");
-const { join } = require("node:path");
+const { join } = require('path');
+const tailwindPrimeUi = require('tailwindcss-primeui');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: [
-        join(__dirname, "src/**/!(*.stories|*.spec).{ts,html}"),
-        ...createGlobPatternsForDependencies(__dirname),
-        "./node_modules/flowbite/**/*.js",
-    ],
-    darkMode: "class",
-    theme: {
-        extend: {},
-    },
-    plugins: [require("@catppuccin/tailwindcss"), require("autoprefixer"), require("flowbite/plugin")],
+  content: [join(__dirname, 'src/**/!(*.stories|*.spec).{ts,html}')],
+  theme: {
+    extend: {},
+  },
+  plugins: [tailwindPrimeUi],
 };

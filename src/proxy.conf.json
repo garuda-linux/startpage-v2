@@ -1,0 +1,11 @@
+{
+  "/proxy-forum": {
+    "target": "https://forum.garudalinux.org",
+    "secure": false,
+    "pathRewrite": {
+      "^/proxy-forum": ""
+    },
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

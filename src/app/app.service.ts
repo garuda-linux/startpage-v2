@@ -1,112 +1,87 @@
-import { ElementRef, Injectable, Renderer2 } from "@angular/core"
-import { BehaviorSubject } from "rxjs"
-import { defaultSettings } from "../../config"
-import { StartpageSettings } from "./types"
+import { inject, Injectable, signal } from '@angular/core';
+import type { BlogData, DiscourseFeed, DiscourseThread, Topic } from './news/interfaces';
+import { HttpClient } from '@angular/common/http';
+import { APP_CONFIG } from 'src/environments/app-config.token';
+import { lastValueFrom, retry } from 'rxjs';
+import { ThemeHandler } from './theme-handler/theme-handler';
 
 @Injectable({
-    providedIn: "root",
+  providedIn: 'root',
 })
 export class AppService {
-    public settings = {} as StartpageSettings
-    public data: any = {}
+  activeLanguage = signal<string>('en');
+  blogData = signal<BlogData[]>([]);
+  blogDataReady = signal<boolean>(false);
 
-    public getSettings = new BehaviorSubject<StartpageSettings>(this.settings)
+  readonly themeHandler = new ThemeHandler();
 
-    constructor() {
-        this.loadSettings()
-    }
+  private readonly AMOUNT = 20;
+  private readonly appConfig = inject(APP_CONFIG);
+  private readonly http = inject(HttpClient);
 
-    /**
-     * Load settings from local storage.
-     */
-    loadSettings(): void {
-        const settings = localStorage.getItem("settings")
-        if (settings !== null) {
-            this.settings = JSON.parse(settings) as StartpageSettings
-            this.getSettings.next(this.settings)
-        } else {
-            this.settings = defaultSettings as StartpageSettings
+  /**
+   * Retrieve the latest news from the Discourse forum.
+   */
+  getDiscourseNews(): void {
+    const topicList: Topic[] = [];
+
+    this.http
+      .get<DiscourseFeed>(`${this.appConfig.forumUrl}/c/announcements/16.json`)
+      .pipe(
+        retry({
+          count: 2,
+          delay: 1000,
+        }),
+      )
+      .subscribe(async (data) => {
+        // Ensure the topics are sorted by date, then slice the first ones
+        data.topic_list.topics.sort((a, b) => {
+          // @ts-expect-error works fine, so fuck off
+          return new Date(b.created_at) - new Date(a.created_at);
+        });
+        topicList.push(...data.topic_list.topics.slice(0, this.AMOUNT));
+
+        for (const topic of topicList) {
+          topic.link = `${this.appConfig.forumUrl}/t/${topic.slug}`;
         }
+
+        void this.getBlogData(topicList);
+      });
+  }
+
+  /**
+   * Retrieve the full data of each Discourse thread, including cooked HTML.
+   * Fills the blogData property with the results.
+   * @param topicList - Topic list to retrieve data for.
+   * @private
+   */
+  private async getBlogData(topicList: Topic[]): Promise<void> {
+    const blogDataPromises = [];
+    for (const topic of topicList) {
+      blogDataPromises.push(
+        lastValueFrom(
+          this.http
+            .get<DiscourseThread>(`${this.appConfig.forumUrl}/t/${topic.id}.json`)
+            .pipe(retry({ count: 2, delay: 1000 })),
+        ),
+      );
     }
 
-    /**
-     * Save settings to local storage.
-     * Saves settings from the AppService instance if no settings are provided.
-     * @param settings Settings object to save, optional.
-     */
-    saveSettings(settings?: StartpageSettings): void {
-        if (settings) {
-            this.settings = settings
-        }
-        localStorage.setItem("settings", JSON.stringify(this.settings))
+    const results = await Promise.allSettled(blogDataPromises);
+    for (const result of results) {
+      if (result.status === 'fulfilled') {
+        const data: DiscourseThread = result.value;
+        this.blogData.set([
+          ...this.blogData(),
+          {
+            threadData: data,
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            topicData: topicList.find((topic: Topic) => topic.id === data.id)!,
+          },
+        ]);
+      }
     }
 
-    /**
-     * Loads a new startpage background.
-     * @param el ElementRef to the body element.
-     * @param renderer Renderer2 to the body element.
-     * @param wallpaper URL to the wallpaper to load.
-     */
-    loadWallpaper(el: ElementRef, renderer: Renderer2, wallpaper: string | null): void {
-        if (wallpaper === null) {
-            renderer.removeStyle(el.nativeElement.ownerDocument.body, "backgroundImage")
-        } else {
-            renderer.setStyle(el.nativeElement.ownerDocument.body, "background-image", `url(${wallpaper})`)
-        }
-    }
-
-    /**
-     * Apply wallpaper style to the body element.
-     * @param el ElementRef to the origin element.
-     * @param renderer Renderer2 to the origin element.
-     * @param kind Kind of wallpaper style to apply.
-     */
-    applyWallpaperStyle(el: ElementRef, renderer: Renderer2, kind?: string): void {
-        switch (kind) {
-            case "contain":
-                this.applyBgContain(el, renderer)
-                break
-            case "blur":
-                this.applyBgBlur(el, renderer)
-                break
-            default:
-                this.applyBgContain(el, renderer)
-                this.applyBgBlur(el, renderer)
-                break
-        }
-    }
-
-    private applyBgBlur(el: ElementRef, renderer: Renderer2): void {
-        if (this.settings.wallpaperBlur) {
-            renderer.addClass(el.nativeElement.ownerDocument.body, "background-blurred")
-        } else {
-            renderer.removeClass(el.nativeElement.ownerDocument.body, "background-blurred")
-        }
-    }
-
-    private applyBgContain(el: ElementRef, renderer: Renderer2): void {
-        if (this.settings.wallpaperFit) {
-            renderer.addClass(el.nativeElement.ownerDocument.body, "bg-contain")
-        } else {
-            renderer.removeClass(el.nativeElement.ownerDocument.body, "bg-contain")
-        }
-    }
-
-    /**
-     * Save data to the AppService instance.
-     * @param key Key to save the data under.
-     * @param data Data to save.
-     */
-    saveData(key: any, data: any): void {
-        this.data[key] = data
-    }
-
-    /**
-     * Get data from the AppService instance.
-     * @param key Key to get the data from.
-     * @returns Data saved under the key.
-     */
-    getData(key: any): any {
-        return this.data[key]
-    }
+    this.blogDataReady.set(true);
+  }
 }

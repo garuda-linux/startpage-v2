@@ -1,15 +1,12 @@
-<div class="sm:pt-24 pt-28 sm:mb-24 md:flex">
-    <div class="md:w-3/4 mt-10">
-        <app-search></app-search>
-        @if (jokesEnabled || jokesEnabled === undefined) {
-            <app-jokes></app-jokes>
-        }
-        <div class="sm:mt-10">
-            <app-link-section></app-link-section>
-        </div>
-    </div>
-
-    <div class="md:w-1/4 lg:w-1/6 flex-auto mx-14 pb-2.5 md:mx-10">
-        <app-news [amount]="amountForumPostsHome"></app-news>
-    </div>
+<div class="md:grid grid-cols-12 md:px-10">
+  <div class="col-span-9">
+    <app-search></app-search>
+    @if (configService.settings().jokesEnabled) {
+      <app-jokes></app-jokes>
+    }
+    <app-links></app-links>
+  </div>
+  <div class="col-span-3 mt-10">
+    <app-news></app-news>
+  </div>
 </div>

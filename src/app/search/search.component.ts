@@ -1,69 +1,50 @@
-import { CommonModule, DOCUMENT, NgOptimizedImage } from "@angular/common";
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from "@angular/core";
-import { FormsModule } from "@angular/forms";
-import { RouterLink } from "@angular/router";
-import { SearchEngine, defaultLogo, searchEngineMappings } from "../../../config";
-import { AppService } from "../app.service";
-import { SearchEngineEntry } from "../types";
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { TranslocoDirective } from '@jsverse/transloco';
+import { ConfigService } from '../config/config.service';
+import { searchEngineMappings } from '../../../config';
+import { SearchEngineEntry, SearchEngineList } from '../types';
+import { Button } from 'primeng/button';
+import { InputText } from 'primeng/inputtext';
 
 @Component({
-    selector: "app-search",
-    standalone: true,
-    imports: [CommonModule, FormsModule, NgOptimizedImage],
-    templateUrl: "./search.component.html",
-    styleUrl: "./search.component.css",
-    changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-search',
+  imports: [CommonModule, FormsModule, NgOptimizedImage, TranslocoDirective, Button, InputText],
+  templateUrl: './search.component.html',
+  styleUrl: './search.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchComponent implements OnInit {
-    searchTerm = "";
-    searchEngine: SearchEngine = "searxng";
-    searchEngineData: SearchEngineEntry;
-    logo = "/logos/violet-orange.png";
+  searchEngine = signal<SearchEngineEntry>({} as SearchEngineEntry);
+  searchTerm = signal<string>('');
 
-    constructor(
-        private appService: AppService,
-        private cdr: ChangeDetectorRef,
-        @Inject(DOCUMENT) public document: Document,
-    ) {
-        this.searchEngine = this.appService.settings.searchEngine;
+  protected readonly configService = inject(ConfigService);
 
-        // @ts-expect-error: is always defined
-        this.searchEngineData = searchEngineMappings.find((engine) => {
-            return engine.name === this.searchEngine;
-        });
-        if (this.searchEngine === "custom") {
-            this.searchEngineData.url = this.appService.settings.searchEngineUrl;
-            this.searchEngineData.prettyName = this.appService.settings.searchEngineName
-                ? this.appService.settings.searchEngineName
-                : "Custom";
-        }
+  ngOnInit() {
+    const activeSearchEngine: string = this.configService.settings().activeSearchEngine;
+    let searchEngine: SearchEngineEntry
+    if (activeSearchEngine === "custom") {
+      const allAvailableSearchEngines: SearchEngineList = [
+        ...searchEngineMappings,
+        ...this.configService.settings().searchEngines,
+      ];
+      searchEngine = allAvailableSearchEngines.find((engine) => engine.name === activeSearchEngine)!;
+    } else {
+      searchEngine = {
+        name: "custom",
+        url: this.configService.settings().searchEngineUrl,
+        prettyName: this.configService.settings().searchEngineName,
+      }
     }
+    if (searchEngine) this.searchEngine.set(searchEngine);
+  }
 
-    ngOnInit(): void {
-        this.appService.getSettings.subscribe((settings) => {
-            this.searchEngine = settings.searchEngine;
-
-            if (settings.logo === "custom" && this.appService.settings.logoUrl !== undefined) {
-                this.logo = this.appService.settings.logoUrl;
-            } else if (settings.logo === undefined) {
-                this.logo = defaultLogo;
-                this.appService.settings.logo = defaultLogo;
-            } else {
-                this.logo = settings.logo;
-            }
-            this.cdr.detectChanges();
-        });
-    }
-
-    /**
-     * Navigate to the search engine with the search term.
-     */
-    navToSearchEngine(): void {
-        const url = new URL(this.searchEngineData.url);
-        url.searchParams.set("q", this.searchTerm);
-
-        // if (this.searchEngineData.url.match(/garudalinux\.org/)) url.searchParams.set("c", c)
-
-        window.location.href = url.toString();
-    }
+  /**
+   * Open the search engine URL in a new tab with the search term.
+   */
+  search() {
+    window.open(this.searchEngine().url.replace('%s', this.searchTerm()), '_blank');
+    this.searchTerm.set('');
+  }
 }

@@ -1,0 +1,8 @@
+<div class="my-10 px-2.5 text-center md:px-0">
+  <h2 class="text-primary-emphasis text-2xl font-extrabold">{{ title() }}</h2>
+  @if (subtitleHtml()) {
+    <p class="text-color my-4 text-lg" [innerHtml]="subtitleHtml()"></p>
+  } @else {
+    <p class="text-color my-4 text-lg">{{ subtitle() }}</p>
+  }
+</div>

@@ -1,23 +1,28 @@
-import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import jokes from "./jokes";
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import jokes from './jokes';
 
 @Component({
-    selector: "app-jokes",
-    standalone: true,
-    imports: [CommonModule],
-    templateUrl: "./jokes.component.html",
-    styleUrl: "./jokes.component.css",
-    changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-jokes',
+  imports: [CommonModule],
+  templateUrl: './jokes.component.html',
+  styleUrl: './jokes.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class JokesComponent implements OnInit {
-    joke = "";
+export class JokesComponent {
+  joke = signal<string>(this.getRandomJoke());
 
-    ngOnInit(): void {
-        this.setJoke();
-    }
+  /**
+   * Sets a new random joke.
+   */
+  setJoke(): void {
+    this.joke.set(this.getRandomJoke());
+  }
 
-    setJoke(): void {
-        this.joke = jokes[Math.floor(Math.random() * jokes.length)];
-    }
+  /**
+   * Returns a random joke from the jokes array.
+   */
+  getRandomJoke(): string {
+    return jokes[Math.floor(Math.random() * jokes.length)];
+  }
 }
