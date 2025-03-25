@@ -10,13 +10,13 @@ import {
   type WritableSignal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LogoList, SearchEngineList, ServiceLink, ServiceLinks, WallpaperList } from '../types';
-import { logos, SearchEngine, searchEngineMappings, wallpapers } from '../../../config';
+import type { LogoList, SearchEngineList, ServiceLink, ServiceLinks, WallpaperList } from '../types';
+import { logos, type SearchEngine, searchEngineMappings, wallpapers } from '../../../config';
 import { Checkbox } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
 import { InputText } from 'primeng/inputtext';
-import { AppSettings } from '../config/interfaces';
+import type { AppSettings } from '../config/interfaces';
 import { ConfigService } from '../config/config.service';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import { TitleComponent } from '../title/title.component';
@@ -24,7 +24,7 @@ import { Button } from 'primeng/button';
 import { ConfirmDialog } from 'primeng/confirmdialog';
 import { Dialog } from 'primeng/dialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Table, TableModule, TableRowReorderEvent } from 'primeng/table';
+import { type Table, TableModule, type TableRowReorderEvent } from 'primeng/table';
 import { Toolbar } from 'primeng/toolbar';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
@@ -93,7 +93,9 @@ export class SettingsComponent {
   constructor() {
     effect(() => {
       const settings: AppSettings = this.configService.settings();
-      const settingsKeys = this as unknown as { [key: string]: WritableSignal<any> };
+      const settingsKeys = this as unknown as {
+        [key: string]: WritableSignal<any>;
+      };
       for (const key of Object.keys(settingsKeys)) {
         if (Object.prototype.hasOwnProperty.call(settings, key)) {
           settingsKeys[key].set(settings[key]);

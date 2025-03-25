@@ -3,8 +3,8 @@ import {
   ChangeDetectorRef,
   Component,
   inject,
-  OnDestroy,
-  OnInit,
+  type OnDestroy,
+  type OnInit,
   signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';

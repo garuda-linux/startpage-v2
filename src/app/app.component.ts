@@ -2,16 +2,15 @@ import { NgOptimizedImage, registerLocaleData } from '@angular/common';
 import localeEnGb from '@angular/common/locales/en-GB';
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   computed,
   ElementRef,
   inject,
-  OnInit,
+  type OnInit,
   Renderer2,
   signal,
 } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { RouterModule, type RouterOutlet } from '@angular/router';
 import { ScrollTop } from 'primeng/scrolltop';
 import { routeAnimations } from './app.routes';
 import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component';
@@ -22,7 +21,7 @@ import { AppService } from './app.service';
 import { ShellComponent } from '@garudalinux/core';
 import { ConfigService } from './config/config.service';
 import { menubarItems } from '../../config';
-import { MenuBarLink } from './types';
+import type { MenuBarLink } from './types';
 
 @Component({
   imports: [

@@ -1,7 +1,12 @@
 import { provideHttpClient } from '@angular/common/http';
-import { ApplicationConfig, isDevMode, LOCALE_ID, provideExperimentalZonelessChangeDetection } from '@angular/core';
+import {
+  type ApplicationConfig,
+  isDevMode,
+  LOCALE_ID,
+  provideExperimentalZonelessChangeDetection,
+} from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideRouter, withInMemoryScrolling, withRouterConfig } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { provideGarudaNG } from '@garudalinux/core';
 import { APP_CONFIG } from '../environments/app-config.token';
 import { environment } from '../environments/environment.dev';
@@ -28,16 +33,7 @@ export const appConfig: ApplicationConfig = {
         inputStyle: 'outlined',
       },
     ),
-    provideRouter(
-      routes,
-      withInMemoryScrolling({
-        anchorScrolling: 'enabled',
-        scrollPositionRestoration: 'enabled',
-      }),
-      withRouterConfig({
-        defaultQueryParamsHandling: 'merge',
-      }),
-    ),
+    provideRouter(routes),
     provideExperimentalZonelessChangeDetection(),
     provideHttpClient(),
     provideTransloco({

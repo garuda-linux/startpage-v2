@@ -45,6 +45,12 @@ export interface TopicList {
   topics: Topic[];
 }
 
+export interface StrippedTopic {
+  fancy_title: string;
+  link: string;
+  created_at: string;
+}
+
 export interface Topic {
   link: string;
   id: number;

@@ -3,8 +3,8 @@ import {
   ChangeDetectorRef,
   Component,
   inject,
-  OnDestroy,
-  OnInit,
+  type OnDestroy,
+  type OnInit,
   signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,7 +13,7 @@ import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import { AppService } from '../app.service';
 import { Router } from '@angular/router';
 import { DialogModule } from 'primeng/dialog';
-import { DialogService, DynamicDialogModule, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogModule, type DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LanguageSelectionComponent } from '../language-selection/language-selection.component';
 
 @Component({

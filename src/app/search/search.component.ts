@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, inject, OnInit, Signal, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, type OnInit, type Signal, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { ConfigService } from '../config/config.service';
 import { searchEngineMappings } from '../../../config';
-import { SearchEngineEntry, SearchEngineList } from '../types';
+import type { SearchEngineEntry, SearchEngineList } from '../types';
 import { Button } from 'primeng/button';
 import { InputText } from 'primeng/inputtext';
 

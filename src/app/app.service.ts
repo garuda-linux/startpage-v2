@@ -1,8 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
-import type { BlogData, DiscourseFeed, DiscourseThread, Topic } from './news/interfaces';
+import { DiscourseFeed, StrippedTopic, Topic } from './news/interfaces';
 import { HttpClient } from '@angular/common/http';
 import { APP_CONFIG } from 'src/environments/app-config.token';
-import { lastValueFrom, retry } from 'rxjs';
+import { retry } from 'rxjs';
 import { ThemeHandler } from './theme-handler/theme-handler';
 
 @Injectable({
@@ -10,7 +10,7 @@ import { ThemeHandler } from './theme-handler/theme-handler';
 })
 export class AppService {
   activeLanguage = signal<string>('en');
-  blogData = signal<BlogData[]>([]);
+  blogData = signal<StrippedTopic[]>([]);
   blogDataReady = signal<boolean>(false);
 
   readonly themeHandler = new ThemeHandler();
@@ -41,49 +41,17 @@ export class AppService {
         });
         topicList.push(...data.topic_list.topics.slice(0, this.AMOUNT));
 
-        for (const topic of topicList) {
-          topic.link = `${this.appConfig.forumUrl}/t/${topic.slug}`;
-        }
+        const onlyNeededProps: StrippedTopic[] = topicList.map((topic) => {
+          return {
+            link: `${this.appConfig.forumUrl}/t/${topic.slug}`,
+            created_at: topic.created_at,
+            fancy_title: topic.fancy_title,
+          };
+        });
+        this.blogData.set(onlyNeededProps);
+        this.blogDataReady.set(true);
 
-        void this.getBlogData(topicList);
+        localStorage.setItem('blogData', JSON.stringify(onlyNeededProps));
       });
-  }
-
-  /**
-   * Retrieve the full data of each Discourse thread, including cooked HTML.
-   * Fills the blogData property with the results.
-   * @param topicList - Topic list to retrieve data for.
-   * @private
-   */
-  private async getBlogData(topicList: Topic[]): Promise<void> {
-    const blogDataPromises = [];
-    for (const topic of topicList) {
-      blogDataPromises.push(
-        lastValueFrom(
-          this.http
-            .get<DiscourseThread>(`${this.appConfig.forumUrl}/t/${topic.id}.json`)
-            .pipe(retry({ count: 2, delay: 1000 })),
-        ),
-      );
-    }
-
-    const results: PromiseSettledResult<DiscourseThread>[] = await Promise.allSettled(blogDataPromises);
-    for (const result of results) {
-      if (result.status === 'fulfilled') {
-        const data: DiscourseThread = result.value;
-        this.blogData.set([
-          ...this.blogData(),
-          {
-            threadData: data,
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            topicData: topicList.find((topic: Topic) => topic.id === data.id)!,
-          },
-        ]);
-      } else {
-        console.error('Error fetching blog data:', result.reason);
-      }
-    }
-
-    this.blogDataReady.set(true);
   }
 }

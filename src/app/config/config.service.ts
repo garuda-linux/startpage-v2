@@ -1,5 +1,5 @@
-import { ElementRef, inject, Injectable, Renderer2, signal } from '@angular/core';
-import { AppSettings } from './interfaces';
+import { type ElementRef, inject, Injectable, type Renderer2, signal } from '@angular/core';
+import type { AppSettings } from './interfaces';
 import { Title } from '@angular/platform-browser';
 import { serviceLinks } from '../../../config';
 import { WallpaperService } from '../wallpaper/wallpaper.service';

@@ -5,10 +5,10 @@
         <ng-container *ngFor="let _ of [].constructor(8)">
           <div class="flex mb-4">
             <div>
-              <p-skeleton width="100%" styleClass="mb-2"/>
+              <p-skeleton width="100%" styleClass="mb-2" />
             </div>
           </div>
-          <p-skeleton width="100%" height="75px"/>
+          <p-skeleton width="100%" height="75px" />
         </ng-container>
       </div>
     }
@@ -16,21 +16,17 @@
       <div class="grid grid-cols-12">
         <div class="col-span-12">
           <p-timeline [value]="appService.blogData()">
-            <ng-template #opposite let-untypedTopic>
-              <ng-container *ngIf="typedTopic(untypedTopic) as topic">
-                <small class="text-surface-300">{{ topic.topicData.created_at | date }}</small>
-              </ng-container>
+            <ng-template #opposite let-topic>
+              <small class="text-surface-300">{{ topic.created_at | date }}</small>
             </ng-template>
-            <ng-template #content let-untypedTopic>
-              <ng-container *ngIf="typedTopic(untypedTopic) as topic">
-                <div
-                  tabindex="0"
-                  (click)="openLinkInNewTab(topic.topicData.link)"
-                  (keydown)="openLinkInNewTab(topic.topicData.link)"
-                  [innerHTML]="topic.topicData.fancy_title | emojiPipe"
-                  class="text-color cursor-pointer"
-                ></div>
-              </ng-container>
+            <ng-template #content let-topic>
+              <div
+                tabindex="0"
+                (click)="openLinkInNewTab(topic.link)"
+                (keydown)="openLinkInNewTab(topic.link)"
+                [innerHTML]="topic.fancy_title | emojiPipe"
+                class="text-color cursor-pointer"
+              ></div>
             </ng-template>
           </p-timeline>
         </div>

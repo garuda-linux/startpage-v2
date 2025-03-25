@@ -1,4 +1,4 @@
-import { SearchEngineEntry, ServiceLinks } from '../types';
+import type { SearchEngineEntry, ServiceLinks } from '../types';
 
 export interface AppSettings {
   jokesEnabled: boolean;
