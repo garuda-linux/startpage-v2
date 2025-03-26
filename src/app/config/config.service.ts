@@ -3,6 +3,8 @@ import type { AppSettings } from './interfaces';
 import { Title } from '@angular/platform-browser';
 import { WallpaperService } from '../wallpaper/wallpaper.service';
 import { menubarItems, serviceLinks } from '../../../config';
+import { usePreset } from '@primeng/themes';
+import { themes } from '../theme';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +13,7 @@ export class ConfigService {
   defaultSettings: AppSettings = {
     activeJoke: 'dev-excuses',
     activeSearchEngine: 'searxng-privau',
+    activeTheme: 'CatppuccinAura',
     blurBackground: false,
     customLinks: serviceLinks,
     customMenuLinks: menubarItems,
@@ -166,6 +169,10 @@ export class ConfigService {
           this.wallpaperService.applyWallpaperStyle(key, value, renderer, el);
         }
         break;
+      }
+      case 'activeTheme': {
+        const indexableThemes = themes as { [key: string]: any };
+        usePreset(indexableThemes[value]);
       }
     }
   }

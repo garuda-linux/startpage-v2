@@ -1,5 +1,4 @@
-import { NgOptimizedImage, registerLocaleData } from '@angular/common';
-import localeEnGb from '@angular/common/locales/en-GB';
+import { NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -46,9 +45,11 @@ export class AppComponent implements OnInit {
 
   protected readonly appService = inject(AppService);
   protected readonly configService = inject(ConfigService);
+
   logoLink = computed<string>(() =>
     this.configService.settings().logo ? this.configService.settings().logo : '/assets/garuda-purple.svg',
   );
+
   private readonly translationsCache = inject(TranslocoPersistTranslations);
   private readonly el = inject(ElementRef);
   private readonly renderer = inject(Renderer2);
@@ -64,8 +65,6 @@ export class AppComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.manageTranslocoCache();
-
-    registerLocaleData(localeEnGb);
     void this.setupLabels(this.translocoService.getActiveLang());
 
     this.translocoService.langChanges$.subscribe((lang) => {

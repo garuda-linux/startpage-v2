@@ -82,6 +82,17 @@
     <p-panel [header]="t('settings.customize')" styleClass="mt-2.5">
       <div class="mt-5 grid grid-cols-1 gap-5 text-color md:grid-cols-2">
         <div class="flex flex-col gap-2">
+          <label for="theme">{{ t('settings.themeLabel') }}</label>
+          <p-select
+            (ngModelChange)="updateConfig('activeTheme', $event)"
+            [(ngModel)]="activeTheme"
+            [options]="availableThemes"
+            fluid
+            id="theme"
+          />
+        </div>
+
+        <div class="flex flex-col gap-2">
           <label for="search-engine">{{ t('settings.searchEngineLabel') }}</label>
           <p-select
             (ngModelChange)="updateConfig('activeSearchEngine', $event)"

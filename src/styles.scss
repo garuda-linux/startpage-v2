@@ -3,12 +3,12 @@
 
 /* Font */
 :root {
-  font-family: Inter, sans-serif;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 @supports (font-variation-settings: normal) {
   :root {
-    font-family: InterVariable, sans-serif;
+    font-family: InterVariable, system-ui, sans-serif;
   }
 }
 

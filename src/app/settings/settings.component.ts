@@ -33,6 +33,7 @@ import { FileSelectEvent, FileUpload } from 'primeng/fileupload';
 import { MessageToastService } from '@garudalinux/core';
 import { MenuEditorComponent } from '../menu-editor/menu-editor.component';
 import { AvailableJokeSources, jokeSources } from '../jokes/jokes';
+import { AppTheme, availableThemes } from '../theme';
 
 @Component({
   selector: 'app-settings',
@@ -65,6 +66,7 @@ export class SettingsComponent {
 
   activeJoke = signal<AvailableJokeSources>('dev-excuses');
   activeSearchEngine = signal<SearchEngine>('searxng-privau');
+  activeTheme = signal<AppTheme>('CatppuccinAura');
   blurBackground = signal<number>(0);
   customLinks = signal<ServiceLinks>([]);
   customTitle = signal<string>('');
@@ -93,6 +95,7 @@ export class SettingsComponent {
   );
   protected readonly wallpapers: WallpaperList = wallpapers.sort((a, b) => a.name.localeCompare(b.name));
   protected readonly jokeSources = jokeSources;
+  protected readonly availableThemes = availableThemes;
   private readonly confirmationService = inject(ConfirmationService);
   private readonly document = inject(DOCUMENT);
   private readonly el = inject(ElementRef);

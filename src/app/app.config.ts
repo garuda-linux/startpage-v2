@@ -3,7 +3,6 @@ import {
   type ApplicationConfig,
   inject,
   isDevMode,
-  LOCALE_ID,
   provideAppInitializer,
   provideExperimentalZonelessChangeDetection,
 } from '@angular/core';
@@ -13,11 +12,9 @@ import { provideGarudaNG } from '@garudalinux/core';
 import { APP_CONFIG } from '../environments/app-config.token';
 import { environment } from '../environments/environment.dev';
 import { routes } from './app.routes';
-import { Catppuccin } from './theme';
 import { TranslocoHttpLoader } from './transloco-loader';
 import { provideTransloco } from '@jsverse/transloco';
 import { provideTranslocoPersistLang } from '@jsverse/transloco-persist-lang';
-import { provideTranslocoLocale } from '@jsverse/transloco-locale';
 import { ConfigService } from './config/config.service';
 import { provideTranslocoPersistTranslations } from '@jsverse/transloco-persist-translations';
 
@@ -28,7 +25,6 @@ export const appConfig: ApplicationConfig = {
       { font: 'InterVariable' },
       {
         theme: {
-          preset: Catppuccin,
           options: {
             darkModeSelector: '.p-dark',
           },
@@ -60,12 +56,6 @@ export const appConfig: ApplicationConfig = {
         reRenderOnLangChange: true,
       },
     }),
-    provideTranslocoLocale({
-      langToLocaleMapping: {
-        en: 'en-US',
-        de: 'de-DE',
-      },
-    }),
     provideTranslocoPersistLang({
       storage: {
         useValue: localStorage,
@@ -78,6 +68,5 @@ export const appConfig: ApplicationConfig = {
       ttl: 86_400,
     }),
     { provide: APP_CONFIG, useValue: environment },
-    { provide: LOCALE_ID, useValue: 'en-GB' },
   ],
 };

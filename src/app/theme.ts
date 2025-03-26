@@ -1,32 +1,17 @@
 import * as flavors from '@catppuccin/palette';
 import { definePreset } from '@primeng/themes';
 import Aura from '@primeng/themes/aura';
+import Nora from '@primeng/themes/nora';
+import Material from '@primeng/themes/material';
+import Lara from '@primeng/themes/lara';
 
 const { latte, mocha } = flavors.flavors;
 
-export const Catppuccin = definePreset(Aura, {
-  primitive: {
-    borderRadius: {
-      none: '0',
-      xs: '2px',
-      sm: '4px',
-      md: '6px',
-      lg: '8px',
-      xl: '12px',
-    },
-  },
+const tokens = {
   semantic: {
-    transitionDuration: '0.3s',
     focusRing: {
-      width: '1px',
-      style: 'solid',
       color: '{primary.color}',
-      offset: '2px',
-      shadow: 'none',
     },
-    disabledOpacity: '0.6',
-    iconSize: '1rem',
-    anchorGutter: '2px',
     primary: {
       50: '#fcfbff',
       100: '#f3eafd',
@@ -39,87 +24,6 @@ export const Catppuccin = definePreset(Aura, {
       800: '#705b88',
       900: '#514263',
       950: '#332a3e',
-    },
-    formField: {
-      paddingX: '0.75rem',
-      paddingY: '0.5rem',
-      sm: {
-        fontSize: '0.875rem',
-        paddingX: '0.625rem',
-        paddingY: '0.375rem',
-      },
-      lg: {
-        fontSize: '1.125rem',
-        paddingX: '0.875rem',
-        paddingY: '0.625rem',
-      },
-      borderRadius: '{border.radius.md}',
-      focusRing: {
-        width: '0',
-        style: 'none',
-        color: 'transparent',
-        offset: '0',
-        shadow: 'none',
-      },
-      transitionDuration: '{transition.duration}',
-    },
-    list: {
-      padding: '0.25rem 0.25rem',
-      gap: '2px',
-      header: {
-        padding: '0.5rem 1rem 0.25rem 1rem',
-      },
-      option: {
-        padding: '0.5rem 0.75rem',
-        borderRadius: '{border.radius.sm}',
-      },
-      optionGroup: {
-        padding: '0.5rem 0.75rem',
-        fontWeight: '600',
-      },
-    },
-    content: {
-      borderRadius: '{border.radius.md}',
-    },
-    mask: {
-      transitionDuration: '0.15s',
-    },
-    navigation: {
-      list: {
-        padding: '0.25rem 0.25rem',
-        gap: '2px',
-      },
-      item: {
-        padding: '0.5rem 0.75rem',
-        borderRadius: '{border.radius.sm}',
-        gap: '0.5rem',
-      },
-      submenuLabel: {
-        padding: '0.5rem 0.75rem',
-        fontWeight: '600',
-      },
-      submenuIcon: {
-        size: '0.875rem',
-      },
-    },
-    overlay: {
-      select: {
-        borderRadius: '{border.radius.md}',
-        shadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)',
-      },
-      popover: {
-        borderRadius: '{border.radius.md}',
-        padding: '0.75rem',
-        shadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)',
-      },
-      modal: {
-        borderRadius: '{border.radius.xl}',
-        padding: '1.25rem',
-        shadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
-      },
-      navigation: {
-        shadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)',
-      },
     },
     colorScheme: {
       light: {
@@ -172,7 +76,6 @@ export const Catppuccin = definePreset(Aura, {
           floatLabelActiveColor: '{surface.400}',
           floatLabelInvalidColor: '{form.field.invalid.placeholder.color}',
           iconColor: '{surface.400}',
-          shadow: '0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgba(18, 18, 23, 0.05)',
         },
         text: {
           color: latte.colors.text.hex,
@@ -297,7 +200,6 @@ export const Catppuccin = definePreset(Aura, {
           floatLabelActiveColor: '{surface.400}',
           floatLabelInvalidColor: '{form.field.invalid.placeholder.color}',
           iconColor: '{surface.400}',
-          shadow: '0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgba(18, 18, 23, 0.05)',
         },
         text: {
           color: mocha.colors.text.hex,
@@ -379,11 +281,9 @@ export const Catppuccin = definePreset(Aura, {
       colorScheme: {
         light: {
           background: latte.colors.mantle.hex + '88',
-          shadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)',
         },
         dark: {
           background: mocha.colors.mantle.hex + '88',
-          shadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)',
         },
       },
     },
@@ -672,4 +572,19 @@ export const Catppuccin = definePreset(Aura, {
       },
     },
   },
-});
+};
+
+export const CatppuccinAura = definePreset(Aura, tokens);
+export const CatppuccinNora = definePreset(Nora, tokens);
+export const CatppuccinMaterial = definePreset(Material, tokens);
+export const CatppuccinLara = definePreset(Lara, tokens);
+
+export const themes = {
+  CatppuccinAura: CatppuccinAura,
+  CatppuccinLara: CatppuccinLara,
+  CatppuccinMaterial: CatppuccinMaterial,
+  CatppuccinNora: CatppuccinNora,
+};
+
+export const availableThemes: string[] = ['CatppuccinAura', 'CatppuccinNora', 'CatppuccinMaterial', 'CatppuccinLara'];
+export type AppTheme = (typeof availableThemes)[number];

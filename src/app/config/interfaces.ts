@@ -1,9 +1,11 @@
 import type { MenuBarItems, SearchEngineEntry, ServiceLinks } from '../types';
 import type { AvailableJokeSources } from '../jokes/jokes';
+import { AppTheme } from '../theme';
 
 export interface AppSettings {
   activeJoke: AvailableJokeSources;
   activeSearchEngine: string;
+  activeTheme: AppTheme;
   blurBackground: boolean;
   customLinks: ServiceLinks;
   customMenuLinks: MenuBarItems;
