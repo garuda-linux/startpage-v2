@@ -1,9 +1,9 @@
 <ng-container *transloco="let t">
   <p-panel>
     @if (!appService.blogDataReady()) {
-      <div class="h-[90vh] md:px-10 px-2.5">
+      <div class="h-[90vh] px-2.5 md:px-10">
         <ng-container *ngFor="let _ of [].constructor(8)">
-          <div class="flex mb-4">
+          <div class="mb-4 flex">
             <div>
               <p-skeleton width="100%" styleClass="mb-2" />
             </div>
@@ -24,7 +24,7 @@
                 (click)="openLinkInNewTab(topic.link)"
                 (keydown)="openLinkInNewTab(topic.link)"
                 [innerHTML]="topic.fancy_title | emojiPipe"
-                class="text-color cursor-pointer"
+                class="cursor-pointer text-color"
                 tabindex="0"
               ></div>
             </ng-template>

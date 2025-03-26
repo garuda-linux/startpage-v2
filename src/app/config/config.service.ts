@@ -1,18 +1,17 @@
 import { type ElementRef, inject, Injectable, type Renderer2, signal } from '@angular/core';
 import type { AppSettings } from './interfaces';
 import { Title } from '@angular/platform-browser';
-import { serviceLinks } from '../../../config';
 import { WallpaperService } from '../wallpaper/wallpaper.service';
+import { serviceLinks } from '../../../config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ConfigService {
-  initialized = signal<boolean>(false);
-  settings = signal<AppSettings>({
+  defaultSettings = {
     activeSearchEngine: 'searxng-privau',
     blurBackground: false,
-    customLinks: [],
+    customLinks: serviceLinks,
     customTitle: "Garuda's Startpage",
     defaultLinks: true,
     fitWallpaper: true,
@@ -26,20 +25,19 @@ export class ConfigService {
     wallpaper: 'none',
     wallpaperUrl: '',
     welcomeText: '',
-  });
+  };
+
+  initialized = signal<boolean>(false);
+  settings = signal<AppSettings>(this.defaultSettings);
+
   private readonly title = inject(Title);
   private readonly wallpaperService = inject(WallpaperService);
 
   constructor() {
     this.initStore().then((pendingConfigUpdate) => {
       if (pendingConfigUpdate) {
-        this.settings.set({ ...this.settings(), ...pendingConfigUpdate });
+        this.settings.update((prev) => ({ ...prev, ...pendingConfigUpdate }));
       }
-
-      if (this.settings().customLinks.length === 0) {
-        this.updateConfig('customLinks', serviceLinks);
-      }
-
       this.initialized.set(true);
     });
   }
@@ -50,16 +48,17 @@ export class ConfigService {
    * @param value The new value for the configuration key.
    * @param renderer The renderer to use for DOM manipulation.
    * @param el The element reference to the DOM element.
+   * @param write Whether to write the value to local storage.
    */
-  updateConfig(key: string, value: any, renderer?: Renderer2, el?: ElementRef): void {
-    this.settings.update((prev) => ({ ...prev, [key]: value }));
-    localStorage.setItem('settings', JSON.stringify(this.settings()));
-
+  updateConfig(key: string, value: any, renderer?: Renderer2, el?: ElementRef, write = true): void {
+    this.settings.update((prev: AppSettings) => ({ ...prev, [key]: value }));
+    if (write) localStorage.setItem('settings', JSON.stringify(this.settings()));
     this.syncSetting(key, value, renderer, el);
   }
 
   /**
-   * Initializes the configuration settings.
+   * Initializes the configuration settings, specifically here because
+   * we have renderer and element references.
    * @param renderer The renderer to use for DOM manipulation.
    * @param el The element reference to the DOM element.
    */
@@ -73,24 +72,47 @@ export class ConfigService {
   /**
    * Restores settings from a file.
    * @param file The file containing the settings to restore.
+   * @param renderer The renderer to use for DOM manipulation.
+   * @param el The element reference to the DOM element.
    */
-  async restoreSettings(file: File): Promise<void> {
+  async restoreSettings(file: File, renderer: Renderer2, el: ElementRef): Promise<void> {
     const buffer: ArrayBuffer = await file.arrayBuffer();
     const blob: Blob = new Blob([buffer], { type: 'application/json' });
     const content: string = await blob.text();
 
     try {
       const settings = JSON.parse(content) as Partial<AppSettings>;
-      for (const key of Object.keys(settings)) {
-        if (Object.prototype.hasOwnProperty.call(this.settings(), key)) {
-          this.settings.update((prev: AppSettings) => ({ ...prev, [key]: settings[key] }));
-        } else {
-          console.warn(`Key "${key}" not found in settings, ignoring`);
-        }
-      }
+      this.iterateSettings(settings, renderer, el);
       localStorage.setItem('settings', JSON.stringify(settings));
     } catch (error) {
       console.error('Error parsing settings file:', error);
+    }
+  }
+
+  /**
+   * Resets the settings to their default values.
+   * @param renderer The renderer to use for DOM manipulation.
+   * @param el The element reference to the DOM element.
+   */
+  resetSettings(renderer: Renderer2, el: ElementRef): void {
+    const settings = this.defaultSettings as { [key: string]: any };
+    this.iterateSettings(settings, renderer, el);
+  }
+
+  /**
+   * Iterates through the settings and updates the configuration.
+   * @param settings The settings object containing key-value pairs to update.
+   * @param renderer The renderer to use for DOM manipulation.
+   * @param el The element reference to the DOM element.
+   * @private
+   */
+  private iterateSettings(settings: { [key: string]: any }, renderer?: Renderer2, el?: ElementRef) {
+    for (const key of Object.keys(settings)) {
+      if (Object.prototype.hasOwnProperty.call(this.settings(), key)) {
+        this.updateConfig(key, settings[key], renderer, el);
+      } else {
+        console.warn(`Key "${key}" not found in settings, ignoring`);
+      }
     }
   }
 

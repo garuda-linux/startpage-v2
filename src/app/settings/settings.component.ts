@@ -174,7 +174,7 @@ export class SettingsComponent {
   deleteLink(link: ServiceLink) {
     this.confirmationService.confirm({
       message: `${this.translocoService.translate('settings.confirmDeleteLink')} ${link.title} ?`,
-      header: this.translocoService.translate('settings.confirmDeleteLinkHeader'),
+      header: this.translocoService.translate('settings.confirmHeader'),
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.customLinks.update((links) => links.filter((val) => val.id !== link.id));
@@ -276,13 +276,31 @@ export class SettingsComponent {
   restoreSettings($event: FileSelectEvent) {
     this.confirmationService.confirm({
       message: this.translocoService.translate('settings.confirmRestore'),
-      header: this.translocoService.translate('settings.confirmRestoreHeader'),
+      header: this.translocoService.translate('settings.confirmHeader'),
       icon: 'pi pi-exclamation-triangle',
       accept: async () => {
-        await this.configService.restoreSettings($event.currentFiles[0]);
+        await this.configService.restoreSettings($event.currentFiles[0], this.renderer, this.el);
         this.messageToastService.success(
           this.translocoService.translate('settings.success'),
           this.translocoService.translate('settings.settingsRestored'),
+        );
+      },
+    });
+  }
+
+  /**
+   * Reset settings to default values, after confirmation.
+   */
+  resetSettings() {
+    this.confirmationService.confirm({
+      message: this.translocoService.translate('settings.confirmReset'),
+      header: this.translocoService.translate('settings.confirmHeader'),
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.configService.resetSettings(this.renderer, this.el);
+        this.messageToastService.success(
+          this.translocoService.translate('settings.success'),
+          this.translocoService.translate('settings.settingsReset'),
         );
       },
     });

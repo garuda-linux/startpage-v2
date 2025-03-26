@@ -1,15 +1,15 @@
 <ng-container *transloco="let t">
-  <span [pTooltip]="t('lang.tooltip')" class="font-medium block mb-5 primary" tooltipPosition="bottom">
+  <span [pTooltip]="t('lang.tooltip')" class="primary mb-5 block font-medium" tooltipPosition="bottom">
     {{ t('lang.title') }}
   </span>
   <p-scroll-panel [style]="{ width: '300px', height: '70vh' }">
-    <ul class="list-none flex-auto">
+    <ul class="flex-auto list-none">
       @for (language of allLanguages(); track language) {
         <li
           [tabindex]="$index"
           (keydown.enter)="close(language)"
           (click)="close(language)"
-          class="flex items-center gap-2 px-2 py-3 hover:bg-emphasis cursor-pointer rounded-border"
+          class="flex cursor-pointer items-center gap-2 px-2 py-3 rounded-border hover:bg-emphasis"
         >
           <span class="font-medium">{{ language | langPipe }}</span>
         </li>
