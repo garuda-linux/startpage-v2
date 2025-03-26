@@ -38,6 +38,7 @@
     "@jsverse/transloco": "^7.6.1",
     "@jsverse/transloco-locale": "^7.0.1",
     "@jsverse/transloco-persist-lang": "^7.0.2",
+    "@jsverse/transloco-persist-translations": "^7.0.1",
     "@primeng/themes": "^19.0.10",
     "dayjs": "^1.11.13",
     "emoji-js": "^3.8.1",

@@ -19,6 +19,7 @@ import { provideTransloco } from '@jsverse/transloco';
 import { provideTranslocoPersistLang } from '@jsverse/transloco-persist-lang';
 import { provideTranslocoLocale } from '@jsverse/transloco-locale';
 import { ConfigService } from './config/config.service';
+import { provideTranslocoPersistTranslations } from '@jsverse/transloco-persist-translations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -58,7 +59,6 @@ export const appConfig: ApplicationConfig = {
         prodMode: !isDevMode(),
         reRenderOnLangChange: true,
       },
-      loader: TranslocoHttpLoader,
     }),
     provideTranslocoLocale({
       langToLocaleMapping: {
@@ -70,6 +70,12 @@ export const appConfig: ApplicationConfig = {
       storage: {
         useValue: localStorage,
       },
+    }),
+    provideTranslocoPersistTranslations({
+      loader: TranslocoHttpLoader,
+      storage: { useValue: localStorage },
+      storageKey: 'translations',
+      ttl: 86_400,
     }),
     { provide: APP_CONFIG, useValue: environment },
     { provide: LOCALE_ID, useValue: 'en-GB' },

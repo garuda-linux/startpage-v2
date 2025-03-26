@@ -22,6 +22,7 @@ import { ShellComponent } from '@garudalinux/core';
 import { ConfigService } from './config/config.service';
 import { menubarItems } from '../../config';
 import type { MenuBarLink } from './types';
+import { TranslocoPersistTranslations } from '@jsverse/transloco-persist-translations';
 
 @Component({
   imports: [
@@ -38,17 +39,17 @@ import type { MenuBarLink } from './types';
   styleUrl: './app.component.scss',
   animations: [routeAnimations],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [TranslocoPersistTranslations],
 })
 export class AppComponent implements OnInit {
   items = signal<MenuBarLink[]>(menubarItems);
 
   protected readonly appService = inject(AppService);
   protected readonly configService = inject(ConfigService);
-
   logoLink = computed<string>(() =>
     this.configService.settings().logo ? this.configService.settings().logo : '/assets/garuda-purple.svg',
   );
-
+  private readonly translationsCache = inject(TranslocoPersistTranslations);
   private readonly el = inject(ElementRef);
   private readonly renderer = inject(Renderer2);
   private readonly translocoService = inject(TranslocoService);
@@ -62,6 +63,8 @@ export class AppComponent implements OnInit {
   });
 
   async ngOnInit(): Promise<void> {
+    this.manageTranslocoCache();
+
     registerLocaleData(localeEnGb);
     void this.setupLabels(this.translocoService.getActiveLang());
 
@@ -106,5 +109,14 @@ export class AppComponent implements OnInit {
    */
   prepareRoute(outlet: RouterOutlet): string {
     return outlet.activatedRouteData['animationState'];
+  }
+
+  /**
+   * Clear transloco localstorage cached files if we have new translations.
+   */
+  manageTranslocoCache(): void {
+    if (this.configService.settings().translationVersion < this.configService.defaultSettings.translationVersion) {
+      this.translationsCache.clearCache();
+    }
   }
 }

@@ -24,6 +24,7 @@ export class ConfigService {
     searchEngineUrl: '',
     searchEngines: [],
     showNews: true,
+    translationVersion: 1,
     username: '',
     wallpaper: 'none',
     wallpaperUrl: '',
