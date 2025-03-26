@@ -2,11 +2,12 @@
   <span [pTooltip]="t('lang.tooltip')" class="font-medium block mb-5 primary" tooltipPosition="bottom">
     {{ t('lang.title') }}
   </span>
-  <p-scrollpanel [style]="{ width: '300px', height: '70vh' }">
+  <p-scroll-panel [style]="{ width: '300px', height: '70vh' }">
     <ul class="list-none flex-auto">
       @for (language of allLanguages(); track language) {
         <li
           [tabindex]="$index"
+          (keydown.enter)="close(language)"
           (click)="close(language)"
           class="flex items-center gap-2 px-2 py-3 hover:bg-emphasis cursor-pointer rounded-border"
         >
@@ -14,5 +15,5 @@
         </li>
       }
     </ul>
-  </p-scrollpanel>
+  </p-scroll-panel>
 </ng-container>

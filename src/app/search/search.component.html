@@ -1,35 +1,36 @@
 <ng-container *transloco="let t">
   <div>
     <img
-      priority
       [ngSrc]="configService.settings().logo ? configService.settings().logo : 'assets/garuda-purple.svg'"
       alt="Garuda Logo"
-      width="150"
+      class="mx-auto mb-10 mt-20"
       height="150"
-      class="grow mx-auto my-10"
+      priority
+      width="150"
     />
   </div>
   <div>
     <div class="mx-auto md:w-1/2 w-3/4">
       <input
-        pInputText
-        autofocus
-        variant="outlined"
-        [placeholder]="t('search.placeholder') + ' ' + searchEngine().prettyName"
-        [(ngModel)]="searchTerm"
         (keydown.enter)="search()"
+        [(ngModel)]="searchTerm"
+        [placeholder]="t('search.placeholder') + ' ' + searchEngine().prettyName"
         [style]="{ height: '3rem' }"
+        autofocus
         fluid
+        pInputText
+        variant="outlined"
       />
     </div>
     <div class="mx-auto w-1/3 md:w-1/6 mt-2.5">
       <p-button
-        [label]="t('search.search')"
-        icon="pi pi-search"
-        severity="secondary"
         (click)="search()"
         (keydown.enter)="search()"
+        [label]="t('search.search')"
         fluid
+        icon="pi pi-search"
+        severity="secondary"
+        styleClass="hover:scale-105 animation duration-1000"
       />
     </div>
   </div>

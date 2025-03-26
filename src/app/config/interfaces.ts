@@ -17,5 +17,6 @@ export interface AppSettings {
   activeSearchEngine: string;
   wallpaper: string;
   wallpaperUrl: string;
+
   [key: string]: any;
 }

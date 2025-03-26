@@ -4,26 +4,24 @@
       <div class="background min-h-svh">
         <garuda-shell #shell [menuItems]="items()">
           <img
-            priority
+            [ngSrc]="logoLink()"
             alt="logo"
             class="cursor-pointer"
             garudaShellBarStart
             height="32"
-            [ngSrc]="logoLink()"
+            priority
             routerLink="/"
             width="32"
           />
-          <div garudaShellBarStart class="ml-5">
-            {{ configService.settings().welcomeText !== '' ? configService.settings().welcomeText : t('menu.welcome')
-            }}{{ configService.settings().username ? ' ' + configService.settings().username : '' }}
-            !
+          <div class="ml-5" garudaShellBarStart>
+            {{ welcomeText() }}
           </div>
           <div garudaShellBarEnd>
             <p-button
               (click)="appService.themeHandler.toggleDarkMode()"
               [icon]="appService.themeHandler.darkMode() ? 'pi pi-sun' : 'pi pi-moon'"
-              outlined
               class="mr-2"
+              outlined
             >
             </p-button>
             <app-language-switcher hidden></app-language-switcher>

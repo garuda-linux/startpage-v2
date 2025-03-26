@@ -21,11 +21,11 @@
             </ng-template>
             <ng-template #content let-topic>
               <div
-                tabindex="0"
                 (click)="openLinkInNewTab(topic.link)"
                 (keydown)="openLinkInNewTab(topic.link)"
                 [innerHTML]="topic.fancy_title | emojiPipe"
                 class="text-color cursor-pointer"
+                tabindex="0"
               ></div>
             </ng-template>
           </p-timeline>

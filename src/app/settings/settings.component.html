@@ -2,84 +2,113 @@
   <div class="md:px-10 px-5 max-w-7xl mx-auto">
     <app-title [title]="t('settings.title')"></app-title>
     <p-panel [header]="t('settings.general')">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-color">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-color mt-5">
         <div class="ml-10">
           <p-checkbox
-            id="default-links"
+            (ngModelChange)="updateConfig('defaultLinks', $event)"
             [(ngModel)]="defaultLinks"
             [binary]="true"
-            (ngModelChange)="updateConfig('defaultLinks', $event)"
+            id="default-links"
           />
-          <label for="default-links" class="ml-2">{{ t('settings.defaultLinksLabel') }}</label>
+          <label class="ml-2" for="default-links">{{ t('settings.defaultLinksLabel') }}</label>
         </div>
         <div class="ml-10">
           <p-checkbox
-            id="jokes-enabled"
+            (ngModelChange)="updateConfig('jokesEnabled', $event)"
             [(ngModel)]="jokesEnabled"
             [binary]="true"
-            (ngModelChange)="updateConfig('jokesEnabled', $event)"
+            id="jokes-enabled"
           />
-          <label for="jokes-enabled" class="ml-2">{{ t('settings.jokesEnabledLabel') }}</label>
+          <label class="ml-2" for="jokes-enabled">{{ t('settings.jokesEnabledLabel') }}</label>
         </div>
         <div class="ml-10">
           <p-checkbox
-            id="fit-wp"
+            (ngModelChange)="updateConfig('fitWallpaper', $event)"
             [(ngModel)]="fitWallpaper"
             [binary]="true"
-            (ngModelChange)="updateConfig('fitWallpaper', $event)"
+            id="fit-wp"
           />
-          <label for="fit-wp" class="ml-2">{{ t('settings.fitWallpaper') }}</label>
+          <label class="ml-2" for="fit-wp">{{ t('settings.fitWallpaper') }}</label>
         </div>
         <div class="ml-10">
           <p-checkbox
-            id="blur-bg"
+            (ngModelChange)="updateConfig('blurBackground', $event)"
             [(ngModel)]="blurBackground"
             [binary]="true"
-            (ngModelChange)="updateConfig('blurBackground', $event)"
+            id="blur-bg"
           />
-          <label for="blur-bg" class="ml-2">{{ t('settings.blurBackground') }}</label>
+          <label class="ml-2" for="blur-bg">{{ t('settings.blurBackground') }}</label>
         </div>
+      </div>
+
+      <div class="md:flex mt-10 mx-auto w-3/4 md:ml-10">
+        <p-button
+          (click)="downloadSettings()"
+          [label]="t('settings.saveSettings')"
+          icon="pi pi-download"
+          styleClass="w-full"
+        >
+        </p-button>
+        <p-fileupload
+          (onSelect)="restoreSettings($event)"
+          [chooseLabel]="t('settings.restoreSettings')"
+          accept=".json"
+          auto
+          chooseIcon="pi pi-upload"
+          maxFileSize="1000000"
+          mode="basic"
+          styleClass="block mt-2.5 md:mt-0 md:ml-2.5 w-full"
+        >
+        </p-fileupload>
       </div>
     </p-panel>
 
     <p-panel [header]="t('settings.customize')" styleClass="mt-2.5">
-      <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5 text-color">
+      <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-5 text-color">
         <div class="flex flex-col gap-2">
           <label for="search-engine">{{ t('settings.searchEngineLabel') }}</label>
           <p-select
-            [options]="searchEngineMappings"
-            optionLabel="prettyName"
-            optionValue="name"
             (ngModelChange)="updateConfig('activeSearchEngine', $event)"
             [(ngModel)]="activeSearchEngine"
-            id="search-engine"
+            [options]="searchEngineMappings"
             fluid
+            id="search-engine"
+            optionLabel="prettyName"
+            optionValue="name"
           />
         </div>
 
         @if (configService.settings().activeSearchEngine === 'custom') {
           <div class="flex flex-col gap-2">
             <label for="custom-search">{{ t('settings.searchEngineUrl') }}</label>
-            <input pInputText id="custom-search" (ngModelChange)="updateConfig('searchEngineUrl', $event)"
-                   [(ngModel)]="searchEngineUrl"/>
+            <input
+              pInputText
+              id="custom-search"
+              (ngModelChange)="updateConfig('searchEngineUrl', $event)"
+              [(ngModel)]="searchEngineUrl"
+            />
           </div>
           <div class="flex flex-col gap-2">
             <label for="custom-search-name">{{ t('settings.searchEngineName') }}</label>
-            <input pInputText id="custom-search-name" (ngModelChange)="updateConfig('searchEngineName', $event)"
-                   [(ngModel)]="searchEngineName"/>
+            <input
+              pInputText
+              id="custom-search-name"
+              (ngModelChange)="updateConfig('searchEngineName', $event)"
+              [(ngModel)]="searchEngineName"
+            />
           </div>
         }
 
         <div class="flex flex-col gap-2">
           <label for="wallpaper">{{ t('settings.wallpaperLabel') }}</label>
           <p-select
-            [options]="wallpapers"
-            optionLabel="name"
-            optionValue="url"
             (ngModelChange)="updateConfig('wallpaper', $event)"
             [(ngModel)]="wallpaper"
+            [options]="wallpapers"
             fluid
             id="wallpaper"
+            optionLabel="name"
+            optionValue="url"
           />
         </div>
 
@@ -98,163 +127,176 @@
         <div class="flex flex-col gap-2">
           <label for="logo">{{ t('settings.logoLabel') }}</label>
           <p-select
-            [options]="logos"
-            optionLabel="name"
-            optionValue="url"
             (ngModelChange)="updateConfig('logo', $event)"
             [(ngModel)]="logo"
+            [options]="logos"
             fluid
             id="logo"
+            optionLabel="name"
+            optionValue="url"
           />
         </div>
 
         @if (configService.settings().logo === 'custom') {
           <div class="flex flex-col gap-2">
             <label for="custom-logo">{{ t('settings.customLogo') }}</label>
-            <input pInputText id="custom-logo" (ngModelChange)="updateConfig('logoUrl', $event)" [(ngModel)]="logoUrl"/>
+            <input
+              pInputText
+              id="custom-logo"
+              (ngModelChange)="updateConfig('logoUrl', $event)"
+              [(ngModel)]="logoUrl"
+            />
           </div>
         }
 
         <div class="flex flex-col gap-2">
           <label for="title">{{ t('settings.customTitle') }}</label>
-          <input pInputText id="title" (ngModelChange)="updateConfig('customTitle', $event)" [(ngModel)]="customTitle"/>
+          <input
+            (ngModelChange)="updateConfig('customTitle', $event)"
+            [(ngModel)]="customTitle"
+            id="title"
+            pInputText
+          />
         </div>
 
         <div class="flex flex-col gap-2">
           <label for="name">{{ t('settings.name') }}</label>
-          <input pInputText id="name" (ngModelChange)="updateConfig('username', $event)" [(ngModel)]="username"/>
+          <input (ngModelChange)="updateConfig('username', $event)" [(ngModel)]="username" id="name" pInputText />
         </div>
         <div class="flex flex-col gap-2">
           <label for="welcome">{{ t('settings.welcomeText') }}</label>
           <input
-            pInputText
-            id="welcome"
             (ngModelChange)="updateConfig('welcomeText', $event)"
             [(ngModel)]="welcomeText"
+            id="welcome"
+            pInputText
           />
         </div>
       </div>
     </p-panel>
 
     <p-panel [header]="t('settings.customLinks')" styleClass="mt-2.5">
-        <p-toolbar styleClass="mt-10">
-          <ng-template #start>
-            <p-button [label]="t('settings.addLink')" icon="pi pi-plus" class="mr-2" (onClick)="openNew()"/>
-            <p-button
-              severity="danger"
-              [label]="t('settings.deleteLink')"
-              icon="pi pi-trash"
-              outlined
-              (onClick)="deleteSelectedLinks()"
-              [disabled]="!selectedLinks() || !selectedLinks()?.length"
-            />
-          </ng-template>
-        </p-toolbar>
+      <p-toolbar styleClass="mt-5">
+        <ng-template #start>
+          <p-button (onClick)="openNew()" [label]="t('settings.addLink')" class="mr-2" icon="pi pi-plus" />
+          <p-button
+            (onClick)="deleteSelectedLinks()"
+            [disabled]="!selectedLinks() || !selectedLinks()?.length"
+            [label]="t('settings.deleteLink')"
+            icon="pi pi-trash"
+            outlined
+            severity="danger"
+          />
+        </ng-template>
+      </p-toolbar>
 
-        <p-table
-          #linkTable
-          [value]="customLinks()"
-          [rows]="10"
-          [paginator]="true"
-          [globalFilterFields]="['title', 'url']"
-          [(selection)]="selectedLinks"
-          [rowHover]="true"
-          [reorderableColumns]="true"
-          (onRowReorder)="onRowReorder($event)"
-          dataKey="title"
-          [currentPageReportTemplate]="t('settings.currentPageReport')"
-          [showCurrentPageReport]="true"
-        >
-          <ng-template #caption>
-            <div class="flex items-center justify-between">
-              <h5 class="m-0" [innerText]="t('settings.manageLinks')"></h5>
-              <p-iconfield>
-                <p-inputicon styleClass="pi pi-search"/>
-                <input
-                  #input
-                  pInputText
-                  fluid
-                  type="text"
-                  (input)="linkTable.filterGlobal(input.value, 'contains')"
-                  [placeholder]="t('settings.search')"
-                />
-              </p-iconfield>
+      <p-table
+        #linkTable
+        (onRowReorder)="onRowReorder($event)"
+        [(selection)]="selectedLinks"
+        [currentPageReportTemplate]="t('settings.currentPageReport')"
+        [globalFilterFields]="['title', 'url', 'icon']"
+        [rowsPerPageOptions]="[15, 30]"
+        [rows]="15"
+        [value]="customLinks()"
+        dataKey="id"
+        paginator
+        reorderableColumns
+        rowHover
+        showCurrentPageReport
+      >
+        <ng-template #caption>
+          <div class="flex items-center justify-between">
+            <h5 [innerText]="t('settings.manageLinks')" class="m-0"></h5>
+            <p-iconfield>
+              <p-inputicon styleClass="pi pi-search" />
+              <input
+                #input
+                (input)="linkTable.filterGlobal(input.value, 'contains')"
+                [placeholder]="t('settings.search')"
+                fluid
+                pInputText
+                type="text"
+              />
+            </p-iconfield>
+          </div>
+        </ng-template>
+
+        <ng-template #header>
+          <tr>
+            <th style="width: 3rem"></th>
+            <th pReorderableColumn style="width: 3rem">
+              <p-tableHeaderCheckbox />
+            </th>
+            <th pReorderableColumn pSortableColumn="title">
+              {{ t('settings.linkTitle') }}
+              <p-sortIcon field="title" />
+            </th>
+            <th pReorderableColumn pSortableColumn="link">
+              {{ t('settings.url') }}
+              <p-sortIcon field="link" />
+            </th>
+            <th pReorderableColumn>
+              {{ t('settings.icon') }}
+            </th>
+            <th pReorderableColumn style="width: 8rem">
+              {{ t('settings.actions') }}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template #body let-index="rowIndex" let-link>
+          <tr [pReorderableRow]="index">
+            <td>
+              <span class="pi pi-bars" pReorderableRowHandle></span>
+            </td>
+            <td>
+              <p-tableCheckbox [value]="link" />
+            </td>
+            <td>{{ link.title }}</td>
+            <td>{{ link.link }}</td>
+            <td>{{ link.icon }}</td>
+            <td>
+              <p-button (click)="editLink(link)" class="mr-2" icon="pi pi-pencil" outlined rounded />
+              <p-button (click)="deleteLink(link)" icon="pi pi-trash" outlined rounded severity="danger" />
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+
+      <p-dialog [(visible)]="linkDialog" [header]="t('settings.linkDetails')" modal>
+        <ng-template #content>
+          <div class="flex flex-col gap-6">
+            <div>
+              <label class="block font-bold mb-3" for="link-title"> {{ t('settings.title') }}</label>
+              <input [(ngModel)]="link().title" fluid id="link-title" pInputText required type="text" />
+              <small *ngIf="linkSubmitted() && !link().title" class="text-primary-emphasis-alt">{{
+                t('settings.isRequired')
+              }}</small>
             </div>
-          </ng-template>
-
-          <ng-template #header>
-            <tr>
-              <th style="width: 3rem">
-                <p-tableHeaderCheckbox/>
-              </th>
-              <th>
-                {{ t('settings.linkTitle') }}
-              </th>
-              <th pSortableColumn="link">
-                {{ t('settings.url') }}
-                <p-sortIcon field="link"/>
-              </th>
-              <th>
-                {{ t('settings.icon') }}
-              </th>
-              <th style="width: 8rem">
-                {{ t('settings.actions') }}
-              </th>
-            </tr>
-          </ng-template>
-          <ng-template #body let-link>
-            <tr>
-              <td>
-                <p-tableCheckbox [value]="link.title"/>
-              </td>
-              <td>{{ link.title }}</td>
-              <td>{{ link.link }}</td>
-              <td>{{ link.icon }}</td>
-              <td>
-                <p-button icon="pi pi-pencil" class="mr-2" rounded outlined (click)="editLink(link)"/>
-                <p-button
-                  icon="pi pi-trash"
-                  severity="danger"
-                  rounded
-                  outlined
-                  (click)="deleteLink(link)"
-                />
-              </td>
-            </tr>
-          </ng-template>
-        </p-table>
-
-        <p-dialog [(visible)]="linkDialog" [style]="{ width: '450px' }" [header]="t('settings.linkDetails')" modal>
-          <ng-template #content>
-            <div class="flex flex-col gap-6">
-              <div>
-                <label for="link-title" class="block font-bold mb-3"> {{ t('settings.title') }}</label>
-                <input type="text" pInputText id="link-title" [(ngModel)]="link().title" required fluid/>
-                <small class="text-red-500"
-                       *ngIf="linkSubmitted() && !link().title">{{ t('settings.isRequired') }}</small>
-              </div>
-              <div>
-                <label for="url" class="block font-bold mb-3"> {{ t('settings.url') }}</label>
-                <input type="text" pInputText id="url" [(ngModel)]="link().link" required fluid/>
-                <small class="text-red-500"
-                       *ngIf="linkSubmitted() && !link().link">{{ t('settings.isRequired') }}</small>
-              </div>
-              <div>
-                <label for="icon" class="block font-bold mb-3"> {{ t('settings.iconLink') }}</label>
-                <input type="text" pInputText id="icon" [(ngModel)]="link().icon" required fluid/>
-                <small class="text-red-500"
-                       *ngIf="linkSubmitted() && !link().icon">{{ t('settings.isRequired') }}</small>
-              </div>
+            <div>
+              <label class="block font-bold mb-3" for="url"> {{ t('settings.url') }}</label>
+              <input [(ngModel)]="link().link" fluid id="url" pInputText required type="text" />
+              <small *ngIf="linkSubmitted() && !link().link" class="text-primary-emphasis-alt">{{
+                t('settings.isRequired')
+              }}</small>
             </div>
-          </ng-template>
+            <div>
+              <label class="block font-bold mb-3" for="icon"> {{ t('settings.iconLink') }}</label>
+              <input [(ngModel)]="link().icon" fluid id="icon" pInputText required type="text" />
+              <small *ngIf="linkSubmitted() && !link().icon" class="text-primary-emphasis-alt">{{
+                t('settings.isRequired')
+              }}</small>
+            </div>
+          </div>
+        </ng-template>
 
-          <ng-template #footer>
-            <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()"/>
-            <p-button label="Save" icon="pi pi-check" (click)="saveLink()"/>
-          </ng-template>
-        </p-dialog>
+        <ng-template #footer>
+          <p-button (click)="hideDialog()" icon="pi pi-times" label="Cancel" text />
+          <p-button (click)="saveLink()" icon="pi pi-check" label="Save" />
+        </ng-template>
+      </p-dialog>
 
-        <p-confirmDialog/>
+      <p-confirmDialog />
     </p-panel>
   </div>
 </ng-container>

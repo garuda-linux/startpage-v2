@@ -9,7 +9,7 @@ import {
   ViewChild,
   type WritableSignal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import type { LogoList, SearchEngineList, ServiceLink, ServiceLinks, WallpaperList } from '../types';
 import { logos, type SearchEngine, searchEngineMappings, wallpapers } from '../../../config';
 import { Checkbox } from 'primeng/checkbox';
@@ -29,6 +29,8 @@ import { Toolbar } from 'primeng/toolbar';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { Panel } from 'primeng/panel';
+import { FileSelectEvent, FileUpload } from 'primeng/fileupload';
+import { MessageToastService } from '@garudalinux/core';
 
 @Component({
   selector: 'app-settings',
@@ -48,6 +50,7 @@ import { Panel } from 'primeng/panel';
     IconField,
     InputIcon,
     Panel,
+    FileUpload,
   ],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.css',
@@ -57,22 +60,22 @@ import { Panel } from 'primeng/panel';
 export class SettingsComponent {
   @ViewChild('linkTable') linkTable!: Table;
 
+  activeSearchEngine = signal<SearchEngine>('searxng-privau');
+  blurBackground = signal<number>(0);
+  customLinks = signal<ServiceLinks>([]);
   customTitle = signal<string>('');
   defaultLinks = signal<boolean>(true);
+  fitWallpaper = signal<string>('cover');
   jokesEnabled = signal<boolean>(true);
-  customLinks = signal<ServiceLinks>([]);
-  activeSearchEngine = signal<SearchEngine>('searxng-privau');
   linkDialog = signal<boolean>(false);
   logo = signal<string>('default');
   logoUrl = signal<string>('');
+  searchEngineName = signal<string>('');
+  searchEngineUrl = signal<string>('');
   username = signal<string>('');
   wallpaper = signal<string>('');
   wallpaperUrl = signal<string>('');
-  fitWallpaper = signal<string>('cover');
-  blurBackground = signal<number>(0);
   welcomeText = signal<string>('');
-  searchEngineUrl = signal<string>('');
-  searchEngineName = signal<string>('');
 
   link = signal<ServiceLink>({} as ServiceLink);
   linkSubmitted = signal<boolean>(false);
@@ -84,9 +87,11 @@ export class SettingsComponent {
     a.prettyName.localeCompare(b.prettyName),
   );
   protected readonly wallpapers: WallpaperList = wallpapers.sort((a, b) => a.name.localeCompare(b.name));
+
   private readonly confirmationService = inject(ConfirmationService);
+  private readonly document = inject(DOCUMENT);
   private readonly el = inject(ElementRef);
-  private readonly messageService = inject(MessageService);
+  private readonly messageToastService = inject(MessageToastService);
   private readonly renderer = inject(Renderer2);
   private readonly translocoService = inject(TranslocoService);
 
@@ -144,14 +149,12 @@ export class SettingsComponent {
       header: this.translocoService.translate('settings.confirm'),
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.customLinks.set(this.customLinks().filter((val) => !this.selectedLinks()?.includes(val)));
+        this.customLinks.update((links) => links.filter((val) => !this.selectedLinks()?.includes(val)));
         this.selectedLinks.set(null);
-        this.messageService.add({
-          severity: 'success',
-          summary: this.translocoService.translate('settings.success'),
-          detail: this.translocoService.translate('settings.linksDeleted'),
-          life: 3000,
-        });
+        this.messageToastService.success(
+          this.translocoService.translate('settings.success'),
+          this.translocoService.translate('settings.linksDeleted'),
+        );
       },
     });
   }
@@ -174,14 +177,12 @@ export class SettingsComponent {
       header: this.translocoService.translate('settings.confirmDeleteLinkHeader'),
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.customLinks.set(this.customLinks().filter((val) => val.link !== link.link));
+        this.customLinks.update((links) => links.filter((val) => val.id !== link.id));
         this.link.set({} as ServiceLink);
-        this.messageService.add({
-          severity: 'success',
-          summary: this.translocoService.translate('settings.success'),
-          detail: this.translocoService.translate('settings.linkDeleted'),
-          life: 3000,
-        });
+        this.messageToastService.success(
+          this.translocoService.translate('settings.success'),
+          this.translocoService.translate('settings.linkDeleted'),
+        );
       },
     });
   }
@@ -194,7 +195,7 @@ export class SettingsComponent {
   findIndexById(link: string): number {
     let index = -1;
     for (let i = 0; i < this.customLinks().length; i++) {
-      if (this.customLinks()[i].link === link) {
+      if (this.customLinks()[i].id === link) {
         index = i;
         break;
       }
@@ -204,12 +205,12 @@ export class SettingsComponent {
 
   /**
    * Generate a random ID for a new link.
-   * @returns A random string of 5 characters
+   * @returns A random string of 3 characters
    */
   createId(): string {
     let id = '';
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 3; i++) {
       id += chars.charAt(Math.floor(Math.random() * chars.length));
     }
     return id;
@@ -222,23 +223,19 @@ export class SettingsComponent {
     this.linkSubmitted.set(true);
 
     if (this.link().id) {
-      this.customLinks()[this.findIndexById(this.link().title)] = this.link();
-      this.messageService.add({
-        severity: 'success',
-        summary: this.translocoService.translate('settings.success'),
-        detail: this.translocoService.translate('settings.linkUpdated'),
-        life: 3000,
-      });
+      this.customLinks()[this.findIndexById(this.link().id)] = this.link();
+      this.messageToastService.success(
+        this.translocoService.translate('settings.success'),
+        this.translocoService.translate('settings.linkUpdated'),
+      );
     } else {
       this.link().id = this.createId();
       this.link().icon = '/assets/garuda-purple.svg';
       this.customLinks.update((links) => [...links, this.link()]);
-      this.messageService.add({
-        severity: 'success',
-        summary: this.translocoService.translate('settings.success'),
-        detail: this.translocoService.translate('settings.linkCreated'),
-        life: 3000,
-      });
+      this.messageToastService.success(
+        this.translocoService.translate('settings.success'),
+        this.translocoService.translate('settings.linkCreated'),
+      );
     }
     this.linkDialog.set(false);
     this.link.set({} as ServiceLink);
@@ -256,5 +253,38 @@ export class SettingsComponent {
     reorderedLinks.splice($event.dragIndex, 1);
     reorderedLinks.splice($event.dropIndex, 0, movedLink);
     this.customLinks.set(reorderedLinks);
+  }
+
+  /**
+   * Download the current settings as a JSON file.
+   */
+  downloadSettings() {
+    const settings: AppSettings = this.configService.settings();
+    const dataStr: string = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(settings));
+    const downloadAnchorNode: HTMLAnchorElement = this.document.createElement('a');
+    downloadAnchorNode.setAttribute('href', dataStr);
+    downloadAnchorNode.setAttribute('download', `settings-${new Date().toISOString().split('T')[0]}.json`);
+    this.document.body.appendChild(downloadAnchorNode);
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+  }
+
+  /**
+   * Restore settings from a JSON file, after confirmation.
+   * @param $event The event containing the file data
+   */
+  restoreSettings($event: FileSelectEvent) {
+    this.confirmationService.confirm({
+      message: this.translocoService.translate('settings.confirmRestore'),
+      header: this.translocoService.translate('settings.confirmRestoreHeader'),
+      icon: 'pi pi-exclamation-triangle',
+      accept: async () => {
+        await this.configService.restoreSettings($event.currentFiles[0]);
+        this.messageToastService.success(
+          this.translocoService.translate('settings.success'),
+          this.translocoService.translate('settings.settingsRestored'),
+        );
+      },
+    });
   }
 }

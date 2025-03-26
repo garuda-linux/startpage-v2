@@ -26,7 +26,7 @@ export interface ServiceLink {
   routerLink?: string;
   subtitle: string;
   title: string;
-  id?: string;
+  id: string;
 }
 
 export type ServiceLinks = ServiceLink[];

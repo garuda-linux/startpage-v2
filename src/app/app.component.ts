@@ -44,13 +44,22 @@ export class AppComponent implements OnInit {
 
   protected readonly appService = inject(AppService);
   protected readonly configService = inject(ConfigService);
+
+  logoLink = computed<string>(() =>
+    this.configService.settings().logo ? this.configService.settings().logo : '/assets/garuda-purple.svg',
+  );
+
   private readonly el = inject(ElementRef);
   private readonly renderer = inject(Renderer2);
   private readonly translocoService = inject(TranslocoService);
 
-  logoLink = computed(() =>
-    this.configService.settings().logo ? '/' + this.configService.settings().logo : '/assets/garuda-purple.svg',
-  );
+  welcomeText = computed<string>(() => {
+    const user = this.configService.settings().username !== '' ? this.configService.settings().username : 'friend';
+    if (this.configService.settings().welcomeText !== '') {
+      return `${this.configService.settings().welcomeText} ${user}!`;
+    }
+    return `${this.translocoService.translate('menu.welcome')} ${user}!`;
+  });
 
   async ngOnInit(): Promise<void> {
     registerLocaleData(localeEnGb);

@@ -4,9 +4,6 @@
 /* Font */
 :root {
   font-family: Inter, sans-serif;
-  font-feature-settings:
-    'liga' 1,
-    'calt' 1;
 }
 
 @supports (font-variation-settings: normal) {
@@ -27,7 +24,7 @@
 
 /*`Custom classes`*/
 body {
-  @apply selection:bg-primary m-2 selection:text-surface-0;
+  @apply selection:bg-primary p-2 selection:text-surface-0;
   font-optical-sizing: auto;
 }
 
@@ -38,21 +35,13 @@ html {
 }
 
 p {
-  @apply text-color break-words;
-}
-
-div.meta {
-  display: none;
-}
-
-p-scrollpanel-content-container > div > div > p {
-  @apply flex;
+  @apply text-color;
 }
 
 .p-inputtext,
-.p-button {
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+.p-button,
+.p-panel {
+  @apply backdrop-blur-md;
 }
 
 .p-timeline-event-opposite {
@@ -60,28 +49,23 @@ p-scrollpanel-content-container > div > div > p {
   width: 120px !important;
 }
 
+p-fileupload > div > p-button > button {
+  @apply w-full;
+}
+
 .bg-contain {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  @apply bg-cover bg-no-repeat bg-fixed;
 }
 
 .background-blurred .background-filter::after {
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  @apply backdrop-blur-sm block h-full w-full fixed top-0;
   content: '';
-  display: block;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  width: 100%;
 }
 
 .background-filter {
-  position: relative;
+  @apply relative;
 }
 
 .non-blurred {
-  position: relative;
-  z-index: 1;
+  @apply z-10 relative;
 }

@@ -1,4 +1,4 @@
-import { ContactLinks, LogoList, MenuBarItems, SearchEngineList, ServiceLinks, WallpaperList } from './src/app/types';
+import { ContactLinks, LogoList, MenuBarItems, ServiceLinks, WallpaperList } from './src/app/types';
 
 // These are the items inside the menu.
 export const menubarItems: MenuBarItems = [
@@ -93,61 +93,70 @@ export const serviceLinks: ServiceLinks = [
     title: 'SearxNG',
     icon: 'assets/pictures/searxng.svg',
     subtitle: 'Privacy-respecting meta search',
+    id: 'gsx',
   },
   {
     link: 'https://bitwarden.garudalinux.org',
     title: 'Vaultwarden',
     icon: 'assets/pictures/vaultwarden.svg',
     subtitle: 'Selfhosted password storage',
+    id: 'gbw',
   },
   {
     link: 'https://reddit.garudalinux.org',
     title: 'Redlib',
     icon: 'assets/pictures/redlib.svg',
     subtitle: 'Lightweight frontend for Reddit',
+    id: 'grl',
   },
   {
     link: 'https://social.garudalinux.org',
     title: 'Mastodon',
     icon: 'assets/pictures/mastodon.svg',
     subtitle: 'Privacy-respecting Twitter alternative',
+    id: 'gms',
   },
   {
     link: 'https://bin.garudalinux.org',
     title: 'PrivateBin',
     icon: 'assets/pictures/privatebin.png',
     subtitle: 'Encrypted pastebin',
+    id: 'gpv',
   },
   {
     link: 'https://search.garudalinux.org',
     title: 'Whoogle',
     icon: 'assets/pictures/whoogle.svg',
     subtitle: 'Privacy-respecting Google',
+    id: 'gwh',
   },
   {
     link: 'https://librey.garudalinux.org',
     title: 'LibreY',
     icon: 'assets/pictures/librey.png',
     subtitle: 'Privacy-respecting meta search',
+    id: 'gli',
   },
   {
     link: 'https://lingva.garudalinux.org',
     title: 'Lingva',
     icon: 'assets/pictures/lingva.svg',
     subtitle: 'Privacy-respecting translator',
+    id: 'glv',
   },
   {
     link: 'https://builds.garudalinux.org/iso/garuda/',
     title: 'Downloads',
     icon: 'assets/pictures/iso.webp',
     subtitle: 'Garuda ISO builds',
+    id: 'gdo',
   },
-
   {
     link: 'https://status.garudalinux.org',
     title: 'Statuspage',
     icon: 'assets/pictures/uptime-kuma.svg',
     subtitle: 'Status page',
+    id: 'gst',
   },
 ];
 

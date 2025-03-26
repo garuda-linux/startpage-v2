@@ -8,9 +8,6 @@ import { WallpaperService } from '../wallpaper/wallpaper.service';
   providedIn: 'root',
 })
 export class ConfigService {
-  private readonly title = inject(Title);
-  private readonly wallpaperService = inject(WallpaperService);
-
   initialized = signal<boolean>(false);
   settings = signal<AppSettings>({
     activeSearchEngine: 'searxng-privau',
@@ -30,6 +27,8 @@ export class ConfigService {
     wallpaperUrl: '',
     welcomeText: '',
   });
+  private readonly title = inject(Title);
+  private readonly wallpaperService = inject(WallpaperService);
 
   constructor() {
     this.initStore().then((pendingConfigUpdate) => {
@@ -57,6 +56,42 @@ export class ConfigService {
     localStorage.setItem('settings', JSON.stringify(this.settings()));
 
     this.syncSetting(key, value, renderer, el);
+  }
+
+  /**
+   * Initializes the configuration settings.
+   * @param renderer The renderer to use for DOM manipulation.
+   * @param el The element reference to the DOM element.
+   */
+  initConfig(renderer: Renderer2, el: ElementRef) {
+    for (const key of Object.keys(this.settings())) {
+      const value = this.settings()[key];
+      this.syncSetting(key, value, renderer, el);
+    }
+  }
+
+  /**
+   * Restores settings from a file.
+   * @param file The file containing the settings to restore.
+   */
+  async restoreSettings(file: File): Promise<void> {
+    const buffer: ArrayBuffer = await file.arrayBuffer();
+    const blob: Blob = new Blob([buffer], { type: 'application/json' });
+    const content: string = await blob.text();
+
+    try {
+      const settings = JSON.parse(content) as Partial<AppSettings>;
+      for (const key of Object.keys(settings)) {
+        if (Object.prototype.hasOwnProperty.call(this.settings(), key)) {
+          this.settings.update((prev: AppSettings) => ({ ...prev, [key]: settings[key] }));
+        } else {
+          console.warn(`Key "${key}" not found in settings, ignoring`);
+        }
+      }
+      localStorage.setItem('settings', JSON.stringify(settings));
+    } catch (error) {
+      console.error('Error parsing settings file:', error);
+    }
   }
 
   /**
@@ -106,18 +141,6 @@ export class ConfigService {
         }
         break;
       }
-    }
-  }
-
-  /**
-   * Initializes the configuration settings.
-   * @param renderer The renderer to use for DOM manipulation.
-   * @param el The element reference to the DOM element.
-   */
-  initConfig(renderer: Renderer2, el: ElementRef) {
-    for (const key of Object.keys(this.settings())) {
-      const value = this.settings()[key];
-      this.syncSetting(key, value, renderer, el);
     }
   }
 }

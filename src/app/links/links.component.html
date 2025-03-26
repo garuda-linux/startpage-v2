@@ -2,7 +2,7 @@
   @for (link of configService.settings().customLinks; track link.title) {
     <a [href]="link.link" target="_blank" class="col-span-6 xl:col-span-2 lg:col-span-4 p-2 cursor-pointer text-center">
       <div>
-        <p-panel [header]="link.title" styleClass="hover:bg-primary-contrast">
+        <p-panel [header]="link.title" styleClass="hover:scale-105 animation duration-300">
           <div class="h-10">
             <img [alt]="link.title" class="w-1/4 mx-auto my-2.5" [ngSrc]="link.icon" width="100" height="100" />
           </div>
@@ -20,7 +20,7 @@
         class="col-span-6 xl:col-span-2 lg:col-span-4 p-2 cursor-pointer text-center"
       >
         <div>
-          <p-panel [header]="link.title" styleClass="hover:bg-primary-contrast">
+          <p-panel [header]="link.title" styleClass="hover:scale-105 animation duration-300">
             <div class="h-10">
               <img [alt]="link.title" class="w-1/4 mx-auto my-2.5" [ngSrc]="link.logo" width="100" height="100" />
             </div>

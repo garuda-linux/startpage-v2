@@ -378,11 +378,11 @@ export const Catppuccin = definePreset(Aura, {
     card: {
       colorScheme: {
         light: {
-          background: latte.colors.mantle.hex,
+          background: latte.colors.mantle.hex + '88',
           shadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)',
         },
         dark: {
-          background: mocha.colors.mantle.hex,
+          background: mocha.colors.mantle.hex + '88',
           shadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)',
         },
       },
@@ -467,16 +467,17 @@ export const Catppuccin = definePreset(Aura, {
     panel: {
       colorScheme: {
         light: {
-          background: latte.colors.base.hex,
+          background: latte.colors.base.hex + '99',
           border: {
             color: latte.colors.crust.hex,
             radius: '0.7rem',
           },
         },
         dark: {
-          background: mocha.colors.base.hex,
+          background: mocha.colors.base.hex + '99',
           border: {
             color: mocha.colors.crust.hex,
+            radius: '0.7rem',
           },
         },
       },
@@ -672,55 +673,3 @@ export const Catppuccin = definePreset(Aura, {
     },
   },
 });
-
-export const CatppuccinXtermJs = {
-  light: {
-    background: latte.colors.base.hex,
-    black: latte.colors.surface1.hex,
-    blue: latte.colors.blue.hex,
-    brightBlack: latte.colors.surface1.hex,
-    brightBlue: latte.colors.blue.hex,
-    brightCyan: latte.colors.flamingo.hex,
-    brightGreen: latte.colors.green.hex,
-    brightMagenta: latte.colors.maroon.hex,
-    brightRed: latte.colors.red.hex,
-    brightWhite: latte.colors.text.hex,
-    brightYellow: latte.colors.yellow.hex,
-    cursor: latte.colors.text.hex,
-    cursorAccent: latte.colors.text.hex,
-    cyan: latte.colors.flamingo.hex,
-    foreground: latte.colors.text.hex,
-    green: latte.colors.green.hex,
-    magenta: latte.colors.maroon.hex,
-    red: latte.colors.red.hex,
-    white: latte.colors.text.hex,
-    yellow: latte.colors.yellow.hex,
-  },
-  dark: {
-    background: mocha.colors.base.hex,
-    black: mocha.colors.surface1.hex,
-    blue: mocha.colors.blue.hex,
-    brightBlack: mocha.colors.surface1.hex,
-    brightBlue: mocha.colors.blue.hex,
-    brightCyan: mocha.colors.flamingo.hex,
-    brightGreen: mocha.colors.green.hex,
-    brightMagenta: mocha.colors.maroon.hex,
-    brightRed: mocha.colors.red.hex,
-    brightWhite: mocha.colors.text.hex,
-    brightYellow: mocha.colors.yellow.hex,
-    cursor: mocha.colors.text.hex,
-    cursorAccent: mocha.colors.text.hex,
-    cyan: mocha.colors.flamingo.hex,
-    foreground: mocha.colors.text.hex,
-    green: mocha.colors.green.hex,
-    magenta: mocha.colors.maroon.hex,
-    red: mocha.colors.red.hex,
-    white: mocha.colors.text.hex,
-    yellow: mocha.colors.yellow.hex,
-  },
-};
-
-export const CatppuccinScrollbars = {
-  light: "#ccd0da rgba(230, 233, 239, 0.5)'",
-  dark: '#313244 rgba(24, 24, 37, 0.5)',
-};
