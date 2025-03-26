@@ -14,6 +14,15 @@
         </div>
         <div class="ml-10">
           <p-checkbox
+            (ngModelChange)="updateConfig('showNews', $event)"
+            [(ngModel)]="showNews"
+            [binary]="true"
+            id="show-news"
+          />
+          <label class="ml-2" for="blur-bg">{{ t('settings.showNews') }}</label>
+        </div>
+        <div class="ml-10">
+          <p-checkbox
             (ngModelChange)="updateConfig('jokesEnabled', $event)"
             [(ngModel)]="jokesEnabled"
             [binary]="true"

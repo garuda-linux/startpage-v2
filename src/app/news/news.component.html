@@ -1,7 +1,7 @@
 <ng-container *transloco="let t">
   <p-panel>
     @if (!appService.blogDataReady()) {
-      <div class="h-[90vh] px-2.5 md:px-10">
+      <div class="px-2.5 md:h-[80vh] md:px-10">
         <ng-container *ngFor="let _ of [].constructor(8)">
           <div class="mb-4 flex">
             <div>
@@ -12,7 +12,7 @@
         </ng-container>
       </div>
     }
-    <p-scroll-panel [style]="{ height: '90vh' }">
+    <p-scroll-panel [style]="{ height: '80vh' }">
       <div class="grid grid-cols-12">
         <div class="col-span-12">
           <p-timeline [value]="appService.blogData()">

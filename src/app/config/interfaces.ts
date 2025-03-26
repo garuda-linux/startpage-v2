@@ -15,6 +15,7 @@ export interface AppSettings {
   searchEngines: SearchEngineEntry[];
   searchEngineUrl: string;
   searchEngineName: string;
+  showNews: boolean;
   activeSearchEngine: string;
   wallpaper: string;
   wallpaperUrl: string;

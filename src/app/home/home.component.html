@@ -1,12 +1,22 @@
 <div class="grid-cols-12 md:grid md:px-10">
-  <div class="col-span-9">
+  <div
+    [ngClass]="{
+      'col-span-9': configService.settings().showNews,
+      'col-span-12': !configService.settings().showNews,
+    }"
+  >
     <app-search></app-search>
     @if (configService.settings().jokesEnabled) {
       <app-jokes></app-jokes>
     }
     <app-links></app-links>
+    @if (configService.settings().defaultLinks) {
+      <app-contact-links></app-contact-links>
+    }
   </div>
-  <div class="col-span-3 mt-10">
-    <app-news></app-news>
-  </div>
+  @if (configService.settings().showNews) {
+    <div class="col-span-3 mt-5">
+      <app-news></app-news>
+    </div>
+  }
 </div>

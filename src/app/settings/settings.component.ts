@@ -73,6 +73,7 @@ export class SettingsComponent {
   logoUrl = signal<string>('');
   searchEngineName = signal<string>('');
   searchEngineUrl = signal<string>('');
+  showNews = signal<boolean>(true);
   username = signal<string>('');
   wallpaper = signal<string>('');
   wallpaperUrl = signal<string>('');

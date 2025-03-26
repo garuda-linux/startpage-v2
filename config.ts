@@ -148,7 +148,7 @@ export const serviceLinks: ServiceLinks = [
   {
     link: 'https://lingva.garudalinux.org',
     title: 'Lingva',
-    icon: 'assets/pictures/lingva.svg',
+    icon: 'assets/pictures/lingva.png',
     subtitle: 'Privacy-respecting translator',
     id: 'glv',
   },

@@ -8,7 +8,7 @@ import { menubarItems, serviceLinks } from '../../../config';
   providedIn: 'root',
 })
 export class ConfigService {
-  defaultSettings = {
+  defaultSettings: AppSettings = {
     activeSearchEngine: 'searxng-privau',
     blurBackground: false,
     customLinks: serviceLinks,
@@ -22,6 +22,7 @@ export class ConfigService {
     searchEngineName: '',
     searchEngineUrl: '',
     searchEngines: [],
+    showNews: true,
     username: '',
     wallpaper: 'none',
     wallpaperUrl: '',

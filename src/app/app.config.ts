@@ -1,8 +1,10 @@
 import { provideHttpClient } from '@angular/common/http';
 import {
   type ApplicationConfig,
+  inject,
   isDevMode,
   LOCALE_ID,
+  provideAppInitializer,
   provideExperimentalZonelessChangeDetection,
 } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -16,6 +18,7 @@ import { TranslocoHttpLoader } from './transloco-loader';
 import { provideTransloco } from '@jsverse/transloco';
 import { provideTranslocoPersistLang } from '@jsverse/transloco-persist-lang';
 import { provideTranslocoLocale } from '@jsverse/transloco-locale';
+import { ConfigService } from './config/config.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -36,6 +39,14 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideExperimentalZonelessChangeDetection(),
     provideHttpClient(),
+    provideAppInitializer(async () => {
+      const configService = inject(ConfigService);
+      while (!configService.initialized()) {
+        await new Promise<void>((resolve) => {
+          setTimeout(() => resolve(), 0);
+        });
+      }
+    }),
     provideTransloco({
       config: {
         availableLangs: environment.availableLanguages,
