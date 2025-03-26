@@ -1,24 +1,26 @@
 import type { MenuBarItems, SearchEngineEntry, ServiceLinks } from '../types';
+import type { AvailableJokeSources } from '../jokes/jokes';
 
 export interface AppSettings {
-  jokesEnabled: boolean;
-  defaultLinks: boolean;
+  activeJoke: AvailableJokeSources;
+  activeSearchEngine: string;
+  blurBackground: boolean;
   customLinks: ServiceLinks;
   customMenuLinks: MenuBarItems;
-  fitWallpaper: boolean;
-  blurBackground: boolean;
   customTitle: string;
-  welcomeText: string;
-  logoUrl: string;
+  defaultLinks: boolean;
+  fitWallpaper: boolean;
+  jokesEnabled: boolean;
   logo: string;
-  username: string;
-  searchEngines: SearchEngineEntry[];
-  searchEngineUrl: string;
+  logoUrl: string;
   searchEngineName: string;
+  searchEngineUrl: string;
+  searchEngines: SearchEngineEntry[];
   showNews: boolean;
-  activeSearchEngine: string;
+  username: string;
   wallpaper: string;
   wallpaperUrl: string;
+  welcomeText: string;
 
   [key: string]: any;
 }

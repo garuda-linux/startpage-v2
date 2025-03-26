@@ -22,7 +22,6 @@ import { ShellComponent } from '@garudalinux/core';
 import { ConfigService } from './config/config.service';
 import { menubarItems } from '../../config';
 import type { MenuBarLink } from './types';
-import { ConfirmDialog } from 'primeng/confirmdialog';
 
 @Component({
   imports: [
@@ -33,7 +32,6 @@ import { ConfirmDialog } from 'primeng/confirmdialog';
     Button,
     ShellComponent,
     TranslocoDirective,
-    ConfirmDialog,
   ],
   selector: 'app-root',
   templateUrl: './app.component.html',

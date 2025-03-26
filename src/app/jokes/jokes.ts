@@ -1,4 +1,4 @@
-const jokes: string[] = [
+export const jokes: string[] = [
   "Actually, that's a feature.",
   "Are you sure you don't have a problem with your internet connection?",
   'Are you sure you want it to work that way?',
@@ -201,4 +201,24 @@ const jokes: string[] = [
   "Your internet connection mustn't be working.",
 ];
 
-export default jokes;
+export const jokeSources = [
+  {
+    name: 'useless-facts',
+    prettyName: 'Useless Facts',
+  },
+  {
+    name: 'dev-excuses',
+    prettyName: 'Dev Excuses',
+  },
+];
+
+export type AvailableJokeSources = 'useless-facts' | 'dev-excuses';
+
+export interface UselessFact {
+  id: string;
+  text: string;
+  source: string;
+  source_url: string;
+  language: string;
+  permalink: string;
+}

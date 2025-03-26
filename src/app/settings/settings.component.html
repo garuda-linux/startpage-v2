@@ -115,6 +115,21 @@
           </div>
         }
 
+        @if (configService.settings().jokesEnabled) {
+          <div class="flex flex-col gap-2">
+            <label for="active-joke">{{ t('settings.activeJoke') }}</label>
+            <p-select
+              (ngModelChange)="updateConfig('activeJoke', $event)"
+              [(ngModel)]="activeJoke"
+              [options]="jokeSources"
+              fluid
+              id="active-joke"
+              optionLabel="prettyName"
+              optionValue="name"
+            />
+          </div>
+        }
+
         <div class="flex flex-col gap-2">
           <label for="wallpaper">{{ t('settings.wallpaperLabel') }}</label>
           <p-select

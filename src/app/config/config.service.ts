@@ -9,6 +9,7 @@ import { menubarItems, serviceLinks } from '../../../config';
 })
 export class ConfigService {
   defaultSettings: AppSettings = {
+    activeJoke: 'dev-excuses',
     activeSearchEngine: 'searxng-privau',
     blurBackground: false,
     customLinks: serviceLinks,
