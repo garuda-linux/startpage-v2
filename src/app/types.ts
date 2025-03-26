@@ -6,6 +6,7 @@ export interface MenuBarLink {
   routerLink?: string;
   url?: string;
   translocoKey: string;
+  id: string;
 }
 
 export type MenuBarItems = MenuBarLink[];

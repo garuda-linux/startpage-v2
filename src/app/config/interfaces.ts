@@ -1,9 +1,10 @@
-import type { SearchEngineEntry, ServiceLinks } from '../types';
+import type { MenuBarItems, SearchEngineEntry, ServiceLinks } from '../types';
 
 export interface AppSettings {
   jokesEnabled: boolean;
   defaultLinks: boolean;
   customLinks: ServiceLinks;
+  customMenuLinks: MenuBarItems;
   fitWallpaper: boolean;
   blurBackground: boolean;
   customTitle: string;

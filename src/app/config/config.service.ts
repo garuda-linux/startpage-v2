@@ -2,7 +2,7 @@ import { type ElementRef, inject, Injectable, type Renderer2, signal } from '@an
 import type { AppSettings } from './interfaces';
 import { Title } from '@angular/platform-browser';
 import { WallpaperService } from '../wallpaper/wallpaper.service';
-import { serviceLinks } from '../../../config';
+import { menubarItems, serviceLinks } from '../../../config';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +12,7 @@ export class ConfigService {
     activeSearchEngine: 'searxng-privau',
     blurBackground: false,
     customLinks: serviceLinks,
+    customMenuLinks: menubarItems,
     customTitle: "Garuda's Startpage",
     defaultLinks: true,
     fitWallpaper: true,

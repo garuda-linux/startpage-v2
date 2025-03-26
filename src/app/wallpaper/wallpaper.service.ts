@@ -12,7 +12,6 @@ export class WallpaperService {
    * @param url Optional URL for the custom wallpaper, if applicable.
    */
   loadWallpaper(wallpaper: string, renderer: Renderer2, el: ElementRef, url?: string): void {
-    console.log(`Loading wallpaper: ${wallpaper}`);
     if (wallpaper === 'custom') {
       this.loadWallpaperExecutor(el, renderer, url ?? '');
     } else if (wallpaper === 'none') {

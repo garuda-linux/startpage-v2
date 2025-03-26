@@ -11,9 +11,7 @@ import {
 } from '@angular/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule, type Routes } from '@angular/router';
-import { RedirectGuard } from './redirect-guard/redirect.guard';
 import { HomeComponent } from './home/home.component';
-import { SettingsComponent } from './settings/settings.component';
 
 export const routes: Routes = [
   {
@@ -23,45 +21,13 @@ export const routes: Routes = [
   },
   {
     path: 'settings',
-    component: SettingsComponent,
+    loadComponent: () => import('./settings/settings.component').then((c) => c.SettingsComponent),
     data: { animationState: '2' },
   },
   {
     path: 'not-found',
     loadComponent: () => import('./not-found/not-found.component').then((c) => c.NotFoundComponent),
     data: { animationState: 'null' },
-  },
-  {
-    path: 'chaotic-aur',
-    canActivate: [RedirectGuard],
-    component: RedirectGuard,
-    data: {
-      externalUrl: 'https://aur.chaotic.cx/',
-    },
-  },
-  {
-    path: 'privacy-policy',
-    canActivate: [RedirectGuard],
-    component: RedirectGuard,
-    data: {
-      externalUrl: 'https://garudalinux.org/privacy-policy',
-    },
-  },
-  {
-    path: 'code-of-conduct',
-    canActivate: [RedirectGuard],
-    component: RedirectGuard,
-    data: {
-      externalUrl: 'https://garudalinux.org/code-of-conduct',
-    },
-  },
-  {
-    path: 'forum',
-    canActivate: [RedirectGuard],
-    component: RedirectGuard,
-    data: {
-      externalUrl: 'https://forum.garudalinux.org',
-    },
   },
   {
     path: '**',

@@ -31,6 +31,7 @@ import { InputIcon } from 'primeng/inputicon';
 import { Panel } from 'primeng/panel';
 import { FileSelectEvent, FileUpload } from 'primeng/fileupload';
 import { MessageToastService } from '@garudalinux/core';
+import { MenuEditorComponent } from '../menu-editor/menu-editor.component';
 
 @Component({
   selector: 'app-settings',
@@ -51,6 +52,7 @@ import { MessageToastService } from '@garudalinux/core';
     InputIcon,
     Panel,
     FileUpload,
+    MenuEditorComponent,
   ],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.css',
@@ -67,7 +69,6 @@ export class SettingsComponent {
   defaultLinks = signal<boolean>(true);
   fitWallpaper = signal<string>('cover');
   jokesEnabled = signal<boolean>(true);
-  linkDialog = signal<boolean>(false);
   logo = signal<string>('default');
   logoUrl = signal<string>('');
   searchEngineName = signal<string>('');
@@ -78,6 +79,7 @@ export class SettingsComponent {
   welcomeText = signal<string>('');
 
   link = signal<ServiceLink>({} as ServiceLink);
+  linkDialog = signal<boolean>(false);
   linkSubmitted = signal<boolean>(false);
   selectedLinks = signal<ServiceLinks | null>(null);
 

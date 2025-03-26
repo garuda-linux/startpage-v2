@@ -302,8 +302,12 @@
           <p-button (click)="saveLink()" icon="pi pi-check" label="Save" />
         </ng-template>
       </p-dialog>
+    </p-panel>
 
-      <p-confirmDialog />
+    <p-panel [header]="t('settings.customMenu')" styleClass="mt-2.5">
+      <app-menu-editor></app-menu-editor>
     </p-panel>
   </div>
+
+  <p-confirmDialog />
 </ng-container>

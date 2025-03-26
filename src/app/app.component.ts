@@ -22,6 +22,7 @@ import { ShellComponent } from '@garudalinux/core';
 import { ConfigService } from './config/config.service';
 import { menubarItems } from '../../config';
 import type { MenuBarLink } from './types';
+import { ConfirmDialog } from 'primeng/confirmdialog';
 
 @Component({
   imports: [
@@ -32,6 +33,7 @@ import type { MenuBarLink } from './types';
     Button,
     ShellComponent,
     TranslocoDirective,
+    ConfirmDialog,
   ],
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -82,7 +84,11 @@ export class AppComponent implements OnInit {
   async setupLabels(lang: string): Promise<void> {
     const newItemPromises = [];
     for (const item of this.items()) {
-      newItemPromises.push(lastValueFrom(this.translocoService.selectTranslate(item['translocoKey'], {}, lang)));
+      if (item.translocoKey) {
+        newItemPromises.push(lastValueFrom(this.translocoService.selectTranslate(item['translocoKey'], {}, lang)));
+      } else {
+        newItemPromises.push(lastValueFrom(this.translocoService.selectTranslate(item['label'], {}, lang)));
+      }
     }
 
     const results: string[] = await Promise.all(newItemPromises);

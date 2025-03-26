@@ -2,7 +2,7 @@
   <div class="background-filter">
     <div class="non-blurred overflow-hidden">
       <div class="background min-h-svh">
-        <garuda-shell #shell [menuItems]="items()">
+        <garuda-shell #shell [menuItems]="configService.settings().customMenuLinks">
           <img
             [ngSrc]="logoLink()"
             alt="logo"
