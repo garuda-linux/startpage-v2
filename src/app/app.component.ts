@@ -1,4 +1,4 @@
-import { NgOptimizedImage } from '@angular/common';
+import { NgClass, NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -14,8 +14,7 @@ import { ScrollTop } from 'primeng/scrolltop';
 import { routeAnimations } from './app.routes';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import { lastValueFrom } from 'rxjs';
-import { AppService } from './app.service';
-import { ShellComponent } from '@garudalinux/core';
+import { MessageToastService, ShellComponent } from '@garudalinux/core';
 import { ConfigService } from './config/config.service';
 import { menubarItems } from '../../config';
 import type { MenuBarLink } from './types';
@@ -23,18 +22,17 @@ import { TranslocoPersistTranslations } from '@jsverse/transloco-persist-transla
 import { Avatar } from 'primeng/avatar';
 
 @Component({
-  imports: [RouterModule, NgOptimizedImage, ScrollTop, ShellComponent, TranslocoDirective, Avatar],
+  imports: [RouterModule, NgOptimizedImage, ScrollTop, ShellComponent, TranslocoDirective, Avatar, NgClass],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   animations: [routeAnimations],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [TranslocoPersistTranslations],
+  providers: [TranslocoPersistTranslations, MessageToastService],
 })
 export class AppComponent implements OnInit {
   items = signal<MenuBarLink[]>(menubarItems);
 
-  protected readonly appService = inject(AppService);
   protected readonly configService = inject(ConfigService);
 
   logoLink = computed<string>(() =>
@@ -43,6 +41,7 @@ export class AppComponent implements OnInit {
 
   private readonly translationsCache = inject(TranslocoPersistTranslations);
   private readonly el = inject(ElementRef);
+  private readonly messageToastService = inject(MessageToastService);
   private readonly renderer = inject(Renderer2);
   private readonly translocoService = inject(TranslocoService);
 
@@ -107,6 +106,38 @@ export class AppComponent implements OnInit {
   manageTranslocoCache(): void {
     if (this.configService.settings().translationVersion < this.configService.defaultSettings.translationVersion) {
       this.translationsCache.clearCache();
+    }
+  }
+
+  /**
+   * Display an easter egg message ;)
+   */
+  displayEasterEgg() {
+    const oneToSix: number = Math.floor(Math.random() * 6) + 1;
+    const oneToTwenty: number = Math.floor(Math.random() * 20) + 1;
+
+    const title: string = this.translocoService.translate(`easterEggs.easterEgg${oneToTwenty}.title`);
+    const content: string = this.translocoService.translate(`easterEggs.easterEgg${oneToTwenty}.content`);
+
+    switch (oneToSix) {
+      case 1:
+        this.messageToastService.info(title, content);
+        break;
+      case 2:
+        this.messageToastService.error(title, content);
+        break;
+      case 3:
+        this.messageToastService.success(title, content);
+        break;
+      case 4:
+        this.messageToastService.warn(title, content);
+        break;
+      case 5:
+        this.messageToastService.contrast(title, content);
+        break;
+      case 6:
+        this.messageToastService.secondary(title, content);
+        break;
     }
   }
 }
