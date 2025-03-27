@@ -25,15 +25,15 @@
     "test": "nx test"
   },
   "dependencies": {
-    "@angular/animations": "~19.2.3",
+    "@angular/animations": "~19.2.4",
     "@angular/cdk": "19.2.3",
-    "@angular/common": "~19.2.3",
-    "@angular/compiler": "~19.2.3",
-    "@angular/core": "~19.2.3",
-    "@angular/forms": "~19.2.3",
-    "@angular/platform-browser": "~19.2.3",
-    "@angular/platform-browser-dynamic": "~19.2.3",
-    "@angular/router": "~19.2.3",
+    "@angular/common": "~19.2.4",
+    "@angular/compiler": "~19.2.4",
+    "@angular/core": "~19.2.4",
+    "@angular/forms": "~19.2.4",
+    "@angular/platform-browser": "~19.2.4",
+    "@angular/platform-browser-dynamic": "~19.2.4",
+    "@angular/router": "~19.2.4",
     "@garudalinux/core": "^0.3.1",
     "@jsverse/transloco": "^7.6.1",
     "@jsverse/transloco-locale": "^7.0.1",
@@ -50,12 +50,12 @@
     "tailwindcss-primeui": "^0.5.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~19.2.4",
-    "@angular-devkit/core": "~19.2.4",
-    "@angular-devkit/schematics": "~19.2.4",
-    "@angular/cli": "~19.2.4",
-    "@angular/compiler-cli": "~19.2.3",
-    "@angular/language-service": "~19.2.3",
+    "@angular-devkit/build-angular": "~19.2.5",
+    "@angular-devkit/core": "~19.2.5",
+    "@angular-devkit/schematics": "~19.2.5",
+    "@angular/cli": "~19.2.5",
+    "@angular/compiler-cli": "~19.2.4",
+    "@angular/language-service": "~19.2.4",
     "@catppuccin/palette": "^1.7.1",
     "@eslint/js": "^9.23.0",
     "@jsverse/transloco-keys-manager": "^6.1.0",
@@ -68,7 +68,7 @@
     "@nx/web": "20.6.2",
     "@nx/workspace": "20.6.2",
     "@parvineyvazov/json-translator": "^3.2.2",
-    "@schematics/angular": "~19.2.4",
+    "@schematics/angular": "~19.2.5",
     "@swc-node/register": "~1.9.2",
     "@swc/core": "~1.5.29",
     "@swc/helpers": "~0.5.15",
@@ -86,7 +86,7 @@
     "tslib": "^2.8.1",
     "typescript": "5.8.2",
     "typescript-eslint": "^8.28.0",
-    "wrangler": "^4.4.0"
+    "wrangler": "^4.5.0"
   },
   "engines": {
     "npm": "^22"

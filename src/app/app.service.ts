@@ -8,7 +8,6 @@ import { retry } from 'rxjs';
   providedIn: 'root',
 })
 export class AppService {
-  activeLanguage = signal<string>('en');
   blogData = signal<StrippedTopic[]>([]);
   blogDataReady = signal<boolean>(false);
 

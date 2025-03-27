@@ -31,7 +31,7 @@ export class ConfigService {
     searchEngineUrl: '',
     searchEngines: [],
     showNews: true,
-    translationVersion: 1,
+    translationVersion: 2,
     username: '',
     wallpaper: 'none',
     wallpaperUrl: '',
@@ -180,26 +180,35 @@ export class ConfigService {
         break;
       }
       case 'darkMode': {
-        const flavors = this.settings().activeTheme.includes('Mocha') ? 'primary' : 'alt';
-        if (value === true) {
-          this.document.documentElement.classList.add('p-dark');
-          if (flavors === 'primary') {
-            this.document.documentElement.style.scrollbarColor = scrollbarColors.primary.dark;
-            this.document.documentElement.style.backgroundColor = backgroundColors.primary.dark;
-          } else {
-            this.document.documentElement.style.scrollbarColor = scrollbarColors.alt.dark;
-            this.document.documentElement.style.backgroundColor = backgroundColors.alt.dark;
-          }
-        } else {
-          this.document.documentElement.classList.remove('p-dark');
-          if (flavors === 'primary') {
-            this.document.documentElement.style.scrollbarColor = scrollbarColors.primary.light;
-            this.document.documentElement.style.backgroundColor = backgroundColors.primary.light;
-          } else {
-            this.document.documentElement.style.scrollbarColor = scrollbarColors.alt.light;
-            this.document.documentElement.style.backgroundColor = backgroundColors.alt.light;
-          }
-        }
+        this.handleDarkMode(value as boolean);
+      }
+    }
+  }
+
+  /**
+   * Handles the dark mode setting.
+   * @param value The value of the dark mode setting.
+   * @private
+   */
+  private handleDarkMode(value: boolean) {
+    const flavors = this.settings().activeTheme.includes('Mocha') ? 'primary' : 'alt';
+    if (value) {
+      this.document.documentElement.classList.add('p-dark');
+      if (flavors === 'primary') {
+        this.document.documentElement.style.scrollbarColor = scrollbarColors.primary.dark;
+        this.document.documentElement.style.backgroundColor = backgroundColors.primary.dark;
+      } else {
+        this.document.documentElement.style.scrollbarColor = scrollbarColors.alt.dark;
+        this.document.documentElement.style.backgroundColor = backgroundColors.alt.dark;
+      }
+    } else {
+      this.document.documentElement.classList.remove('p-dark');
+      if (flavors === 'primary') {
+        this.document.documentElement.style.scrollbarColor = scrollbarColors.primary.light;
+        this.document.documentElement.style.backgroundColor = backgroundColors.primary.light;
+      } else {
+        this.document.documentElement.style.scrollbarColor = scrollbarColors.alt.light;
+        this.document.documentElement.style.backgroundColor = backgroundColors.alt.light;
       }
     }
   }

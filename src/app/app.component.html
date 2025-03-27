@@ -20,7 +20,6 @@
             @if (configService.settings().avatarEnabled) {
               <p-avatar [image]="configService.settings().avatarUrl" shape="circle"> </p-avatar>
             }
-            <app-language-switcher hidden></app-language-switcher>
           </div>
           <div [@routerTransition]="prepareRoute(routerOutlet)" class="mt-5">
             <router-outlet #routerOutlet="outlet"></router-outlet>

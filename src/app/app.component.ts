@@ -12,7 +12,6 @@ import {
 import { RouterModule, type RouterOutlet } from '@angular/router';
 import { ScrollTop } from 'primeng/scrolltop';
 import { routeAnimations } from './app.routes';
-import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import { lastValueFrom } from 'rxjs';
 import { AppService } from './app.service';
@@ -24,15 +23,7 @@ import { TranslocoPersistTranslations } from '@jsverse/transloco-persist-transla
 import { Avatar } from 'primeng/avatar';
 
 @Component({
-  imports: [
-    RouterModule,
-    NgOptimizedImage,
-    ScrollTop,
-    LanguageSwitcherComponent,
-    ShellComponent,
-    TranslocoDirective,
-    Avatar,
-  ],
+  imports: [RouterModule, NgOptimizedImage, ScrollTop, ShellComponent, TranslocoDirective, Avatar],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
