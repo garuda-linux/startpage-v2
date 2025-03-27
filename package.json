@@ -40,6 +40,7 @@
     "@jsverse/transloco-persist-lang": "^7.0.2",
     "@jsverse/transloco-persist-translations": "^7.0.1",
     "@primeng/themes": "^19.0.10",
+    "csshake": "^1.7.0",
     "dayjs": "^1.11.13",
     "emoji-js": "^3.8.1",
     "marked": "^15.0.7",

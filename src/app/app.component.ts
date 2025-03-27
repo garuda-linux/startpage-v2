@@ -119,6 +119,25 @@ export class AppComponent implements OnInit {
     const title: string = this.translocoService.translate(`easterEggs.easterEgg${oneToTwenty}.title`);
     const content: string = this.translocoService.translate(`easterEggs.easterEgg${oneToTwenty}.content`);
 
+    const shakeEffects: string[] = [
+      'shake-hard',
+      'shake-slow',
+      'shake-little',
+      'shake-horizontal',
+      'shake-vertical',
+      'shake-rotate',
+      'shake-opacity',
+      'shake-crazy',
+    ];
+    const shakeEffect: string = shakeEffects[Math.floor(Math.random() * shakeEffects.length)];
+
+    this.renderer.addClass(this.el.nativeElement, 'shake');
+    this.renderer.addClass(this.el.nativeElement, shakeEffect);
+    setTimeout(() => {
+      this.renderer.removeClass(this.el.nativeElement, 'shake');
+      this.renderer.removeClass(this.el.nativeElement, shakeEffect);
+    }, 5000);
+
     switch (oneToSix) {
       case 1:
         this.messageToastService.info(title, content);

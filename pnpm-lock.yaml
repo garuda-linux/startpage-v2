@@ -53,6 +53,9 @@ importers:
       '@primeng/themes':
         specifier: ^19.0.10
         version: 19.0.10
+      csshake:
+        specifier: ^1.7.0
+        version: 1.7.0
       dayjs:
         specifier: ^1.11.13
         version: 1.11.13
@@ -4286,6 +4289,9 @@ packages:
     resolution: {integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==}
     engines: {node: '>=4'}
     hasBin: true
+
+  csshake@1.7.0:
+    resolution: {integrity: sha512-J8YPxrFmhNCK/sgoiWwbPDmUPramnEts8E9OZ6hdfh8z5wDjdIfVH0VgUz8HU5px5JpyLgnvPon6L3cmGef8TA==}
 
   cssnano-preset-default@6.1.2:
     resolution: {integrity: sha512-1C0C+eNaeN8OcHQa193aRgYexyJtU8XwbdieEjClw+J9d94E41LwT6ivKH0WT+fYwYWB0Zp3I3IZ7tI/BbUbrg==}
@@ -13560,6 +13566,8 @@ snapshots:
   css-what@6.1.0: {}
 
   cssesc@3.0.0: {}
+
+  csshake@1.7.0: {}
 
   cssnano-preset-default@6.1.2(postcss@8.5.3):
     dependencies:
