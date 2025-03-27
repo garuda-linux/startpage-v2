@@ -108,6 +108,8 @@ export class ConfigService {
    */
   resetSettings(renderer: Renderer2, el: ElementRef): void {
     const settings = this.defaultSettings as { [key: string]: any };
+
+    localStorage.clear();
     this.iterateSettings(settings, renderer, el);
   }
 
