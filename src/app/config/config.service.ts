@@ -13,7 +13,7 @@ export class ConfigService {
   defaultSettings: AppSettings = {
     activeJoke: 'dev-excuses',
     activeSearchEngine: 'searxng-privau',
-    activeTheme: 'CatppuccinAura',
+    activeTheme: 'Catppuccin Mocha/Latte Aura',
     blurBackground: false,
     customLinks: serviceLinks,
     customMenuLinks: menubarItems,
@@ -171,8 +171,7 @@ export class ConfigService {
         break;
       }
       case 'activeTheme': {
-        const indexableThemes = themes as { [key: string]: any };
-        usePreset(indexableThemes[value]);
+        usePreset(themes[value]);
       }
     }
   }

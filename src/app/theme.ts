@@ -5,7 +5,7 @@ import Nora from '@primeng/themes/nora';
 import Material from '@primeng/themes/material';
 import Lara from '@primeng/themes/lara';
 
-const { latte, mocha } = flavors.flavors;
+const { latte, mocha, frappe, macchiato } = flavors.flavors;
 
 const tokens = {
   semantic: {
@@ -50,11 +50,11 @@ const tokens = {
         highlight: {
           background: '{content.background}',
           focusBackground: '{content.background}',
-          color: 'rgba(230, 69, 83, .87)',
+          color: latte.colors.red.hex + '88',
           focusColor: latte.colors.maroon.hex,
         },
         mask: {
-          background: 'rgba(220, 224, 232, .6)',
+          background: latte.colors.surface0.hex + '99',
           color: '{surface.200}',
         },
         formField: {
@@ -84,7 +84,7 @@ const tokens = {
           hoverMutedColor: latte.colors.surface0.hex,
         },
         content: {
-          background: 'rgba(230, 233, 239, 0.8)',
+          background: latte.colors.mantle.hex + '88',
           hoverBackground: '{surface.800}',
           borderColor: '{surface.700}',
           color: '{text.color}',
@@ -174,11 +174,11 @@ const tokens = {
         highlight: {
           background: '{content.background}',
           focusBackground: '{content.background}',
-          color: 'rgba(235, 160, 172, .87)',
+          color: mocha.colors.red.hex + '88',
           focusColor: mocha.colors.maroon.hex,
         },
         mask: {
-          background: 'rgba(17, 17, 27, 0.6)',
+          background: mocha.colors.surface0.hex + '99',
           color: '{surface.200}',
         },
         formField: {
@@ -208,7 +208,7 @@ const tokens = {
           hoverMutedColor: mocha.colors.surface0.hex,
         },
         content: {
-          background: 'rgba(24, 24, 37, 0.8)',
+          background: mocha.colors.mantle.hex + '99',
           hoverBackground: '{surface.800}',
           borderColor: '{surface.700}',
           color: '{text.color}',
@@ -539,7 +539,7 @@ const tokens = {
         },
       },
     },
-    table: {
+    datatable: {
       colorScheme: {
         light: {
           header: {
@@ -549,6 +549,11 @@ const tokens = {
               },
             },
           },
+          row: {
+            hover: {
+              background: latte.colors.surface0.hex,
+            },
+          },
         },
         dark: {
           header: {
@@ -556,6 +561,11 @@ const tokens = {
               hover: {
                 background: mocha.colors.surface0.hex,
               },
+            },
+          },
+          row: {
+            hover: {
+              background: mocha.colors.surface0.hex,
             },
           },
         },
@@ -574,17 +584,607 @@ const tokens = {
   },
 };
 
+const tokensAlt = {
+  semantic: {
+    focusRing: {
+      color: '{primary.color}',
+    },
+    primary: {
+      50: '#fcfbff',
+      100: '#f3eafd',
+      200: '#e9d9fc',
+      300: '#dfc8fa',
+      400: '#d5b7f9',
+      500: '#cba6f7',
+      600: '#ad8dd2',
+      700: '#8e74ad',
+      800: '#705b88',
+      900: '#514263',
+      950: '#332a3e',
+    },
+    colorScheme: {
+      light: {
+        surface: {
+          0: '#ffffff',
+          50: '#f5f5f6',
+          100: '#d0ced3',
+          200: '#aaa8af',
+          300: '#85818c',
+          400: '#5f5b69',
+          500: '#3a3446',
+          600: '#312c3c',
+          700: '#292431',
+          800: '#201d27',
+          900: '#17151c',
+          950: '#0f0d12',
+        },
+        primary: {
+          color: frappe.colors.mauve.hex,
+          contrastColor: frappe.colors.surface0.hex,
+          hoverColor: frappe.colors.maroon.hex,
+          activeColor: frappe.colors.flamingo.hex,
+        },
+        highlight: {
+          background: '{content.background}',
+          focusBackground: '{content.background}',
+          color: frappe.colors.red.hex + '87',
+          focusColor: frappe.colors.maroon.hex,
+        },
+        mask: {
+          background: frappe.colors.surface0.hex + '99',
+          color: '{surface.200}',
+        },
+        formField: {
+          background: frappe.colors.crust.hex + '88',
+          disabledBackground: '{surface.700}',
+          filledBackground: '{surface.800}',
+          filledHoverBackground: '{surface.800}',
+          filledFocusBackground: '{surface.800}',
+          borderColor: '{surface.600}',
+          hoverBorderColor: '{surface.500}',
+          focusBorderColor: '{primary.color}',
+          invalidBorderColor: frappe.colors.peach.hex,
+          color: frappe.colors.text.hex,
+          disabledColor: '{surface.400}',
+          placeholderColor: '{surface.400}',
+          invalidPlaceholderColor: frappe.colors.maroon.hex,
+          floatLabelColor: '{surface.400}',
+          floatLabelFocusColor: '{primary.color}',
+          floatLabelActiveColor: '{surface.400}',
+          floatLabelInvalidColor: '{form.field.invalid.placeholder.color}',
+          iconColor: '{surface.400}',
+        },
+        text: {
+          color: frappe.colors.text.hex,
+          hoverColor: frappe.colors.maroon.hex,
+          mutedColor: frappe.colors.surface1.hex,
+          hoverMutedColor: frappe.colors.surface0.hex,
+        },
+        content: {
+          background: frappe.colors.surface0.hex + '99',
+          hoverBackground: '{surface.800}',
+          borderColor: '{surface.700}',
+          color: '{text.color}',
+          hoverColor: '{text.hover.color}',
+        },
+        overlay: {
+          select: {
+            background: '{surface.900}',
+            borderColor: '{surface.700}',
+            color: '{text.color}',
+          },
+          popover: {
+            background: '{surface.900}',
+            borderColor: '{surface.700}',
+            color: '{text.color}',
+          },
+          modal: {
+            background: '{surface.900}',
+            borderColor: '{surface.700}',
+            color: '{text.color}',
+          },
+        },
+        list: {
+          option: {
+            focusBackground: '{surface.800}',
+            selectedBackground: '{highlight.background}',
+            selectedFocusBackground: '{highlight.focus.background}',
+            color: '{text.color}',
+            focusColor: '{text.hover.color}',
+            selectedColor: '{highlight.color}',
+            selectedFocusColor: '{highlight.focus.color}',
+            icon: {
+              color: '{surface.500}',
+              focusColor: '{surface.400}',
+            },
+          },
+          optionGroup: {
+            background: 'transparent',
+            color: '{text.muted.color}',
+          },
+        },
+        navigation: {
+          item: {
+            focusBackground: '{surface.800}',
+            activeBackground: '{surface.800}',
+            color: '{text.color}',
+            focusColor: '{text.hover.color}',
+            activeColor: '{text.hover.color}',
+            icon: {
+              color: '{surface.500}',
+              focusColor: '{surface.400}',
+              activeColor: '{surface.400}',
+            },
+          },
+          submenuLabel: {
+            background: 'transparent',
+            color: '{text.muted.color}',
+          },
+          submenuIcon: {
+            color: '{surface.500}',
+            focusColor: '{surface.400}',
+            activeColor: '{surface.400}',
+          },
+        },
+      },
+      dark: {
+        surface: {
+          0: '#ffffff',
+          50: '#f4f4f5',
+          100: '#cacbcd',
+          200: '#a1a2a6',
+          300: '#77797f',
+          400: '#4e5057',
+          500: '#242730',
+          600: '#1f2129',
+          700: '#191b22',
+          800: '#14151a',
+          900: '#0e1013',
+          950: '#090a0c',
+        },
+        primary: {
+          color: macchiato.colors.mauve.hex,
+          contrastColor: macchiato.colors.surface0.hex,
+          hoverColor: macchiato.colors.maroon.hex,
+          activeColor: macchiato.colors.flamingo.hex,
+        },
+        highlight: {
+          background: '{content.background}',
+          focusBackground: '{content.background}',
+          color: macchiato.colors.red.hex + '87',
+          focusColor: macchiato.colors.maroon.hex,
+        },
+        mask: {
+          background: macchiato.colors.surface0.hex + '99',
+          color: '{surface.200}',
+        },
+        formField: {
+          background: macchiato.colors.crust.hex + '88',
+          disabledBackground: '{surface.700}',
+          filledBackground: '{surface.800}',
+          filledHoverBackground: '{surface.800}',
+          filledFocusBackground: '{surface.800}',
+          borderColor: '{surface.600}',
+          hoverBorderColor: '{surface.500}',
+          focusBorderColor: '{primary.color}',
+          invalidBorderColor: macchiato.colors.peach.hex,
+          color: macchiato.colors.text.hex,
+          disabledColor: '{surface.400}',
+          placeholderColor: '{surface.400}',
+          invalidPlaceholderColor: macchiato.colors.maroon.hex,
+          floatLabelColor: '{surface.400}',
+          floatLabelFocusColor: '{primary.color}',
+          floatLabelActiveColor: '{surface.400}',
+          floatLabelInvalidColor: '{form.field.invalid.placeholder.color}',
+          iconColor: '{surface.400}',
+        },
+        text: {
+          color: macchiato.colors.text.hex,
+          hoverColor: macchiato.colors.maroon.hex,
+          mutedColor: macchiato.colors.surface1.hex,
+          hoverMutedColor: macchiato.colors.surface0.hex,
+        },
+        content: {
+          background: macchiato.colors.surface0.hex + '99',
+          hoverBackground: '{surface.800}',
+          borderColor: '{surface.700}',
+          color: '{text.color}',
+          hoverColor: '{text.hover.color}',
+        },
+        overlay: {
+          select: {
+            background: '{surface.900}',
+            borderColor: '{surface.700}',
+            color: '{text.color}',
+          },
+          popover: {
+            background: '{surface.900}',
+            borderColor: '{surface.700}',
+            color: '{text.color}',
+          },
+          modal: {
+            background: '{surface.900}',
+            borderColor: '{surface.700}',
+            color: '{text.color}',
+          },
+        },
+        list: {
+          option: {
+            focusBackground: '{surface.800}',
+            selectedBackground: '{highlight.background}',
+            selectedFocusBackground: '{highlight.focus.background}',
+            color: '{text.color}',
+            focusColor: '{text.hover.color}',
+            selectedColor: '{highlight.color}',
+            selectedFocusColor: '{highlight.focus.color}',
+            icon: {
+              color: '{surface.500}',
+              focusColor: '{surface.400}',
+            },
+          },
+          optionGroup: {
+            background: 'transparent',
+            color: '{text.muted.color}',
+          },
+        },
+        navigation: {
+          item: {
+            focusBackground: '{surface.800}',
+            activeBackground: '{surface.800}',
+            color: '{text.color}',
+            focusColor: '{text.hover.color}',
+            activeColor: '{text.hover.color}',
+            icon: {
+              color: '{surface.500}',
+              focusColor: '{surface.400}',
+              activeColor: '{surface.400}',
+            },
+          },
+          submenuLabel: {
+            background: 'transparent',
+            color: '{text.muted.color}',
+          },
+          submenuIcon: {
+            color: '{surface.500}',
+            focusColor: '{surface.400}',
+            activeColor: '{surface.400}',
+          },
+        },
+      },
+    },
+  },
+  components: {
+    card: {
+      colorScheme: {
+        light: {
+          background: frappe.colors.mantle.hex + '88',
+        },
+        dark: {
+          background: macchiato.colors.mantle.hex + '88',
+        },
+      },
+    },
+    checkbox: {
+      colorScheme: {
+        light: {
+          background: frappe.colors.crust.hex,
+          disabled: {
+            background: frappe.colors.mantle.hex,
+          },
+        },
+        dark: {
+          background: macchiato.colors.crust.hex,
+          disabled: {
+            background: macchiato.colors.mantle.hex,
+          },
+        },
+      },
+    },
+    drawer: {
+      colorScheme: {
+        light: {
+          background: frappe.colors.mantle.hex,
+        },
+        dark: {
+          background: macchiato.colors.mantle.hex,
+        },
+      },
+    },
+    inputtext: {
+      colorScheme: {
+        light: {
+          color: frappe.colors.text.hex,
+          background: frappe.colors.crust.hex + '88',
+          border: {
+            color: frappe.colors.surface0.hex,
+          },
+        },
+        dark: {
+          color: macchiato.colors.text.hex,
+          background: macchiato.colors.crust.hex + '88',
+          border: {
+            color: macchiato.colors.surface0.hex,
+          },
+        },
+      },
+    },
+    button: {
+      colorScheme: {
+        light: {
+          secondary: {
+            background: frappe.colors.crust.hex + '88',
+            border: {
+              color: frappe.colors.surface0.hex,
+            },
+            hover: {
+              color: frappe.colors.mauve.hex,
+              border: {
+                color: frappe.colors.crust.hex,
+              },
+            },
+          },
+        },
+        dark: {
+          secondary: {
+            background: macchiato.colors.crust.hex + '88',
+            border: {
+              color: macchiato.colors.surface0.hex,
+            },
+            color: macchiato.colors.text.hex,
+            hover: {
+              color: macchiato.colors.mauve.hex,
+              border: {
+                color: macchiato.colors.crust.hex,
+              },
+            },
+          },
+        },
+      },
+    },
+    panel: {
+      colorScheme: {
+        light: {
+          background: frappe.colors.base.hex + '99',
+          border: {
+            color: frappe.colors.crust.hex,
+            radius: '0.7rem',
+          },
+        },
+        dark: {
+          background: macchiato.colors.base.hex + '99',
+          border: {
+            color: macchiato.colors.crust.hex,
+            radius: '0.7rem',
+          },
+        },
+      },
+    },
+    dialog: {
+      colorScheme: {
+        light: {
+          background: frappe.colors.base.hex,
+          border: {
+            color: frappe.colors.crust.hex,
+          },
+        },
+        dark: {
+          background: macchiato.colors.base.hex,
+          border: {
+            color: macchiato.colors.crust.hex,
+          },
+        },
+      },
+    },
+    divider: {
+      colorScheme: {
+        light: {
+          border: {
+            color: frappe.colors.surface0.hex,
+          },
+        },
+        dark: {
+          border: {
+            color: macchiato.colors.surface0.hex,
+          },
+        },
+      },
+    },
+    menubar: {
+      colorScheme: {
+        light: {
+          background: frappe.colors.crust.hex,
+          color: frappe.colors.mauve.hex,
+          item: {
+            color: frappe.colors.mauve.hex,
+            active: {
+              color: frappe.colors.maroon.hex,
+            },
+            focus: {
+              color: frappe.colors.maroon.hex,
+              background: frappe.colors.crust.hex,
+            },
+            icon: {
+              color: frappe.colors.maroon.hex,
+              focus: {
+                color: frappe.colors.mauve.hex,
+              },
+            },
+            submenu: {
+              icon: {
+                color: frappe.colors.text.hex,
+              },
+            },
+          },
+        },
+        dark: {
+          item: {
+            color: macchiato.colors.mauve.hex,
+            active: {
+              color: macchiato.colors.maroon.hex,
+            },
+            focus: {
+              color: macchiato.colors.maroon.hex,
+              background: macchiato.colors.crust.hex,
+            },
+            icon: {
+              color: macchiato.colors.maroon.hex,
+              focus: {
+                color: macchiato.colors.mauve.hex,
+              },
+            },
+            submenu: {
+              icon: {
+                color: macchiato.colors.text.hex,
+                active: {
+                  color: macchiato.colors.maroon.hex,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    popover: {
+      colorscheme: {
+        light: {
+          background: frappe.colors.crust.hex,
+          arrow: {
+            offset: '9.8rem',
+          },
+        },
+        dark: {
+          background: macchiato.colors.crust.hex,
+          arrow: {
+            offset: '9.8rem',
+          },
+        },
+      },
+    },
+    progressspinner: {
+      colorScheme: {
+        light: {
+          color: {
+            1: frappe.colors.maroon.hex,
+            2: frappe.colors.flamingo.hex,
+            3: frappe.colors.green.hex,
+            4: frappe.colors.yellow.hex,
+          },
+        },
+        dark: {
+          color: {
+            1: macchiato.colors.maroon.hex,
+            2: macchiato.colors.flamingo.hex,
+            3: macchiato.colors.green.hex,
+            4: macchiato.colors.yellow.hex,
+          },
+        },
+      },
+    },
+    select: {
+      colorScheme: {
+        light: {
+          color: frappe.colors.text.hex,
+          disabled: {
+            background: frappe.colors.surface0.hex,
+          },
+          overlay: {
+            background: frappe.colors.crust.hex,
+          },
+          option: {
+            focus: {
+              background: frappe.colors.base.hex,
+            },
+            selected: {
+              background: frappe.colors.surface0.hex,
+            },
+          },
+        },
+        dark: {
+          color: macchiato.colors.text.hex,
+          disabled: {
+            background: macchiato.colors.surface0.hex,
+          },
+          overlay: {
+            background: macchiato.colors.crust.hex,
+          },
+          option: {
+            focus: {
+              background: macchiato.colors.base.hex,
+            },
+            selected: {
+              background: macchiato.colors.surface0.hex,
+            },
+          },
+        },
+      },
+    },
+    datatable: {
+      colorScheme: {
+        light: {
+          header: {
+            cell: {
+              hover: {
+                background: frappe.colors.surface0.hex,
+              },
+            },
+          },
+          row: {
+            hover: {
+              background: frappe.colors.surface0.hex,
+            },
+          },
+        },
+        dark: {
+          header: {
+            cell: {
+              hover: {
+                background: macchiato.colors.surface0.hex,
+              },
+            },
+          },
+          row: {
+            hover: {
+              background: macchiato.colors.surface0.hex,
+            },
+          },
+        },
+      },
+    },
+    tooltip: {
+      colorScheme: {
+        light: {
+          background: frappe.colors.crust.hex,
+        },
+        dark: {
+          background: macchiato.colors.crust.hex,
+        },
+      },
+    },
+  },
+};
+
 export const CatppuccinAura = definePreset(Aura, tokens);
 export const CatppuccinNora = definePreset(Nora, tokens);
 export const CatppuccinMaterial = definePreset(Material, tokens);
 export const CatppuccinLara = definePreset(Lara, tokens);
 
-export const themes = {
-  CatppuccinAura: CatppuccinAura,
-  CatppuccinLara: CatppuccinLara,
-  CatppuccinMaterial: CatppuccinMaterial,
-  CatppuccinNora: CatppuccinNora,
+export const CatppuccinAuraAlt = definePreset(Aura, tokensAlt);
+export const CatppuccinNoraAlt = definePreset(Nora, tokensAlt);
+export const CatppuccinMaterialAlt = definePreset(Material, tokensAlt);
+export const CatppuccinLaraAlt = definePreset(Lara, tokensAlt);
+
+export const themes: AppThemes = {
+  'Catppuccin Mocha/Latte Aura': CatppuccinAura,
+  'Catppuccin Mocha/Latte Nora': CatppuccinNora,
+  'Catppuccin Mocha/Latte Material': CatppuccinMaterial,
+  'Catppuccin Mocha/Latte Lara': CatppuccinLara,
+  'Catppuccin Macchiato/Frappe Aura': CatppuccinAuraAlt,
+  'Catppuccin Macchiato/Frappe Nora': CatppuccinNoraAlt,
+  'Catppuccin Macchiato/Frappe Material': CatppuccinMaterialAlt,
+  'Catppuccin Macchiato/Frappe Lara': CatppuccinLaraAlt,
 };
 
-export const availableThemes: string[] = ['CatppuccinAura', 'CatppuccinNora', 'CatppuccinMaterial', 'CatppuccinLara'];
-export type AppTheme = (typeof availableThemes)[number];
+export type AppTheme = keyof typeof themes;
+export interface AppThemes {
+  [key: string]: any;
+}
