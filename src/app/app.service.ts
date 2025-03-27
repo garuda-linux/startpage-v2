@@ -3,7 +3,6 @@ import { DiscourseFeed, StrippedTopic, Topic } from './news/interfaces';
 import { HttpClient } from '@angular/common/http';
 import { APP_CONFIG } from 'src/environments/app-config.token';
 import { retry } from 'rxjs';
-import { ThemeHandler } from './theme-handler/theme-handler';
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +11,6 @@ export class AppService {
   activeLanguage = signal<string>('en');
   blogData = signal<StrippedTopic[]>([]);
   blogDataReady = signal<boolean>(false);
-
-  readonly themeHandler = new ThemeHandler();
 
   private readonly AMOUNT = 20;
   private readonly appConfig = inject(APP_CONFIG);

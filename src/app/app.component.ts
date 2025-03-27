@@ -15,13 +15,13 @@ import { routeAnimations } from './app.routes';
 import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import { lastValueFrom } from 'rxjs';
-import { Button } from 'primeng/button';
 import { AppService } from './app.service';
 import { ShellComponent } from '@garudalinux/core';
 import { ConfigService } from './config/config.service';
 import { menubarItems } from '../../config';
 import type { MenuBarLink } from './types';
 import { TranslocoPersistTranslations } from '@jsverse/transloco-persist-translations';
+import { Avatar } from 'primeng/avatar';
 
 @Component({
   imports: [
@@ -29,9 +29,9 @@ import { TranslocoPersistTranslations } from '@jsverse/transloco-persist-transla
     NgOptimizedImage,
     ScrollTop,
     LanguageSwitcherComponent,
-    Button,
     ShellComponent,
     TranslocoDirective,
+    Avatar,
   ],
   selector: 'app-root',
   templateUrl: './app.component.html',

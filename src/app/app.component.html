@@ -17,13 +17,9 @@
             {{ welcomeText() }}
           </div>
           <div garudaShellBarEnd>
-            <p-button
-              (click)="appService.themeHandler.toggleDarkMode()"
-              [icon]="appService.themeHandler.darkMode() ? 'pi pi-sun' : 'pi pi-moon'"
-              class="mr-2"
-              outlined
-            >
-            </p-button>
+            @if (configService.settings().avatarEnabled) {
+              <p-avatar [image]="configService.settings().avatarUrl" shape="circle"> </p-avatar>
+            }
             <app-language-switcher hidden></app-language-switcher>
           </div>
           <div [@routerTransition]="prepareRoute(routerOutlet)" class="mt-5">

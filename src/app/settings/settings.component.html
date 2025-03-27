@@ -48,6 +48,24 @@
           />
           <label class="ml-2" for="blur-bg">{{ t('settings.blurBackground') }}</label>
         </div>
+        <div class="ml-10">
+          <p-checkbox
+            (ngModelChange)="updateConfig('darkMode', $event)"
+            [(ngModel)]="darkMode"
+            [binary]="true"
+            id="dark-mode"
+          />
+          <label class="ml-2" for="dark-mode">{{ t('settings.darkMode') }}</label>
+        </div>
+        <div class="ml-10">
+          <p-checkbox
+            (ngModelChange)="updateConfig('avatarEnabled', $event)"
+            [(ngModel)]="avatarEnabled"
+            [binary]="true"
+            id="avatar-enabled"
+          />
+          <label class="ml-2" for="avatar-enabled">{{ t('settings.avatarEnabled') }}</label>
+        </div>
       </div>
 
       <div class="mx-auto mt-10 w-3/4 md:ml-10 md:flex">
@@ -179,18 +197,6 @@
           />
         </div>
 
-        @if (configService.settings().logo === 'custom') {
-          <div class="flex flex-col gap-2">
-            <label for="custom-logo">{{ t('settings.customLogo') }}</label>
-            <input
-              pInputText
-              id="custom-logo"
-              (ngModelChange)="updateConfig('logoUrl', $event)"
-              [(ngModel)]="logoUrl"
-            />
-          </div>
-        }
-
         <div class="flex flex-col gap-2">
           <label for="title">{{ t('settings.customTitle') }}</label>
           <input
@@ -205,6 +211,7 @@
           <label for="name">{{ t('settings.name') }}</label>
           <input (ngModelChange)="updateConfig('username', $event)" [(ngModel)]="username" id="name" pInputText />
         </div>
+
         <div class="flex flex-col gap-2">
           <label for="welcome">{{ t('settings.welcomeText') }}</label>
           <input
@@ -214,6 +221,30 @@
             pInputText
           />
         </div>
+
+        @if (configService.settings().avatarEnabled) {
+          <div class="flex flex-col gap-2">
+            <label for="avatar-url">{{ t('settings.avatarUrl') }}</label>
+            <input
+              pInputText
+              id="avatar-url"
+              (ngModelChange)="updateConfig('avatarUrl', $event)"
+              [(ngModel)]="avatarUrl"
+            />
+          </div>
+        }
+
+        @if (configService.settings().logo === 'custom') {
+          <div class="flex flex-col gap-2">
+            <label for="custom-logo">{{ t('settings.customLogo') }}</label>
+            <input
+              pInputText
+              id="custom-logo"
+              (ngModelChange)="updateConfig('logoUrl', $event)"
+              [(ngModel)]="logoUrl"
+            />
+          </div>
+        }
       </div>
     </p-panel>
 

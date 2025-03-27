@@ -6,11 +6,14 @@ export interface AppSettings {
   activeJoke: AvailableJokeSources;
   activeSearchEngine: string;
   activeTheme: AppTheme;
+  avatarEnabled: boolean;
+  avatarUrl: string;
   blurBackground: boolean;
   customLinks: ServiceLinks;
   customMenuLinks: MenuBarItems;
   customTitle: string;
   defaultLinks: boolean;
+  darkMode: boolean;
   fitWallpaper: boolean;
   jokesEnabled: boolean;
   logo: string;

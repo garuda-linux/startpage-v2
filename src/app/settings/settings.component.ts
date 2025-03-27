@@ -58,9 +58,12 @@ export class SettingsComponent {
   activeJoke = signal<AvailableJokeSources>('dev-excuses');
   activeSearchEngine = signal<SearchEngine>('searxng-privau');
   activeTheme = signal<AppTheme>('Catppuccin Mocha/Latte Aura');
+  avatarEnabled = signal<boolean>(true);
+  avatarUrl = signal<string>('');
   blurBackground = signal<number>(0);
   customTitle = signal<string>('');
   defaultLinks = signal<boolean>(true);
+  darkMode = signal<boolean>(true);
   fitWallpaper = signal<string>('cover');
   jokesEnabled = signal<boolean>(true);
   logo = signal<string>('default');

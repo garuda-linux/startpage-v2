@@ -44,6 +44,15 @@ p {
   @apply backdrop-blur-md;
 }
 
+.p-avatar {
+  display: unset !important;
+}
+
+.p-avatar img {
+  width: 32px !important;
+  height: 32px !important;
+}
+
 .p-timeline-event-opposite {
   flex: unset !important;
   width: 120px !important;

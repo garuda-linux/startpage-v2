@@ -1163,6 +1163,27 @@ const tokensAlt = {
   },
 };
 
+export const scrollbarColors = {
+  primary: {
+    light: `${latte.colors.surface0.hex} rgba(230, 233, 239, 0.5)`,
+    dark: `${mocha.colors.surface0.hex} rgba(24, 24, 37, 0.5)`,
+  },
+  alt: {
+    light: `${frappe.colors.surface0.hex} rgba(48, 52, 70, 0.5)`,
+    dark: `${macchiato.colors.surface0.hex} rgba(36, 39, 58, 0.5)`,
+  },
+};
+export const backgroundColors = {
+  primary: {
+    light: latte.colors.base.hex,
+    dark: mocha.colors.base.hex,
+  },
+  alt: {
+    light: frappe.colors.base.hex,
+    dark: macchiato.colors.base.hex,
+  },
+};
+
 export const CatppuccinAura = definePreset(Aura, tokens);
 export const CatppuccinNora = definePreset(Nora, tokens);
 export const CatppuccinMaterial = definePreset(Material, tokens);
@@ -1184,7 +1205,16 @@ export const themes: AppThemes = {
   'Catppuccin Macchiato/Frappe Lara': CatppuccinLaraAlt,
 };
 
-export type AppTheme = keyof typeof themes;
+export type AppTheme =
+  | 'Catppuccin Mocha/Latte Aura'
+  | 'Catppuccin Mocha/Latte Nora'
+  | 'Catppuccin Mocha/Latte Material'
+  | 'Catppuccin Mocha/Latte Lara'
+  | 'Catppuccin Macchiato/Frappe Aura'
+  | 'Catppuccin Macchiato/Frappe Nora'
+  | 'Catppuccin Macchiato/Frappe Material'
+  | 'Catppuccin Macchiato/Frappe Lara';
+
 export interface AppThemes {
   [key: string]: any;
 }

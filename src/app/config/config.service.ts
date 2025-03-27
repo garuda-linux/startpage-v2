@@ -4,7 +4,8 @@ import { Title } from '@angular/platform-browser';
 import { WallpaperService } from '../wallpaper/wallpaper.service';
 import { menubarItems, serviceLinks } from '../../../config';
 import { usePreset } from '@primeng/themes';
-import { themes } from '../theme';
+import { backgroundColors, scrollbarColors, themes } from '../theme';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -14,11 +15,14 @@ export class ConfigService {
     activeJoke: 'dev-excuses',
     activeSearchEngine: 'searxng-privau',
     activeTheme: 'Catppuccin Mocha/Latte Aura',
+    avatarEnabled: true,
+    avatarUrl: '/assets/avatars/cat.png',
     blurBackground: false,
     customLinks: serviceLinks,
     customMenuLinks: menubarItems,
     customTitle: "Garuda's Startpage",
     defaultLinks: true,
+    darkMode: true,
     fitWallpaper: true,
     jokesEnabled: true,
     logo: 'assets/logos/violet-orange.png',
@@ -37,6 +41,7 @@ export class ConfigService {
   initialized = signal<boolean>(false);
   settings = signal<AppSettings>(this.defaultSettings);
 
+  private readonly document = inject(DOCUMENT);
   private readonly title = inject(Title);
   private readonly wallpaperService = inject(WallpaperService);
 
@@ -172,6 +177,29 @@ export class ConfigService {
       }
       case 'activeTheme': {
         usePreset(themes[value]);
+        break;
+      }
+      case 'darkMode': {
+        const flavors = this.settings().activeTheme.includes('Mocha') ? 'primary' : 'alt';
+        if (value === true) {
+          this.document.documentElement.classList.add('p-dark');
+          if (flavors === 'primary') {
+            this.document.documentElement.style.scrollbarColor = scrollbarColors.primary.dark;
+            this.document.documentElement.style.backgroundColor = backgroundColors.primary.dark;
+          } else {
+            this.document.documentElement.style.scrollbarColor = scrollbarColors.alt.dark;
+            this.document.documentElement.style.backgroundColor = backgroundColors.alt.dark;
+          }
+        } else {
+          this.document.documentElement.classList.remove('p-dark');
+          if (flavors === 'primary') {
+            this.document.documentElement.style.scrollbarColor = scrollbarColors.primary.light;
+            this.document.documentElement.style.backgroundColor = backgroundColors.primary.light;
+          } else {
+            this.document.documentElement.style.scrollbarColor = scrollbarColors.alt.light;
+            this.document.documentElement.style.backgroundColor = backgroundColors.alt.light;
+          }
+        }
       }
     }
   }
