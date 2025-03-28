@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, effect, inject, signal, untracked, 
 import { CommonModule } from '@angular/common';
 import { Toolbar } from 'primeng/toolbar';
 import { Button } from 'primeng/button';
-import { type Table, TableModule, type TableRowReorderEvent } from 'primeng/table';
+import { type Table, TableModule } from 'primeng/table';
 import type { ServiceLink, ServiceLinks } from '../types';
 import { ConfigService } from '../config/config.service';
 import { ConfirmationService } from 'primeng/api';
@@ -55,7 +55,7 @@ export class LinksEditorComponent {
       const currentSettings: ServiceLinks = untracked(this.configService.settings).customLinks;
       const newSettings: ServiceLinks = this.customLinks();
 
-      if (newSettings.length !== newSettings.length) {
+      if (currentSettings.length !== newSettings.length) {
         this.configService.updateConfig('customLinks', newSettings);
         return;
       }
@@ -189,16 +189,11 @@ export class LinksEditorComponent {
   }
 
   /**
-   * Reorder the links in the table.
-   * @param $event The event containing the link data
+   * Reorder the links in the table. PrimeNG table does automatic reordering,
+   * but we need to update the customLinks signal manually.
    */
-  onRowReorder($event: TableRowReorderEvent) {
-    if (!$event.dragIndex || !$event.dropIndex) return;
-
-    const reorderedLinks: ServiceLinks = [...this.customLinks()];
-    const movedLink: ServiceLink = reorderedLinks[$event.dragIndex];
-    reorderedLinks.splice($event.dragIndex, 1);
-    reorderedLinks.splice($event.dropIndex, 0, movedLink);
-    this.customLinks.set(reorderedLinks);
+  onRowReorder() {
+    const links: ServiceLinks = [...this.customLinks()];
+    this.configService.updateConfig('customLinks', links);
   }
 }

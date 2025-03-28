@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, effect, inject, signal, untracked, 
 import { CommonModule } from '@angular/common';
 import { Toolbar } from 'primeng/toolbar';
 import { Button } from 'primeng/button';
-import { type Table, TableModule, type TableRowReorderEvent } from 'primeng/table';
+import { type Table, TableModule } from 'primeng/table';
 import type { MenuBarItems, MenuBarLink } from '../types';
 import { ConfigService } from '../config/config.service';
 import { ConfirmationService } from 'primeng/api';
@@ -55,7 +55,7 @@ export class MenuEditorComponent {
       const currentSettings: MenuBarItems = untracked(this.configService.settings).customMenuLinks;
       const newSettings: MenuBarItems = this.menuLinks();
 
-      if (newSettings.length !== newSettings.length) {
+      if (currentSettings.length !== newSettings.length) {
         this.configService.updateConfig('customMenuLinks', newSettings);
         return;
       }
@@ -88,7 +88,7 @@ export class MenuEditorComponent {
   }
 
   /**
-   * Delete selected links after confirmation.
+   * Delete selected links after confirmation. Always keep the settings link.
    */
   deleteSelectedLinks() {
     this.confirmationService.confirm({
@@ -96,7 +96,12 @@ export class MenuEditorComponent {
       header: this.translocoService.translate('settings.confirm'),
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.menuLinks.update((links) => links.filter((val) => !this.selectedLinks()?.includes(val)));
+        this.menuLinks.update((links: MenuBarItems) =>
+          links.filter((val: MenuBarLink) => {
+            if (val.routerLink === '/settings') return true;
+            return !this.selectedLinks()?.includes(val);
+          }),
+        );
         this.selectedLinks.set(null);
         this.messageToastService.success(
           this.translocoService.translate('settings.success'),
@@ -168,17 +173,21 @@ export class MenuEditorComponent {
    */
   saveLink() {
     this.linkSubmitted.set(true);
+    const link: MenuBarLink = this.link();
 
-    if (this.link().id) {
-      this.menuLinks()[this.findIndexById(this.link().id)] = this.link();
+    if (link.id) {
+      this.menuLinks.update((links: MenuBarItems) => {
+        links[this.findIndexById(link.id)] = link;
+        return links;
+      });
       this.messageToastService.success(
         this.translocoService.translate('settings.success'),
         this.translocoService.translate('settings.linkUpdated'),
       );
     } else {
-      this.link().id = this.createId();
-      this.link().icon = 'pi pi-heart';
-      this.menuLinks.update((links) => [...links, this.link()]);
+      link.id = this.createId();
+      link.icon = 'pi pi-heart';
+      this.menuLinks.update((links: MenuBarItems) => [...links, link]);
       this.messageToastService.success(
         this.translocoService.translate('settings.success'),
         this.translocoService.translate('settings.linkCreated'),
@@ -189,16 +198,11 @@ export class MenuEditorComponent {
   }
 
   /**
-   * Reorder the links in the table.
-   * @param $event The event containing the link data
+   * Reorder the links in the table. PrimeNG table does automatic reordering,
+   * but doesn't update the signal. This method updates the signal with the new order.
    */
-  onRowReorder($event: TableRowReorderEvent) {
-    if (!$event.dragIndex || !$event.dropIndex) return;
-
-    const reorderedLinks: MenuBarItems = [...this.menuLinks()];
-    const movedLink: MenuBarLink = reorderedLinks[$event.dragIndex];
-    reorderedLinks.splice($event.dragIndex, 1);
-    reorderedLinks.splice($event.dropIndex, 0, movedLink);
-    this.menuLinks.set(reorderedLinks);
+  onRowReorder() {
+    const newLinks: MenuBarItems = [...this.menuLinks()];
+    this.configService.updateConfig('customMenuLinks', newLinks);
   }
 }

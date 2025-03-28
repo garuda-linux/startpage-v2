@@ -15,7 +15,7 @@
 
   <p-table
     #linkTable
-    (onRowReorder)="onRowReorder($event)"
+    (onRowReorder)="onRowReorder()"
     [(selection)]="selectedLinks"
     [currentPageReportTemplate]="t('settings.currentPageReport')"
     [globalFilterFields]="['title', 'url', 'icon']"
