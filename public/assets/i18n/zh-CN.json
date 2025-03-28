@@ -1,0 +1,155 @@
+{
+  "search": {
+    "placeholder": "搜索内容",
+    "search": "搜索"
+  },
+  "menu": {
+    "aboutUs": "关于我们",
+    "archWiki": "Arch Wiki",
+    "donate": "捐赠",
+    "forum": "论坛",
+    "garudaWiki": "Garuda Wiki",
+    "gitlab": "GitLab",
+    "home": "主页",
+    "settings": "设置",
+    "welcome": "欢迎"
+  },
+  "common": {
+    "coc": "行为准则",
+    "gitlab": "GitLab",
+    "privacyPolicy": "隐私政策"
+  },
+  "notFound": {
+    "subtitle": "未找到您要查找的页面。",
+    "title": "页面未找到"
+  },
+  "imprint": {
+    "contact": "主要联系方式",
+    "furtherContact": "其他联系方式",
+    "subtitle": "根据 § 5 TMG 的信息。",
+    "title": "版权信息"
+  },
+  "settings": {
+    "actions": "操作",
+    "activeJoke": "显示的有趣事实/借口来源",
+    "addLink": "添加链接",
+    "avatarEnabled": "启用头像",
+    "avatarUrl": "头像 URL",
+    "blurBackground": "模糊背景",
+    "confirm": "确认",
+    "confirmDelete": "您确定要删除所选链接吗？",
+    "confirmDeleteLink": "确定要删除吗",
+    "confirmHeader": "确定吗？",
+    "confirmReset": "您确定要重置所有设置吗？",
+    "confirmRestore": "您确定要恢复设置吗？",
+    "currentPageReport": "显示 {totalRecords} 条中的 {first} - {last} 条",
+    "customLinks": "自定义链接",
+    "customLogo": "自定义徽标 URL",
+    "customMenu": "自定义菜单栏链接",
+    "customTitle": "自定义页面标题",
+    "customize": "自定义部分",
+    "darkMode": "启用暗黑模式",
+    "defaultLinksLabel": "显示默认链接",
+    "deleteLink": "删除链接",
+    "fitWallpaper": "调整壁纸",
+    "general": "常规设置",
+    "icon": "图标",
+    "iconLink": "图标链接",
+    "isRequired": "必填字段！",
+    "jokesEnabledLabel": "启用笑话/事实/借口",
+    "language": "语言",
+    "linkCreated": "链接已创建",
+    "linkDeleted": "链接已删除",
+    "linkDetails": "链接详细信息",
+    "linkTitle": "标题",
+    "linksDeleted": "链接已删除",
+    "linkUpdated": "链接已更新",
+    "logoLabel": "徽标图像",
+    "manageLinks": "管理链接",
+    "name": "显示您的姓名",
+    "primeNgIcons": "可以从此处引用任意图标（单击我）",
+    "resetSettings": "重置起始页",
+    "restoreSettings": "恢复设置",
+    "saveSettings": "保存设置",
+    "search": "搜索...",
+    "searchEngineLabel": "要使用的搜索引擎",
+    "searchEngineName": "搜索引擎名称",
+    "searchEngineUrl": "搜索引擎 URL（包含 %s）",
+    "settingsReset": "设置已成功重置",
+    "settingsRestored": "设置已成功恢复",
+    "showNews": "显示 Garuda 新闻",
+    "success": "成功",
+    "themeLabel": "设计预设",
+    "title": "设置",
+    "url": "URL",
+    "wallpaperCustomLabel": "自定义壁纸 URL",
+    "wallpaperLabel": "壁纸",
+    "welcomeText": "欢迎消息"
+  },
+  "easterEggs": {
+    "easterEgg1": {
+      "title": "VOODOO AS A SERVICE (VaaS)",
+      "content": "您的数字形象现在通过安全的灵性协议受到远程影响。期待性能提升……或基于月球周期的无法解释的系统重启。"
+    },
+    "easterEgg2": {
+      "title": "CRYPTOGRAPHIC HEXES",
+      "content": "此功能受到高级巫毒加密的保护。尝试绕过将导致您的数据暂时替换为动画僵尸兔子。"
+    },
+    "easterEgg3": {
+      "title": "SMART CONTRACT WITH SPIRITS",
+      "content": "执行此功能将使您受到与（大多数）仁慈存在之间数字强制执行的契约的约束。如果您违反您的承诺，可能会损坏文件系统。"
+    },
+    "easterEgg4": {
+      "title": "ALGORITHMIC RITUALS",
+      "content": "我们的 AI 现在经过训练，可使用古老的巫毒教习俗来优化鸡蛋分配并驱逐数字小精灵。结果可能因当前行星排列而异。"
+    },
+    "easterEgg5": {
+      "title": "QUANTUM ENTANGLEMENT OF SOULS",
+      "content": "此实验性功能将您的数字存在与光谱对应物链接起来。预计会出现不可预测的行为和偶尔的幽灵般的通知。"
+    },
+    "easterEgg6": {
+      "title": "DECENTRALIZED SPIRIT NETWORK (DSN)",
+      "content": "连接到以太体存在的对等网络以提高处理能力。小心低因果报应分数的节点。"
+    },
+    "easterEgg7": {
+      "title": "BIOMETRIC VOODOO AUTHENTICATION",
+      "content": "您的数字身份现已链接到您的精神光环。未经授权的访问将引发轻微的诅咒（主要是恼人的弹出窗口）。"
+    },
+    "easterEgg8": {
+      "title": "AUGMENTED REALITY SPIRIT GUIDES",
+      "content": "召唤有用的（并且有点淘气的）loa 来帮助调试和浏览复杂的界面。可能需要提供虚拟装饰品。"
+    },
+    "easterEgg9": {
+      "title": "MACHINE LEARNING ORACLES",
+      "content": "咨询古代数字灵魂以获取预测分析和未来趋势。准确性不能保证，尤其是关于巧克力的可用性。"
+    },
+    "easterEgg10": {
+      "title": "SERVER-SIDE SORCERY",
+      "content": "此操作将在后端调用强大的巫毒魔法。请不要看数字窗帘后面。它可能包含令人不安的依赖关系。"
+    },
+    "easterEgg11": {
+      "title": "404 ERROR: SOUL NOT FOUND",
+      "content": "正在尝试使用古代咒语进行恶魔数据检索。请检查与灵界的连接并重试。可能包含意想不到的祝福……或诅咒。"
+    },
+    "easterEgg12": {
+      "title": "KERNEL PANIC!",
+      "content": "淘气的 loa 缠住了系统。症状包括随机出现鸡蛋、光标不受控制地颤抖和二进制耳语。驱魔协议已启动……请勿拔掉插头。"
+    },
+    "easterEgg13": {
+      "title": "FIREWALL BREACHED!",
+      "content": "恶意实体试图注入涂有巧克力的恶意软件。已部署巫毒教对策。预计会意外地将浏览器重定向到闹鬼的糖果店。"
+    },
+    "easterEgg14": {
+      "title": "UPDATING DEMONS...",
+      "content": "请勿中断仪式。这可能包括用遗忘的编程语言吟唱咒语以及牺牲陈旧的 Peeps 来安抚更新服务器的灵魂。"
+    },
+    "easterEgg15": {
+      "title": "CAPTCHA CHALLENGE",
+      "content": "通过识别包含圣水和战略性放置的巫毒娃娃的所有图像来证明您不是被附身的自动机。失败可能会导致来自冥界的随机弹出窗口。"
+    },
+    "easterEgg16": {
+      "title": "404 ERROR: SOUL NOT FOUND",
+      "content": "正在尝试使用古代咒语进行恶魔数据检索。请检查与灵界的连接并重试。可能包含意想不到的祝福……或诅咒。"
+    }
+  }
+}

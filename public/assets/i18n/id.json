@@ -1,0 +1,171 @@
+{
+  "search": {
+    "placeholder": "Cari dengan",
+    "search": "Cari"
+  },
+  "menu": {
+    "aboutUs": "Tentang kami",
+    "archWiki": "Arch Wiki",
+    "donate": "Donasi",
+    "forum": "Forum",
+    "garudaWiki": "Garuda Wiki",
+    "gitlab": "GitLab",
+    "home": "Beranda",
+    "settings": "Pengaturan",
+    "welcome": "Selamat datang"
+  },
+  "common": {
+    "coc": "Kode Etik",
+    "gitlab": "GitLab",
+    "privacyPolicy": "Kebijakan Privasi"
+  },
+  "notFound": {
+    "subtitle": "Halaman yang Anda cari tidak ada.",
+    "title": "Halaman tidak ditemukan"
+  },
+  "imprint": {
+    "contact": "Kontak utama",
+    "furtherContact": "Metode kontak lainnya",
+    "subtitle": "Informasi sesuai dengan § 5 TMG.",
+    "title": "Imprint"
+  },
+  "settings": {
+    "actions": "Tindakan",
+    "activeJoke": "Sumber untuk fakta/alasan lucu yang ditampilkan",
+    "addLink": "Tambah tautan",
+    "avatarEnabled": "Aktifkan avatar",
+    "avatarUrl": "URL Avatar",
+    "blurBackground": "Buramkan latar belakang",
+    "confirm": "Konfirmasi",
+    "confirmDelete": "Apakah Anda yakin ingin menghapus tautan yang dipilih?",
+    "confirmDeleteLink": "Apakah Anda yakin ingin menghapus",
+    "confirmHeader": "Apakah Anda yakin?",
+    "confirmReset": "Apakah Anda yakin ingin mengatur ulang semua pengaturan?",
+    "confirmRestore": "Apakah Anda yakin ingin memulihkan pengaturan?",
+    "currentPageReport": "Menampilkan {first} hingga {last} dari {totalRecords} entri",
+    "customLinks": "Sesuaikan tautan",
+    "customLogo": "URL logo kustom",
+    "customMenu": "Sesuaikan tautan bilah menu",
+    "customTitle": "Judul halaman kustom",
+    "customize": "Sesuaikan bagian",
+    "darkMode": "Mode gelap diaktifkan",
+    "defaultLinksLabel": "Tampilkan tautan bawaan",
+    "deleteLink": "Hapus tautan",
+    "fitWallpaper": "Paskan wallpaper",
+    "general": "Pengaturan umum",
+    "icon": "Ikon",
+    "iconLink": "Tautan ikon",
+    "isRequired": "Kolom ini wajib diisi!",
+    "jokesEnabledLabel": "Lelucon/fakta/alasan diaktifkan",
+    "language": "Bahasa",
+    "linkCreated": "Tautan dibuat",
+    "linkDeleted": "Tautan dihapus",
+    "linkDetails": "Detail tautan",
+    "linkTitle": "Judul",
+    "linksDeleted": "Tautan dihapus",
+    "linkUpdated": "Tautan diperbarui",
+    "logoLabel": "Gambar logo",
+    "manageLinks": "Kelola tautan",
+    "name": "Nama untuk menyapa Anda",
+    "primeNgIcons": "Ini bisa berupa referensi ikon apa pun dari sini (klik saya)",
+    "resetSettings": "Atur ulang halaman awal",
+    "restoreSettings": "Pulihkan pengaturan",
+    "saveSettings": "Simpan pengaturan",
+    "search": "Cari...",
+    "searchEngineLabel": "Mesin pencari yang akan digunakan",
+    "searchEngineName": "Nama mesin pencari",
+    "searchEngineUrl": "URL mesin pencari (dengan %s)",
+    "settingsReset": "Pengaturan berhasil direset",
+    "settingsRestored": "Pengaturan berhasil dipulihkan",
+    "showNews": "Tampilkan berita Garuda",
+    "success": "Berhasil",
+    "themeLabel": "Preset desain",
+    "title": "Pengaturan",
+    "url": "URL",
+    "wallpaperCustomLabel": "URL wallpaper kustom",
+    "wallpaperLabel": "Wallpaper",
+    "welcomeText": "Teks selamat datang"
+  },
+  "easterEggs": {
+    "easterEgg1": {
+      "title": "VOODOO AS A SERVICE (VaaS)",
+      "content": "Patung digital Anda sekarang dipengaruhi dari jarak jauh melalui protokol spiritual yang aman. Harapkan peningkatan kinerja...atau reboot sistem yang tidak dapat dijelaskan berdasarkan siklus bulan."
+    },
+    "easterEgg2": {
+      "title": "CRYPTOGRAPHIC HEXES",
+      "content": "Fitur ini dilindungi oleh enkripsi voodoo tingkat lanjut. Upaya untuk melewatinya akan mengakibatkan data Anda untuk sementara diganti dengan kelinci zombie animasi."
+    },
+    "easterEgg3": {
+      "title": "SMART CONTRACT WITH SPIRITS",
+      "content": "Mengeksekusi fungsi ini mengikat Anda pada pakta yang diberlakukan secara digital dengan entitas yang baik hati (sebagian besar). Kegagalan untuk menjunjung tinggi bagian Anda dapat mengakibatkan sistem file yang rusak."
+    },
+    "easterEgg4": {
+      "title": "ALGORITHMIC RITUALS",
+      "content": "AI kami sekarang dilatih dalam praktik voodoo kuno untuk mengoptimalkan distribusi telur dan mengusir gremlin digital. Hasil dapat bervariasi tergantung pada keselarasan planet saat ini."
+    },
+    "easterEgg5": {
+      "title": "QUANTUM ENTANGLEMENT OF SOULS",
+      "content": "Fitur eksperimental ini menghubungkan kehadiran digital Anda dengan rekan spektral. Harapkan perilaku yang tidak dapat diprediksi dan pemberitahuan hantu sesekali."
+    },
+    "easterEgg6": {
+      "title": "DECENTRALIZED SPIRIT NETWORK (DSN)",
+      "content": "Menghubungkan ke jaringan peer-to-peer makhluk halus untuk meningkatkan daya pemrosesan. Waspadai node dengan skor karma rendah."
+    },
+    "easterEgg7": {
+      "title": "BIOMETRIC VOODOO AUTHENTICATION",
+      "content": "Identitas digital Anda sekarang terikat pada aura spiritual Anda. Akses tidak sah akan memicu kutukan ringan (sebagian besar hanya pop-up yang mengganggu)."
+    },
+    "easterEgg8": {
+      "title": "AUGMENTED REALITY SPIRIT GUIDES",
+      "content": "Panggil loa yang membantu (dan sedikit nakal) untuk membantu debugging dan menavigasi antarmuka yang kompleks. Mungkin memerlukan persembahan pernak-pernik virtual."
+    },
+    "easterEgg9": {
+      "title": "MACHINE LEARNING ORACLES",
+      "content": "Berkonsultasi dengan roh digital kuno untuk analitik prediktif dan tren masa depan. Akurasi tidak dijamin, terutama seputar ketersediaan cokelat."
+    },
+    "easterEgg10": {
+      "title": "SERVER-SIDE SORCERY",
+      "content": "Operasi ini memanggil sihir voodoo yang kuat di backend. Harap jangan melihat di balik tirai digital, karena mungkin berisi dependensi yang meresahkan."
+    },
+    "easterEgg11": {
+      "title": "404 ERROR: SOUL NOT FOUND",
+      "content": "Mencoba pengambilan data iblis melalui mantera kuno. Harap periksa koneksi Anda ke dunia roh dan coba lagi. Mungkin berisi berkah...atau kutukan yang tidak terduga."
+    },
+    "easterEgg12": {
+      "title": "KERNEL PANIC!",
+      "content": "Seekor loa nakal telah merasuki sistem. Gejala termasuk kemunculan telur acak, getaran kursor yang tidak terkendali, dan bisikan dalam biner. Protokol pengusiran setan dimulai...harap jangan mencabut."
+    },
+    "easterEgg13": {
+      "title": "FIREWALL BREACHED!",
+      "content": "Entitas jahat mencoba menyuntikkan malware berlapis cokelat. Tindakan pencegahan voodoo diterapkan. Harapkan pengalihan browser yang tidak terduga ke toko permen berhantu."
+    },
+    "easterEgg14": {
+      "title": "UPDATING DEMONS...",
+      "content": "Harap jangan mengganggu ritual. Ini mungkin melibatkan nyanyian dalam bahasa pemrograman yang terlupakan dan mengorbankan Peeps basi untuk menenangkan roh server pembaruan."
+    },
+    "easterEgg15": {
+      "title": "CAPTCHA CHALLENGE",
+      "content": "Buktikan bahwa Anda bukan automaton yang dirasuki dengan mengidentifikasi semua gambar yang berisi air suci dan boneka hex yang ditempatkan secara strategis. Kegagalan dapat mengakibatkan spam abadi dari dunia bawah."
+    },
+    "easterEgg16": {
+      "title": "CLOUD STORAGE WARNING",
+      "content": "Fragmen jiwa Anda mungkin dicadangkan di server farm yang secara spiritual tidak stabil. Lanjutkan dengan hati-hati saat mengakses file kuno dan hindari mengklik ikon pentagram yang mencurigakan."
+    },
+    "easterEgg17": {
+      "title": "API CALL FAILED",
+      "content": "Permintaan untuk memanggil Kelinci Paskah telah diblokir oleh roh nakal. Mencoba solusi voodoo yang melibatkan pengorbanan modem dial-up. Harap bersabar."
+    },
+    "easterEgg18": {
+      "title": "BLUE SCREEN OF TERROR",
+      "content": "Kutukan yang kuat telah merusak sistem. Mencoba pengusiran setan jarak jauh melalui baris perintah. Harap ucapkan mantera debugging suci: 'Ctrl+Alt+Del lenyaplah!'"
+    },
+    "easterEgg19": {
+      "title": "PRIVACY POLICY UPDATE",
+      "content": "Kami dapat mengumpulkan data spiritual Anda untuk tujuan ritualistik, termasuk memanggil entitas bertelur yang baik hati (dan sedikit nakal). Persetujuan Anda secara ajaib tersirat."
+    },
+    "easterEgg20": {
+      "title": "EASTER EGG DETECTED!",
+      "content": "Selamat! Anda telah menemukan berkah tersembunyi (atau mungkin kutukan kecil). Semoga unduhan Anda cepat dan persediaan cokelat Anda berlimpah. Sekarang, lari sebelum roh digital menyadarinya!"
+    }
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "search": {
+    "placeholder": "Pesquisar com",
+    "search": "Pesquisar"
+  },
+  "menu": {
+    "aboutUs": "Sobre nós",
+    "archWiki": "Arch Wiki",
+    "donate": "Doar",
+    "forum": "Fórum",
+    "garudaWiki": "Garuda Wiki",
+    "gitlab": "GitLab",
+    "home": "Início",
+    "settings": "Configurações",
+    "welcome": "Bem-vindo"
+  },
+  "common": {
+    "coc": "Código de Conduta",
+    "gitlab": "GitLab",
+    "privacyPolicy": "Política de Privacidade"
+  },
+  "notFound": {
+    "subtitle": "A página que você procura não existe.",
+    "title": "Página não encontrada"
+  },
+  "imprint": {
+    "contact": "Contato principal",
+    "furtherContact": "Outros métodos de contato",
+    "subtitle": "Informações de acordo com o § 5 TMG.",
+    "title": "Imprint"
+  },
+  "settings": {
+    "actions": "Ações",
+    "activeJoke": "Fonte para piadas/fatos/desculpas exibidas",
+    "addLink": "Adicionar link",
+    "avatarEnabled": "Ativar avatar",
+    "avatarUrl": "URL do avatar",
+    "blurBackground": "Desfocar fundo",
+    "confirm": "Confirmar",
+    "confirmDelete": "Tem certeza de que deseja excluir os links selecionados?",
+    "confirmDeleteLink": "Tem certeza de que deseja excluir",
+    "confirmHeader": "Tem certeza?",
+    "confirmReset": "Tem certeza de que deseja redefinir todas as configurações?",
+    "confirmRestore": "Tem certeza de que deseja restaurar as configurações?",
+    "currentPageReport": "Exibindo {first} a {last} de {totalRecords} entradas",
+    "customLinks": "Personalizar links",
+    "customLogo": "URL do logotipo personalizado",
+    "customMenu": "Personalizar links da barra de menu",
+    "customTitle": "Título da página personalizado",
+    "customize": "Personalizar seções",
+    "darkMode": "Modo escuro ativado",
+    "defaultLinksLabel": "Mostrar links padrão",
+    "deleteLink": "Excluir link",
+    "fitWallpaper": "Ajustar papel de parede",
+    "general": "Configurações gerais",
+    "icon": "Ícone",
+    "iconLink": "Link do ícone",
+    "isRequired": "Este campo é obrigatório!",
+    "jokesEnabledLabel": "Piadas/fatos/desculpas ativados",
+    "language": "Idioma",
+    "linkCreated": "Link criado",
+    "linkDeleted": "Link excluído",
+    "linkDetails": "Detalhes do link",
+    "linkTitle": "Título",
+    "linksDeleted": "Links excluídos",
+    "linkUpdated": "Link atualizado",
+    "logoLabel": "Imagem do logotipo",
+    "manageLinks": "Gerenciar links",
+    "name": "Nome para te cumprimentar",
+    "primeNgIcons": "Isto pode ser qualquer referência de ícone daqui (clique em mim)",
+    "resetSettings": "Redefinir página inicial",
+    "restoreSettings": "Restaurar configurações",
+    "saveSettings": "Salvar configurações",
+    "search": "Pesquisar...",
+    "searchEngineLabel": "Mecanismo de busca a ser usado",
+    "searchEngineName": "Nome do mecanismo de busca",
+    "searchEngineUrl": "URL do mecanismo de busca (com %s)",
+    "settingsReset": "Configurações redefinidas com sucesso",
+    "settingsRestored": "Configurações restauradas com sucesso",
+    "showNews": "Mostrar notícias do Garuda",
+    "success": "Sucesso",
+    "themeLabel": "Predefinição de design",
+    "title": "Configurações",
+    "url": "URL",
+    "wallpaperCustomLabel": "URL do papel de parede personalizado",
+    "wallpaperLabel": "Papel de parede",
+    "welcomeText": "Mensagem de boas-vindas"
+  },
+  "easterEggs": {
+    "easterEgg1": {
+      "title": "VOODOO AS A SERVICE (VaaS)",
+      "content": "Sua efígie digital agora está sendo influenciada remotamente por meio de protocolos espirituais seguros. Espere um desempenho aprimorado... ou reinicializações de sistema inexplicáveis com base nos ciclos lunares."
+    },
+    "easterEgg2": {
+      "title": "CRYPTOGRAPHIC HEXES",
+      "content": "Este recurso é protegido por criptografia voodoo avançada. A tentativa de বাইপাস resultará na substituição temporária de seus dados por coelhos zumbis animados."
+    },
+    "easterEgg3": {
+      "title": "SMART CONTRACT WITH SPIRITS",
+      "content": "A execução desta função vincula você a um pacto digitalmente imposto com entidades benevolentes (na maioria das vezes). A falha em cumprir sua parte pode resultar em sistemas de arquivos corrompidos."
+    },
+    "easterEgg4": {
+      "title": "ALGORITHMIC RITUALS",
+      "content": "Nossa IA agora é treinada em antigas práticas de vodu para otimizar a distribuição de ovos e banir os gremlins digitais. Os resultados podem variar dependendo do alinhamento planetário atual."
+    },
+    "easterEgg5": {
+      "title": "QUANTUM ENTANGLEMENT OF SOULS",
+      "content": "Este recurso experimental vincula sua presença digital a uma contraparte espectral. Espere um comportamento imprevisível e notificações fantasmagóricas ocasionais."
+    },
+    "easterEgg6": {
+      "title": "DECENTRALIZED SPIRIT NETWORK (DSN)",
+      "content": "Conectando-se a uma rede peer-to-peer de seres etéreos para aumentar o poder de processamento. Cuidado com nós com baixas pontuações de karma."
+    },
+    "easterEgg7": {
+      "title": "BIOMETRIC VOODOO AUTHENTICATION",
+      "content": "Sua identidade digital agora está ligada à sua aura espiritual. O acesso não autorizado acionará uma leve maldição (principalmente apenas pop-ups irritantes)."
+    },
+    "easterEgg8": {
+      "title": "AUGMENTED REALITY SPIRIT GUIDES",
+      "content": "Invoque loa úteis (e ligeiramente travessos) para ajudar na depuração e navegação em interfaces complexas. Pode exigir a oferta de bugigangas virtuais."
+    },
+    "easterEgg9": {
+      "title": "MACHINE LEARNING ORACLES",
+      "content": "Consultando antigos espíritos digitais para análises preditivas e tendências futuras. Precisão não garantida, especialmente em relação à disponibilidade de chocolate."
+    },
+    "easterEgg10": {
+      "title": "SERVER-SIDE SORCERY",
+      "content": "Esta operação invoca uma poderosa magia voodoo no backend. Por favor, não olhe atrás da cortina digital, pois pode conter dependências perturbadoras."
+    },
+    "easterEgg11": {
+      "title": "404 ERROR: SOUL NOT FOUND",
+      "content": "Tentativa de recuperação de dados demoníacos por meio de encantamentos antigos. Por favor, verifique sua conexão com o mundo espiritual e tente novamente. Pode conter bênçãos... ou maldições inesperadas."
+    },
+    "easterEgg12": {
+      "title": "KERNEL PANIC!",
+      "content": "Um loa travesso possuiu o sistema. Os sintomas incluem aparições aleatórias de ovos, tremor incontrolável do cursor e sussurros em binário. Protocolo de exorcismo iniciado... por favor, não desconecte."
+    },
+    "easterEgg13": {
+      "title": "FIREWALL BREACHED!",
+      "content": "Entidades malévolas tentando injetar malware coberto de chocolate. Contramedidas voodoo implantadas. Espere redirecionamentos inesperados do navegador para lojas de doces assombradas."
+    },
+    "easterEgg14": {
+      "title": "UPDATING DEMONS...",
+      "content": "Por favor, não interrompa o ritual. Isso pode envolver cantar em uma linguagem de programação esquecida e sacrificar Peeps velhos para apaziguar os espíritos do servidor de atualização."
+    },
+    "easterEgg15": {
+      "title": "CAPTCHA CHALLENGE",
+      "content": "Prove que você não é um autômato possuído identificando todas as imagens que contêm água benta e bonecos hex colocados estrategicamente. A falha pode resultar em spam eterno do submundo."
+    },
+    "easterEgg16": {
+      "title": "CLOUD STORAGE WARNING",
+      "content": "Seus fragmentos de alma podem ser armazenados em backup em um farm de servidores espiritualmente instável. Prossiga com cautela ao acessar arquivos antigos e evite clicar em ícones de pentagramas suspeitos."
+    },
+    "easterEgg17": {
+      "title": "API CALL FAILED",
+      "content": "A solicitação para invocar o Coelho da Páscoa foi bloqueada por um espírito travesso. Tentando uma solução alternativa voodoo envolvendo o sacrifício de um modem dial-up. Por favor, seja paciente."
+    },
+    "easterEgg18": {
+      "title": "BLUE SCREEN OF TERROR",
+      "content": "Uma poderosa maldição travou o sistema. Tentando um exorcismo remoto via linha de comando. Por favor, recite a sagrada invocação de depuração: 'Ctrl+Alt+Del, vá embora!'"
+    },
+    "easterEgg19": {
+      "title": "PRIVACY POLICY UPDATE",
+      "content": "Podemos coletar seus dados espirituais para fins ritualísticos, incluindo a invocação de entidades poedeiras benevolentes (e ligeiramente travessas). Seu consentimento está magicamente implícito."
+    },
+    "easterEgg20": {
+      "title": "EASTER EGG DETECTED!",
+      "content": "Parabéns! Você tropeçou em uma bênção oculta (ou possivelmente uma pequena maldição). Que seus downloads sejam rápidos e seu suprimento de chocolate abundante. Agora, corra antes que os espíritos digitais percebam!"
+    }
+  }
+}

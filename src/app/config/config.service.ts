@@ -6,6 +6,7 @@ import { menubarItems, serviceLinks } from '../../../config';
 import { usePreset } from '@primeng/themes';
 import { backgroundColors, scrollbarColors, themes } from '../theme';
 import { DOCUMENT } from '@angular/common';
+import { TranslocoService } from '@jsverse/transloco';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +26,7 @@ export class ConfigService {
     darkMode: true,
     fitWallpaper: true,
     jokesEnabled: true,
+    language: 'en',
     logo: 'assets/logos/violet-orange.png',
     logoUrl: 'assets/logos/violet-orange.png',
     searchEngineName: '',
@@ -43,6 +45,7 @@ export class ConfigService {
 
   private readonly document = inject(DOCUMENT);
   private readonly title = inject(Title);
+  private readonly translocoService = inject(TranslocoService);
   private readonly wallpaperService = inject(WallpaperService);
 
   constructor() {
@@ -183,6 +186,11 @@ export class ConfigService {
       }
       case 'darkMode': {
         this.handleDarkMode(value as boolean);
+        break;
+      }
+      case 'language': {
+        this.translocoService.setActiveLang(value);
+        break;
       }
     }
   }

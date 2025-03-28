@@ -30,6 +30,7 @@ import { MenuEditorComponent } from '../menu-editor/menu-editor.component';
 import { AvailableJokeSources, jokeSources } from '../jokes/jokes';
 import { type AppTheme, themes } from '../theme';
 import { LinksEditorComponent } from '../links-editor/links-editor.component';
+import { LangPipe } from '../lang/lang.pipe';
 
 @Component({
   selector: 'app-settings',
@@ -51,7 +52,7 @@ import { LinksEditorComponent } from '../links-editor/links-editor.component';
   ],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.css',
-  providers: [MessageService, ConfirmationService],
+  providers: [MessageService, ConfirmationService, LangPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsComponent {
@@ -66,6 +67,7 @@ export class SettingsComponent {
   darkMode = signal<boolean>(true);
   fitWallpaper = signal<string>('cover');
   jokesEnabled = signal<boolean>(true);
+  language = signal<string>('en');
   logo = signal<string>('default');
   logoUrl = signal<string>('');
   searchEngineName = signal<string>('');
@@ -76,6 +78,7 @@ export class SettingsComponent {
   wallpaperUrl = signal<string>('');
   welcomeText = signal<string>('');
 
+  protected readonly availableLanguages: { name: string; prettyName: string }[] = [];
   protected readonly availableThemes = Object.keys(themes).sort();
   protected readonly configService = inject(ConfigService);
   protected readonly jokeSources = jokeSources.sort((a, b) => a.name.localeCompare(b.name));
@@ -88,6 +91,7 @@ export class SettingsComponent {
   private readonly confirmationService = inject(ConfirmationService);
   private readonly document = inject(DOCUMENT);
   private readonly el = inject(ElementRef);
+  private readonly langPipe = inject(LangPipe);
   private readonly messageToastService = inject(MessageToastService);
   private readonly renderer = inject(Renderer2);
   private readonly translocoService = inject(TranslocoService);
@@ -104,6 +108,14 @@ export class SettingsComponent {
         }
       }
     });
+
+    for (const lang of this.translocoService.getAvailableLangs() as string[]) {
+      this.availableLanguages.push({
+        name: lang,
+        prettyName: this.langPipe.transform(lang),
+      });
+    }
+    this.language.set(this.translocoService.getActiveLang());
   }
 
   /**

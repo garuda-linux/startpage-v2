@@ -1,9 +1,9 @@
 import { Pipe, type PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'langPipe',
+  name: 'lang',
 })
-export class LangPipePipe implements PipeTransform {
+export class LangPipe implements PipeTransform {
   transform(value: string): string {
     switch (value) {
       case 'en':

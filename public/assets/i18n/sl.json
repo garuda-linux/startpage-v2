@@ -1,0 +1,171 @@
+{
+  "search": {
+    "placeholder": "Išči z",
+    "search": "Išči"
+  },
+  "menu": {
+    "aboutUs": "O nas",
+    "archWiki": "Arch Wiki",
+    "donate": "Doniraj",
+    "forum": "Forum",
+    "garudaWiki": "Garuda Wiki",
+    "gitlab": "GitLab",
+    "home": "Domov",
+    "settings": "Nastavitve",
+    "welcome": "Dobrodošli"
+  },
+  "common": {
+    "coc": "Kodeks ravnanja",
+    "gitlab": "GitLab",
+    "privacyPolicy": "Politika zasebnosti"
+  },
+  "notFound": {
+    "subtitle": "Stran, ki jo iščete, ne obstaja.",
+    "title": "Stran ni najdena"
+  },
+  "imprint": {
+    "contact": "Glavni kontakt",
+    "furtherContact": "Nadaljnje možnosti kontakta",
+    "subtitle": "Informacije v skladu s § 5 TMG.",
+    "title": "Impresum"
+  },
+  "settings": {
+    "actions": "Dejanja",
+    "activeJoke": "Vir prikazanih zabavnih dejstev/izgovorov",
+    "addLink": "Dodaj povezavo",
+    "avatarEnabled": "Omogoči avatar",
+    "avatarUrl": "URL avatarja",
+    "blurBackground": "Zamegli ozadje",
+    "confirm": "Potrdi",
+    "confirmDelete": "Ste prepričani, da želite izbrisati izbrane povezave?",
+    "confirmDeleteLink": "Ste prepričani, da želite izbrisati",
+    "confirmHeader": "Ste prepričani?",
+    "confirmReset": "Ste prepričani, da želite ponastaviti vse nastavitve?",
+    "confirmRestore": "Ste prepričani, da želite obnoviti nastavitve?",
+    "currentPageReport": "Prikazujem {first} do {last} od {totalRecords} vnosov",
+    "customLinks": "Prilagodi povezave",
+    "customLogo": "URL logotipa po meri",
+    "customMenu": "Prilagodi povezave menijske vrstice",
+    "customTitle": "Naslov strani po meri",
+    "customize": "Prilagodi razdelke",
+    "darkMode": "Omogočen temni način",
+    "defaultLinksLabel": "Pokaži privzete povezave",
+    "deleteLink": "Izbriši povezavo",
+    "fitWallpaper": "Prilagodi ozadje",
+    "general": "Splošne nastavitve",
+    "icon": "Ikona",
+    "iconLink": "Povezava ikone",
+    "isRequired": "To polje je obvezno!",
+    "jokesEnabledLabel": "Omogočeni vici/dejstva/izgovori",
+    "language": "Jezik",
+    "linkCreated": "Povezava ustvarjena",
+    "linkDeleted": "Povezava izbrisana",
+    "linkDetails": "Podrobnosti povezave",
+    "linkTitle": "Naslov",
+    "linksDeleted": "Povezave izbrisane",
+    "linkUpdated": "Povezava posodobljena",
+    "logoLabel": "Slika logotipa",
+    "manageLinks": "Upravljaj povezave",
+    "name": "Ime, s katerim vas bomo pozdravili",
+    "primeNgIcons": "To je lahko katera koli referenca ikone od tukaj (kliknite me)",
+    "resetSettings": "Ponastavi začetno stran",
+    "restoreSettings": "Obnovi nastavitve",
+    "saveSettings": "Shrani nastavitve",
+    "search": "Išči...",
+    "searchEngineLabel": "Iskalnik za uporabo",
+    "searchEngineName": "Ime iskalnika",
+    "searchEngineUrl": "URL iskalnika (z %s)",
+    "settingsReset": "Nastavitve uspešno ponastavljene",
+    "settingsRestored": "Nastavitve uspešno obnovljene",
+    "showNews": "Pokaži novice Garuda",
+    "success": "Uspeh",
+    "themeLabel": "Prednastavitev dizajna",
+    "title": "Nastavitve",
+    "url": "URL",
+    "wallpaperCustomLabel": "URL ozadja po meri",
+    "wallpaperLabel": "Ozadje",
+    "welcomeText": "Besedilo dobrodošlice"
+  },
+  "easterEggs": {
+    "easterEgg1": {
+      "title": "VOODOO AS A SERVICE (VaaS)",
+      "content": "Vaša digitalna podoba je zdaj na daljavo pod vplivom varnih duhovnih protokolov. Pričakujte izboljšano delovanje ... ali nepojasnjene ponovne zagone sistema, ki temeljijo na luninih ciklih."
+    },
+    "easterEgg2": {
+      "title": "CRYPTOGRAPHIC HEXES",
+      "content": "Ta funkcija je zaščitena z naprednim vudu šifriranjem. Poskus obvoda bo povzročil začasno zamenjavo vaših podatkov z animiranimi zombi zajci."
+    },
+    "easterEgg3": {
+      "title": "SMART CONTRACT WITH SPIRITS",
+      "content": "Izvedba te funkcije vas veže na digitalno uveljavljeno pogodbo z (večinoma) dobronamernimi entitetami. Neizpolnitev vaše strani lahko povzroči poškodovane datotečne sisteme."
+    },
+    "easterEgg4": {
+      "title": "ALGORITHMIC RITUALS",
+      "content": "Naša umetna inteligenca je zdaj usposobljena v starodavnih vudu praksah za optimizacijo distribucije jajc in izgon digitalnih škratov. Rezultati se lahko razlikujejo glede na trenutno planetarno poravnavo."
+    },
+    "easterEgg5": {
+      "title": "QUANTUM ENTANGLEMENT OF SOULS",
+      "content": "Ta eksperimentalna funkcija povezuje vašo digitalno prisotnost s spektralnim dvojnikom. Pričakujte nepredvidljivo vedenje in občasna prikazenska obvestila."
+    },
+    "easterEgg6": {
+      "title": "DECENTRALIZED SPIRIT NETWORK (DSN)",
+      "content": "Povezovanje z enakovrednim omrežjem eteričnih bitij za izboljšano procesorsko moč. Pazite se vozlišč z nizkimi ocenami karme."
+    },
+    "easterEgg7": {
+      "title": "BIOMETRIC VOODOO AUTHENTICATION",
+      "content": "Vaša digitalna identiteta je zdaj povezana z vašo duhovno avro. Neavtoriziran dostop bo sprožil rahlo prekletstvo (večinoma samo nadležna pojavna okna)."
+    },
+    "easterEgg8": {
+      "title": "AUGMENTED REALITY SPIRIT GUIDES",
+      "content": "Prikličite koristne (in rahlo nagajive) loa, da vam pomagajo pri odpravljanju napak in krmarjenju po kompleksnih vmesnikih. Morda bo potrebno ponuditi virtualne malenkosti."
+    },
+    "easterEgg9": {
+      "title": "MACHINE LEARNING ORACLES",
+      "content": "Posvetovanje s starodavnimi digitalnimi duhovi za napovedno analitiko in prihodnje trende. Natančnost ni zagotovljena, zlasti glede razpoložljivosti čokolade."
+    },
+    "easterEgg10": {
+      "title": "SERVER-SIDE SORCERY",
+      "content": "Ta operacija prikliče močno vudu magijo na zaledju. Prosimo, ne glejte za digitalno zaveso, saj lahko vsebuje vznemirjajoče odvisnosti."
+    },
+    "easterEgg11": {
+      "title": "404 ERROR: SOUL NOT FOUND",
+      "content": "Poskus demonskega pridobivanja podatkov prek starodavnih invokacij. Prosimo, preverite svojo povezavo z duhovnim svetom in poskusite znova. Lahko vsebuje nepričakovane blagoslove ... ali prekletstva."
+    },
+    "easterEgg12": {
+      "title": "KERNEL PANIC!",
+      "content": "Nagajiv loa je obsedel sistem. Simptomi vključujejo naključne pojave jajc, nenadzorovano drgetanje kurzorja in šepetanja v binarni kodi. Protokol eksorcizma se je začel ... prosimo, ne izključujte."
+    },
+    "easterEgg13": {
+      "title": "FIREWALL BREACHED!",
+      "content": "Zlonamerne entitete poskušajo vbrizgati zlonamerno programsko opremo, prekrito s čokolado. Uvedeni so vudu protiukrepi. Pričakujte nepričakovane preusmeritve brskalnika na strašljive trgovine s sladkarijami."
+    },
+    "easterEgg14": {
+      "title": "UPDATING DEMONS...",
+      "content": "Prosimo, ne prekinjajte rituala. To lahko vključuje petje v pozabljenem programskem jeziku in žrtvovanje starega Peepsa, da bi pomirili duhove strežnika za posodobitve."
+    },
+    "easterEgg15": {
+      "title": "CAPTCHA CHALLENGE",
+      "content": "Dokažite, da niste obsedeni avtomat, tako da prepoznate vse slike, ki vsebujejo sveto vodo in strateško nameščene heksne lutke. Neuspeh lahko povzroči večno neželeno pošto iz podzemlja."
+    },
+    "easterEgg16": {
+      "title": "CLOUD STORAGE WARNING",
+      "content": "Vaši fragmenti duše so morda varnostno kopirani v duhovno nestabilni strežniški farmi. Pri dostopanju do starih datotek ravnajte previdno in se izogibajte klikanju sumljivih ikon pentagramov."
+    },
+    "easterEgg17": {
+      "title": "API CALL FAILED",
+      "content": "Zahteva za priklic velikonočnega zajca je bila blokirana s strani nagajivega duha. Poskušamo z vudu rešitvijo, ki vključuje žrtvovanje modema za klicno povezavo. Prosimo, bodite potrpežljivi."
+    },
+    "easterEgg18": {
+      "title": "BLUE SCREEN OF TERROR",
+      "content": "Močno prekletstvo je zrušilo sistem. Poskušamo z oddaljenim eksorcizmom prek ukazne vrstice. Prosimo, izgovorite sveto invokacijo za odpravljanje napak: 'Ctrl+Alt+Del, izgini!'"
+    },
+    "easterEgg19": {
+      "title": "PRIVACY POLICY UPDATE",
+      "content": "Vaše duhovne podatke lahko zbiramo za ritualne namene, vključno s priklicem dobronamernih (in rahlo nagajivih) bitij, ki ležejo jajca. Vaše soglasje je magično implicirano."
+    },
+    "easterEgg20": {
+      "title": "EASTER EGG DETECTED!",
+      "content": "Čestitamo! Naleteli ste na skriti blagoslov (ali morda manjšo prekletstvo). Naj bodo vaši prenosi hitri in vaša zaloga čokolade obilna. Zdaj pa bežite, preden vas digitalni duhovi opazijo!"
+    }
+  }
+}

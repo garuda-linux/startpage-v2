@@ -111,6 +111,19 @@
         </div>
 
         <div class="flex flex-col gap-2">
+          <label for="search-engine">{{ t('settings.language') }}</label>
+          <p-select
+            (ngModelChange)="updateConfig('language', $event)"
+            [(ngModel)]="language"
+            [options]="availableLanguages"
+            fluid
+            id="language"
+            optionLabel="prettyName"
+            optionValue="name"
+          />
+        </div>
+
+        <div class="flex flex-col gap-2">
           <label for="search-engine">{{ t('settings.searchEngineLabel') }}</label>
           <p-select
             (ngModelChange)="updateConfig('activeSearchEngine', $event)"

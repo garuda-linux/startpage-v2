@@ -16,6 +16,7 @@ export interface AppSettings {
   darkMode: boolean;
   fitWallpaper: boolean;
   jokesEnabled: boolean;
+  language: string;
   logo: string;
   logoUrl: string;
   searchEngineName: string;
