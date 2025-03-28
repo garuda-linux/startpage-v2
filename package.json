@@ -16,13 +16,14 @@
   },
   "scripts": {
     "build": "nx build",
-    "start": "nx serve --proxy-config src/proxy.conf.json",
+    "deploy": "pnpm build && wrangler pages deploy --branch=main",
+    "format": "prettier -w .",
     "i18n:extract": "transloco-keys-manager extract",
     "i18n:find": "transloco-keys-manager find",
     "lint": "nx lint",
-    "format": "prettier -w .",
-    "translate-main": "jsontt i18n/en.json --module google --from en --to am ar es eu fr hu id it ja ko pt sl sv sw zh-CN gl hi ru pl tr",
-    "test": "nx test"
+    "start": "nx serve --proxy-config src/proxy.conf.json",
+    "test": "nx test",
+    "translate-main": "jsontt i18n/en.json --module google --from en --to am ar es eu fr hu id it ja ko pt sl sv sw zh-CN gl hi ru pl tr"
   },
   "dependencies": {
     "@angular/animations": "~19.2.4",
