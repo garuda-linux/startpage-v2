@@ -44,7 +44,16 @@ p {
 .p-inputtext,
 .p-button,
 .p-panel {
-  @apply backdrop-blur-md;
+  @apply backdrop-blur-sm;
+}
+
+.p-panel,
+.p-toolbar {
+  background: unset !important;
+}
+
+.p-toolbar {
+  border: unset !important;
 }
 
 .p-avatar {
