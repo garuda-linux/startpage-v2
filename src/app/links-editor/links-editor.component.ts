@@ -170,14 +170,20 @@ export class LinksEditorComponent {
     this.linkSubmitted.set(true);
 
     if (this.link().id) {
-      this.customLinks()[this.findIndexById(this.link().id)] = this.link();
+      this.customLinks.update((links) => {
+        const index: number = this.findIndexById(this.link().id);
+        if (index !== -1) {
+          links[index] = this.link();
+        }
+        return [...links];
+      });
       this.messageToastService.success(
         this.translocoService.translate('settings.success'),
         this.translocoService.translate('settings.linkUpdated'),
       );
     } else {
       this.link().id = this.createId();
-      this.link().icon = '/assets/garuda-purple.svg';
+      if (!this.link().icon) this.link().icon = '/assets/garuda-purple.svg';
       this.customLinks.update((links) => [...links, this.link()]);
       this.messageToastService.success(
         this.translocoService.translate('settings.success'),

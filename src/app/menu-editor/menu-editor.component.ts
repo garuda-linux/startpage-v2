@@ -178,7 +178,7 @@ export class MenuEditorComponent {
     if (link.id) {
       this.menuLinks.update((links: MenuBarItems) => {
         links[this.findIndexById(link.id)] = link;
-        return links;
+        return [...links];
       });
       this.messageToastService.success(
         this.translocoService.translate('settings.success'),
@@ -186,7 +186,7 @@ export class MenuEditorComponent {
       );
     } else {
       link.id = this.createId();
-      link.icon = 'pi pi-heart';
+      if (!link.icon) link.icon = 'pi pi-heart';
       this.menuLinks.update((links: MenuBarItems) => [...links, link]);
       this.messageToastService.success(
         this.translocoService.translate('settings.success'),
