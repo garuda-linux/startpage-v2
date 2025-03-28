@@ -1,13 +1,6 @@
 <ng-container *transloco="let t">
   <div>
-    <img
-      [ngSrc]="configService.settings().logo ? configService.settings().logo : 'assets/garuda-purple.svg'"
-      alt="Garuda Logo"
-      class="mx-auto mb-10 mt-20"
-      height="150"
-      priority
-      width="150"
-    />
+    <img [ngSrc]="logoSource()" alt="Garuda Logo" class="mx-auto mb-10 mt-20" height="150" priority width="150" />
   </div>
   <div>
     <div class="mx-auto w-3/4 md:w-1/2">

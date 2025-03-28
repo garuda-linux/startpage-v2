@@ -36,9 +36,15 @@ export class AppComponent implements OnInit {
 
   protected readonly configService = inject(ConfigService);
 
-  logoLink = computed<string>(() =>
-    this.configService.settings().logo ? this.configService.settings().logo : '/assets/garuda-purple.svg',
-  );
+  logoLink = computed(() => {
+    if (this.configService.settings().logo === 'custom') {
+      return this.configService.settings().logoUrl;
+    } else if (this.configService.settings().logo === 'none') {
+      return this.configService.settings().logo;
+    } else {
+      return 'assets/garuda-purple.svg';
+    }
+  });
 
   private readonly translationsCache = inject(TranslocoPersistTranslations);
   private readonly el = inject(ElementRef);

@@ -16,6 +16,10 @@ import { InputText } from 'primeng/inputtext';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchComponent {
+  searchTerm = signal<string>('');
+
+  protected readonly configService = inject(ConfigService);
+
   searchEngine: Signal<SearchEngineEntry> = computed(() => {
     const activeSearchEngine: string = this.configService.settings().activeSearchEngine;
     let searchEngine: SearchEngineEntry;
@@ -34,9 +38,15 @@ export class SearchComponent {
     }
     return searchEngine;
   });
-  searchTerm = signal<string>('');
-
-  protected readonly configService = inject(ConfigService);
+  logoSource = computed(() => {
+    if (this.configService.settings().logo === 'custom') {
+      return this.configService.settings().logoUrl;
+    } else if (this.configService.settings().logo === 'none') {
+      return this.configService.settings().logo;
+    } else {
+      return 'assets/garuda-purple.svg';
+    }
+  });
 
   /**
    * Open the search engine URL in a new tab with the search term.
