@@ -1,6 +1,7 @@
 import type { MenuBarItems, SearchEngineEntry, ServiceLinks } from '../types';
 import type { AvailableJokeSources } from '../jokes/jokes';
 import { AppTheme } from '../theme';
+import { AutocompleteProvider } from '../../../config';
 
 export interface AppSettings {
   activeJoke: AvailableJokeSources;
@@ -8,7 +9,9 @@ export interface AppSettings {
   activeTheme: AppTheme;
   avatarEnabled: boolean;
   avatarUrl: string;
+  autocompleteProvider: AutocompleteProvider;
   blurBackground: boolean;
+  corsProxy: string;
   customLinks: ServiceLinks;
   customMenuLinks: MenuBarItems;
   customTitle: string;

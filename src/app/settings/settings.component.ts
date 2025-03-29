@@ -10,7 +10,14 @@ import {
 } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import type { LogoList, SearchEngineList, WallpaperList } from '../types';
-import { logos, type SearchEngine, searchEngineMappings, wallpapers } from '../../../config';
+import {
+  type AutocompleteProvider,
+  autocompleteProviders,
+  logos,
+  type SearchEngine,
+  searchEngineMappings,
+  wallpapers,
+} from '../../../config';
 import { Checkbox } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
@@ -59,9 +66,11 @@ export class SettingsComponent {
   activeJoke = signal<AvailableJokeSources>('dev-excuses');
   activeSearchEngine = signal<SearchEngine>('searxng-privau');
   activeTheme = signal<AppTheme>('Catppuccin Mocha/Latte Aura');
+  autocompleteProvider = signal<AutocompleteProvider>('');
   avatarEnabled = signal<boolean>(true);
   avatarUrl = signal<string>('');
   blurBackground = signal<number>(0);
+  corsProxy = signal<string>('');
   customTitle = signal<string>('');
   defaultLinks = signal<boolean>(true);
   darkMode = signal<boolean>(true);
@@ -79,7 +88,10 @@ export class SettingsComponent {
   welcomeText = signal<string>('');
 
   protected readonly availableLanguages: { name: string; prettyName: string }[] = [];
-  protected readonly availableThemes = Object.keys(themes).sort();
+  protected readonly availableThemes: string[] = Object.keys(themes).sort();
+  protected readonly autocompleteProviders: SearchEngineList = autocompleteProviders.sort((a, b) =>
+    a.name.localeCompare(b.name),
+  );
   protected readonly configService = inject(ConfigService);
   protected readonly jokeSources = jokeSources.sort((a, b) => a.name.localeCompare(b.name));
   protected readonly logos: LogoList = logos.sort((a, b) => a.name.localeCompare(b.name));

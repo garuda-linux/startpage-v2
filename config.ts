@@ -169,6 +169,7 @@ export const serviceLinks: ServiceLinks = [
 ];
 
 export type SearchEngine = (typeof searchEngineMappings)[number]['name'] | 'custom';
+export type AutocompleteProvider = (typeof autocompleteProviders)[number]['name'];
 
 export interface SearchEngineEntry {
   name: string;
@@ -224,6 +225,25 @@ export const searchEngineMappings: SearchEngineEntry[] = [
   {
     name: 'custom',
     prettyName: 'Custom',
+    url: '',
+  },
+];
+
+// Autocomplete providers for the search engines
+export const autocompleteProviders: SearchEngineEntry[] = [
+  {
+    name: 'startpage',
+    prettyName: 'Startpage',
+    url: 'https://www.startpage.com/osuggestions?q=%s',
+  },
+  {
+    name: 'brave',
+    prettyName: 'Brave',
+    url: 'https://search.brave.com/api/suggest?q=%s',
+  },
+  {
+    name: 'none',
+    prettyName: 'None',
     url: '',
   },
 ];

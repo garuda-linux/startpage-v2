@@ -208,7 +208,7 @@ export const jokeSources = [
   },
   {
     name: 'dev-excuses',
-    prettyName: 'Dev Excuses',
+    prettyName: 'Developer Excuses',
   },
 ];
 

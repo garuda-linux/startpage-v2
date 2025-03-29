@@ -136,6 +136,24 @@
           />
         </div>
 
+        <div class="flex flex-col gap-2">
+          <label for="autocomplete-provider">{{ t('settings.autocompleteLabel') }}</label>
+          <p-select
+            (ngModelChange)="updateConfig('autocompleteProvider', $event)"
+            [(ngModel)]="autocompleteProvider"
+            [ngClass]="{
+              'ng-invalid ng-dirty':
+                configService.settings().autocompleteProvider !== 'none' &&
+                !configService.settings().corsProxy.includes('https://'),
+            }"
+            [options]="autocompleteProviders"
+            fluid
+            id="autocomplete-provider"
+            optionLabel="prettyName"
+            optionValue="name"
+          />
+        </div>
+
         @if (configService.settings().activeSearchEngine === 'custom') {
           <div class="flex flex-col gap-2">
             <label for="custom-search">{{ t('settings.searchEngineUrl') }}</label>
@@ -185,6 +203,20 @@
           />
         </div>
 
+        @if (configService.settings().autocompleteProvider !== 'none') {
+          <div class="flex flex-col gap-2">
+            <label for="cors-proxy">{{ t('settings.corsProxyLabel') }}</label>
+            <input
+              [ngClass]="{ 'ng-invalid ng-dirty': !configService.settings().corsProxy.includes('https://') }"
+              (ngModelChange)="updateConfig('corsProxy', $event)"
+              [(ngModel)]="corsProxy"
+              [placeholder]="t('settings.corsProxyPlaceholder')"
+              pInputText
+              id="cors-proxy"
+            />
+          </div>
+        }
+
         @if (configService.settings().wallpaper === 'custom') {
           <div class="flex flex-col gap-2">
             <label for="custom-wallpaper">{{ t('settings.wallpaperCustomLabel') }}</label>
@@ -230,6 +262,7 @@
           <input
             (ngModelChange)="updateConfig('welcomeText', $event)"
             [(ngModel)]="welcomeText"
+            [placeholder]="t('settings.welcomeTextPlaceholder')"
             id="welcome"
             pInputText
           />
