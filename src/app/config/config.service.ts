@@ -35,7 +35,7 @@ export class ConfigService {
     searchEngineUrl: '',
     searchEngines: [],
     showNews: true,
-    translationVersion: 3,
+    translationVersion: 4,
     username: 'friend',
     wallpaper: 'none',
     wallpaperUrl: '',
