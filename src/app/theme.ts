@@ -1226,7 +1226,7 @@ export const scrollbarColors = {
   },
   vo1ded: {
     light: '#dfdafa #aa96ef',
-    dark: '#c6Bcf6 #2f1c57',
+    dark: '#8c6ce6 #4b2989',
   },
 };
 export const backgroundColors = {
