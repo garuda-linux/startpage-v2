@@ -4,7 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { WallpaperService } from '../wallpaper/wallpaper.service';
 import { menubarItems, serviceLinks } from '../../../config';
 import { usePreset } from '@primeng/themes';
-import { backgroundColors, scrollbarColors, themes } from '../theme';
+import { AppTheme, backgroundColors, scrollbarColors, themes } from '../theme';
 import { DOCUMENT } from '@angular/common';
 import { TranslocoService } from '@jsverse/transloco';
 
@@ -184,10 +184,11 @@ export class ConfigService {
       }
       case 'activeTheme': {
         usePreset(themes[value]);
+        this.handleMiscColors(this.settings().darkMode);
         break;
       }
       case 'darkMode': {
-        this.handleDarkMode(value as boolean);
+        this.handleMiscColors(value as boolean);
         break;
       }
       case 'language': {
@@ -198,30 +199,52 @@ export class ConfigService {
   }
 
   /**
-   * Handles the dark mode setting.
+   * Handles setting background and scrollbar colors, as well as dark mode.
    * @param value The value of the dark mode setting.
    * @private
    */
-  private handleDarkMode(value: boolean) {
-    const flavors = this.settings().activeTheme.includes('Mocha') ? 'primary' : 'alt';
-    if (value) {
-      this.document.documentElement.classList.add('p-dark');
-      if (flavors === 'primary') {
-        this.document.documentElement.style.scrollbarColor = scrollbarColors.primary.dark;
-        this.document.documentElement.style.backgroundColor = backgroundColors.primary.dark;
+  private handleMiscColors(value: boolean) {
+    const activeTheme: AppTheme = this.settings().activeTheme;
+
+    let scrollbarColor: string;
+    let backgroundColor: string;
+
+    if (activeTheme.includes('Catppuccin')) {
+      const flavors = this.settings().activeTheme.includes('Mocha') ? 'primary' : 'alt';
+
+      if (value) {
+        if (flavors === 'primary') {
+          scrollbarColor = scrollbarColors.primary.dark;
+          backgroundColor = backgroundColors.primary.dark;
+        } else {
+          scrollbarColor = scrollbarColors.alt.dark;
+          backgroundColor = backgroundColors.alt.dark;
+        }
       } else {
-        this.document.documentElement.style.scrollbarColor = scrollbarColors.alt.dark;
-        this.document.documentElement.style.backgroundColor = backgroundColors.alt.dark;
+        if (flavors === 'primary') {
+          scrollbarColor = scrollbarColors.primary.light;
+          backgroundColor = backgroundColors.primary.light;
+        } else {
+          scrollbarColor = scrollbarColors.alt.light;
+          backgroundColor = backgroundColors.alt.light;
+        }
       }
-    } else {
-      this.document.documentElement.classList.remove('p-dark');
-      if (flavors === 'primary') {
-        this.document.documentElement.style.scrollbarColor = scrollbarColors.primary.light;
-        this.document.documentElement.style.backgroundColor = backgroundColors.primary.light;
+    } else if (activeTheme.includes('Vo1ded')) {
+      if (value) {
+        scrollbarColor = scrollbarColors.vo1ded.dark;
+        backgroundColor = backgroundColors.vo1ded.dark;
       } else {
-        this.document.documentElement.style.scrollbarColor = scrollbarColors.alt.light;
-        this.document.documentElement.style.backgroundColor = backgroundColors.alt.light;
+        scrollbarColor = scrollbarColors.vo1ded.light;
+        backgroundColor = backgroundColors.vo1ded.light;
       }
     }
+
+    if (value) {
+      this.document.documentElement.classList.add('p-dark');
+    } else {
+      this.document.documentElement.classList.remove('p-dark');
+    }
+    this.document.documentElement.style.backgroundColor = backgroundColor!;
+    this.document.documentElement.style.scrollbarColor = scrollbarColor!;
   }
 }

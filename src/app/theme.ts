@@ -1224,6 +1224,10 @@ export const scrollbarColors = {
     light: `${frappe.colors.surface0.hex} rgba(48, 52, 70, 0.5)`,
     dark: `${macchiato.colors.surface0.hex} rgba(36, 39, 58, 0.5)`,
   },
+  vo1ded: {
+    light: '#dfdafa #aa96ef',
+    dark: '#c6Bcf6 #2f1c57',
+  },
 };
 export const backgroundColors = {
   primary: {
@@ -1233,6 +1237,10 @@ export const backgroundColors = {
   alt: {
     light: frappe.colors.base.hex,
     dark: macchiato.colors.base.hex,
+  },
+  vo1ded: {
+    light: '#fbfafe',
+    dark: '#291d44',
   },
 };
 
