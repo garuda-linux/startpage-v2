@@ -20,7 +20,11 @@
             @if (configService.settings().avatarEnabled) {
               <p-avatar
                 (click)="displayEasterEgg()"
-                [image]="configService.settings().avatarUrl"
+                [image]="
+                  configService.settings().avatarUrl !== ''
+                    ? configService.settings().avatarUrl
+                    : '/assets/avatars/cat.png'
+                "
                 shape="circle"
                 ngClass="cursor-pointer"
               >

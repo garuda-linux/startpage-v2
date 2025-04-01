@@ -33,23 +33,27 @@ export interface ServiceLink {
 export type ServiceLinks = ServiceLink[];
 
 export interface SearchEngineEntry {
-  name: SearchEngine;
-  prettyName: string;
-  url: string;
+  value: SearchEngine;
+  label: string;
+  url?: string;
 }
-
-export type SearchEngineList = SearchEngineEntry[];
 
 export interface WallpaperEntry {
-  name: string;
-  url: string | null;
+  label: string;
+  value: string | null;
 }
 
-export type WallpaperList = WallpaperEntry[];
+export type WallpaperList = {
+  label: string;
+  items: WallpaperEntry[];
+}[];
 
 export interface Logo {
-  name: string;
-  url: string;
+  label: string;
+  value: string;
 }
 
-export type LogoList = Logo[];
+export type LogoList = {
+  label: string;
+  items: Logo[];
+}[];

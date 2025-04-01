@@ -10,7 +10,9 @@ export interface AppSettings {
   avatarEnabled: boolean;
   avatarUrl: string;
   autocompleteProvider: AutocompleteProvider;
+  autoGridCols: boolean;
   blurBackground: boolean;
+  blurStrength: 1 | 2 | 3 | 4;
   corsProxy: string;
   customLinks: ServiceLinks;
   customMenuLinks: MenuBarItems;
@@ -18,6 +20,7 @@ export interface AppSettings {
   defaultLinks: boolean;
   darkMode: boolean;
   fitWallpaper: boolean;
+  gridCols: number;
   jokesEnabled: boolean;
   language: string;
   logo: string;

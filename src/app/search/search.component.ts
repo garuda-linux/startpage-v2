@@ -4,12 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { ConfigService } from '../config/config.service';
 import { autocompleteProviders, searchEngineMappings } from '../../../config';
-import type { SearchEngineEntry, SearchEngineList } from '../types';
 import { Button } from 'primeng/button';
 import { InputText } from 'primeng/inputtext';
 import { AutoComplete, AutoCompleteCompleteEvent } from 'primeng/autocomplete';
 import { HttpClient } from '@angular/common/http';
 import { ArrayBasedSuggestions } from './interfaces';
+import { SearchEngineEntry } from '../types';
 
 @Component({
   selector: 'app-search',
@@ -27,16 +27,17 @@ export class SearchComponent {
     const activeSearchEngine: string = this.configService.settings().activeSearchEngine;
     let searchEngine: SearchEngineEntry;
     if (activeSearchEngine !== 'custom') {
-      const allAvailableSearchEngines: SearchEngineList = [
-        ...searchEngineMappings,
+      const allAvailableSearchEngines: SearchEngineEntry[] = [
+        ...searchEngineMappings[0].items,
+        ...searchEngineMappings[1].items,
         ...this.configService.settings().searchEngines,
       ];
-      searchEngine = allAvailableSearchEngines.find((engine) => engine.name === activeSearchEngine)!;
+      searchEngine = allAvailableSearchEngines.find((engine) => engine.value === activeSearchEngine)!;
     } else {
       searchEngine = {
-        name: 'custom',
+        value: 'custom',
         url: this.configService.settings().searchEngineUrl,
-        prettyName: this.configService.settings().searchEngineName,
+        label: this.configService.settings().searchEngineName,
       };
     }
     return searchEngine;
@@ -57,7 +58,7 @@ export class SearchComponent {
    * Open the search engine URL in a new tab with the search term.
    */
   search() {
-    const url: string = encodeURI(this.searchEngine().url.replace('%s', this.searchTerm()));
+    const url: string = encodeURI(this.searchEngine().url!.replace('%s', this.searchTerm()));
     window.open(url, '_blank');
 
     this.searchTerm.set('');
@@ -69,17 +70,18 @@ export class SearchComponent {
    * @param $event The autocomplete event.
    */
   autocomplete($event: AutoCompleteCompleteEvent) {
-    const corsProxy = this.configService.settings().corsProxy;
-    const provider = this.configService.settings().autocompleteProvider;
+    const corsProxy: string = this.configService.settings().corsProxy;
+    const provider: string = this.configService.settings().autocompleteProvider;
     if (!provider || provider === 'none' || !corsProxy) return;
     if (!$event.query.trim()) {
       this.suggestions.set([]);
       return;
     }
 
-    const entry: SearchEngineEntry = autocompleteProviders.find((entry) => entry.name === provider)!;
-    const url: string = encodeURI(`${corsProxy}${entry.url.replace('%s', $event.query)}`);
-    switch (entry.name) {
+    const allProviders: SearchEngineEntry[] = [...autocompleteProviders[0].items, ...autocompleteProviders[1].items];
+    const entry: SearchEngineEntry = allProviders.find((entry) => entry.label === provider)!;
+    const url: string = encodeURI(`${corsProxy}${entry.url?.replace('%s', $event.query)}`);
+    switch (entry.value) {
       case 'startpage':
       case 'brave':
         this.arrayBasedAutocomplete(url);

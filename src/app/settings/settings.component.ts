@@ -9,13 +9,15 @@ import {
   type WritableSignal,
 } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
-import type { LogoList, SearchEngineList, WallpaperList } from '../types';
+import type { LogoList, WallpaperList } from '../types';
 import {
-  type AutocompleteProvider,
+  AutocompleteProvider,
   autocompleteProviders,
   logos,
   type SearchEngine,
+  SearchEngineList,
   searchEngineMappings,
+  Wallpaper,
   wallpapers,
 } from '../../../config';
 import { Checkbox } from 'primeng/checkbox';
@@ -38,6 +40,7 @@ import { AvailableJokeSources, jokeSources } from '../jokes/jokes';
 import { type AppTheme, themes } from '../theme';
 import { LinksEditorComponent } from '../links-editor/links-editor.component';
 import { LangPipe } from '../lang/lang.pipe';
+import { InputNumber } from 'primeng/inputnumber';
 
 @Component({
   selector: 'app-settings',
@@ -47,6 +50,7 @@ import { LangPipe } from '../lang/lang.pipe';
     FormsModule,
     Select,
     InputText,
+    InputNumber,
     TranslocoDirective,
     TitleComponent,
     Button,
@@ -67,14 +71,17 @@ export class SettingsComponent {
   activeSearchEngine = signal<SearchEngine>('searxng-privau');
   activeTheme = signal<AppTheme>('Catppuccin Mocha/Latte Aura');
   autocompleteProvider = signal<AutocompleteProvider>('');
+  autoGridCols = signal<boolean>(true);
   avatarEnabled = signal<boolean>(true);
   avatarUrl = signal<string>('');
   blurBackground = signal<number>(0);
+  blurStrength = signal<number>(4);
   corsProxy = signal<string>('');
   customTitle = signal<string>('');
   defaultLinks = signal<boolean>(true);
   darkMode = signal<boolean>(true);
   fitWallpaper = signal<string>('cover');
+  gridCols = signal<number>(3);
   jokesEnabled = signal<boolean>(true);
   language = signal<string>('en');
   logo = signal<string>('default');
@@ -83,22 +90,18 @@ export class SettingsComponent {
   searchEngineUrl = signal<string>('');
   showNews = signal<boolean>(true);
   username = signal<string>('');
-  wallpaper = signal<string>('');
+  wallpaper = signal<Wallpaper>('');
   wallpaperUrl = signal<string>('');
   welcomeText = signal<string>('');
 
   protected readonly availableLanguages: { name: string; prettyName: string }[] = [];
   protected readonly availableThemes: string[] = Object.keys(themes).sort();
-  protected readonly autocompleteProviders: SearchEngineList = autocompleteProviders.sort((a, b) =>
-    a.name.localeCompare(b.name),
-  );
+  protected readonly autocompleteProviders: SearchEngineList = autocompleteProviders;
   protected readonly configService = inject(ConfigService);
   protected readonly jokeSources = jokeSources.sort((a, b) => a.name.localeCompare(b.name));
-  protected readonly logos: LogoList = logos.sort((a, b) => a.name.localeCompare(b.name));
-  protected readonly searchEngineMappings: SearchEngineList = searchEngineMappings.sort((a, b) =>
-    a.prettyName.localeCompare(b.prettyName),
-  );
-  protected readonly wallpapers: WallpaperList = wallpapers.sort((a, b) => a.name.localeCompare(b.name));
+  protected readonly logos: LogoList = logos;
+  protected readonly searchEngineMappings: SearchEngineList = searchEngineMappings;
+  protected readonly wallpapers: WallpaperList = wallpapers;
 
   private readonly confirmationService = inject(ConfirmationService);
   private readonly document = inject(DOCUMENT);

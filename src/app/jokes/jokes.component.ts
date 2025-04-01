@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@ang
 import { type AvailableJokeSources, jokes, type UselessFact } from './jokes';
 import { ConfigService } from '../config/config.service';
 import { HttpClient } from '@angular/common/http';
-import { lastValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-jokes',
@@ -54,7 +54,7 @@ export class JokesComponent {
   async getUselessFact(): Promise<string> {
     try {
       const url = 'https://uselessfacts.jsph.pl/api/v2/facts/random';
-      const fact: UselessFact = await lastValueFrom(this.httpService.get<UselessFact>(url));
+      const fact: UselessFact = await firstValueFrom(this.httpService.get<UselessFact>(url));
       return fact.text;
     } catch (err: any) {
       console.log('Failed retrieving useless fact, proceeding to show excuse');

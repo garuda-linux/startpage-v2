@@ -1,9 +1,17 @@
 import { type ElementRef, Injectable, type Renderer2 } from '@angular/core';
+import { ConfigService } from '../config/config.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WallpaperService {
+  private prevBlurStrength: null | number = null;
+  private readonly configService: ConfigService;
+
+  constructor(configService: ConfigService) {
+    this.configService = configService;
+  }
+
   /**
    * Loads the wallpaper based on the provided wallpaper type.
    * @param wallpaper The type of wallpaper to load. Can be 'custom', 'none', or a URL.
@@ -50,6 +58,9 @@ export class WallpaperService {
       case 'blurBackground':
         this.applyBgBlur(el, renderer, value);
         break;
+      case 'blurStrength':
+        this.applyBgBlur(el, renderer, true);
+        break;
       default:
         this.applyBgContain(el, renderer, false);
         this.applyBgBlur(el, renderer, false);
@@ -64,10 +75,15 @@ export class WallpaperService {
    * @param apply Whether to apply the style or not.
    */
   applyBgBlur(el: ElementRef, renderer: Renderer2, apply = true): void {
+    const strength = this.configService.settings().blurStrength;
     if (apply) {
-      renderer.addClass(el.nativeElement.ownerDocument.body, 'background-blurred');
+      if (this.prevBlurStrength) {
+        renderer.removeClass(el.nativeElement.ownerDocument.body, `background-blurred-${this.prevBlurStrength}`);
+      }
+      this.prevBlurStrength = strength;
+      renderer.addClass(el.nativeElement.ownerDocument.body, `background-blurred-${strength}`);
     } else {
-      renderer.removeClass(el.nativeElement.ownerDocument.body, 'background-blurred');
+      renderer.removeClass(el.nativeElement.ownerDocument.body, `background-blurred-${strength}`);
     }
   }
 

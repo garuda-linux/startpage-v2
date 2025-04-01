@@ -66,6 +66,15 @@
           />
           <label class="ml-2" for="avatar-enabled">{{ t('settings.avatarEnabled') }}</label>
         </div>
+        <div class="ml-10">
+          <p-checkbox
+            (ngModelChange)="updateConfig('autoGridCols', $event)"
+            [(ngModel)]="autoGridCols"
+            [binary]="true"
+            id="auto-grid-cols"
+          />
+          <label class="ml-2" for="auto-grid-cols">{{ t('settings.autoGridCols') }}</label>
+        </div>
       </div>
 
       <div class="mx-auto mt-10 w-3/4 md:ml-10 md:flex">
@@ -130,10 +139,10 @@
             [(ngModel)]="activeSearchEngine"
             [options]="searchEngineMappings"
             fluid
+            group
             id="search-engine"
-            optionLabel="prettyName"
-            optionValue="name"
-          />
+          >
+          </p-select>
         </div>
 
         <div class="flex flex-col gap-2">
@@ -148,9 +157,8 @@
             }"
             [options]="autocompleteProviders"
             fluid
+            group
             id="autocomplete-provider"
-            optionLabel="prettyName"
-            optionValue="name"
           />
         </div>
 
@@ -161,6 +169,7 @@
               pInputText
               id="custom-search"
               (ngModelChange)="updateConfig('searchEngineUrl', $event)"
+              [placeholder]="t('settings.searchEngineUrlPlaceholder')"
               [(ngModel)]="searchEngineUrl"
             />
           </div>
@@ -170,6 +179,7 @@
               pInputText
               id="custom-search-name"
               (ngModelChange)="updateConfig('searchEngineName', $event)"
+              [placeholder]="t('settings.searchEngineNamePlaceholder')"
               [(ngModel)]="searchEngineName"
             />
           </div>
@@ -197,10 +207,10 @@
             [(ngModel)]="wallpaper"
             [options]="wallpapers"
             fluid
+            group
             id="wallpaper"
-            optionLabel="name"
-            optionValue="url"
-          />
+          >
+          </p-select>
         </div>
 
         @if (configService.settings().autocompleteProvider !== 'none') {
@@ -224,6 +234,7 @@
               pInputText
               id="custom-wallpaper"
               (ngModelChange)="updateConfig('wallpaperUrl', $event)"
+              [placeholder]="t('settings.wallpaperCustomPlaceholder')"
               [(ngModel)]="wallpaperUrl"
             />
           </div>
@@ -236,9 +247,23 @@
             [(ngModel)]="logo"
             [options]="logos"
             fluid
+            group
             id="logo"
-            optionLabel="name"
-            optionValue="url"
+          >
+          </p-select>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="blur-strength">{{ t('settings.blurStrength') }}</label>
+          <p-input-number
+            (ngModelChange)="updateConfig('blurStrength', $event)"
+            [(ngModel)]="blurStrength"
+            [max]="6"
+            [min]="1"
+            id="blur-strength"
+            inputId="grid-cols"
+            mode="decimal"
+            showButtons
           />
         </div>
 
@@ -247,6 +272,7 @@
           <input
             (ngModelChange)="updateConfig('customTitle', $event)"
             [(ngModel)]="customTitle"
+            [placeholder]="t('settings.customTitlePlaceholder')"
             id="title"
             pInputText
           />
@@ -254,7 +280,13 @@
 
         <div class="flex flex-col gap-2">
           <label for="name">{{ t('settings.name') }}</label>
-          <input (ngModelChange)="updateConfig('username', $event)" [(ngModel)]="username" id="name" pInputText />
+          <input
+            (ngModelChange)="updateConfig('username', $event)"
+            [(ngModel)]="username"
+            [placeholder]="t('settings.namePlaceholder')"
+            id="name"
+            pInputText
+          />
         </div>
 
         <div class="flex flex-col gap-2">
@@ -276,6 +308,7 @@
               id="avatar-url"
               (ngModelChange)="updateConfig('avatarUrl', $event)"
               [(ngModel)]="avatarUrl"
+              [placeholder]="t('settings.avatarUrlPlaceholder')"
             />
           </div>
         }
@@ -287,7 +320,24 @@
               pInputText
               id="custom-logo"
               (ngModelChange)="updateConfig('logoUrl', $event)"
+              [placeholder]="t('settings.logoUrlPlaceholder')"
               [(ngModel)]="logoUrl"
+            />
+          </div>
+        }
+
+        @if (!autoGridCols()) {
+          <div class="flex flex-col gap-2">
+            <label for="grid-cols">{{ t('settings.gridCols') }}</label>
+            <p-input-number
+              [(ngModel)]="gridCols"
+              [max]="12"
+              [min]="1"
+              (ngModelChange)="updateConfig('gridCols', $event)"
+              showButtons
+              id="grid-cols"
+              inputId="grid-cols"
+              mode="decimal"
             />
           </div>
         }

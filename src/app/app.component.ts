@@ -13,7 +13,7 @@ import { RouterModule, type RouterOutlet } from '@angular/router';
 import { ScrollTop } from 'primeng/scrolltop';
 import { routeAnimations } from './app.routes';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
-import { lastValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { MessageToastService, ShellComponent } from '@garudalinux/core';
 import { ConfigService } from './config/config.service';
 import { menubarItems } from '../../config';
@@ -82,9 +82,9 @@ export class AppComponent implements OnInit {
     const newItemPromises = [];
     for (const item of this.items()) {
       if (item.translocoKey) {
-        newItemPromises.push(lastValueFrom(this.translocoService.selectTranslate(item['translocoKey'], {}, lang)));
+        newItemPromises.push(firstValueFrom(this.translocoService.selectTranslate(item['translocoKey'], {}, lang)));
       } else {
-        newItemPromises.push(lastValueFrom(this.translocoService.selectTranslate(item['label'], {}, lang)));
+        newItemPromises.push(firstValueFrom(this.translocoService.selectTranslate(item['label'], {}, lang)));
       }
     }
 

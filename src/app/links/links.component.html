@@ -2,8 +2,11 @@
   @for (link of configService.settings().customLinks; track link.title) {
     <a
       [href]="link.link"
+      [ngClass]="{ 'cursor-pointer auto-rows-fr p-2 text-center': true }"
+      [class]="
+        configService.settings().autoGridCols ? '3xl:col-span-1 col-span-6 lg:col-span-4 xl:col-span-2' : gridCols()
+      "
       target="_blank"
-      class="3xl:col-span-1 col-span-6 cursor-pointer auto-rows-fr p-2 text-center lg:col-span-4 xl:col-span-2"
     >
       <div>
         <p-panel [header]="link.title" styleClass="hover:scale-105 animation duration-300 h-auto">

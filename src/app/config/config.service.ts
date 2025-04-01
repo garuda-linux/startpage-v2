@@ -7,6 +7,7 @@ import { usePreset } from '@primeng/themes';
 import { AppTheme, backgroundColors, scrollbarColors, themes } from '../theme';
 import { DOCUMENT } from '@angular/common';
 import { TranslocoService } from '@jsverse/transloco';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,26 +18,29 @@ export class ConfigService {
     activeSearchEngine: 'searxng-privau',
     activeTheme: 'Catppuccin Mocha/Latte Aura',
     avatarEnabled: true,
-    avatarUrl: '/assets/avatars/cat.png',
+    avatarUrl: '',
     autocompleteProvider: 'none',
+    autoGridCols: true,
     blurBackground: false,
+    blurStrength: 1,
     corsProxy: '',
     customLinks: serviceLinks,
     customMenuLinks: menubarItems,
-    customTitle: "Garuda's Startpage",
+    customTitle: '',
     defaultLinks: true,
     darkMode: true,
     fitWallpaper: true,
+    gridCols: 3,
     jokesEnabled: true,
     language: 'en',
     logo: 'assets/logos/violet-orange.png',
-    logoUrl: 'assets/logos/violet-orange.png',
+    logoUrl: '',
     searchEngineName: '',
     searchEngineUrl: '',
     searchEngines: [],
     showNews: true,
     translationVersion: 4,
-    username: 'friend',
+    username: '',
     wallpaper: 'none',
     wallpaperUrl: '',
     welcomeText: '',
@@ -48,7 +52,7 @@ export class ConfigService {
   private readonly document = inject(DOCUMENT);
   private readonly title = inject(Title);
   private readonly translocoService = inject(TranslocoService);
-  private readonly wallpaperService = inject(WallpaperService);
+  private readonly wallpaperService: WallpaperService;
 
   constructor() {
     this.initStore().then((pendingConfigUpdate) => {
@@ -57,6 +61,8 @@ export class ConfigService {
       }
       this.initialized.set(true);
     });
+
+    this.wallpaperService = new WallpaperService(this);
   }
 
   /**
@@ -163,10 +169,15 @@ export class ConfigService {
    * @param el The element reference to the DOM element.
    * @private
    */
-  private syncSetting(key: string, value: any, renderer?: Renderer2, el?: ElementRef) {
+  private async syncSetting(key: string, value: any, renderer?: Renderer2, el?: ElementRef) {
     switch (key) {
       case 'customTitle': {
-        this.title.setTitle(value);
+        if (!this.settings().customTitle) {
+          await firstValueFrom(this.translocoService.load(this.settings().language));
+          this.title.setTitle(this.translocoService.translate('menu.defaultTitle'));
+        } else {
+          this.title.setTitle(value);
+        }
         break;
       }
       case 'wallpaper': {
@@ -176,7 +187,8 @@ export class ConfigService {
         break;
       }
       case 'fitWallpaper':
-      case 'blurBackground': {
+      case 'blurBackground':
+      case 'blurStrength': {
         if (renderer && el) {
           this.wallpaperService.applyWallpaperStyle(key, value, renderer, el);
         }

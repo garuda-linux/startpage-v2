@@ -8,7 +8,7 @@
         <input
           (keydown.enter)="search()"
           [(ngModel)]="searchTerm"
-          [placeholder]="t('search.placeholder') + ' ' + searchEngine().prettyName"
+          [placeholder]="t('search.placeholder') + ' ' + searchEngine().label"
           [style]="{ height: '3rem' }"
           pInputText
           autofocus
@@ -20,7 +20,7 @@
           (completeMethod)="autocomplete($event)"
           (keydown.enter)="search()"
           [(ngModel)]="searchTerm"
-          [placeholder]="t('search.placeholder') + ' ' + searchEngine().prettyName"
+          [placeholder]="t('search.placeholder') + ' ' + searchEngine().label"
           [style]="{ height: '3rem' }"
           [suggestions]="suggestions()"
           autoHighlight

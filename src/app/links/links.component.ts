@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import type { ServiceLinks } from '../types';
 import { serviceLinks } from '../../../config';
@@ -16,4 +16,6 @@ export class LinksComponent {
   links = signal<ServiceLinks>(serviceLinks);
 
   protected readonly configService = inject(ConfigService);
+
+  gridCols = computed(() => `col-span-${this.configService.settings().gridCols}`);
 }
