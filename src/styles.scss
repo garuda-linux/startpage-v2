@@ -82,8 +82,33 @@ p-button {
   @apply bg-cover bg-fixed bg-no-repeat;
 }
 
-.background-blurred .background-filter::after {
+.background-blurred-1 .background-filter::after {
   @apply fixed top-0 block h-full w-full backdrop-blur-sm;
+  content: '';
+}
+
+.background-blurred-2 .background-filter::after {
+  @apply fixed top-0 block h-full w-full backdrop-blur-md;
+  content: '';
+}
+
+.background-blurred-3 .background-filter::after {
+  @apply fixed top-0 block h-full w-full backdrop-blur-lg;
+  content: '';
+}
+
+.background-blurred-4 .background-filter::after {
+  @apply fixed top-0 block h-full w-full backdrop-blur-xl;
+  content: '';
+}
+
+.background-blurred-5 .background-filter::after {
+  @apply fixed top-0 block h-full w-full backdrop-blur-2xl;
+  content: '';
+}
+
+.background-blurred-6 .background-filter::after {
+  @apply fixed top-0 block h-full w-full backdrop-blur-3xl;
   content: '';
 }
 

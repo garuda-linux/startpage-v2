@@ -1,4 +1,4 @@
-import { ContactLinks, LogoList, MenuBarItems, ServiceLinks, WallpaperList } from './src/app/types';
+import type { ContactLinks, LogoList, MenuBarItems, ServiceLinks, WallpaperList } from './src/app/types';
 
 // These are the items inside the menu.
 export const menubarItems: MenuBarItems = [
@@ -168,83 +168,113 @@ export const serviceLinks: ServiceLinks = [
   },
 ];
 
-export type SearchEngine = (typeof searchEngineMappings)[number]['name'] | 'custom';
-export type AutocompleteProvider = (typeof autocompleteProviders)[number]['name'];
+export type SearchEngine = (typeof searchEngineMappings)[number]['items'][number]['value'];
+export type Wallpaper = (typeof wallpapers)[number]['items'][number]['value'];
+export type AutocompleteProvider = (typeof autocompleteProviders)[number]['items'][number]['value'];
 
 export interface SearchEngineEntry {
-  name: string;
-  prettyName: string;
-  url: string;
+  value: string;
+  label: string;
+  url?: string;
 }
 
+export type SearchEngineList = {
+  label: string;
+  items: SearchEngineEntry[];
+}[];
+
 // Available search engines and their URLs
-export const searchEngineMappings: SearchEngineEntry[] = [
+export const searchEngineMappings: SearchEngineList = [
   {
-    name: 'searxng',
-    prettyName: 'SearxNG',
-    url: 'https://searx.garudalinux.org/search?q=%s',
+    label: 'Special',
+    items: [
+      {
+        value: 'custom',
+        label: 'Custom',
+        url: '',
+      },
+    ],
   },
   {
-    name: 'whoogle',
-    prettyName: 'Whoogle',
-    url: 'https://search.garudalinux.org/search?q=%s',
-  },
-  // This seems to be one of the better instances.
-  // Doesn't nag with Cloudflare Captcha unlike ours.
-  // Running it unprotected made it sadly necessary, however.
-  {
-    name: 'searxng-privau',
-    prettyName: 'SearxNG (priv.au)',
-    url: 'https://priv.au/search?q=%s',
-  },
-  {
-    name: 'google',
-    prettyName: 'Google',
-    url: 'https://www.google.com/search?q=%s',
-  },
-  {
-    name: 'ecosia',
-    prettyName: 'Ecosia',
-    url: 'https://www.ecosia.org/search?q=%s',
-  },
-  {
-    name: 'duckduckgo',
-    prettyName: 'DuckDuckGo',
-    url: 'https://duckduckgo.com/?q=%s',
-  },
-  {
-    name: 'startpage',
-    prettyName: 'Startpage',
-    url: 'https://www.startpage.com/do/search?q=%s',
-  },
-  {
-    name: 'brave',
-    prettyName: 'Brave',
-    url: 'https://search.brave.com/search?q=%s',
-  },
-  {
-    name: 'custom',
-    prettyName: 'Custom',
-    url: '',
+    label: 'Predefined',
+    items: [
+      {
+        value: 'searxng',
+        label: 'SearxNG',
+        url: 'https://searx.garudalinux.org/search?q=%s',
+      },
+      {
+        value: 'whoogle',
+        label: 'Whoogle',
+        url: 'https://search.garudalinux.org/search?q=%s',
+      },
+      // This seems to be one of the better instances.
+      // Doesn't nag with Cloudflare Captcha unlike ours.
+      // Running it unprotected made it sadly necessary, however.
+      {
+        value: 'searxng-privau',
+        label: 'SearxNG (priv.au)',
+        url: 'https://priv.au/search?q=%s',
+      },
+      {
+        value: 'google',
+        label: 'Google',
+        url: 'https://www.google.com/search?q=%s',
+      },
+      {
+        value: 'ecosia',
+        label: 'Ecosia',
+        url: 'https://www.ecosia.org/search?q=%s',
+      },
+      {
+        value: 'duckduckgo',
+        label: 'DuckDuckGo',
+        url: 'https://duckduckgo.com/?q=%s',
+      },
+      {
+        value: 'startpage',
+        label: 'Startpage',
+        url: 'https://www.startpage.com/do/search?q=%s',
+      },
+      {
+        value: 'brave',
+        label: 'Brave',
+        url: 'https://search.brave.com/search?q=%s',
+      },
+      {
+        value: 'custom',
+        label: 'Custom',
+        url: '',
+      },
+    ].sort((a, b) => a.label.localeCompare(b.label)),
   },
 ];
 
 // Autocomplete providers for the search engines
-export const autocompleteProviders: SearchEngineEntry[] = [
+export const autocompleteProviders: SearchEngineList = [
   {
-    name: 'startpage',
-    prettyName: 'Startpage',
-    url: 'https://www.startpage.com/osuggestions?q=%s',
+    label: 'Special',
+    items: [
+      {
+        label: 'None',
+        value: 'none',
+      },
+    ],
   },
   {
-    name: 'brave',
-    prettyName: 'Brave',
-    url: 'https://search.brave.com/api/suggest?q=%s',
-  },
-  {
-    name: 'none',
-    prettyName: 'None',
-    url: '',
+    label: 'Predefined',
+    items: [
+      {
+        value: 'startpage',
+        label: 'Startpage',
+        url: 'https://www.startpage.com/osuggestions?q=%s',
+      },
+      {
+        value: 'brave',
+        label: 'Brave',
+        url: 'https://search.brave.com/api/suggest?q=%s',
+      },
+    ].sort((a, b) => a.label.localeCompare(b.label)),
   },
 ];
 
@@ -253,106 +283,123 @@ export const autocompleteProviders: SearchEngineEntry[] = [
 // to being in the public folder.
 export const wallpapers: WallpaperList = [
   {
-    name: 'None',
-    url: 'none',
+    label: 'Special',
+    items: [
+      {
+        label: 'None',
+        value: 'none',
+      },
+      { label: 'Custom', value: 'custom' },
+    ],
   },
   {
-    name: 'Shaded Landscape',
-    url: 'assets/wallpapers/shaded-landscape.png',
+    label: 'Predefined',
+    items: [
+      {
+        label: 'Shaded Landscape',
+        value: 'assets/wallpapers/shaded-landscape.png',
+      },
+      {
+        label: 'Evening Sky',
+        value: 'assets/wallpapers/evening-sky.png',
+      },
+      {
+        label: 'Abstract Swirls',
+        value: 'assets/wallpapers/abstract-swirls.jpg',
+      },
+      {
+        label: 'City Horizon',
+        value: 'assets/wallpapers/city-horizon.jpg',
+      },
+      {
+        label: 'River City',
+        value: 'assets/wallpapers/river-city.jpg',
+      },
+      {
+        label: 'City Asteroid Attack',
+        value: 'assets/wallpapers/city-asteroid-attack.jpg',
+      },
+      {
+        label: 'Clouds',
+        value: 'assets/wallpapers/clouds.jpg',
+      },
+      {
+        label: 'Puffy Stars',
+        value: 'assets/wallpapers/puffy-stars.jpg',
+      },
+      {
+        label: 'Rainy Window',
+        value: 'assets/wallpapers/rainy-window.jpeg',
+      },
+      {
+        label: 'Vivid Line',
+        value: 'assets/wallpapers/vivid-line.png',
+      },
+      {
+        label: 'Horizon Mocha',
+        value: 'assets/wallpapers/horizon-mocha.jpg',
+      },
+      {
+        label: 'Mokka SGS',
+        value: 'assets/wallpapers/mokka-sgs.png',
+      },
+      {
+        label: 'Garuda M V1',
+        value: 'assets/wallpapers/garuda-m-v1.png',
+      },
+      {
+        label: 'Mokka Tree',
+        value: 'assets/wallpapers/mokka-tree.jpg',
+      },
+      {
+        label: 'Mokkaxero',
+        value: 'assets/wallpapers/mokkaxero.jpg',
+      },
+      {
+        label: 'Puffy stars',
+        value: 'assets/wallpapers/puffy-stars.jpg',
+      },
+      {
+        label: 'Rainy window',
+        value: 'assets/wallpapers/rainy-window.jpeg',
+      },
+      {
+        label: 'River city',
+        value: 'assets/wallpapers/river-city.jpg',
+      },
+      {
+        label: 'Shaded landscape',
+        value: 'assets/wallpapers/shaded-landscape.png',
+      },
+      {
+        label: 'Vivid line',
+        value: 'assets/wallpapers/vivid-line.png',
+      },
+    ].sort((a, b) => a.label.localeCompare(b.label)),
   },
-  {
-    name: 'Evening Sky',
-    url: 'assets/wallpapers/evening-sky.png',
-  },
-  {
-    name: 'Abstract Swirls',
-    url: 'assets/wallpapers/abstract-swirls.jpg',
-  },
-  {
-    name: 'City Horizon',
-    url: 'assets/wallpapers/city-horizon.jpg',
-  },
-  {
-    name: 'River City',
-    url: 'assets/wallpapers/river-city.jpg',
-  },
-  {
-    name: 'City Asteroid Attack',
-    url: 'assets/wallpapers/city-asteroid-attack.jpg',
-  },
-  {
-    name: 'Clouds',
-    url: 'assets/wallpapers/clouds.jpg',
-  },
-  {
-    name: 'Puffy Stars',
-    url: 'assets/wallpapers/puffy-stars.jpg',
-  },
-  {
-    name: 'Rainy Window',
-    url: 'assets/wallpapers/rainy-window.jpeg',
-  },
-  {
-    name: 'Vivid Line',
-    url: 'assets/wallpapers/vivid-line.png',
-  },
-  {
-    name: 'Horizon Mocha',
-    url: 'assets/wallpapers/horizon-mocha.jpg',
-  },
-  {
-    name: 'Mokka SGS',
-    url: 'assets/wallpapers/mokka-sgs.png',
-  },
-  {
-    name: 'Garuda M V1',
-    url: 'assets/wallpapers/garuda-m-v1.png',
-  },
-  {
-    name: 'Mokka Tree',
-    url: 'assets/wallpapers/mokka-tree.jpg',
-  },
-  {
-    name: 'Mokkaxero',
-    url: 'assets/wallpapers/mokkaxero.jpg',
-  },
-  {
-    name: 'Puffy stars',
-    url: 'assets/wallpapers/puffy-stars.jpg',
-  },
-  {
-    name: 'Rainy window',
-    url: 'assets/wallpapers/rainy-window.jpeg',
-  },
-  {
-    name: 'River city',
-    url: 'assets/wallpapers/river-city.jpg',
-  },
-  {
-    name: 'Shaded landscape',
-    url: 'assets/wallpapers/shaded-landscape.png',
-  },
-  {
-    name: 'Vivid line',
-    url: 'assets/wallpapers/vivid-line.png',
-  },
-  { name: 'Custom', url: 'custom' },
 ];
 
 // List for logo shown on the main page. Needs to have a fitting file in the public/logos folder.
 export const logos: LogoList = [
-  { name: 'Black Metal', url: 'assets/logos/black-metal.png' },
-  { name: 'Blue Metal', url: 'assets/logos/blue-metal.png' },
-  { name: 'Blue', url: 'assets/logos/blue.png' },
-  { name: 'Dr460nized', url: 'assets/logos/dr460nized.png' },
-  { name: 'Green', url: 'assets/logos/green.png' },
-  { name: 'Maroon Lavender', url: 'assets/logos/maroon-lavender.png' },
-  { name: 'Metal', url: 'assets/logos/metal.png' },
-  { name: 'Orange', url: 'assets/logos/orange.png' },
-  { name: 'Petrol', url: 'assets/logos/petrol.png' },
-  { name: 'Pink', url: 'assets/logos/pink.png' },
-  { name: 'Red', url: 'assets/logos/red.png' },
-  { name: 'Solid', url: 'assets/logos/solid.png' },
-  { name: 'Violet Orange', url: 'assets/logos/violet-orange.png' },
-  { name: 'Custom', url: 'custom' },
+  {
+    label: 'Special',
+    items: [{ label: 'Custom', value: 'custom' }],
+  },
+  {
+    label: 'Predefined',
+    items: [
+      { label: 'Blue Metal', value: 'assets/logos/blue-metal.png' },
+      { label: 'Blue', value: 'assets/logos/blue.png' },
+      { label: 'Dr460nized', value: 'assets/logos/dr460nized.png' },
+      { label: 'Green', value: 'assets/logos/green.png' },
+      { label: 'Maroon Lavender', value: 'assets/logos/maroon-lavender.png' },
+      { label: 'Metal', value: 'assets/logos/metal.png' },
+      { label: 'Orange', value: 'assets/logos/orange.png' },
+      { label: 'Petrol', value: 'assets/logos/petrol.png' },
+      { label: 'Pink', value: 'assets/logos/pink.png' },
+      { label: 'Red', value: 'assets/logos/red.png' },
+      { label: 'Solid', value: 'assets/logos/solid.png' },
+      { label: 'Violet Orange', value: 'assets/logos/violet-orange.png' },
+    ].sort((a, b) => a.label.localeCompare(b.label)),
+  },
 ];

@@ -1,11 +1,12 @@
 {
   "search": {
-    "placeholder": "検索ワード",
+    "placeholder": "検索",
     "search": "検索"
   },
   "menu": {
     "aboutUs": "私たちについて",
     "archWiki": "Arch Wiki",
+    "defaultTitle": "Garuda's Startpage",
     "donate": "寄付",
     "forum": "フォーラム",
     "garudaWiki": "Garuda Wiki",
@@ -26,146 +27,160 @@
   "imprint": {
     "contact": "主な連絡先",
     "furtherContact": "その他の連絡方法",
-    "subtitle": "§ 5 TMGに基づく情報",
+    "subtitle": "§ 5 TMGに基づく情報。",
     "title": "インプリント"
   },
   "settings": {
     "actions": "アクション",
-    "activeJoke": "表示する面白い事実・言い訳のソース",
+    "activeJoke": "表示される面白い事実/言い訳のソース",
     "addLink": "リンクを追加",
+    "autoGridCols": "グリッド列を自動的に設定",
     "avatarEnabled": "アバターを有効にする",
     "avatarUrl": "アバターのURL",
+    "avatarUrlPlaceholder": "画像への有効なURL、例：githubプロファイル + .png",
+    "autocompleteLabel": "オートコンプリートプロバイダー",
     "blurBackground": "背景をぼかす",
+    "blurStrength": "壁紙のぼかしの強さ",
     "confirm": "確認",
     "confirmDelete": "選択したリンクを削除してもよろしいですか？",
     "confirmDeleteLink": "削除してもよろしいですか",
     "confirmHeader": "よろしいですか？",
     "confirmReset": "すべての設定をリセットしてもよろしいですか？",
     "confirmRestore": "設定を復元してもよろしいですか？",
-    "currentPageReport": "{totalRecords}件中{first}～{last}件を表示",
+    "corsProxyLabel": "CORS proxy",
+    "corsProxyPlaceholder": "有効なCORSプロキシURL（例：github.com/distribuyed/proxies）",
+    "currentPageReport": "{totalRecords}件のエントリーのうち、{first}から{last}を表示",
     "customLinks": "リンクをカスタマイズ",
-    "customLogo": "カスタムロゴのURL",
+    "customLogo": "カスタムロゴURL",
     "customMenu": "メニューバーのリンクをカスタマイズ",
-    "customTitle": "カスタムページタイトル",
+    "customTitle": "ページタイトル",
+    "customTitlePlaceholder": "これはブラウザータブに表示されるタイトルです",
     "customize": "セクションをカスタマイズ",
     "darkMode": "ダークモードを有効にする",
-    "defaultLinksLabel": "デフォルトのリンクを表示",
+    "defaultLinksLabel": "デフォルトリンクを表示",
     "deleteLink": "リンクを削除",
-    "fitWallpaper": "壁紙を合わせる",
+    "fitWallpaper": "壁紙に合わせる",
     "general": "一般設定",
+    "gridCols": "グリッド列数",
     "icon": "アイコン",
     "iconLink": "アイコンリンク",
-    "isRequired": "必須項目です！",
-    "jokesEnabledLabel": "ジョーク・事実・言い訳を有効にする",
-    "language": "言語",
+    "isRequired": "必須フィールドです！",
+    "jokesEnabledLabel": "ジョーク/事実/言い訳を有効にする",
     "linkCreated": "リンクを作成しました",
     "linkDeleted": "リンクを削除しました",
     "linkDetails": "リンクの詳細",
     "linkTitle": "タイトル",
     "linksDeleted": "リンクを削除しました",
+    "language": "言語",
     "linkUpdated": "リンクを更新しました",
     "logoLabel": "ロゴ画像",
+    "logoUrlPlaceholder": "使用するロゴへのリンク",
     "manageLinks": "リンクを管理",
-    "name": "あなたの名前",
-    "primeNgIcons": "ここから任意のアイコンを参照できます（クリックしてください）",
+    "name": "ユーザー名",
+    "namePlaceholder": "これは左側に表示される名前です",
+    "primeNgIcons": "これはここからのアイコン参照にできます（クリックしてください）",
     "resetSettings": "スタートページをリセット",
     "restoreSettings": "設定を復元",
     "saveSettings": "設定を保存",
     "search": "検索...",
     "searchEngineLabel": "使用する検索エンジン",
-    "searchEngineName": "検索エンジンの名前",
-    "searchEngineUrl": "検索エンジンのURL（%sを含む）",
-    "settingsReset": "設定を正常にリセットしました",
-    "settingsRestored": "設定を正常に復元しました",
+    "searchEngineName": "検索エンジン名",
+    "searchEngineNamePlaceholder": "これは検索エンジンが表示される名前です",
+    "searchEngineUrl": "検索エンジンのURL",
+    "searchEngineUrlPlaceholder": "%sを検索語句とする検索エンジンのURL",
+    "settingsReset": "設定は正常にリセットされました",
+    "settingsRestored": "設定は正常に復元されました",
     "showNews": "Garudaニュースを表示",
     "success": "成功",
     "themeLabel": "デザインプリセット",
     "title": "設定",
     "url": "URL",
-    "wallpaperCustomLabel": "カスタム壁紙のURL",
+    "wallpaperCustomLabel": "カスタム壁紙URL",
     "wallpaperLabel": "壁紙",
-    "welcomeText": "ウェルカムメッセージ"
+    "wallpaperCustomPlaceholder": "画像への有効なURL（例：unsplash.com）を入力してください",
+    "welcomeText": "ウェルカムメッセージ",
+    "welcomeTextPlaceholder": "左側に表示するウェルカムメッセージ"
   },
   "easterEggs": {
     "easterEgg1": {
       "title": "VOODOO AS A SERVICE (VaaS)",
-      "content": "あなたのデジタル像は、安全なスピリチュアルプロトコルを介してリモートで影響を受けています。パフォーマンスの向上...または月の周期に基づく説明のつかないシステム再起動にご期待ください。"
+      "content": "デジタルエフィジーは、安全なスピリチュアルプロトコルを介してリモートで影響を受けています。パフォーマンスの向上、または月の周期に基づく原因不明のシステム再起動が予想されます。"
     },
     "easterEgg2": {
       "title": "CRYPTOGRAPHIC HEXES",
-      "content": "この機能は高度なブードゥー暗号化によって保護されています。バイパスしようとすると、あなたのデータは一時的にアニメーションのゾンビウサギに置き換えられます。"
+      "content": "この機能は、高度なブードゥー暗号化によって保護されています。バイパスしようとすると、データがアニメーション化されたゾンビウサギに一時的に置き換えられます。"
     },
     "easterEgg3": {
       "title": "SMART CONTRACT WITH SPIRITS",
-      "content": "この機能を実行すると、あなたは（ほとんどの場合）慈悲深い存在とのデジタル的に強制された契約に拘束されます。あなたの側が守られない場合、ファイルシステムが破損する可能性があります。"
+      "content": "この関数を実行すると、あなたは慈悲深い（ほとんど）エンティティとのデジタルで強制された契約に縛られます。あなたの終わりを守らなかった場合、ファイルシステムが破損する可能性があります。"
     },
     "easterEgg4": {
       "title": "ALGORITHMIC RITUALS",
-      "content": "私たちのAIは、卵の分布を最適化し、デジタルグレムリンを追い払うために、古代のブードゥー教の慣習で訓練されています。結果は現在の惑星の配置によって異なる場合があります。"
+      "content": "私たちのAIは現在、卵の分布を最適化し、デジタルグレムリンを排除するために古代のブードゥー教の慣習で訓練されています。結果は、現在の惑星の配置によって異なる場合があります。"
     },
     "easterEgg5": {
       "title": "QUANTUM ENTANGLEMENT OF SOULS",
-      "content": "この実験的な機能は、あなたのデジタルプレゼンスをスペクトル対応物とリンクさせます。予測不可能な動作と、時折幽霊のような通知を期待してください。"
+      "content": "この実験的な機能は、あなたのデジタルプレゼンスをスペクトルカウンターパートとリンクさせます。予測不可能な動作と時折幽霊のような通知が予想されます。"
     },
     "easterEgg6": {
       "title": "DECENTRALIZED SPIRIT NETWORK (DSN)",
-      "content": "強化された処理能力のために、エーテル的存在のピアツーピアネットワークに接続します。カルマスコアの低いノードに注意してください。"
+      "content": "処理能力を強化するために、幽玄な存在のピアツーピアネットワークに接続します。カルマスコアの低いノードに注意してください。"
     },
     "easterEgg7": {
       "title": "BIOMETRIC VOODOO AUTHENTICATION",
-      "content": "あなたのデジタルIDはあなたの霊的なオーラに関連付けられています。不正アクセスは軽い呪い（ほとんどは迷惑なポップアップ）を引き起こします。"
+      "content": "あなたのデジタルIDは、あなたのスピリチュアルオーラに結び付けられています。不正アクセスにより、軽い呪いがトリガーされます（ほとんどは迷惑なポップアップのみ）。"
     },
     "easterEgg8": {
       "title": "AUGMENTED REALITY SPIRIT GUIDES",
-      "content": "デバッグや複雑なインターフェースのナビゲートを手助けするために、役立つ（そして少しいたずら好きな）ロアを召喚します。仮想的な装身具の提供が必要になる場合があります。"
+      "content": "デバッグや複雑なインターフェースのナビゲートを支援するために、役立つ（そして少しいたずら好きな）loaを召喚します。仮想トリケットの提供が必要になる場合があります。"
     },
     "easterEgg9": {
       "title": "MACHINE LEARNING ORACLES",
-      "content": "予測分析と将来のトレンドのために、古代のデジタル霊に相談します。特にチョコレートの入手可能性については、精度は保証されていません。"
+      "content": "予測分析と将来のトレンドのために、古代のデジタルスピリットに相談します。特にチョコレートの入手可能性については、精度は保証されていません。"
     },
     "easterEgg10": {
       "title": "SERVER-SIDE SORCERY",
-      "content": "この操作は、バックエンドで強力なブードゥー教の魔法を呼び出します。デジタルカーテンの後ろを見ないでください。そこには不安な依存関係が含まれている可能性があります。"
+      "content": "この操作は、バックエンドで強力なブードゥー教の魔法を呼び出します。不安な依存関係が含まれている可能性があるため、デジタルカーテンの後ろを見ないでください。"
     },
     "easterEgg11": {
       "title": "404 ERROR: SOUL NOT FOUND",
-      "content": "古代の呪文による悪魔のデータ検索を試みています。霊界への接続を確認して、もう一度お試しください。予期せぬ祝福...または呪いが含まれている可能性があります。"
+      "content": "古代の呪文による悪魔のようなデータの検索を試みています。霊界への接続を確認して、もう一度お試しください。予期しない祝福...または呪いが含まれている可能性があります。"
     },
     "easterEgg12": {
       "title": "KERNEL PANIC!",
-      "content": "いたずら好きなロアがシステムに取り憑きました。症状には、ランダムな卵の出現、カーソルの制御不能な震え、バイナリでの囁きが含まれます。悪魔祓いのプロトコルを開始しました...プラグを抜かないでください。"
+      "content": "いたずら好きなloaがシステムを所有しています。症状には、ランダムな卵の出現、制御不能なカーソルの揺れ、バイナリでのささやきなどがあります。エクソシズムプロトコルが開始されました...プラグを抜かないでください。"
     },
     "easterEgg13": {
       "title": "FIREWALL BREACHED!",
-      "content": "悪意のあるエンティティがチョコレートで覆われたマルウェアを注入しようとしています。ブードゥー教の対抗策が展開されました。幽霊の出るお菓子屋さんへの予期しないブラウザのリダイレクトを期待してください。"
+      "content": "悪意のあるエンティティがチョコレートで覆われたマルウェアを注入しようとしています。ブードゥー教の対策が展開されました。お化けキャンディーストアへの予期しないブラウザリダイレクトが予想されます。"
     },
     "easterEgg14": {
       "title": "UPDATING DEMONS...",
-      "content": "儀式を中断しないでください。これには、忘れられたプログラミング言語での詠唱と、アップデートサーバーの霊を鎮めるための古くなったピープスの犠牲が含まれる場合があります。"
+      "content": "儀式を中断しないでください。これには、忘れられたプログラミング言語での詠唱と、アップデートサーバーの精霊をなだめるための古いPeepsの犠牲が含まれる場合があります。"
     },
     "easterEgg15": {
       "title": "CAPTCHA CHALLENGE",
-      "content": "聖水と戦略的に配置されたヘックスドールを含むすべての画像を識別することで、あなたが憑依されたオートマトンでないことを証明してください。失敗すると、冥界からの永遠のスパムが発生する可能性があります。"
+      "content": "聖水と戦略的に配置されたヘックス人形を含むすべての画像を識別することにより、あなたが憑依されたオートマトンではないことを証明してください。失敗すると、冥界からの永遠のスパムが発生する可能性があります。"
     },
     "easterEgg16": {
       "title": "CLOUD STORAGE WARNING",
-      "content": "あなたの魂の断片は、霊的に不安定なサーバーファームにバックアップされている可能性があります。古代のファイルにアクセスする際は注意して進み、疑わしい五芒星アイコンをクリックしないようにしてください。"
+      "content": "あなたの魂の断片は、霊的に不安定なサーバーファームにバックアップされる可能性があります。古いファイルにアクセスするときは注意して進め、疑わしいペンタグラムアイコンをクリックしないでください。"
     },
     "easterEgg17": {
       "title": "API CALL FAILED",
-      "content": "イースターバニーを召喚するリクエストは、いたずら好きな霊によってブロックされました。ダイヤルアップモデムを犠牲にするブードゥー教の回避策を試みています。しばらくお待ちください。"
+      "content": "イースターバニーを召喚するリクエストは、いたずらな精霊によってブロックされました。ダイヤルアップモデムを犠牲にすることを含むブードゥー教の回避策を試みています。しばらくお待ちください。"
     },
     "easterEgg18": {
       "title": "BLUE SCREEN OF TERROR",
-      "content": "強力な呪いがシステムをクラッシュさせました。コマンドラインを介したリモート悪魔祓いを試みています。神聖なデバッグの呪文「Ctrl+Alt+Delよ、去れ！」を唱えてください。"
+      "content": "強力な呪いがシステムをクラッシュさせました。コマンドラインを介したリモート除霊を試みています。神聖なデバッグ呪文を唱えてください：「Ctrl + Alt + Delよ、消えろ！」。"
     },
     "easterEgg19": {
       "title": "PRIVACY POLICY UPDATE",
-      "content": "私たちは、慈悲深い（そして少しいたずら好きな）産卵エンティティの召喚を含む、儀式的な目的であなたの霊的なデータを収集する場合があります。あなたの同意は魔法的に暗示されています。"
+      "content": "私たちは、慈悲深い（そして少しいたずら好きな）産卵エンティティの召喚を含む、儀式的な目的であなたの精神的なデータを収集する場合があります。あなたの同意は魔法のように暗示されています。"
     },
     "easterEgg20": {
       "title": "EASTER EGG DETECTED!",
-      "content": "おめでとうございます！あなたは隠された祝福（またはおそらく小さな呪い）につまずきました。あなたのダウンロードが速く、チョコレートの供給が豊富であることを願っています。さあ、デジタル霊が気づく前に逃げてください！"
+      "content": "おめでとうございます！あなたは隠された祝福（またはおそらく小さなヘックス）につまずきました。ダウンロードが速くなり、チョコレートの供給が豊富になることを願っています。さあ、デジタルスピリットが気づく前に走りましょう！"
     }
   }
 }

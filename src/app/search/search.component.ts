@@ -99,7 +99,6 @@ export class SearchComponent {
   private arrayBasedAutocomplete(url: string): void {
     this.http.get<ArrayBasedSuggestions>(url, { responseType: 'json' }).subscribe({
       next: (data: ArrayBasedSuggestions) => {
-        console.log(data);
         if (!Array.isArray(data) || data.length > 1 || Array.isArray(data[1])) {
           this.suggestions.set(data[1]);
         }

@@ -6,12 +6,13 @@
   "menu": {
     "aboutUs": "Sobre nosotros",
     "archWiki": "Arch Wiki",
+    "defaultTitle": "Página de inicio de Garuda",
     "donate": "Donar",
     "forum": "Foro",
     "garudaWiki": "Garuda Wiki",
     "gitlab": "GitLab",
     "home": "Inicio",
-    "settings": "Ajustes",
+    "settings": "Configuración",
     "welcome": "Bienvenido"
   },
   "common": {
@@ -26,102 +27,116 @@
   "imprint": {
     "contact": "Contacto principal",
     "furtherContact": "Otros métodos de contacto",
-    "subtitle": "Información según el § 5 TMG.",
-    "title": "Aviso legal"
+    "subtitle": "Información según § 5 TMG.",
+    "title": "Pie de imprenta"
   },
   "settings": {
     "actions": "Acciones",
-    "activeJoke": "Fuente de chistes/datos/excusas mostrados",
+    "activeJoke": "Fuente de datos curiosos/excusas mostrados",
     "addLink": "Añadir enlace",
-    "avatarEnabled": "Activar avatar",
+    "autoGridCols": "Establecer automáticamente las columnas de la cuadrícula",
+    "avatarEnabled": "Habilitar avatar",
     "avatarUrl": "URL del avatar",
-    "blurBackground": "Desenfocar fondo",
+    "avatarUrlPlaceholder": "Una URL válida para una imagen, p. ej. tu perfil de github + .png",
+    "autocompleteLabel": "Proveedor de autocompletado",
+    "blurBackground": "Desenfoque del fondo",
+    "blurStrength": "Intensidad del desenfoque del fondo de pantalla",
     "confirm": "Confirmar",
-    "confirmDelete": "¿Estás seguro de que quieres eliminar los enlaces seleccionados?",
-    "confirmDeleteLink": "¿Estás seguro de que quieres eliminar",
+    "confirmDelete": "¿Estás seguro de que quieres borrar los enlaces seleccionados?",
+    "confirmDeleteLink": "¿Estás seguro de que quieres borrar",
     "confirmHeader": "¿Estás seguro?",
     "confirmReset": "¿Estás seguro de que quieres restablecer todos los ajustes?",
-    "confirmRestore": "¿Estás seguro de que quieres restaurar los ajustes?",
+    "confirmRestore": "¿Estás seguro de que quieres restaurar la configuración?",
+    "corsProxyLabel": "CORS proxy",
+    "corsProxyPlaceholder": "Una URL de proxy CORS válida, p. ej. de github.com/distribuyed/proxies",
     "currentPageReport": "Mostrando {first} a {last} de {totalRecords} entradas",
     "customLinks": "Personalizar enlaces",
     "customLogo": "URL del logo personalizado",
     "customMenu": "Personalizar enlaces de la barra de menú",
-    "customTitle": "Título de página personalizado",
+    "customTitle": "Título de la página",
+    "customTitlePlaceholder": "Este es el título que se mostrará en la pestaña del navegador",
     "customize": "Personalizar secciones",
     "darkMode": "Modo oscuro activado",
     "defaultLinksLabel": "Mostrar enlaces predeterminados",
-    "deleteLink": "Eliminar enlace",
+    "deleteLink": "Borrar enlace",
     "fitWallpaper": "Ajustar fondo de pantalla",
     "general": "Ajustes generales",
+    "gridCols": "Número de columnas de la cuadrícula",
     "icon": "Icono",
     "iconLink": "Enlace del icono",
     "isRequired": "¡Este campo es obligatorio!",
-    "jokesEnabledLabel": "Chistes/datos/excusas activados",
-    "language": "Idioma",
+    "jokesEnabledLabel": "Bromas/datos/excusas habilitados",
     "linkCreated": "Enlace creado",
-    "linkDeleted": "Enlace eliminado",
+    "linkDeleted": "Enlace borrado",
     "linkDetails": "Detalles del enlace",
     "linkTitle": "Título",
-    "linksDeleted": "Enlaces eliminados",
+    "linksDeleted": "Enlaces borrados",
+    "language": "Idioma",
     "linkUpdated": "Enlace actualizado",
     "logoLabel": "Imagen del logo",
-    "manageLinks": "Gestionar enlaces",
-    "name": "Nombre con el que saludarte",
-    "primeNgIcons": "Esto puede ser cualquier referencia de icono desde aquí (haz clic)",
+    "logoUrlPlaceholder": "Enlace al logo a usar",
+    "manageLinks": "Administrar enlaces",
+    "name": "Nombre de usuario",
+    "namePlaceholder": "Este es el nombre que se mostrará en el lado izquierdo",
+    "primeNgIcons": "Esto puede ser cualquier referencia de icono desde aquí (haz clic aquí)",
     "resetSettings": "Restablecer página de inicio",
-    "restoreSettings": "Restaurar ajustes",
-    "saveSettings": "Guardar ajustes",
+    "restoreSettings": "Restaurar configuración",
+    "saveSettings": "Guardar configuración",
     "search": "Buscar...",
-    "searchEngineLabel": "Motor de búsqueda a utilizar",
+    "searchEngineLabel": "Motor de búsqueda a usar",
     "searchEngineName": "Nombre del motor de búsqueda",
-    "searchEngineUrl": "URL del motor de búsqueda (con %s)",
-    "settingsReset": "Ajustes restablecidos correctamente",
-    "settingsRestored": "Ajustes restaurados correctamente",
+    "searchEngineNamePlaceholder": "Este es el nombre con el que se mostrará el motor de búsqueda",
+    "searchEngineUrl": "URL del motor de búsqueda",
+    "searchEngineUrlPlaceholder": "URL del motor de búsqueda con %s como término de búsqueda",
+    "settingsReset": "Configuración restablecida con éxito",
+    "settingsRestored": "Configuración restaurada con éxito",
     "showNews": "Mostrar noticias de Garuda",
     "success": "Éxito",
-    "themeLabel": "Preajuste de diseño",
-    "title": "Ajustes",
+    "themeLabel": "Diseño preestablecido",
+    "title": "Configuración",
     "url": "URL",
     "wallpaperCustomLabel": "URL del fondo de pantalla personalizado",
     "wallpaperLabel": "Fondo de pantalla",
-    "welcomeText": "Mensaje de bienvenida"
+    "wallpaperCustomPlaceholder": "Proporciona una URL válida para una imagen, p. ej. de unsplash.com",
+    "welcomeText": "Mensaje de bienvenida",
+    "welcomeTextPlaceholder": "Mensaje de bienvenida para mostrar en el lado izquierdo"
   },
   "easterEggs": {
     "easterEgg1": {
       "title": "VOODOO AS A SERVICE (VaaS)",
-      "content": "Tu efigie digital ahora está siendo influenciada remotamente a través de protocolos espirituales seguros. Espera un rendimiento mejorado... o reinicios inexplicables del sistema basados en ciclos lunares."
+      "content": "Tu efigie digital ahora está siendo influenciada de forma remota a través de protocolos espirituales seguros. Espera un rendimiento mejorado... o reinicios inexplicables del sistema basados en ciclos lunares."
     },
     "easterEgg2": {
       "title": "CRYPTOGRAPHIC HEXES",
-      "content": "Esta función está protegida por cifrado vudú avanzado. Intentar বাইপাস resultará en que tus datos sean reemplazados temporalmente con conejitos zombis animados."
+      "content": "Esta función está protegida por un cifrado vudú avanzado. Intentar evitarlo hará que tus datos sean reemplazados temporalmente con conejitos zombis animados."
     },
     "easterEgg3": {
       "title": "SMART CONTRACT WITH SPIRITS",
-      "content": "La ejecución de esta función te vincula a un pacto digitalmente aplicado con entidades benévolas (en su mayoría). El incumplimiento por tu parte puede resultar en sistemas de archivos corruptos."
+      "content": "La ejecución de esta función te vincula a un pacto digitalmente reforzado con entidades benévolas (en su mayoría). No cumplir con tu parte puede resultar en sistemas de archivos corruptos."
     },
     "easterEgg4": {
       "title": "ALGORITHMIC RITUALS",
-      "content": "Nuestra IA ahora está entrenada en antiguas prácticas vudú para optimizar la distribución de huevos y desterrar a los duendes digitales. Los resultados pueden variar según la alineación planetaria actual."
+      "content": "Nuestra IA ahora está entrenada en antiguas prácticas vudú para optimizar la distribución de huevos y desterrar a los gremlins digitales. Los resultados pueden variar dependiendo de la alineación planetaria actual."
     },
     "easterEgg5": {
       "title": "QUANTUM ENTANGLEMENT OF SOULS",
-      "content": "Esta función experimental vincula tu presencia digital con una contraparte espectral. Espera un comportamiento impredecible y notificaciones fantasmales ocasionales."
+      "content": "Esta función experimental vincula tu presencia digital con una contraparte espectral. Espera un comportamiento impredecible y la ocasional notificación fantasmal."
     },
     "easterEgg6": {
       "title": "DECENTRALIZED SPIRIT NETWORK (DSN)",
-      "content": "Conexión a una red peer-to-peer de seres etéreos para una potencia de procesamiento mejorada. Ten cuidado con los nodos con puntuaciones de karma bajas."
+      "content": "Conéctate a una red peer-to-peer de seres etéreos para mejorar la potencia de procesamiento. Ten cuidado con los nodos con bajas puntuaciones de karma."
     },
     "easterEgg7": {
       "title": "BIOMETRIC VOODOO AUTHENTICATION",
-      "content": "Tu identidad digital ahora está ligada a tu aura espiritual. El acceso no autorizado activará una maldición leve (principalmente ventanas emergentes molestas)."
+      "content": "Tu identidad digital ahora está ligada a tu aura espiritual. El acceso no autorizado activará una leve maldición (en su mayoría solo ventanas emergentes molestas)."
     },
     "easterEgg8": {
       "title": "AUGMENTED REALITY SPIRIT GUIDES",
-      "content": "Invoca loa útiles (y ligeramente traviesos) para ayudarte a depurar y navegar por interfaces complejas. Puede requerir ofrecer baratijas virtuales."
+      "content": "Invoca loa útiles (y ligeramente traviesos) para que te ayuden a depurar y navegar por interfaces complejas. Puede requerir ofrecer baratijas virtuales."
     },
     "easterEgg9": {
       "title": "MACHINE LEARNING ORACLES",
-      "content": "Consulta a antiguos espíritus digitales para análisis predictivos y tendencias futuras. Precisión no garantizada, especialmente en lo que respecta a la disponibilidad de chocolate."
+      "content": "Consulta a antiguos espíritus digitales para obtener análisis predictivos y tendencias futuras. La precisión no está garantizada, especialmente en lo que respecta a la disponibilidad de chocolate."
     },
     "easterEgg10": {
       "title": "SERVER-SIDE SORCERY",
@@ -129,7 +144,7 @@
     },
     "easterEgg11": {
       "title": "404 ERROR: SOUL NOT FOUND",
-      "content": "Intentando la recuperación de datos demoníacos mediante antiguos encantamientos. Por favor, comprueba tu conexión con el mundo de los espíritus e inténtalo de nuevo. Puede contener bendiciones... o maldiciones inesperadas."
+      "content": "Intentando recuperar datos demoníacos a través de antiguos encantamientos. Por favor, comprueba tu conexión con el mundo de los espíritus e inténtalo de nuevo. Puede contener bendiciones inesperadas... o maldiciones."
     },
     "easterEgg12": {
       "title": "KERNEL PANIC!",
@@ -137,7 +152,7 @@
     },
     "easterEgg13": {
       "title": "FIREWALL BREACHED!",
-      "content": "Entidades malévolas intentando inyectar malware cubierto de chocolate. Contramedidas vudú desplegadas. Espera redireccionamientos inesperados del navegador a tiendas de dulces embrujadas."
+      "content": "Entidades malévolas intentando inyectar malware cubierto de chocolate. Contramedidas vudú desplegadas. Espera redirecciones inesperadas del navegador a tiendas de dulces embrujadas."
     },
     "easterEgg14": {
       "title": "UPDATING DEMONS...",
@@ -145,11 +160,11 @@
     },
     "easterEgg15": {
       "title": "CAPTCHA CHALLENGE",
-      "content": "Demuestra que no eres un autómata poseído identificando todas las imágenes que contengan agua bendita y muñecos de maleficios estratégicamente colocados. El fallo puede resultar en spam eterno del inframundo."
+      "content": "Demuestra que no eres un autómata poseído identificando todas las imágenes que contienen agua bendita y muñecas de hechizos colocadas estratégicamente. El fracaso puede resultar en spam eterno del inframundo."
     },
     "easterEgg16": {
       "title": "CLOUD STORAGE WARNING",
-      "content": "Tus fragmentos de alma pueden estar respaldados en una granja de servidores espiritualmente inestable. Procede con precaución al acceder a archivos antiguos y evita hacer clic en iconos de pentagramas sospechosos."
+      "content": "Tus fragmentos de alma pueden estar respaldados en una granja de servidores espiritualmente inestable. Procede con precaución al acceder a archivos antiguos y evita hacer clic en iconos sospechosos de pentagramas."
     },
     "easterEgg17": {
       "title": "API CALL FAILED",
@@ -157,15 +172,16 @@
     },
     "easterEgg18": {
       "title": "BLUE SCREEN OF TERROR",
-      "content": "Una poderosa maldición ha bloqueado el sistema. Intentando un exorcismo remoto a través de la línea de comandos. Por favor, recita la sagrada invocación de depuración: '¡Ctrl+Alt+Supr, desapareced!'"
+      "content": "Una poderosa maldición ha bloqueado el sistema. Intentando un exorcismo remoto a través de la línea de comandos. Por favor, recita la sagrada invocación de depuración: '¡Ctrl+Alt+Supr, desaparece!'."
     },
     "easterEgg19": {
       "title": "PRIVACY POLICY UPDATE",
-      "content": "Podemos recopilar tus datos espirituales con fines rituales, incluyendo la invocación de entidades ponedoras de huevos benévolas (y ligeramente traviesas). Tu consentimiento se implica mágicamente."
+      "content": "Podemos recopilar tus datos espirituales para fines rituales, incluyendo la invocación de entidades ponedoras de huevos benévolas (y ligeramente traviesas). Tu consentimiento está implícito mágicamente."
     },
     "easterEgg20": {
       "title": "EASTER EGG DETECTED!",
-      "content": "¡Felicidades! Has tropezado con una bendición oculta (o posiblemente un pequeño maleficio). Que tus descargas sean rápidas y tu suministro de chocolate abundante. ¡Ahora, corre antes de que los espíritus digitales se den cuenta!"
+      "content": "¡Felicitaciones! Has tropezado con una bendición oculta (o posiblemente un pequeño hechizo). Que tus descargas sean rápidas y tu suministro de chocolate abundante. Ahora, ¡corre antes de que los espíritus digitales se den cuenta!"
     }
   }
 }
+```

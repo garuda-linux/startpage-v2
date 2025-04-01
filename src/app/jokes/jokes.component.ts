@@ -57,7 +57,7 @@ export class JokesComponent {
       const fact: UselessFact = await firstValueFrom(this.httpService.get<UselessFact>(url));
       return fact.text;
     } catch (err: any) {
-      console.log('Failed retrieving useless fact, proceeding to show excuse');
+      console.error('Failed retrieving useless fact, proceeding to show excuse');
       return this.getDevExcuses();
     }
   }

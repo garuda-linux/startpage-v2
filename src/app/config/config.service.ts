@@ -39,7 +39,7 @@ export class ConfigService {
     searchEngineUrl: '',
     searchEngines: [],
     showNews: true,
-    translationVersion: 4,
+    translationVersion: 5,
     username: '',
     wallpaper: 'none',
     wallpaperUrl: '',

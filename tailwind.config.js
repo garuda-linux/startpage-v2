@@ -5,7 +5,11 @@ const tailwindPrimeUi = require('tailwindcss-primeui');
 module.exports = {
   content: [join(__dirname, 'src/**/!(*.stories|*.spec).{ts,html}')],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        '3xl': { max: '2048px' },
+      },
+    },
   },
   plugins: [tailwindPrimeUi],
 };
