@@ -64,7 +64,7 @@ export class ConfigService {
       this.initialized.set(true);
     });
 
-    this.wallpaperService = new WallpaperService(this.settings);
+    this.wallpaperService = new WallpaperService(this);
 
     if (!this.settings().languageChanged) {
       const lang: string = navigator.language.includes('-') ? navigator.language.split('-')[0] : navigator.language;
