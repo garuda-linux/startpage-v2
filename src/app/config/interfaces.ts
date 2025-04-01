@@ -23,6 +23,7 @@ export interface AppSettings {
   gridCols: number;
   jokesEnabled: boolean;
   language: string;
+  languageChanged: boolean;
   logo: string;
   logoUrl: string;
   searchEngineName: string;

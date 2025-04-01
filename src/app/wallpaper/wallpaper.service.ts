@@ -1,15 +1,15 @@
-import { type ElementRef, Injectable, type Renderer2 } from '@angular/core';
-import { ConfigService } from '../config/config.service';
+import { type ElementRef, Injectable, type Renderer2, WritableSignal } from '@angular/core';
+import { AppSettings } from '../config/interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WallpaperService {
   private prevBlurStrength: null | number = null;
-  private readonly configService: ConfigService;
+  private settings: WritableSignal<AppSettings>;
 
-  constructor(configService: ConfigService) {
-    this.configService = configService;
+  constructor(settings: WritableSignal<AppSettings>) {
+    this.settings = settings;
   }
 
   /**
@@ -75,7 +75,7 @@ export class WallpaperService {
    * @param apply Whether to apply the style or not.
    */
   applyBgBlur(el: ElementRef, renderer: Renderer2, apply = true): void {
-    const strength = this.configService.settings().blurStrength;
+    const strength = this.settings().blurStrength;
     if (apply) {
       if (this.prevBlurStrength) {
         renderer.removeClass(el.nativeElement.ownerDocument.body, `background-blurred-${this.prevBlurStrength}`);

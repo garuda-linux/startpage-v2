@@ -1,4 +1,4 @@
-import { type ElementRef, inject, Injectable, type Renderer2, signal } from '@angular/core';
+import { type ElementRef, inject, Injectable, type Renderer2, REQUEST, signal } from '@angular/core';
 import type { AppSettings } from './interfaces';
 import { Title } from '@angular/platform-browser';
 import { WallpaperService } from '../wallpaper/wallpaper.service';
@@ -33,6 +33,7 @@ export class ConfigService {
     gridCols: 3,
     jokesEnabled: true,
     language: 'en',
+    languageChanged: false,
     logo: 'assets/logos/violet-orange.png',
     logoUrl: '',
     searchEngineName: '',
@@ -51,6 +52,7 @@ export class ConfigService {
 
   private readonly document = inject(DOCUMENT);
   private readonly title = inject(Title);
+  private readonly request = inject(REQUEST);
   private readonly translocoService = inject(TranslocoService);
   private readonly wallpaperService: WallpaperService;
 
@@ -62,7 +64,16 @@ export class ConfigService {
       this.initialized.set(true);
     });
 
-    this.wallpaperService = new WallpaperService(this);
+    this.wallpaperService = new WallpaperService(this.settings);
+
+    if (!this.settings().languageChanged) {
+      const lang: string = navigator.language.includes('-') ? navigator.language.split('-')[0] : navigator.language;
+      if ((this.translocoService.getAvailableLangs() as string[]).includes(lang)) {
+        this.translocoService.setActiveLang(lang);
+      }
+    } else {
+      this.translocoService.setActiveLang(this.settings().language);
+    }
   }
 
   /**
@@ -76,7 +87,7 @@ export class ConfigService {
   updateConfig(key: string, value: any, renderer?: Renderer2, el?: ElementRef, write = true): void {
     this.settings.update((prev: AppSettings) => ({ ...prev, [key]: value }));
     if (write) localStorage.setItem('settings', JSON.stringify(this.settings()));
-    this.syncSetting(key, value, renderer, el);
+    void this.syncSetting(key, value, renderer, el);
   }
 
   /**
@@ -88,7 +99,7 @@ export class ConfigService {
   initConfig(renderer: Renderer2, el: ElementRef) {
     for (const key of Object.keys(this.settings())) {
       const value = this.settings()[key];
-      this.syncSetting(key, value, renderer, el);
+      void this.syncSetting(key, value, renderer, el);
     }
   }
 

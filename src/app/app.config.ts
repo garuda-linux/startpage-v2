@@ -14,7 +14,6 @@ import { environment } from '../environments/environment.dev';
 import { routes } from './app.routes';
 import { TranslocoHttpLoader } from './transloco-loader';
 import { provideTransloco } from '@jsverse/transloco';
-import { provideTranslocoPersistLang } from '@jsverse/transloco-persist-lang';
 import { ConfigService } from './config/config.service';
 import { provideTranslocoPersistTranslations } from '@jsverse/transloco-persist-translations';
 
@@ -54,11 +53,6 @@ export const appConfig: ApplicationConfig = {
         },
         prodMode: !isDevMode(),
         reRenderOnLangChange: true,
-      },
-    }),
-    provideTranslocoPersistLang({
-      storage: {
-        useValue: localStorage,
       },
     }),
     provideTranslocoPersistTranslations({
