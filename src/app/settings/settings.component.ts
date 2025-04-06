@@ -11,13 +11,13 @@ import {
 import { CommonModule, DOCUMENT } from '@angular/common';
 import type { LogoList, WallpaperList } from '../types';
 import {
-  AutocompleteProvider,
+  type AutocompleteProvider,
   autocompleteProviders,
   logos,
   type SearchEngine,
-  SearchEngineList,
+  type SearchEngineList,
   searchEngineMappings,
-  Wallpaper,
+  type Wallpaper,
   wallpapers,
 } from '../../../config';
 import { Checkbox } from 'primeng/checkbox';
@@ -33,10 +33,10 @@ import { ConfirmDialog } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 import { Panel } from 'primeng/panel';
-import { FileSelectEvent, FileUpload } from 'primeng/fileupload';
+import { type FileSelectEvent, FileUpload } from 'primeng/fileupload';
 import { MessageToastService } from '@garudalinux/core';
 import { MenuEditorComponent } from '../menu-editor/menu-editor.component';
-import { AvailableJokeSources, jokeSources } from '../jokes/jokes';
+import { type AvailableJokeSources, jokeSources } from '../jokes/jokes';
 import { type AppTheme, themes } from '../theme';
 import { LinksEditorComponent } from '../links-editor/links-editor.component';
 import { LangPipe } from '../lang/lang.pipe';
@@ -94,7 +94,10 @@ export class SettingsComponent {
   wallpaperUrl = signal<string>('');
   welcomeText = signal<string>('');
 
-  protected readonly availableLanguages: { name: string; prettyName: string }[] = [];
+  protected readonly availableLanguages: {
+    name: string;
+    prettyName: string;
+  }[] = [];
   protected readonly availableThemes: string[] = Object.keys(themes).sort();
   protected readonly autocompleteProviders: SearchEngineList = autocompleteProviders;
   protected readonly configService = inject(ConfigService);

@@ -17,5 +17,5 @@ export class LinksComponent {
 
   protected readonly configService = inject(ConfigService);
 
-  gridCols = computed(() => `col-span-${this.configService.settings().gridCols}`);
+  gridCols = computed(() => `col-span-${this.configService.settings().gridCols} cursor-pointer p-2 text-center`);
 }

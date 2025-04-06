@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, type OnInit } from '@angular/core';
-import { AppService } from '../app.service';
+import { NewsService } from './news.service';
 import { EmojiPipe } from '../emoji-pipe/emoji.pipe';
 import { Timeline } from 'primeng/timeline';
 import { ScrollPanel } from 'primeng/scrollpanel';
@@ -21,7 +21,7 @@ import type { StrippedTopic } from './interfaces';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewsComponent implements OnInit {
-  protected readonly appService = inject(AppService);
+  protected readonly newsService = inject(NewsService);
   protected readonly openLinkInNewTab = openLinkInNewTab;
 
   ngOnInit(): void {
@@ -29,7 +29,7 @@ export class NewsComponent implements OnInit {
       const cache: string | null = localStorage.getItem('blogData');
       if (cache) {
         const parsedCache = JSON.parse(cache) as StrippedTopic[];
-        this.appService.blogData.set(parsedCache);
+        this.newsService.blogData.set(parsedCache);
       }
     } catch (err: any) {
       console.error('Error parsing blogData from localStorage:', err);
@@ -38,9 +38,9 @@ export class NewsComponent implements OnInit {
     }
   }
 
-  async getFeed() {
-    if (!this.appService.blogDataReady()) {
-      this.appService.getDiscourseNews();
+  async getFeed(): Promise<void> {
+    if (!this.newsService.blogDataReady()) {
+      this.newsService.getDiscourseNews();
     }
   }
 }

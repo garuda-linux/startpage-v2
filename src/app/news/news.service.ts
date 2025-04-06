@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { DiscourseFeed, StrippedTopic, Topic } from './news/interfaces';
+import type { DiscourseFeed, StrippedTopic, Topic } from './interfaces';
 import { HttpClient } from '@angular/common/http';
 import { APP_CONFIG } from 'src/environments/app-config.token';
 import { retry } from 'rxjs';
@@ -7,7 +7,7 @@ import { retry } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class AppService {
+export class NewsService {
   blogData = signal<StrippedTopic[]>([]);
   blogDataReady = signal<boolean>(false);
 

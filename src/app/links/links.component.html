@@ -2,9 +2,10 @@
   @for (link of configService.settings().customLinks; track link.title) {
     <a
       [href]="link.link"
-      [ngClass]="{ 'cursor-pointer auto-rows-fr p-2 text-center': true }"
       [class]="
-        configService.settings().autoGridCols ? '3xl:col-span-1 col-span-6 lg:col-span-4 xl:col-span-2' : gridCols()
+        configService.settings().autoGridCols
+          ? 'col-span-6 cursor-pointer p-2 text-center lg:col-span-4 xl:col-span-2 3xl:col-span-1'
+          : gridCols()
       "
       target="_blank"
     >

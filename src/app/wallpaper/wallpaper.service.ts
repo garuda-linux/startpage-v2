@@ -19,7 +19,12 @@ export class WallpaperService {
    * @param el ElementRef to the body element.
    * @param url Optional URL for the custom wallpaper, if applicable.
    */
-  loadWallpaper(wallpaper: string, renderer: Renderer2, el: ElementRef, url?: string): void {
+  loadWallpaper(
+    wallpaper: string,
+    renderer: Renderer2,
+    el: ElementRef,
+    url?: string,
+  ): void {
     if (wallpaper === 'custom') {
       this.loadWallpaperExecutor(el, renderer, url ?? '');
     } else if (wallpaper === 'none') {
@@ -35,11 +40,22 @@ export class WallpaperService {
    * @param renderer Renderer2 to the body element.
    * @param wallpaper URL to the wallpaper to load.
    */
-  loadWallpaperExecutor(el: ElementRef, renderer: Renderer2, wallpaper: string | null): void {
+  loadWallpaperExecutor(
+    el: ElementRef,
+    renderer: Renderer2,
+    wallpaper: string | null,
+  ): void {
     if (wallpaper === null) {
-      renderer.removeStyle(el.nativeElement.ownerDocument.body, 'backgroundImage');
+      renderer.removeStyle(
+        el.nativeElement.ownerDocument.body,
+        'backgroundImage',
+      );
     } else {
-      renderer.setStyle(el.nativeElement.ownerDocument.body, 'background-image', `url(${wallpaper})`);
+      renderer.setStyle(
+        el.nativeElement.ownerDocument.body,
+        'background-image',
+        `url(${wallpaper})`,
+      );
     }
   }
 
@@ -50,7 +66,12 @@ export class WallpaperService {
    * @param renderer Renderer2 to the origin element.
    * @param el ElementRef to the origin element.
    */
-  applyWallpaperStyle(kind: string, value: boolean, renderer: Renderer2, el: ElementRef): void {
+  applyWallpaperStyle(
+    kind: string,
+    value: boolean,
+    renderer: Renderer2,
+    el: ElementRef,
+  ): void {
     switch (kind) {
       case 'fitWallpaper':
         this.applyBgContain(el, renderer, value);
@@ -59,7 +80,10 @@ export class WallpaperService {
         this.applyBgBlur(el, renderer, value);
         break;
       case 'blurStrength':
-        this.applyBgBlur(el, renderer, true);
+        if (!this.configService.settings().blurBackground) {
+          return;
+        }
+        this.applyBgBlur(el, renderer, value);
         break;
       default:
         this.applyBgContain(el, renderer, false);
@@ -78,12 +102,21 @@ export class WallpaperService {
     const strength = this.configService.settings().blurStrength;
     if (apply) {
       if (this.prevBlurStrength) {
-        renderer.removeClass(el.nativeElement.ownerDocument.body, `background-blurred-${this.prevBlurStrength}`);
+        renderer.removeClass(
+          el.nativeElement.ownerDocument.body,
+          `background-blurred-${this.prevBlurStrength}`,
+        );
       }
       this.prevBlurStrength = strength;
-      renderer.addClass(el.nativeElement.ownerDocument.body, `background-blurred-${strength}`);
+      renderer.addClass(
+        el.nativeElement.ownerDocument.body,
+        `background-blurred-${strength}`,
+      );
     } else {
-      renderer.removeClass(el.nativeElement.ownerDocument.body, `background-blurred-${strength}`);
+      renderer.removeClass(
+        el.nativeElement.ownerDocument.body,
+        `background-blurred-${strength}`,
+      );
     }
   }
 

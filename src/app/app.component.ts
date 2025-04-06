@@ -20,7 +20,7 @@ import { menubarItems } from '../../config';
 import type { MenuBarLink } from './types';
 import { TranslocoPersistTranslations } from '@jsverse/transloco-persist-translations';
 import { Avatar } from 'primeng/avatar';
-import { ToastMessageOptions } from 'primeng/api';
+import type { ToastMessageOptions } from 'primeng/api';
 
 @Component({
   imports: [RouterModule, NgOptimizedImage, ScrollTop, ShellComponent, TranslocoDirective, Avatar, NgClass],
@@ -39,11 +39,11 @@ export class AppComponent implements OnInit {
   logoLink = computed(() => {
     if (this.configService.settings().logo === 'custom') {
       return this.configService.settings().logoUrl;
-    } else if (this.configService.settings().logo === 'none') {
-      return this.configService.settings().logo;
-    } else {
-      return 'assets/garuda-purple.svg';
     }
+    if (this.configService.settings().logo === 'none') {
+      return this.configService.settings().logo;
+    }
+    return 'assets/garuda-purple.svg';
   });
 
   private readonly translationsCache = inject(TranslocoPersistTranslations);
@@ -145,7 +145,11 @@ export class AppComponent implements OnInit {
       this.renderer.removeClass(this.el.nativeElement, shakeEffect);
     }, 5000);
 
-    const options: ToastMessageOptions = { sticky: true, life: 10000, icon: 'pi pi-spinner pi-spin' };
+    const options: ToastMessageOptions = {
+      sticky: true,
+      life: 10000,
+      icon: 'pi pi-spinner pi-spin',
+    };
     switch (oneToSix) {
       case 1:
         this.messageToastService.info(title, content, 'top-center', options);

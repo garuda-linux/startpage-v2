@@ -1,10 +1,22 @@
-import { type ElementRef, inject, Injectable, type Renderer2, REQUEST, signal } from '@angular/core';
+import {
+  type ElementRef,
+  inject,
+  Injectable,
+  type Renderer2,
+  REQUEST,
+  signal,
+} from '@angular/core';
 import type { AppSettings } from './interfaces';
 import { Title } from '@angular/platform-browser';
 import { WallpaperService } from '../wallpaper/wallpaper.service';
 import { menubarItems, serviceLinks } from '../../../config';
 import { usePreset } from '@primeng/themes';
-import { AppTheme, backgroundColors, scrollbarColors, themes } from '../theme';
+import {
+  type AppTheme,
+  backgroundColors,
+  scrollbarColors,
+  themes,
+} from '../theme';
 import { DOCUMENT } from '@angular/common';
 import { TranslocoService } from '@jsverse/transloco';
 import { firstValueFrom } from 'rxjs';
@@ -67,8 +79,12 @@ export class ConfigService {
     this.wallpaperService = new WallpaperService(this);
 
     if (!this.settings().languageChanged) {
-      const lang: string = navigator.language.includes('-') ? navigator.language.split('-')[0] : navigator.language;
-      if ((this.translocoService.getAvailableLangs() as string[]).includes(lang)) {
+      const lang: string = navigator.language.includes('-')
+        ? navigator.language.split('-')[0]
+        : navigator.language;
+      if (
+        (this.translocoService.getAvailableLangs() as string[]).includes(lang)
+      ) {
         this.translocoService.setActiveLang(lang);
       }
     } else {
@@ -84,9 +100,16 @@ export class ConfigService {
    * @param el The element reference to the DOM element.
    * @param write Whether to write the value to local storage.
    */
-  updateConfig(key: string, value: any, renderer?: Renderer2, el?: ElementRef, write = true): void {
+  updateConfig(
+    key: string,
+    value: any,
+    renderer?: Renderer2,
+    el?: ElementRef,
+    write = true,
+  ): void {
     this.settings.update((prev: AppSettings) => ({ ...prev, [key]: value }));
-    if (write) localStorage.setItem('settings', JSON.stringify(this.settings()));
+    if (write)
+      localStorage.setItem('settings', JSON.stringify(this.settings()));
     void this.syncSetting(key, value, renderer, el);
   }
 
@@ -109,7 +132,11 @@ export class ConfigService {
    * @param renderer The renderer to use for DOM manipulation.
    * @param el The element reference to the DOM element.
    */
-  async restoreSettings(file: File, renderer: Renderer2, el: ElementRef): Promise<void> {
+  async restoreSettings(
+    file: File,
+    renderer: Renderer2,
+    el: ElementRef,
+  ): Promise<void> {
     const buffer: ArrayBuffer = await file.arrayBuffer();
     const blob: Blob = new Blob([buffer], { type: 'application/json' });
     const content: string = await blob.text();
@@ -142,7 +169,11 @@ export class ConfigService {
    * @param el The element reference to the DOM element.
    * @private
    */
-  private iterateSettings(settings: { [key: string]: any }, renderer?: Renderer2, el?: ElementRef) {
+  private iterateSettings(
+    settings: { [key: string]: unknown },
+    renderer?: Renderer2,
+    el?: ElementRef,
+  ) {
     for (const key of Object.keys(settings)) {
       if (Object.prototype.hasOwnProperty.call(this.settings(), key)) {
         this.updateConfig(key, settings[key], renderer, el);
@@ -180,12 +211,21 @@ export class ConfigService {
    * @param el The element reference to the DOM element.
    * @private
    */
-  private async syncSetting(key: string, value: any, renderer?: Renderer2, el?: ElementRef) {
+  private async syncSetting(
+    key: string,
+    value: any,
+    renderer?: Renderer2,
+    el?: ElementRef,
+  ) {
     switch (key) {
       case 'customTitle': {
         if (!this.settings().customTitle) {
-          await firstValueFrom(this.translocoService.load(this.settings().language));
-          this.title.setTitle(this.translocoService.translate('menu.defaultTitle'));
+          await firstValueFrom(
+            this.translocoService.load(this.settings().language),
+          );
+          this.title.setTitle(
+            this.translocoService.translate('menu.defaultTitle'),
+          );
         } else {
           this.title.setTitle(value);
         }
@@ -193,7 +233,12 @@ export class ConfigService {
       }
       case 'wallpaper': {
         if (renderer && el) {
-          this.wallpaperService.loadWallpaper(value, renderer, el, this.settings().wallpaperUrl);
+          this.wallpaperService.loadWallpaper(
+            value,
+            renderer,
+            el,
+            this.settings().wallpaperUrl,
+          );
         }
         break;
       }
@@ -201,7 +246,12 @@ export class ConfigService {
       case 'blurBackground':
       case 'blurStrength': {
         if (renderer && el) {
-          this.wallpaperService.applyWallpaperStyle(key, value, renderer, el);
+          this.wallpaperService.applyWallpaperStyle(
+            key,
+            this.settings().blurBackground,
+            renderer,
+            el,
+          );
         }
         break;
       }
@@ -233,7 +283,9 @@ export class ConfigService {
     let backgroundColor: string;
 
     if (activeTheme.includes('Catppuccin')) {
-      const flavors = this.settings().activeTheme.includes('Mocha') ? 'primary' : 'alt';
+      const flavors = this.settings().activeTheme.includes('Mocha')
+        ? 'primary'
+        : 'alt';
 
       if (value) {
         if (flavors === 'primary') {

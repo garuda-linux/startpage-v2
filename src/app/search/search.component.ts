@@ -6,10 +6,10 @@ import { ConfigService } from '../config/config.service';
 import { autocompleteProviders, searchEngineMappings } from '../../../config';
 import { Button } from 'primeng/button';
 import { InputText } from 'primeng/inputtext';
-import { AutoComplete, AutoCompleteCompleteEvent } from 'primeng/autocomplete';
+import { AutoComplete, type AutoCompleteCompleteEvent } from 'primeng/autocomplete';
 import { HttpClient } from '@angular/common/http';
-import { ArrayBasedSuggestions } from './interfaces';
-import { SearchEngineEntry } from '../types';
+import type { ArrayBasedSuggestions } from './interfaces';
+import type { SearchEngineEntry } from '../types';
 
 @Component({
   selector: 'app-search',
