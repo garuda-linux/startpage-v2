@@ -43,6 +43,8 @@ Thumbs.db
 .nx/workspace-data
 
 # Local env files
+.cursor/rules/nx-rules.md
 .env
+.github/instructions/nx.instructions.md
 .pre-commit-config.yaml
 .wrangler
