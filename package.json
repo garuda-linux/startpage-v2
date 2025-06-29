@@ -61,7 +61,7 @@
     "@catppuccin/palette": "^1.7.1",
     "@eslint/js": "^9.30.0",
     "@google/generative-ai": "^0.24.1",
-    "@jsverse/transloco-keys-manager": "^6.2.2",
+    "@jsverse/transloco-keys-manager": "^7.0.0",
     "@jsverse/transloco-optimize": "^7.0.1",
     "@jsverse/transloco-utils": "^7.0.2",
     "@nx/angular": "21.1.3",
