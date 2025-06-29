@@ -75,7 +75,7 @@
     "@swc/core": "^1.12.7",
     "@swc/helpers": "^0.5.17",
     "@types/emoji-js": "^3.5.2",
-    "@types/mime-types": "^2.1.4",
+    "@types/mime-types": "^3.0.0",
     "@types/node": "^22.15.34",
     "@typescript-eslint/utils": "^8.35.0",
     "angular-eslint": "^19.8.1",
