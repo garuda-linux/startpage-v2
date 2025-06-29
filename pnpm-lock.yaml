@@ -78,8 +78,8 @@ importers:
         specifier: ^7.8.2
         version: 7.8.2
       tailwindcss-primeui:
-        specifier: ^0.5.1
-        version: 0.5.1(tailwindcss@3.4.17(ts-node@10.9.1(@swc/core@1.12.7(@swc/helpers@0.5.17))(@types/node@22.15.34)(typescript@5.8.3)))
+        specifier: ^0.6.0
+        version: 0.6.1(tailwindcss@3.4.17(ts-node@10.9.1(@swc/core@1.12.7(@swc/helpers@0.5.17))(@types/node@22.15.34)(typescript@5.8.3)))
     devDependencies:
       '@angular-devkit/build-angular':
         specifier: ^19.2.15
@@ -8009,8 +8009,8 @@ packages:
     resolution: {integrity: sha512-iK5/YhZxq5GO5z8wb0bY1317uDF3Zjpha0QFFLA8/trAoiLbQD0HUbMesEaxyzUgDxi2QlcbM8IvqOlEjgoXBA==}
     engines: {node: '>=12.17'}
 
-  tailwindcss-primeui@0.5.1:
-    resolution: {integrity: sha512-zNqp62N4c+pwBVkVJd8ByvujepVKAMxZBdYy5MzIDi/Zb2p8wTGo4RrQaqLQazm3teOWVmttzZYPH/GlOB3lgw==}
+  tailwindcss-primeui@0.6.1:
+    resolution: {integrity: sha512-T69Rylcrmnt8zy9ik+qZvsLuRIrS9/k6rYJSIgZ1trnbEzGDDQSCIdmfyZknevqiHwpSJHSmQ9XT2C+S/hJY4A==}
     peerDependencies:
       tailwindcss: '>=3.1.0'
 
@@ -18459,7 +18459,7 @@ snapshots:
       array-back: 6.2.2
       wordwrapjs: 5.1.0
 
-  tailwindcss-primeui@0.5.1(tailwindcss@3.4.17(ts-node@10.9.1(@swc/core@1.12.7(@swc/helpers@0.5.17))(@types/node@22.15.34)(typescript@5.8.3))):
+  tailwindcss-primeui@0.6.1(tailwindcss@3.4.17(ts-node@10.9.1(@swc/core@1.12.7(@swc/helpers@0.5.17))(@types/node@22.15.34)(typescript@5.8.3))):
     dependencies:
       tailwindcss: 3.4.17(ts-node@10.9.1(@swc/core@1.12.7(@swc/helpers@0.5.17))(@types/node@22.15.34)(typescript@5.8.3))
 
