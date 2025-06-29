@@ -78,7 +78,7 @@
     "@types/mime-types": "^2.1.4",
     "@types/node": "^22.15.34",
     "@typescript-eslint/utils": "^8.35.0",
-    "angular-eslint": "^19.8.1",
+    "angular-eslint": "^20.0.0",
     "eslint": "^9.30.0",
     "eslint-config-prettier": "^10.1.5",
     "mime-types": "^3.0.1",
