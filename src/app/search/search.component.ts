@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject, type Signal, signal } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { ConfigService } from '../config/config.service';
@@ -13,7 +13,7 @@ import type { SearchEngineEntry } from '../types';
 
 @Component({
   selector: 'app-search',
-  imports: [CommonModule, FormsModule, NgOptimizedImage, TranslocoDirective, Button, InputText, AutoComplete],
+  imports: [FormsModule, NgOptimizedImage, TranslocoDirective, Button, InputText, AutoComplete],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

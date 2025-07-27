@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, effect, inject, signal, untracked, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Toolbar } from 'primeng/toolbar';
 import { Button } from 'primeng/button';
 import { type Table, TableModule } from 'primeng/table';
@@ -16,18 +16,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-menu-editor',
-  imports: [
-    CommonModule,
-    Toolbar,
-    Button,
-    TableModule,
-    TranslocoDirective,
-    IconField,
-    InputIcon,
-    InputText,
-    Dialog,
-    FormsModule,
-  ],
+  imports: [Toolbar, Button, TableModule, TranslocoDirective, IconField, InputIcon, InputText, Dialog, FormsModule],
   templateUrl: './menu-editor.component.html',
   styleUrl: './menu-editor.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
 import { type AvailableJokeSources, jokes, type UselessFact } from './jokes';
 import { ConfigService } from '../config/config.service';
@@ -7,7 +6,7 @@ import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-jokes',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './jokes.component.html',
   styleUrl: './jokes.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

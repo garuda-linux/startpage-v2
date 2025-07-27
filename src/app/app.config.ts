@@ -1,10 +1,11 @@
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import {
   type ApplicationConfig,
   inject,
   isDevMode,
   provideAppInitializer,
-  provideExperimentalZonelessChangeDetection,
+  provideBrowserGlobalErrorListeners,
+  provideZonelessChangeDetection,
 } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
@@ -20,6 +21,7 @@ import { provideTranslocoPersistTranslations } from '@jsverse/transloco-persist-
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimationsAsync(),
+    provideBrowserGlobalErrorListeners(),
     provideGarudaNG(
       { font: 'InterVariable' },
       {
@@ -33,8 +35,8 @@ export const appConfig: ApplicationConfig = {
       },
     ),
     provideRouter(routes),
-    provideExperimentalZonelessChangeDetection(),
-    provideHttpClient(),
+    provideZonelessChangeDetection(),
+    provideHttpClient(withFetch()),
     provideAppInitializer(async () => {
       const configService = inject(ConfigService);
       while (!configService.initialized()) {

@@ -92,23 +92,23 @@
         <div>
           <label class="mb-3 block font-bold" for="link-title"> {{ t('settings.title') }}</label>
           <input [(ngModel)]="link().title" fluid id="link-title" pInputText required type="text" />
-          <small *ngIf="linkSubmitted() && !link().title" class="text-primary-emphasis-alt">{{
-            t('settings.isRequired')
-          }}</small>
+          @if (linkSubmitted() && !link().title) {
+            <small class="text-primary-emphasis-alt">{{ t('settings.isRequired') }}</small>
+          }
         </div>
         <div>
           <label class="mb-3 block font-bold" for="url"> {{ t('settings.url') }}</label>
           <input [(ngModel)]="link().link" fluid id="url" pInputText required type="text" />
-          <small *ngIf="linkSubmitted() && !link().link" class="text-primary-emphasis-alt">{{
-            t('settings.isRequired')
-          }}</small>
+          @if (linkSubmitted() && !link().link) {
+            <small class="text-primary-emphasis-alt">{{ t('settings.isRequired') }}</small>
+          }
         </div>
         <div>
           <label class="mb-3 block font-bold" for="icon"> {{ t('settings.iconLink') }}</label>
           <input [(ngModel)]="link().icon" fluid id="icon" pInputText required type="text" />
-          <small *ngIf="linkSubmitted() && !link().icon" class="text-primary-emphasis-alt">{{
-            t('settings.isRequired')
-          }}</small>
+          @if (linkSubmitted() && !link().icon) {
+            <small class="text-primary-emphasis-alt">{{ t('settings.isRequired') }}</small>
+          }
         </div>
       </div>
     </ng-template>

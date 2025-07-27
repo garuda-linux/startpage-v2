@@ -98,16 +98,16 @@
         <div>
           <label class="mb-3 block font-bold" for="link-title"> {{ t('settings.title') }}</label>
           <input [(ngModel)]="link().label" fluid id="link-title" pInputText required type="text" />
-          <small *ngIf="linkSubmitted() && !link().label" class="text-primary-emphasis-alt">{{
-            t('settings.isRequired')
-          }}</small>
+          @if (linkSubmitted() && !link().label) {
+            <small class="text-primary-emphasis-alt">{{ t('settings.isRequired') }}</small>
+          }
         </div>
         <div>
           <label class="mb-3 block font-bold" for="url"> {{ t('settings.url') }}</label>
           <input [(ngModel)]="link().url" fluid id="url" pInputText required type="text" />
-          <small *ngIf="linkSubmitted() && !link().url" class="text-primary-emphasis-alt">{{
-            t('settings.isRequired')
-          }}</small>
+          @if (linkSubmitted() && !link().url) {
+            <small class="text-primary-emphasis-alt">{{ t('settings.isRequired') }}</small>
+          }
         </div>
         <div>
           <label class="mb-3 block font-bold" for="icon"> {{ t('settings.iconLink') }}</label>
@@ -115,9 +115,9 @@
           <a href="https://primeng.org/icons">
             <small class="text-primary">{{ t('settings.primeNgIcons') }}</small>
           </a>
-          <small *ngIf="linkSubmitted() && !link().icon" class="text-primary-emphasis-alt">{{
-            t('settings.isRequired')
-          }}</small>
+          @if (linkSubmitted() && !link().icon) {
+            <small class="text-primary-emphasis-alt">{{ t('settings.isRequired') }}</small>
+          }
         </div>
       </div>
     </ng-template>

@@ -2,14 +2,14 @@
   <p-panel>
     @if (!newsService.blogDataReady()) {
       <div class="px-2.5 md:h-[80vh] md:px-10">
-        <ng-container *ngFor="let _ of [].constructor(8)">
+        @for (_ of [].constructor(8); track _) {
           <div class="mb-4 flex">
             <div>
               <p-skeleton width="100%" styleClass="mb-2" />
             </div>
           </div>
           <p-skeleton width="100%" height="75px" />
-        </ng-container>
+        }
       </div>
     }
     <p-scroll-panel [style]="{ height: '80vh' }">

@@ -109,9 +109,3 @@ export const routeAnimations: AnimationTriggerMetadata = trigger('routerTransiti
   transition(backwardValues(), fadeInFromDirection('backward')),
   transition('* => null, null => *', fade),
 ]);
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}

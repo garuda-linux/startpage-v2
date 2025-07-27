@@ -7,8 +7,9 @@ import {
   Renderer2,
   signal,
   type WritableSignal,
+  DOCUMENT,
 } from '@angular/core';
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import type { LogoList, WallpaperList } from '../types';
 import {
   type AutocompleteProvider,
