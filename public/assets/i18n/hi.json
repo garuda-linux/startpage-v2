@@ -5,19 +5,19 @@
   },
   "menu": {
     "aboutUs": "हमारे बारे में",
-    "archWiki": "आर्क विकि",
+    "archWiki": "",
     "defaultTitle": "गरुड़ का स्टार्टपेज",
     "donate": "दान करें",
     "forum": "फ़ोरम",
-    "garudaWiki": "गरुड़ विकि",
-    "gitlab": "GitLab",
+    "garudaWiki": "",
+    "gitlab": "",
     "home": "होम",
     "settings": "सेटिंग्स",
     "welcome": "स्वागत है"
   },
   "common": {
     "coc": "आचार संहिता",
-    "gitlab": "GitLab",
+    "gitlab": "",
     "privacyPolicy": "गोपनीयता नीति"
   },
   "notFound": {

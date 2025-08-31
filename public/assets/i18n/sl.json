@@ -5,19 +5,19 @@
   },
   "menu": {
     "aboutUs": "O nas",
-    "archWiki": "Arch Wiki",
+    "archWiki": "",
     "defaultTitle": "Garudina začetna stran",
     "donate": "Doniraj",
     "forum": "Forum",
-    "garudaWiki": "Garuda Wiki",
-    "gitlab": "GitLab",
+    "garudaWiki": "",
+    "gitlab": "",
     "home": "Domov",
     "settings": "Nastavitve",
     "welcome": "Dobrodošli"
   },
   "common": {
     "coc": "Kodeks ravnanja",
-    "gitlab": "GitLab",
+    "gitlab": "",
     "privacyPolicy": "Politika zasebnosti"
   },
   "notFound": {

@@ -5,19 +5,19 @@
   },
   "menu": {
     "aboutUs": "Om oss",
-    "archWiki": "Arch Wiki",
+    "archWiki": "",
     "defaultTitle": "Garudas Startpage",
     "donate": "Donera",
     "forum": "Forum",
-    "garudaWiki": "Garuda Wiki",
-    "gitlab": "GitLab",
+    "garudaWiki": "",
+    "gitlab": "",
     "home": "Hem",
     "settings": "Inställningar",
     "welcome": "Välkommen"
   },
   "common": {
     "coc": "Regler för uppförande",
-    "gitlab": "GitLab",
+    "gitlab": "",
     "privacyPolicy": "Integritetspolicy"
   },
   "notFound": {

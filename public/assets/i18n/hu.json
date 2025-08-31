@@ -5,19 +5,19 @@
   },
   "menu": {
     "aboutUs": "Rólunk",
-    "archWiki": "Arch Wiki",
+    "archWiki": "",
     "defaultTitle": "A Garuda kezdőlapja",
     "donate": "Adomány",
     "forum": "Fórum",
-    "garudaWiki": "Garuda Wiki",
-    "gitlab": "GitLab",
+    "garudaWiki": "",
+    "gitlab": "",
     "home": "Főoldal",
     "settings": "Beállítások",
     "welcome": "Üdvözöljük"
   },
   "common": {
     "coc": "Magatartási kódex",
-    "gitlab": "GitLab",
+    "gitlab": "",
     "privacyPolicy": "Adatvédelmi irányelvek"
   },
   "notFound": {

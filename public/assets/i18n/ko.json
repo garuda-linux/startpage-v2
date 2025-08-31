@@ -5,19 +5,19 @@
   },
   "menu": {
     "aboutUs": "회사 소개",
-    "archWiki": "Arch Wiki",
+    "archWiki": "",
     "defaultTitle": "Garuda 시작 페이지",
     "donate": "기부",
     "forum": "포럼",
-    "garudaWiki": "Garuda Wiki",
-    "gitlab": "GitLab",
+    "garudaWiki": "",
+    "gitlab": "",
     "home": "홈",
     "settings": "설정",
     "welcome": "환영합니다"
   },
   "common": {
     "coc": "행동 강령",
-    "gitlab": "GitLab",
+    "gitlab": "",
     "privacyPolicy": "개인 정보 정책"
   },
   "notFound": {

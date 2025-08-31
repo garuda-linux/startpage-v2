@@ -5,19 +5,19 @@
   },
   "menu": {
     "aboutUs": "Hakkımızda",
-    "archWiki": "Arch Wiki",
+    "archWiki": "",
     "defaultTitle": "Garuda'nın Başlangıç Sayfası",
     "donate": "Bağış yap",
     "forum": "Forum",
-    "garudaWiki": "Garuda Wiki",
-    "gitlab": "GitLab",
+    "garudaWiki": "",
+    "gitlab": "",
     "home": "Anasayfa",
     "settings": "Ayarlar",
     "welcome": "Hoş geldin"
   },
   "common": {
     "coc": "Davranış Kuralları",
-    "gitlab": "GitLab",
+    "gitlab": "",
     "privacyPolicy": "Gizlilik Politikası"
   },
   "notFound": {

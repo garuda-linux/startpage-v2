@@ -5,19 +5,19 @@
   },
   "menu": {
     "aboutUs": "私たちについて",
-    "archWiki": "Arch Wiki",
+    "archWiki": "",
     "defaultTitle": "Garuda's Startpage",
     "donate": "寄付",
     "forum": "フォーラム",
-    "garudaWiki": "Garuda Wiki",
-    "gitlab": "GitLab",
+    "garudaWiki": "",
+    "gitlab": "",
     "home": "ホーム",
     "settings": "設定",
     "welcome": "ようこそ"
   },
   "common": {
     "coc": "行動規範",
-    "gitlab": "GitLab",
+    "gitlab": "",
     "privacyPolicy": "プライバシーポリシー"
   },
   "notFound": {

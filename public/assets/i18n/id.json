@@ -5,19 +5,19 @@
   },
   "menu": {
     "aboutUs": "Tentang kami",
-    "archWiki": "Arch Wiki",
+    "archWiki": "",
     "defaultTitle": "Halaman Muka Garuda",
     "donate": "Donasi",
     "forum": "Forum",
-    "garudaWiki": "Garuda Wiki",
-    "gitlab": "GitLab",
+    "garudaWiki": "",
+    "gitlab": "",
     "home": "Beranda",
     "settings": "Pengaturan",
     "welcome": "Selamat datang"
   },
   "common": {
     "coc": "Kode Etik",
-    "gitlab": "GitLab",
+    "gitlab": "",
     "privacyPolicy": "Kebijakan Privasi"
   },
   "notFound": {

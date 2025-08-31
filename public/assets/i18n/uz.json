@@ -5,19 +5,19 @@
   },
   "menu": {
     "aboutUs": "Biz haqimizda",
-    "archWiki": "Arch Wiki",
+    "archWiki": "",
     "defaultTitle": "Garudaning Bosh Sahifasi",
     "donate": "Ehson qiling",
     "forum": "Forum",
-    "garudaWiki": "Garuda Wiki",
-    "gitlab": "GitLab",
+    "garudaWiki": "",
+    "gitlab": "",
     "home": "Bosh sahifa",
     "settings": "Sozlamalar",
     "welcome": "Xush kelibsiz"
   },
   "common": {
     "coc": "Axloq Kodeksi",
-    "gitlab": "GitLab",
+    "gitlab": "",
     "privacyPolicy": "Maxfiylik Siyosati"
   },
   "notFound": {

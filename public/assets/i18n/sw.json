@@ -5,19 +5,19 @@
   },
   "menu": {
     "aboutUs": "Kuhusu sisi",
-    "archWiki": "Arch Wiki",
+    "archWiki": "",
     "defaultTitle": "Ukurasa wa kuanzia wa Garuda",
     "donate": "Changia",
     "forum": "Jukwaa",
-    "garudaWiki": "Garuda Wiki",
-    "gitlab": "GitLab",
+    "garudaWiki": "",
+    "gitlab": "",
     "home": "Mwanzo",
     "settings": "Mipangilio",
     "welcome": "Karibu"
   },
   "common": {
     "coc": "Kanuni za Maadili",
-    "gitlab": "GitLab",
+    "gitlab": "",
     "privacyPolicy": "Sera ya Faragha"
   },
   "notFound": {

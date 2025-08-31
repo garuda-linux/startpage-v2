@@ -5,19 +5,19 @@
   },
   "menu": {
     "aboutUs": "Guri buruz",
-    "archWiki": "Arch Wiki",
+    "archWiki": "",
     "defaultTitle": "Garudaren Hasiera Orria",
     "donate": "Dohaintza egin",
     "forum": "Foroa",
-    "garudaWiki": "Garuda Wiki",
-    "gitlab": "GitLab",
+    "garudaWiki": "",
+    "gitlab": "",
     "home": "Etxea",
     "settings": "Ezarpenak",
     "welcome": "Ongi etorri"
   },
   "common": {
     "coc": "Jokabide Kodea",
-    "gitlab": "GitLab",
+    "gitlab": "",
     "privacyPolicy": "Pribatutasun Politika"
   },
   "notFound": {

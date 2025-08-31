@@ -5,19 +5,19 @@
   },
   "menu": {
     "aboutUs": "معلومات عنا",
-    "archWiki": "Arch Wiki",
+    "archWiki": "",
     "defaultTitle": "صفحة بداية Garuda",
     "donate": "تبرع",
     "forum": "المنتدى",
-    "garudaWiki": "Garuda Wiki",
-    "gitlab": "GitLab",
+    "garudaWiki": "",
+    "gitlab": "",
     "home": "الرئيسية",
     "settings": "الإعدادات",
     "welcome": "مرحبا"
   },
   "common": {
     "coc": "مدونة قواعد السلوك",
-    "gitlab": "GitLab",
+    "gitlab": "",
     "privacyPolicy": "سياسة الخصوصية"
   },
   "notFound": {

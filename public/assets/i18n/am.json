@@ -5,19 +5,19 @@
   },
   "menu": {
     "aboutUs": "ስለ እኛ",
-    "archWiki": "Arch Wiki",
+    "archWiki": "",
     "defaultTitle": "የ Garud's መግቢያ ገጽ",
     "donate": "ይለግሱ",
     "forum": "መድረክ",
-    "garudaWiki": "Garuda Wiki",
-    "gitlab": "GitLab",
+    "garudaWiki": "",
+    "gitlab": "",
     "home": "ቤት",
     "settings": "ቅንብሮች",
     "welcome": "እንኳን ደህና መጡ"
   },
   "common": {
     "coc": "የስነ ምግባር ደንብ",
-    "gitlab": "GitLab",
+    "gitlab": "",
     "privacyPolicy": "የግላዊነት መመሪያ"
   },
   "notFound": {
