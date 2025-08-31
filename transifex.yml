@@ -1,0 +1,11 @@
+---
+filters:
+  - filter_type: file
+    file_format: KEYVALUEJSON
+    source_file: public/assets/i18n/en.json
+    source_language: en
+    translation_files_expression: 'public/assets/i18n/<lang>.json'
+settings:
+  language_mapping:
+    zh_CN: zh-CN
+    uk: ua

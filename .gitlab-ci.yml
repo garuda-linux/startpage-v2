@@ -1,0 +1,4 @@
+---
+stages: [auto]
+include:
+  - 'https://gitlab.com/garuda-linux/tools/gitlab-ci-commons/-/raw/main/templates/transifex-automerge.gitlab-ci.yml'
