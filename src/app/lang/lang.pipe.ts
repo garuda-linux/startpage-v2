@@ -22,6 +22,8 @@ export class LangPipe implements PipeTransform {
         return 'Polish 🇵🇱';
       case 'pt':
         return 'Portuguese 🇵🇹';
+      case 'pt-br':
+        return 'Portuguese (Brazil) 🇧🇷';
       case 'ru':
         return 'Russian 🇷🇺';
       case 'tr':

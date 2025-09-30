@@ -7,5 +7,6 @@ filters:
     translation_files_expression: 'public/assets/i18n/<lang>.json'
 settings:
   language_mapping:
+    pt_br: pt-BR
     zh_CN: zh-CN
     uk: ua
