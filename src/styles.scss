@@ -1,9 +1,6 @@
 /* PrimeNG stuff */
 @use 'primeicons/primeicons.css';
 
-/* Sauce */
-@use 'csshake/scss/csshake.scss';
-
 /* Font */
 :root {
   font-family: Inter, system-ui, sans-serif;
@@ -25,9 +22,8 @@
   @apply md:mr-auto;
 }
 
-.garuda-shell-menubar,
-.garuda-shell__dropdown {
-  @apply m-2;
+.garuda-shell-content {
+  @apply m-0 !important;
 }
 
 /*`Custom classes`*/
