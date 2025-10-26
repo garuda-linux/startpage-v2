@@ -3,7 +3,7 @@
   "assignees": ["dr460nf1r3"],
   "commitMessageAction": "update",
   "extends": [
-    "config:base",
+    "config:recommended",
     ":gitSignOff",
     ":ignoreModulesAndTests",
     ":semanticPrefixFixDepsChoreOthers",
