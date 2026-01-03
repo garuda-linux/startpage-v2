@@ -9,8 +9,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { NgModule } from '@angular/core';
-import { RouterModule, type Routes } from '@angular/router';
+import { type Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [

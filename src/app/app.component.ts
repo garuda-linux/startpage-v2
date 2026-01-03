@@ -10,7 +10,6 @@ import {
   signal,
 } from '@angular/core';
 import { RouterModule, type RouterOutlet } from '@angular/router';
-import { ScrollTop } from 'primeng/scrolltop';
 import { routeAnimations } from './app.routes';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import { firstValueFrom } from 'rxjs';
@@ -23,7 +22,7 @@ import { Avatar } from 'primeng/avatar';
 import type { ToastMessageOptions } from 'primeng/api';
 
 @Component({
-  imports: [RouterModule, NgOptimizedImage, ScrollTop, ShellComponent, TranslocoDirective, Avatar, NgClass],
+  imports: [RouterModule, NgOptimizedImage, ShellComponent, TranslocoDirective, Avatar, NgClass],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
