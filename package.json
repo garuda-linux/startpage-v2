@@ -81,7 +81,7 @@
     "knip": "^5.79.0",
     "mime-types": "^3.0.2",
     "ngx-build-plus": "^20.0.0",
-    "nx": "22.3.3",
+    "nx": "22.4.2",
     "postcss": "^8.5.6",
     "prettier": "^3.7.4",
     "prettier-plugin-tailwindcss": "^0.7.2",
