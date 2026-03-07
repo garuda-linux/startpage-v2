@@ -28,6 +28,7 @@ export interface AppSettings {
   logoUrl: string;
   searchEngineName: string;
   searchEngineUrl: string;
+
   searchEngines: SearchEngineEntry[];
   showNews: boolean;
   translationVersion: number;

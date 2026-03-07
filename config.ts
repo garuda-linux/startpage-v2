@@ -111,13 +111,6 @@ export const serviceLinks: ServiceLinks = [
     id: 'gbw',
   },
   {
-    link: 'https://reddit.garudalinux.org',
-    title: 'Redlib',
-    icon: 'assets/pictures/redlib.svg',
-    subtitle: 'Lightweight frontend for Reddit',
-    id: 'grl',
-  },
-  {
     link: 'https://social.garudalinux.org',
     title: 'Mastodon',
     icon: 'assets/pictures/mastodon.svg',
