@@ -1,4 +1,5 @@
 ---
-stages: [auto]
+stages: [auto, test]
 include:
   - 'https://gitlab.com/garuda-linux/tools/gitlab-ci-commons/-/raw/main/templates/transifex-automerge.gitlab-ci.yml'
+  - 'https://gitlab.com/garuda-linux/tools/gitlab-ci-commons/-/raw/main/templates/commitizen.gitlab-ci.yml'
