@@ -1,9 +1,9 @@
-import { type ElementRef, inject, Injectable, type Renderer2, REQUEST, signal, DOCUMENT } from '@angular/core';
+import { DOCUMENT, type ElementRef, inject, Injectable, type Renderer2, REQUEST, signal } from '@angular/core';
 import type { AppSettings } from './interfaces';
 import { Title } from '@angular/platform-browser';
 import { WallpaperService } from '../wallpaper/wallpaper.service';
 import { menubarItems, serviceLinks } from '../../../config';
-import { usePreset } from '@primeng/themes';
+import { usePreset } from '@openng/optimus-ui-themes';
 import { type AppTheme, backgroundColors, scrollbarColors, themes } from '../theme';
 
 import { TranslocoService } from '@jsverse/transloco';

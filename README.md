@@ -2,7 +2,7 @@
 
 This is Garuda's new startpage.
 It is a simple page with a search bar and a few links to other pages.
-The page is built with Angular + GarudaNG/PrimeNG.
+The page is built with Angular + GarudaNG/OptimusUI.
 
 <img src="/assets/startpage.png" alt="Startpage picture">
 <img src="/assets/settings.png" alt="Startpage picture">

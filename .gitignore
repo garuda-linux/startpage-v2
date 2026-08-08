@@ -48,3 +48,6 @@ Thumbs.db
 .github/instructions/nx.instructions.md
 .pre-commit-config.yaml
 .wrangler
+
+.claude/worktrees
+.claude/settings.local.json

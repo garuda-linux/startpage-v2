@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-
 import type { ServiceLinks } from '../types';
 import { serviceLinks } from '../../../config';
 import { ConfigService } from '../config/config.service';
-import { Panel } from 'primeng/panel';
+import { Panel } from '@openng/optimus-ui/panel';
 
 @Component({
   selector: 'app-links',

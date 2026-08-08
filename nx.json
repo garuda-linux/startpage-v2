@@ -6,7 +6,7 @@
     "sharedGlobals": []
   },
   "targetDefaults": {
-    "@angular-devkit/build-angular:application": {
+    "@angular/build:application": {
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
@@ -15,9 +15,11 @@
       "cache": true,
       "inputs": [
         "default",
+        "^default",
         "{workspaceRoot}/.eslintrc.json",
         "{workspaceRoot}/.eslintignore",
-        "{workspaceRoot}/eslint.config.mjs"
+        "{workspaceRoot}/eslint.config.mjs",
+        "{workspaceRoot}/tools/eslint-rules/**/*"
       ]
     }
   },
@@ -84,5 +86,9 @@
       "typeSeparator": "."
     }
   },
-  "defaultProject": "startpage-v3"
+  "defaultProject": "startpage-v3",
+  "analytics": false,
+  "migrate": {
+    "agentic": false
+  }
 }

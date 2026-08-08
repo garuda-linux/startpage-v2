@@ -1,8 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
 import type { DiscourseFeed, StrippedTopic, Topic } from './interfaces';
 import { HttpClient } from '@angular/common/http';
-import { APP_CONFIG } from 'src/environments/app-config.token';
 import { retry } from 'rxjs';
+import { APP_CONFIG } from '../../environments/app-config.token';
 
 @Injectable({
   providedIn: 'root',

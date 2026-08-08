@@ -9,8 +9,15 @@ import {
   Renderer2,
   signal,
 } from '@angular/core';
-import { RouterModule, type RouterOutlet } from '@angular/router';
-import { routeAnimations } from './app.routes';
+import {
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  Router,
+  RouterModule,
+  type RouterOutlet,
+} from '@angular/router';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import { firstValueFrom } from 'rxjs';
 import { MessageToastService, ShellComponent } from '@garudalinux/core';
@@ -18,15 +25,14 @@ import { ConfigService } from './config/config.service';
 import { menubarItems } from '../../config';
 import type { MenuBarLink } from './types';
 import { TranslocoPersistTranslations } from '@jsverse/transloco-persist-translations';
-import { Avatar } from 'primeng/avatar';
-import type { ToastMessageOptions } from 'primeng/api';
+import { Avatar } from '@openng/optimus-ui/avatar';
+import type { ToastMessageOptions } from '@openng/optimus-ui/api';
 
 @Component({
   imports: [RouterModule, NgOptimizedImage, ShellComponent, TranslocoDirective, Avatar, NgClass],
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
-  animations: [routeAnimations],
+  styleUrl: './app.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [TranslocoPersistTranslations, MessageToastService],
 })
@@ -49,6 +55,7 @@ export class AppComponent implements OnInit {
   private readonly el = inject(ElementRef);
   private readonly messageToastService = inject(MessageToastService);
   private readonly renderer = inject(Renderer2);
+  private readonly router = inject(Router);
   private readonly translocoService = inject(TranslocoService);
 
   welcomeText = computed<string>(() => {
@@ -65,6 +72,19 @@ export class AppComponent implements OnInit {
 
     this.translocoService.langChanges$.subscribe((lang) => {
       void this.setupLabels(lang);
+    });
+
+    let firstNavigationComplete = false;
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        if (firstNavigationComplete) {
+          document.body.classList.add('is-transitioning');
+        }
+      } else if (event instanceof NavigationCancel || event instanceof NavigationError) {
+        document.body.classList.remove('is-transitioning');
+      } else if (event instanceof NavigationEnd) {
+        firstNavigationComplete = true;
+      }
     });
 
     while (!this.configService.initialized()) {

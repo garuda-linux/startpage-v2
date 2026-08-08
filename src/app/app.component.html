@@ -25,13 +25,13 @@
                     ? configService.settings().avatarUrl
                     : '/assets/avatars/cat.png'
                 "
-                shape="circle"
                 ngClass="cursor-pointer"
+                shape="circle"
               >
               </p-avatar>
             }
           </div>
-          <div [@routerTransition]="prepareRoute(routerOutlet)" class="router-container">
+          <div class="router-container">
             <router-outlet #routerOutlet="outlet"></router-outlet>
           </div>
         </garuda-shell>

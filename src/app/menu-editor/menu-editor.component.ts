@@ -1,17 +1,16 @@
 import { ChangeDetectionStrategy, Component, effect, inject, signal, untracked, ViewChild } from '@angular/core';
-
-import { Toolbar } from 'primeng/toolbar';
-import { Button } from 'primeng/button';
-import { type Table, TableModule } from 'primeng/table';
+import { Toolbar } from '@openng/optimus-ui/toolbar';
+import { Button } from '@openng/optimus-ui/button';
+import { type Table, TableModule } from '@openng/optimus-ui/table';
 import type { MenuBarItems, MenuBarLink } from '../types';
 import { ConfigService } from '../config/config.service';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService } from '@openng/optimus-ui/api';
 import { MessageToastService } from '@garudalinux/core';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
-import { IconField } from 'primeng/iconfield';
-import { InputIcon } from 'primeng/inputicon';
-import { InputText } from 'primeng/inputtext';
-import { Dialog } from 'primeng/dialog';
+import { IconField } from '@openng/optimus-ui/iconfield';
+import { InputIcon } from '@openng/optimus-ui/inputicon';
+import { InputText } from '@openng/optimus-ui/inputtext';
+import { Dialog } from '@openng/optimus-ui/dialog';
 import { FormsModule } from '@angular/forms';
 
 @Component({

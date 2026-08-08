@@ -2,13 +2,13 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, type OnInit } from '@angular/core';
 import { NewsService } from './news.service';
 import { EmojiPipe } from '../emoji-pipe/emoji.pipe';
-import { Timeline } from 'primeng/timeline';
-import { ScrollPanel } from 'primeng/scrollpanel';
+import { Timeline } from '@openng/optimus-ui/timeline';
+import { ScrollPanel } from '@openng/optimus-ui/scrollpanel';
 import { provideMarkdown } from 'ngx-markdown';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { openLinkInNewTab } from '../functions';
-import { Skeleton } from 'primeng/skeleton';
-import { Panel } from 'primeng/panel';
+import { Skeleton } from '@openng/optimus-ui/skeleton';
+import { Panel } from '@openng/optimus-ui/panel';
 import type { StrippedTopic } from './interfaces';
 
 @Component({

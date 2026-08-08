@@ -21,27 +21,27 @@ import {
   type Wallpaper,
   wallpapers,
 } from '../../../config';
-import { Checkbox } from 'primeng/checkbox';
+import { Checkbox } from '@openng/optimus-ui/checkbox';
 import { FormsModule } from '@angular/forms';
-import { Select } from 'primeng/select';
-import { InputText } from 'primeng/inputtext';
+import { Select } from '@openng/optimus-ui/select';
+import { InputText } from '@openng/optimus-ui/inputtext';
 import type { AppSettings } from '../config/interfaces';
 import { ConfigService } from '../config/config.service';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import { TitleComponent } from '../title/title.component';
-import { Button } from 'primeng/button';
-import { ConfirmDialog } from 'primeng/confirmdialog';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { TableModule } from 'primeng/table';
-import { Panel } from 'primeng/panel';
-import { type FileSelectEvent, FileUpload } from 'primeng/fileupload';
+import { Button } from '@openng/optimus-ui/button';
+import { ConfirmDialog } from '@openng/optimus-ui/confirmdialog';
+import { ConfirmationService, MessageService } from '@openng/optimus-ui/api';
+import { TableModule } from '@openng/optimus-ui/table';
+import { Panel } from '@openng/optimus-ui/panel';
+import { type FileSelectEvent, FileUpload } from '@openng/optimus-ui/fileupload';
 import { MessageToastService } from '@garudalinux/core';
 import { MenuEditorComponent } from '../menu-editor/menu-editor.component';
 import { type AvailableJokeSources, jokeSources } from '../jokes/jokes';
 import { type AppTheme, themes } from '../theme';
 import { LinksEditorComponent } from '../links-editor/links-editor.component';
 import { LangPipe } from '../lang/lang.pipe';
-import { InputNumber } from 'primeng/inputnumber';
+import { InputNumber } from '@openng/optimus-ui/inputnumber';
 
 @Component({
   selector: 'app-settings',

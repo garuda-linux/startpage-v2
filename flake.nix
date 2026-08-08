@@ -29,6 +29,7 @@
     }: {
       apps.default = self.outputs.devShells.${system}.default.flakeApp;
       checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {
+        package = pkgs.prek;
         hooks = {
           alejandra-quiet = {
             description = "Run Alejandra in quiet mode";
@@ -45,7 +46,7 @@
             description = "Run eslint";
             enable = true;
             entry = ''
-              ${pkgs.corepack_latest}/bin/pnpm lint
+              ${pkgs.corepack}/bin/pnpm lint
             '';
             name = "eslint";
             pass_filenames = false;
@@ -73,8 +74,6 @@
         default = garuda-startpage;
         garuda-startpage = mkShell {
           commands = [
-            {package = "corepack_latest";}
-            {package = "nodejs_latest";}
             {package = "pre-commit";}
           ];
           devshell = {
@@ -83,9 +82,9 @@
               ${self.checks.${system}.pre-commit-check.shellHook}
 
               if [ ! -d node_modules ]; then
-                ${pkgs.corepack_latest}/bin/pnpm install
+                ${pkgs.corepack}/bin/pnpm install
               else
-                outcome=$(${pkgs.corepack_latest}/bin/pnpm install)
+                outcome=$(${pkgs.corepack}/bin/pnpm install)
                 if  [[ !  "$outcome" =~ "Already up to date" ]]; then
                   echo "Dependencies have been updated"
                 fi

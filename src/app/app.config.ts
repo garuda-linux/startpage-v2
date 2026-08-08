@@ -1,4 +1,4 @@
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import {
   type ApplicationConfig,
   inject,
@@ -7,8 +7,7 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideRouter } from '@angular/router';
+import { provideRouter, Router, withViewTransitions } from '@angular/router';
 import { provideGarudaNG } from '@garudalinux/core';
 import { APP_CONFIG } from '../environments/app-config.token';
 import { environment } from '../environments/environment.dev';
@@ -20,7 +19,6 @@ import { provideTranslocoPersistTranslations } from '@jsverse/transloco-persist-
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideAnimationsAsync(),
     provideBrowserGlobalErrorListeners(),
     provideGarudaNG(
       { font: 'InterVariable' },
@@ -34,9 +32,40 @@ export const appConfig: ApplicationConfig = {
         inputStyle: 'outlined',
       },
     ),
-    provideRouter(routes),
+    provideRouter(
+      routes,
+      withViewTransitions({
+        skipInitialTransition: true,
+        onViewTransitionCreated: ({ transition }) => {
+          const router = inject(Router);
+          try {
+            const nav = router.currentNavigation();
+            const info = nav?.extras?.info as any;
+
+            if (info?.disableViewTransition) {
+              const style = document.createElement('style');
+              style.id = 'skip-transition';
+              style.textContent = '* { view-transition-name: none !important; }';
+              document.head.appendChild(style);
+
+              transition.finished.finally(() => {
+                const el = document.getElementById('skip-transition');
+                if (el) el.remove();
+                document.body.classList.remove('is-transitioning');
+              });
+            } else {
+              transition.finished.finally(() => {
+                document.body.classList.remove('is-transitioning');
+              });
+            }
+          } catch {
+            // Ignore parse errors, let transition proceed
+          }
+        },
+      }),
+    ),
     provideZonelessChangeDetection(),
-    provideHttpClient(withFetch()),
+    provideHttpClient(),
     provideAppInitializer(async () => {
       const configService = inject(ConfigService);
       while (!configService.initialized()) {

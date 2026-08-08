@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-
 import type { ContactLinks } from '../types';
-import { Panel } from 'primeng/panel';
+import { Panel } from '@openng/optimus-ui/panel';
 import { contactLinks } from '../../../config';
 
 @Component({
