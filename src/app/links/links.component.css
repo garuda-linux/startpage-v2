@@ -1,3 +1,17 @@
 img {
+  margin-top: 1rem;
   height: 3.5rem;
+}
+
+.product-small {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+::ng-deep .garuda-card-product-showcase-small {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  border: 2px solid var(--p-panel-border-color) !important;
+  background: var(--p-panel-background) !important;
 }

@@ -2,3 +2,7 @@
   position: relative;
   min-height: 100vh;
 }
+
+::ng-deep .p-menubar-start {
+  margin-right: 0 !important;
+}

@@ -1,3 +1,11 @@
 img {
+  margin-top: 1rem;
   height: 3.5rem;
+}
+
+.social-handles {
+  margin-top: 8%;
+  margin-bottom: 3%;
+  display: flex;
+  flex-wrap: wrap;
 }

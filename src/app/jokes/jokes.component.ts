@@ -1,18 +1,24 @@
 import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
-import { type AvailableJokeSources, jokes, type UselessFact } from './jokes';
+import { type AvailableJokeSources, jokes as defaultJokes, type UselessFact } from './jokes';
 import { ConfigService } from '../config/config.service';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
+import { JokesModel, JokesComponent as LibJokesComponent } from '@garudalinux/core';
 
 @Component({
   selector: 'app-jokes',
-  imports: [],
+  imports: [LibJokesComponent],
   templateUrl: './jokes.component.html',
   styleUrl: './jokes.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class JokesComponent {
   joke = signal<string>('');
+  
+  // Model consumed by <garuda-jokes>, updated dynamically by setJoke()
+  jokesConfig: JokesModel = {
+    jokes: [],
+  };
 
   private readonly configService = inject(ConfigService);
   private readonly httpService = inject(HttpClient);
@@ -24,26 +30,36 @@ export class JokesComponent {
   }
 
   /**
-   * Sets a new random joke.
+   * Sets a new random joke and updates the library config model.
    */
   async setJoke(activeJoke?: AvailableJokeSources): Promise<void> {
     if (!activeJoke) activeJoke = this.configService.settings().activeJoke;
 
+    let selectedJoke = '';
     switch (activeJoke) {
       case 'dev-excuses':
-        this.joke.set(this.getDevExcuses());
+        selectedJoke = this.getDevExcuses();
         break;
       case 'useless-facts':
-        this.joke.set(await this.getUselessFact());
+        selectedJoke = await this.getUselessFact();
         break;
+      default:
+        selectedJoke = this.getDevExcuses();
     }
+
+    this.joke.set(selectedJoke);
+    
+    // Dynamically feed the current active/fetched joke into the core library model
+    this.jokesConfig = {
+      jokes: [selectedJoke],
+    };
   }
 
   /**
-   * Get a random developer excuse from the array of available ones.
+   * Get a random developer excuse from your dynamic array list.
    */
   getDevExcuses(): string {
-    return jokes[Math.floor(Math.random() * jokes.length)];
+    return defaultJokes[Math.floor(Math.random() * defaultJokes.length)];
   }
 
   /**
