@@ -40,7 +40,7 @@
     "@jsverse/transloco-persist-translations": "^8.4.0",
     "@openng/icons": "^1.0.0",
     "@openng/optimus-ui": "2.0.0-rc.0",
-    "@openng/optimus-ui-tailwindcss": "^1.0.1",
+    "@openng/optimus-ui-tailwindcss": "^2.0.0",
     "@openng/optimus-ui-themes": "2.0.0-rc.0",
     "dayjs": "^1.11.21",
     "emoji-js": "^3.9.0",

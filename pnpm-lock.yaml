@@ -54,8 +54,8 @@ importers:
         specifier: 2.0.0-rc.0
         version: 2.0.0-rc.0(ad41dafe611acc914be7ec0b4d274f61)
       '@openng/optimus-ui-tailwindcss':
-        specifier: ^1.0.1
-        version: 1.0.1(tailwindcss@4.3.3)
+        specifier: ^2.0.0
+        version: 2.0.1(tailwindcss@4.3.3)
       '@openng/optimus-ui-themes':
         specifier: 2.0.0-rc.0
         version: 2.0.0-rc.0
@@ -2964,8 +2964,8 @@ packages:
   '@openng/optimus-ui-styles@2.0.0-rc.0':
     resolution: {integrity: sha512-/LZ9t2+LAMuRbUh/MrNosgUJrofbK1ife/JXSN+Skpx7du6ymzPA3v+kf2TEUHufgrf75oI5y6d7JaLXbExQfw==}
 
-  '@openng/optimus-ui-tailwindcss@1.0.1':
-    resolution: {integrity: sha512-WdCNSzR8opqceQWrnkxqc1IprpLLxktVKAhQdiXrjCj4FuIhPfnvwduPe1IctXBlXkgx4zprvK0aFhiOezh2lg==}
+  '@openng/optimus-ui-tailwindcss@2.0.1':
+    resolution: {integrity: sha512-nLZ0ekTiGtTnJ+aDrHCaW1bCYlJ7ruk5djGy676TO9nBfZDkJEqIbrDWe0nAyAgtWsLc3EPQyZsWzRXudnMWjQ==}
     peerDependencies:
       tailwindcss: '>=3.1.0'
 
@@ -11717,7 +11717,7 @@ snapshots:
     dependencies:
       '@openng/optimus-ui-styled': 2.0.0-rc.0
 
-  '@openng/optimus-ui-tailwindcss@1.0.1(tailwindcss@4.3.3)':
+  '@openng/optimus-ui-tailwindcss@2.0.1(tailwindcss@4.3.3)':
     dependencies:
       tailwindcss: 4.3.3
 
