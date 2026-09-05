@@ -67,7 +67,7 @@
     "@nx/workspace": "23.1.1",
     "@schematics/angular": "22.1.3",
     "@swc-node/register": "1.12.1",
-    "@swc/core": "1.15.47",
+    "@swc/core": "1.16.2",
     "@swc/helpers": "0.5.23",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/emoji-js": "^3.5.2",
