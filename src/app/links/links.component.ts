@@ -31,4 +31,10 @@ export class LinksComponent {
       }));
     });
   });
+
+  protected openLink(url?: string): void {
+    if (url) {
+      window.open(url, '_blank');
+    }
+  }
 }

@@ -1,12 +1,16 @@
 <div class="product-small mt-4">
   @for (product of productsConfig(); track product) {
-    <garuda-card cardRole="product-showcase-small" [link]="product?.link">
-          <div garudaCardTitleWrapper>
-            <h4>{{ product?.cardTitle }}</h4>
-          </div>
-          <div garudaCardThumbnailWrapper>
-            <img [src]="product?.cardImageUrl" width="60" height="60" alt="logo" />
-          </div>
+    <garuda-card
+      cardRole="product-showcase-small"
+      class="cursor-pointer"
+      (click)="$event.stopPropagation(); openLink(product?.link)"
+    >
+      <div garudaCardTitleWrapper>
+        <h4>{{ product?.cardTitle }}</h4>
+      </div>
+      <div garudaCardThumbnailWrapper>
+        <img [src]="product?.cardImageUrl" width="60" height="60" alt="logo" />
+      </div>
     </garuda-card>
   }
 </div>

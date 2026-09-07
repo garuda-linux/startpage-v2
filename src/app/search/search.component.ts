@@ -1,23 +1,28 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal, type Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, type Signal, signal } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
-import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
+import { FormsModule } from '@angular/forms';
+import { TranslocoDirective } from '@jsverse/transloco';
 import { ConfigService } from '../config/config.service';
-import { searchEngineMappings } from '../../../config';
-import { SearchModel, SearchComponent as LibSearchComponent } from '@garudalinux/core';
+import { autocompleteProviders, searchEngineMappings } from '../../../config';
+import { Button } from '@openng/optimus-ui/button';
+import { InputText } from '@openng/optimus-ui/inputtext';
+import { AutoComplete, type AutoCompleteCompleteEvent } from '@openng/optimus-ui/autocomplete';
+import { HttpClient } from '@angular/common/http';
+import type { ArrayBasedSuggestions } from './interfaces';
 import type { SearchEngineEntry } from '../types';
 
 @Component({
   selector: 'app-search',
-  imports: [NgOptimizedImage, TranslocoDirective, LibSearchComponent],
+  imports: [FormsModule, NgOptimizedImage, TranslocoDirective, Button, InputText, AutoComplete],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchComponent {
-  protected readonly configService = inject(ConfigService);
-  private readonly translocoService = inject(TranslocoService);
   searchTerm = signal<string>('');
+  suggestions = signal<any[]>([]);
 
+  protected readonly configService = inject(ConfigService);
   searchEngine: Signal<SearchEngineEntry> = computed(() => {
     const activeSearchEngine: string = this.configService.settings().activeSearchEngine;
     let searchEngine: SearchEngineEntry;
@@ -37,37 +42,70 @@ export class SearchComponent {
     }
     return searchEngine;
   });
-
-  searchConfig = computed<SearchModel>(() => {
-    const engine = this.searchEngine();
-    const placeholderText = this.translocoService.translate('search.placeholder');
-    const searchButtonText = this.translocoService.translate('search.search');
-
-    const rawUrl = engine.url || 'https://priv.au/search?q=%s';
-    const query = this.searchTerm().trim();
-
-    let searchEngineUrl: string;
-    if (rawUrl.includes('%s')) {
-      searchEngineUrl = rawUrl.replace('%s', encodeURIComponent(query));
-    } else {
-      searchEngineUrl = rawUrl.includes('?') ? `${rawUrl}&q=${encodeURIComponent(query)}` : `${rawUrl}?q=${encodeURIComponent(query)}`;
-    }
-    
-    return {
-      searchTitle: searchButtonText,
-      searchEngineUrl: searchEngineUrl,
-      placeholder: `${placeholderText} ${engine.label || 'SearxNG'}`,
-    };
-  });
-
   logoSource = computed(() => {
-    const logoSetting = this.configService.settings().logo;
-    if (logoSetting === 'custom') {
+    if (this.configService.settings().logo === 'custom') {
       return this.configService.settings().logoUrl;
-    } else if (logoSetting === 'none') {
-      return logoSetting;
+    } else if (this.configService.settings().logo === 'none') {
+      return this.configService.settings().logo;
     } else {
       return 'assets/garuda-purple.svg';
     }
   });
+
+  private readonly http = inject(HttpClient);
+
+  /**
+   * Open the search engine URL in a new tab with the search term.
+   */
+  search() {
+    const url: string = encodeURI(this.searchEngine().url!.replace('%s', this.searchTerm()));
+    window.open(url, '_blank');
+
+    this.searchTerm.set('');
+    this.suggestions.set([]);
+  }
+
+  /**
+   * Handle the autocomplete event and update the suggestions.
+   * @param $event The autocomplete event.
+   */
+  autocomplete($event: AutoCompleteCompleteEvent) {
+    const corsProxy: string = this.configService.settings().corsProxy;
+    const provider: string = this.configService.settings().autocompleteProvider;
+    if (!provider || provider === 'none' || !corsProxy) return;
+    if (!$event.query.trim()) {
+      this.suggestions.set([]);
+      return;
+    }
+
+    const allProviders: SearchEngineEntry[] = [...autocompleteProviders[0].items, ...autocompleteProviders[1].items];
+    const entry: SearchEngineEntry = allProviders.find((entry) => entry.label === provider)!;
+    const url: string = encodeURI(`${corsProxy}${entry.url?.replace('%s', $event.query)}`);
+    switch (entry.value) {
+      case 'startpage':
+      case 'brave':
+        this.arrayBasedAutocomplete(url);
+        break;
+      default:
+        this.suggestions.set([]);
+    }
+  }
+
+  /**
+   * Fetch suggestions from the server using an array-based approach.
+   * @param url The URL to fetch suggestions from.
+   * @private
+   */
+  private arrayBasedAutocomplete(url: string): void {
+    this.http.get<ArrayBasedSuggestions>(url, { responseType: 'json' }).subscribe({
+      next: (data: ArrayBasedSuggestions) => {
+        if (!Array.isArray(data) || data.length > 1 || Array.isArray(data[1])) {
+          this.suggestions.set(data[1]);
+        }
+      },
+      error: () => {
+        this.suggestions.set([]);
+      },
+    });
+  }
 }

@@ -1,7 +1,11 @@
 <div class="social-handles">
   @for (contact of contactsConfig(); track contact) {
     <div [class]="gridCols()">
-      <garuda-card cardRole="product-showcase-small" [link]="contact?.link">
+      <garuda-card
+        cardRole="product-showcase-small"
+        class="cursor-pointer"
+        (click)="$event.stopPropagation(); openLink(contact?.link)"
+      >
         <div garudaCardTitleWrapper>
           <h4>{{ contact?.cardTitle }}</h4>
         </div>

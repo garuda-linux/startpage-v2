@@ -14,11 +14,9 @@ import { JokesModel, JokesComponent as LibJokesComponent } from '@garudalinux/co
 })
 export class JokesComponent {
   joke = signal<string>('');
-  
-  // Model consumed by <garuda-jokes>, updated dynamically by setJoke()
-  jokesConfig: JokesModel = {
+  jokesConfig = signal<JokesModel>({
     jokes: [],
-  };
+  });
 
   private readonly configService = inject(ConfigService);
   private readonly httpService = inject(HttpClient);
@@ -48,11 +46,9 @@ export class JokesComponent {
     }
 
     this.joke.set(selectedJoke);
-    
-    // Dynamically feed the current active/fetched joke into the core library model
-    this.jokesConfig = {
+    this.jokesConfig.set({
       jokes: [selectedJoke],
-    };
+    });
   }
 
   /**

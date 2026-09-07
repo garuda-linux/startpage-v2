@@ -31,4 +31,10 @@ export class ContactLinksComponent {
       }));
     });
   });
+
+  protected openLink(url?: string): void {
+    if (url) {
+      window.open(url, '_blank');
+    }
+  }
 }
