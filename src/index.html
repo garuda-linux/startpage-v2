@@ -24,10 +24,12 @@
         var w = s.wallpaper === 'custom' ? s.wallpaperUrl : s.wallpaper;
         if (w && w !== 'none') {
           var m = /^assets\/wallpapers\/([^/]+)\.(png|jpe?g)$/.exec(w);
+          var needed = Math.max(screen.width, (screen.height * 16) / 9) * devicePixelRatio;
+          var variant = s.blurBackground || needed <= 1280 ? '-1280' : needed <= 1920 ? '-1920' : '';
           var l = document.createElement('link');
           l.rel = 'preload';
           l.as = 'image';
-          l.href = m ? 'assets/wallpapers/optimized/' + m[1] + '.webp' : w;
+          l.href = m ? 'assets/wallpapers/optimized/' + m[1] + variant + '.webp' : w;
           l.setAttribute('fetchpriority', 'high');
           document.head.appendChild(l);
         }

@@ -1,10 +1,9 @@
-import { NgOptimizedImage, ViewportScroller } from '@angular/common';
+import { ViewportScroller } from '@angular/common';
 import {
   afterNextRender,
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
-  computed,
   ElementRef,
   inject,
   type OnInit,
@@ -30,7 +29,7 @@ import { WallpaperComponent } from './wallpaper/wallpaper.component';
 import type { ToastMessageOptions } from '@openng/optimus-ui/api';
 
 @Component({
-  imports: [RouterModule, NgOptimizedImage, ShellComponent, TranslocoDirective, Avatar, WallpaperComponent],
+  imports: [RouterModule, ShellComponent, TranslocoDirective, Avatar, WallpaperComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -41,16 +40,6 @@ export class AppComponent implements OnInit {
   items = signal<MenuBarLink[]>(menubarItems);
 
   protected readonly configService = inject(ConfigService);
-
-  logoLink = computed(() => {
-    if (this.configService.settings().logo === 'custom') {
-      return this.configService.settings().logoUrl;
-    }
-    if (this.configService.settings().logo === 'none') {
-      return this.configService.settings().logo;
-    }
-    return 'assets/garuda-purple.svg';
-  });
 
   private readonly el = inject(ElementRef);
   private readonly messageToastService = inject(MessageToastService);

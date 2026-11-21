@@ -2,8 +2,6 @@ import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, signa
 import { TranslocoDirective } from '@jsverse/transloco';
 import { ConfigService } from '../config/config.service';
 
-const DEFAULT_LOGO = 'assets/logos/violet-orange.png';
-
 @Component({
   selector: 'app-hero',
   imports: [TranslocoDirective],
@@ -16,13 +14,7 @@ export class HeroComponent {
 
   protected readonly now = signal(new Date());
 
-  protected readonly logoSource = computed<string | null>(() => {
-    const { logo, logoUrl } = this.configService.settings();
-    if (logo === 'none') return null;
-    if (logo === 'custom' && logoUrl) return logoUrl;
-    // Unknown or empty values (e.g. older "default", or "custom" without an image) fall back
-    return logo && logo !== 'custom' && logo !== 'default' ? logo : DEFAULT_LOGO;
-  });
+  protected readonly logoSource = this.configService.logoSource;
 
   /**
    * The logo when shown in its large style, beside the greeting

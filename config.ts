@@ -381,6 +381,7 @@ export const logos: LogoList = [
   {
     label: 'Predefined',
     items: [
+      { label: 'Garuda', value: 'assets/garuda-purple.svg' },
       { label: 'Blue Metal', value: 'assets/logos/blue-metal.png' },
       { label: 'Blue', value: 'assets/logos/blue.png' },
       { label: 'Dr460nized', value: 'assets/logos/dr460nized.png' },

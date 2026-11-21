@@ -21,11 +21,21 @@ export function hostnameOf(url: string | undefined): string {
 
 /**
  * Bundled wallpapers ship as large PNG/JPEG originals. Serve the screen-sized WebP copy instead.
+ * A blurred wallpaper looks the same at 1280 px, so it always gets the smallest copy.
  * Keep in sync with the preload snippet in index.html.
  */
-export function optimizedWallpaper(src: string): string {
+export function optimizedWallpaper(src: string, blurred = false): string {
   const match = /^assets\/wallpapers\/([^/]+)\.(png|jpe?g)$/.exec(src);
-  return match ? `assets/wallpapers/optimized/${match[1]}.webp` : src;
+  return match ? `assets/wallpapers/optimized/${match[1]}${wallpaperVariant(blurred)}.webp` : src;
+}
+
+/**
+ * Wallpapers are 16:9 and cover the viewport, so portrait screens need the width that matches their height
+ */
+function wallpaperVariant(blurred: boolean): string {
+  const needed = Math.max(screen.width, (screen.height * 16) / 9) * devicePixelRatio;
+  if (blurred || needed <= 1280) return '-1280';
+  return needed <= 1920 ? '-1920' : '';
 }
 
 /**

@@ -30,10 +30,10 @@ export class WallpaperComponent {
   protected readonly settings = inject(ConfigService).settings;
 
   protected readonly url = computed<string | null>(() => {
-    const { wallpaper, wallpaperUrl } = this.settings();
+    const { wallpaper, wallpaperUrl, blurBackground } = this.settings();
     const src = wallpaper === 'custom' ? wallpaperUrl : wallpaper;
     if (!src || src === 'none') return null;
-    return `url("${optimizedWallpaper(src).replace(/"/g, '%22')}")`;
+    return `url("${optimizedWallpaper(src, blurBackground).replace(/"/g, '%22')}")`;
   });
 
   protected readonly blur = computed(() => {

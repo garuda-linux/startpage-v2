@@ -5,7 +5,9 @@
     <div class="min-h-svh">
       <garuda-shell #shell [menuItems]="configService.settings().customMenuLinks">
         <a [attr.aria-label]="t('menu.home')" class="shell-logo" garudaShellBarStart routerLink="/">
-          <img [ngSrc]="logoLink()" alt="" height="32" priority width="32" />
+          @if (configService.logoSource(); as logo) {
+            <img [src]="logo" alt="" fetchpriority="high" height="32" width="32" />
+          }
         </a>
         <div garudaShellBarEnd>
           @if (configService.settings().avatarEnabled) {

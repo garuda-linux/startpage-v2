@@ -1,4 +1,4 @@
-import { DOCUMENT, inject, Injectable, signal } from '@angular/core';
+import { computed, DOCUMENT, inject, Injectable, signal } from '@angular/core';
 import type { AppSettings } from './interfaces';
 import { Title } from '@angular/platform-browser';
 import { menubarItems, serviceLinks } from '../../../config';
@@ -13,6 +13,8 @@ import { firstValueFrom } from 'rxjs';
  * Bump when saved settings need a one-time migration in main.ts
  */
 export const SETTINGS_VERSION = 2;
+
+export const DEFAULT_LOGO = 'assets/garuda-purple.svg';
 
 /**
  * Bump whenever translation files gain or change keys, to invalidate cached translations
@@ -46,7 +48,7 @@ export class ConfigService {
     jokesEnabled: true,
     language: 'en',
     languageChanged: false,
-    logo: 'assets/logos/violet-orange.png',
+    logo: DEFAULT_LOGO,
     logoStyle: 'large',
     logoUrl: '',
     motion: 'full',
@@ -74,6 +76,14 @@ export class ConfigService {
 
   initialized = signal<boolean>(false);
   settings = signal<AppSettings>(this.defaultSettings);
+
+  readonly logoSource = computed<string | null>(() => {
+    const { logo, logoUrl } = this.settings();
+    if (logo === 'none') return null;
+    if (logo === 'custom' && logoUrl) return logoUrl;
+    // Unknown or empty values (e.g. older "default", or "custom" without an image) fall back
+    return logo && logo !== 'custom' && logo !== 'default' ? logo : DEFAULT_LOGO;
+  });
 
   private readonly document = inject(DOCUMENT);
   private readonly title = inject(Title);
