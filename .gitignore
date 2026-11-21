@@ -47,6 +47,7 @@ Thumbs.db
 .env
 .github/instructions/nx.instructions.md
 .pre-commit-config.yaml
+.treefmt.toml
 .wrangler
 
 .claude/worktrees
