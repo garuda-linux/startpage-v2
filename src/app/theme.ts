@@ -1,4 +1,5 @@
 import { garudaThemes, type GarudaThemeName } from '@garudalinux/themes';
+import { CatppuccinAura } from '@garudalinux/themes/catppuccin/aura';
 
 /*
  * The few Catppuccin colours used outside the theme presets. Kept as constants so the
@@ -74,11 +75,12 @@ export const DEFAULT_THEME: AppTheme = 'Catppuccin Mocha/Latte Aura';
 
 /**
  * Download the preset for a theme. Only the chosen preset and its one Optimus base are fetched.
+ * The default preset is bundled, so first paint does not wait for a chunk.
  * Unknown names (e.g. from an old settings file) fall back to the default theme.
  */
 export function loadThemePreset(theme: string) {
   const name = themes[theme as AppTheme] ?? themes[DEFAULT_THEME];
-  return garudaThemes[name]();
+  return name === themes[DEFAULT_THEME] ? Promise.resolve(CatppuccinAura) : garudaThemes[name]();
 }
 
 export type AppTheme =

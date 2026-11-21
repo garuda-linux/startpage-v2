@@ -15,11 +15,6 @@
     <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
     <link href="/site.webmanifest" rel="manifest" />
 
-    <link crossorigin href="https://rsms.me/" rel="preconnect" />
-    <!-- Font stylesheet must not block first paint. system-ui renders until Inter arrives -->
-    <link href="https://rsms.me/inter/inter.css" media="print" onload="this.media = 'all'" rel="stylesheet" />
-    <noscript><link href="https://rsms.me/inter/inter.css" rel="stylesheet" /></noscript>
-
     <script>
       // Before Angular boots: apply the saved colour scheme and start fetching the wallpaper,
       // so neither waits for the app bundle. Mirrors optimizedWallpaper() in functions.ts.
@@ -36,6 +31,22 @@
           l.setAttribute('fetchpriority', 'high');
           document.head.appendChild(l);
         }
+
+        // Keep in sync with availableLanguages in src/environments/environment.*.ts
+        var available = 'am ar de en es eu fr gl hi hu id it ja ko pl pt ru sl sv sw tr ua uz zh-CN'.split(' ');
+        var cached = JSON.parse(localStorage.getItem('translations') || '{}');
+        var cachedAt = Number(localStorage.getItem('translations/timestamp'));
+        var fresh = cachedAt && Date.now() - cachedAt < 864e5;
+        // ConfigService activates the browser language first and the saved one after settings load
+        [navigator.language.split('-')[0], s.languageChanged && s.language, 'en'].forEach(function (lang, i, all) {
+          if (!lang || all.indexOf(lang) !== i || available.indexOf(lang) < 0 || (fresh && cached[lang])) return;
+          var p = document.createElement('link');
+          p.rel = 'preload';
+          p.as = 'fetch';
+          p.crossOrigin = 'anonymous';
+          p.href = '/assets/i18n/' + lang + '.json';
+          document.head.appendChild(p);
+        });
       } catch (e) {}
     </script>
   </head>

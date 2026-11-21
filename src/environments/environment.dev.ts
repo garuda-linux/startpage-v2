@@ -19,7 +19,6 @@ export const environment: EnvironmentModel = {
     'ko',
     'pl',
     'pt',
-    'pt-br',
     'ru',
     'sl',
     'sv',

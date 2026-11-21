@@ -5,7 +5,11 @@
       <app-hero />
       <app-search class="home__search" />
       @if (settings.jokesEnabled) {
-        <app-jokes class="sp-enter" style="--i: 3" />
+        @defer (on idle) {
+          <app-jokes class="sp-enter" style="--i: 3" />
+        } @placeholder {
+          <div aria-hidden="true" class="joke-placeholder"></div>
+        }
       }
     </div>
 
@@ -21,7 +25,11 @@
     <app-links class="home__dock" />
 
     @if (!settings.showNews && settings.defaultLinks) {
-      <app-contact-links class="home__community" />
+      @defer (on idle) {
+        <app-contact-links class="home__community" />
+      } @placeholder {
+        <div aria-hidden="true" class="home__community community-placeholder"></div>
+      }
     }
   </main>
 

@@ -1,9 +1,10 @@
 @import 'tailwindcss';
 @import '@openng/icons/openng-icons.css';
+@import '@fontsource-variable/inter';
 @plugin '@openng/optimus-ui-tailwindcss';
 
 :root {
-  font-family: Inter, system-ui, sans-serif;
+  font-family: 'Inter Variable', system-ui, sans-serif;
   font-feature-settings: 'cv11', 'ss01';
 }
 
@@ -128,12 +129,6 @@ main:focus {
 :focus-visible {
   outline: 2px solid var(--sp-accent);
   outline-offset: 2px;
-}
-
-@supports (font-variation-settings: normal) {
-  :root {
-    font-family: InterVariable, system-ui, sans-serif;
-  }
 }
 
 .garuda-shell-content {

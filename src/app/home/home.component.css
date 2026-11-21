@@ -42,6 +42,14 @@
   min-height: 10rem;
 }
 
+.joke-placeholder {
+  height: calc(0.875rem + 1.75rem);
+}
+
+.community-placeholder {
+  min-height: 2.25rem;
+}
+
 .home__dock {
   width: 100%;
   margin-top: auto;

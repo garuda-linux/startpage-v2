@@ -21,7 +21,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideGarudaNG(
-      { font: 'InterVariable' },
+      { font: "'Inter Variable', system-ui, sans-serif" },
       {
         theme: {
           options: {
@@ -91,7 +91,6 @@ export const appConfig: ApplicationConfig = {
       loader: TranslocoHttpLoader,
       storage: { useValue: localStorage },
       storageKey: 'translations',
-      ttl: 86_400,
     }),
     { provide: APP_CONFIG, useValue: environment },
   ],

@@ -9,10 +9,15 @@ import { SETTINGS_VERSION, TRANSLATION_VERSION } from './app/config/config.servi
  */
 try {
   const settings = JSON.parse(localStorage.getItem('settings') ?? '{}');
-  if ((settings.settingsVersion ?? 0) < SETTINGS_VERSION) {
+  const version = settings.settingsVersion ?? 0;
+  if (version < SETTINGS_VERSION) {
     // v1: development builds saved panelBlur 32 and showLogo false as defaults. Restore the real defaults
-    if (settings.panelBlur === 32) settings.panelBlur = 2;
-    settings.showLogo = true;
+    if (version < 1) {
+      if (settings.panelBlur === 32) settings.panelBlur = 2;
+      settings.showLogo = true;
+    }
+    // v2: pt-br was offered without a translation file
+    if (settings.language === 'pt-br') settings.language = 'pt';
     settings.settingsVersion = SETTINGS_VERSION;
     if (Object.keys(settings).length > 1) localStorage.setItem('settings', JSON.stringify(settings));
   }

@@ -16,14 +16,10 @@ export class LangPipe implements PipeTransform {
         return 'German 🇩🇪';
       case 'it':
         return 'Italian 🇮🇹';
-      case 'nl':
-        return 'Dutch 🇳🇱';
       case 'pl':
         return 'Polish 🇵🇱';
       case 'pt':
         return 'Portuguese 🇵🇹';
-      case 'pt-br':
-        return 'Portuguese (Brazil) 🇧🇷';
       case 'ru':
         return 'Russian 🇷🇺';
       case 'tr':

@@ -12,7 +12,7 @@ import { firstValueFrom } from 'rxjs';
 /**
  * Bump when saved settings need a one-time migration in main.ts
  */
-export const SETTINGS_VERSION = 1;
+export const SETTINGS_VERSION = 2;
 
 /**
  * Bump whenever translation files gain or change keys, to invalidate cached translations
