@@ -1,40 +1,17 @@
-import { ChangeDetectionStrategy, Component, computed, inject, Injector, runInInjectionContext } from '@angular/core';
-import type { ContactLinks } from '../types';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { TranslocoDirective } from '@jsverse/transloco';
 import { contactLinks } from '../../../config';
 import { ConfigService } from '../config/config.service';
-import { SmallCardModel, CardComponent, PopupService } from '@garudalinux/core';
-import { DialogService } from '@openng/optimus-ui/dynamicdialog';
+import type { ContactLinks } from '../types';
 
 @Component({
   selector: 'app-contact-links',
-  imports: [CardComponent],
-  providers: [DialogService, PopupService],
+  imports: [TranslocoDirective],
   templateUrl: './contact-links.component.html',
   styleUrl: './contact-links.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactLinksComponent {
-  private readonly injector = inject(Injector);
   protected readonly configService = inject(ConfigService);
-
-  gridCols = computed(() => `col-span-${this.configService.settings().gridCols} cursor-pointer p-2 text-center`);
-
-  contactsConfig = computed<SmallCardModel[]>(() => {
-    return runInInjectionContext(this.injector, () => {
-      const currentLinks: ContactLinks = contactLinks || [];
-      
-      return currentLinks.map((contact) => ({
-        cardRole: 'product-showcase-small',
-        cardTitle: contact.title || '',
-        cardImageUrl: contact.logo || '',
-        link: contact.link || contact.routerLink || '',
-      }));
-    });
-  });
-
-  protected openLink(url?: string): void {
-    if (url) {
-      window.open(url, '_blank');
-    }
-  }
+  protected readonly contacts: ContactLinks = contactLinks;
 }

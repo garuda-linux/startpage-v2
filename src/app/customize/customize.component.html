@@ -1,0 +1,315 @@
+<ng-container *transloco="let t">
+  @let settings = configService.settings();
+  <p-drawer
+    [(visible)]="visible"
+    [ariaCloseLabel]="t('common.close')"
+    [blockScroll]="false"
+    [modal]="false"
+    (onHide)="restoreFocus()"
+    (onShow)="focusDrawer()"
+    position="right"
+    styleClass="customize"
+  >
+    <ng-template #header>
+      <div>
+        <h2 class="customize__title">{{ t('customize.title') }}</h2>
+        <p class="customize__subtitle">{{ t('customize.subtitle') }}</p>
+      </div>
+    </ng-template>
+
+    <section class="group" aria-labelledby="cz-theme">
+      <h3 class="group__title" id="cz-theme">{{ t('customize.theme') }}</h3>
+      <div class="swatches" role="radiogroup" aria-labelledby="cz-theme">
+        @for (family of themeFamilies; track family.name) {
+          <button
+            (click)="setTheme(family.name, theme().style)"
+            [attr.aria-checked]="theme().family === family.name"
+            [style.--swatch-accent]="family.accent"
+            [style.--swatch-base]="family.base"
+            class="swatch"
+            role="radio"
+            type="button"
+          >
+            <span class="swatch__chip" aria-hidden="true"></span>
+            <span class="swatch__label">{{ family.label }}</span>
+          </button>
+        }
+      </div>
+
+      <div class="field">
+        <span class="field__label" id="cz-mode">{{ t('customize.appearance') }}</span>
+        <app-segmented
+          (valueChange)="update('darkMode', $event)"
+          [options]="modeOptions()"
+          [value]="settings.darkMode"
+          labelledBy="cz-mode"
+        />
+      </div>
+
+      <div class="field">
+        <span class="field__label" id="cz-style">{{ t('customize.style') }}</span>
+        <app-segmented
+          (valueChange)="setTheme(theme().family, $event)"
+          [options]="themeStyles"
+          [value]="theme().style"
+          labelledBy="cz-style"
+        />
+      </div>
+    </section>
+
+    <section class="group" aria-labelledby="cz-wallpaper">
+      <h3 class="group__title" id="cz-wallpaper">{{ t('customize.wallpaper') }}</h3>
+      <div class="wallpapers" role="radiogroup" aria-labelledby="cz-wallpaper">
+        <button
+          (click)="update('wallpaper', 'none')"
+          [attr.aria-checked]="settings.wallpaper === 'none' || !settings.wallpaper"
+          class="wallpaper wallpaper--none"
+          role="radio"
+          type="button"
+        >
+          <i class="pi pi-ban" aria-hidden="true"></i>
+          <span class="wallpaper__name">{{ t('customize.none') }}</span>
+        </button>
+        @for (wp of wallpapers; track wp.value) {
+          <button
+            (click)="update('wallpaper', wp.value)"
+            [attr.aria-checked]="settings.wallpaper === wp.value"
+            [attr.aria-label]="wp.label"
+            [title]="wp.label"
+            class="wallpaper"
+            role="radio"
+            type="button"
+          >
+            <img (error)="useFullImage($event, wp.value!)" [src]="wp.thumb" alt="" loading="lazy" />
+          </button>
+        }
+      </div>
+
+      <div class="row">
+        <label for="cz-blurBackground">{{ t('customize.blur') }}</label>
+        <p-toggleswitch
+          (ngModelChange)="update('blurBackground', $event)"
+          [ngModel]="settings.blurBackground"
+          inputId="cz-blurBackground"
+        />
+      </div>
+      @if (settings.blurBackground) {
+        <div class="field field--slider">
+          <span class="field__label" id="cz-blur"
+            >{{ t('customize.blurStrength') }} · {{ wallpaperBlurPx(settings.blurStrength) }}px</span
+          >
+          <p-slider
+            (ngModelChange)="update('blurStrength', $event)"
+            [max]="6"
+            [min]="1"
+            [ngModel]="settings.blurStrength"
+            [step]="1"
+            ariaLabelledBy="cz-blur"
+          />
+        </div>
+      }
+      <div class="field field--slider">
+        <span class="field__label" id="cz-panel-blur">{{ t('customize.panelBlur') }} · {{ settings.panelBlur }}px</span>
+        <p-slider
+          (ngModelChange)="update('panelBlur', $event)"
+          [max]="48"
+          [min]="0"
+          [ngModel]="settings.panelBlur"
+          [step]="2"
+          ariaLabelledBy="cz-panel-blur"
+        />
+      </div>
+    </section>
+
+    <section class="group" aria-labelledby="cz-home">
+      <h3 class="group__title" id="cz-home">{{ t('customize.homepage') }}</h3>
+      @for (row of toggles; track row.key) {
+        @if (!row.dependsOn || settings[row.dependsOn]) {
+          <div class="row" [class.row--nested]="row.dependsOn">
+            <label [for]="'cz-' + row.key">{{ t(row.label) }}</label>
+            <p-toggleswitch
+              (ngModelChange)="update(row.key, $event)"
+              [inputId]="'cz-' + row.key"
+              [ngModel]="settings[row.key]"
+            />
+          </div>
+        }
+      }
+      @if (settings.showLogo) {
+        <div class="field field--nested">
+          <span class="field__label" id="cz-logo-style">{{ t('customize.logoStyle') }}</span>
+          <app-segmented
+            (valueChange)="update('logoStyle', $event)"
+            [options]="logoStyleOptions()"
+            [value]="settings.logoStyle"
+            labelledBy="cz-logo-style"
+          />
+          <span class="field__label" id="cz-logo-pick">{{ t('customize.logoPick') }}</span>
+          <div aria-labelledby="cz-logo-pick" class="logos" role="radiogroup">
+            @for (logo of logos; track logo.value) {
+              <button
+                (click)="update('logo', logo.value)"
+                [attr.aria-checked]="settings.logo === logo.value"
+                [attr.aria-label]="logo.label"
+                [title]="logo.label"
+                class="logo-choice"
+                role="radio"
+                type="button"
+              >
+                <img [src]="logo.value" alt="" height="36" loading="lazy" width="36" />
+              </button>
+            }
+            <button
+              (click)="update('logo', 'custom')"
+              [attr.aria-checked]="settings.logo === 'custom'"
+              [attr.aria-label]="t('customize.logoCustom')"
+              [title]="t('customize.logoCustom')"
+              class="logo-choice"
+              role="radio"
+              type="button"
+            >
+              @if (settings.logoUrl) {
+                <img [src]="settings.logoUrl" alt="" height="36" width="36" />
+              } @else {
+                <i class="pi pi-image" aria-hidden="true"></i>
+              }
+            </button>
+          </div>
+          @if (settings.logo === 'custom') {
+            <label class="field__label" for="cz-logo-url">{{ t('customize.logoUrl') }}</label>
+            <div class="inline">
+              <input
+                #logoUrl
+                (change)="update('logoUrl', logoUrl.value.trim())"
+                [value]="settings.logoUrl.startsWith('data:') ? '' : settings.logoUrl"
+                fluid
+                id="cz-logo-url"
+                inputmode="url"
+                pInputText
+                placeholder="https://…/logo.png"
+                type="url"
+              />
+              <button (click)="logoFile.click()" class="ghost" type="button">
+                <i class="pi pi-upload" aria-hidden="true"></i>
+                {{ t('customize.logoUpload') }}
+              </button>
+              <input #logoFile (change)="uploadLogo(logoFile)" accept="image/*" hidden type="file" />
+            </div>
+            @if (uploadError()) {
+              <small class="field__error" role="alert">{{ t('customize.logoUploadError') }}</small>
+            }
+          }
+        </div>
+      }
+      @if (settings.showClock) {
+        <div class="field field--nested">
+          <span class="field__label" id="cz-clock-style">{{ t('customize.clockStyle') }}</span>
+          <app-segmented
+            (valueChange)="update('clockStyle', $event)"
+            [options]="clockOptions()"
+            [value]="settings.clockStyle"
+            labelledBy="cz-clock-style"
+          />
+        </div>
+      }
+      @if (settings.showNews) {
+        <div class="field field--nested">
+          <span class="field__label" id="cz-feed">{{ t('customize.feed') }}</span>
+          <app-segmented
+            (valueChange)="update('newsSource', $event)"
+            [options]="sourceOptions()"
+            [value]="settings.newsSource"
+            labelledBy="cz-feed"
+          />
+          @if (settings.newsSource === 'rss') {
+            <label class="field__label" for="cz-rss-title">{{ t('customize.rssTitle') }}</label>
+            <input
+              (ngModelChange)="update('rssTitle', $event)"
+              [ngModel]="settings.rssTitle"
+              [placeholder]="t('customize.rssTitlePlaceholder')"
+              fluid
+              id="cz-rss-title"
+              pInputText
+            />
+            <label class="field__label" for="cz-rss-url">{{ t('customize.rssUrl') }}</label>
+            <input
+              (change)="update('rssUrl', rssUrl.value.trim())"
+              #rssUrl
+              [value]="settings.rssUrl"
+              aria-describedby="cz-rss-hint"
+              fluid
+              id="cz-rss-url"
+              inputmode="url"
+              pInputText
+              placeholder="https://example.org/feed.xml"
+              type="url"
+            />
+            <small class="field__hint" id="cz-rss-hint">{{ t('customize.rssUrlHint') }}</small>
+          }
+        </div>
+      }
+      <div class="field">
+        <label class="field__label" for="cz-name">{{ t('customize.name') }}</label>
+        <input
+          (ngModelChange)="update('username', $event)"
+          [ngModel]="settings.username"
+          [placeholder]="t('home.friend')"
+          autocomplete="given-name"
+          fluid
+          id="cz-name"
+          pInputText
+        />
+      </div>
+    </section>
+
+    <section class="group" aria-labelledby="cz-behaviour">
+      <h3 class="group__title" id="cz-behaviour">{{ t('customize.behaviour') }}</h3>
+      <div class="field">
+        <span class="field__label" id="cz-density">{{ t('customize.density') }}</span>
+        <app-segmented
+          (valueChange)="update('tileDensity', $event)"
+          [options]="densityOptions()"
+          [value]="settings.tileDensity"
+          labelledBy="cz-density"
+        />
+      </div>
+      @if (settings.tileDensity === 'comfortable') {
+        <div class="row row--nested">
+          <label for="cz-showLinkLabels">{{ t('customize.showLinkLabels') }}</label>
+          <p-toggleswitch
+            (ngModelChange)="update('showLinkLabels', $event)"
+            [ngModel]="settings.showLinkLabels"
+            inputId="cz-showLinkLabels"
+          />
+        </div>
+      }
+      <div class="field">
+        <span class="field__label" id="cz-motion">{{ t('customize.motion') }}</span>
+        <app-segmented
+          (valueChange)="update('motion', $event)"
+          [options]="motionOptions()"
+          [value]="settings.motion"
+          labelledBy="cz-motion"
+        />
+      </div>
+      <div class="row">
+        <label for="cz-openInNewTab">{{ t('customize.openInNewTab') }}</label>
+        <p-toggleswitch
+          (ngModelChange)="update('openInNewTab', $event)"
+          [ngModel]="settings.openInNewTab"
+          inputId="cz-openInNewTab"
+        />
+      </div>
+    </section>
+
+    <ng-template #footer>
+      <div class="customize__footer">
+        <span class="customize__shortcut"> {{ t('customize.shortcut') }} <kbd class="sp-kbd">,</kbd> </span>
+        <a (click)="visible.set(false)" class="customize__all" routerLink="/settings">
+          {{ t('customize.allSettings') }}
+          <i class="pi pi-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </ng-template>
+  </p-drawer>
+</ng-container>

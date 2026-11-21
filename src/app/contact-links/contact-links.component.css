@@ -1,11 +1,75 @@
-img {
-  margin-top: 1rem;
-  height: 3.5rem;
+:host {
+  display: block;
 }
 
-.social-handles {
-  margin-top: 8%;
-  margin-bottom: 3%;
+.community {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.25rem 0.75rem;
+}
+
+.community__label {
+  font-size: 0.8125rem;
+  color: var(--sp-text-muted);
+}
+
+.community__list {
+  display: flex;
+  gap: 0.375rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pill {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  background: var(--sp-glass);
+  backdrop-filter: var(--sp-glass-blur);
+  border: 1px solid var(--sp-border);
+  border-radius: 50%;
+  touch-action: manipulation;
+  transition:
+    transform var(--sp-dur) var(--sp-ease-out),
+    border-color var(--sp-dur) ease,
+    background-color var(--sp-dur) ease;
+}
+
+/* Invisible hit area: compact look, 44px touch target */
+.pill::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+}
+
+.pill img {
+  width: 1.125rem;
+  height: 1.125rem;
+  object-fit: contain;
+  transition: transform var(--sp-dur) var(--sp-ease-out);
+}
+
+@media (hover: hover) {
+  .pill:hover {
+    transform: translateY(-2px);
+    border-color: var(--sp-border-strong);
+    background: var(--sp-hover);
+  }
+
+  .pill:hover img {
+    transform: rotate(-8deg) scale(1.1);
+  }
+}
+
+.pill:active {
+  transform: scale(0.95);
+}
+
+:host(.home__community) .community {
+  justify-content: center;
 }

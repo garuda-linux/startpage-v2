@@ -1,0 +1,112 @@
+:host {
+  display: block;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.625rem;
+  text-align: center;
+}
+
+.hero__logo-large {
+  width: clamp(5.5rem, 1rem + 11vh, 9.5rem);
+  height: clamp(5.5rem, 1rem + 11vh, 9.5rem);
+  margin-bottom: clamp(0.5rem, 2vh, 1.25rem);
+  object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgb(0 0 0 / 0.3));
+}
+
+.hero__date {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--sp-text-muted);
+}
+
+.hero__time {
+  font-weight: 600;
+  color: var(--sp-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.hero__sep {
+  opacity: 0.6;
+}
+
+.hero__greeting {
+  margin: 0;
+  font-size: clamp(1.875rem, 1.3rem + 2vw, 2.75rem);
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--sp-text);
+  text-wrap: balance;
+}
+
+/* Inline logo style: sits on the greeting line at text height */
+.hero__logo {
+  display: inline-block;
+  width: auto;
+  height: 1em;
+  margin-right: 0.3em;
+  vertical-align: -0.12em;
+  object-fit: contain;
+}
+
+.hero__name {
+  color: var(--sp-accent);
+}
+
+/* Large clock style: a centered time above the greeting, kept moderate */
+.hero__clock {
+  display: flex;
+  align-items: baseline;
+  font-size: clamp(2.75rem, 2rem + 2.5vw, 4rem);
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--sp-text);
+}
+
+.hero__digits {
+  display: inline-grid;
+}
+
+.hero__roll {
+  grid-area: 1 / 1;
+}
+
+.hero__roll--in {
+  animation: hero-roll var(--sp-dur-slow) var(--sp-ease-out) both;
+}
+
+@keyframes hero-roll {
+  from {
+    opacity: 0;
+    transform: translateY(0.25em);
+  }
+}
+
+.hero__colon {
+  margin: 0 0.05em;
+  color: var(--sp-text-muted);
+}
+
+.hero__period {
+  margin-left: 0.25em;
+  font-size: 0.4em;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--sp-text-muted);
+}
+
+.hero__date .hero__period {
+  margin-left: 0.125rem;
+  font-size: 0.75em;
+}

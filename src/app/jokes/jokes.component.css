@@ -1,7 +1,83 @@
-.jokes {
+:host {
+  display: block;
+}
+
+.joke {
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-top: 3%;
-  margin-bottom: 9%;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0.875rem 0 0;
+  min-height: 1.75rem;
+  font-size: 1rem;
+  color: var(--sp-text-muted);
+}
+
+.joke__text {
+  text-wrap: pretty;
+}
+
+.joke__text::before {
+  content: '“';
+}
+
+.joke__text::after {
+  content: '”';
+}
+
+.joke__text--in {
+  animation: joke-in var(--sp-dur) var(--sp-ease-out) both;
+}
+
+@keyframes joke-in {
+  from {
+    opacity: 0;
+    filter: blur(3px);
+  }
+}
+
+.joke__again {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--sp-text-muted);
+  cursor: pointer;
+  opacity: 0.7;
+  transition:
+    opacity var(--sp-dur-fast) ease,
+    background-color var(--sp-dur-fast) ease,
+    color var(--sp-dur-fast) ease;
+}
+
+.joke__again:hover {
+  opacity: 1;
+  color: var(--sp-text);
+  background: var(--sp-hover);
+}
+
+.joke__again i {
+  font-size: 0.8125rem;
+}
+
+.joke__spin {
+  animation: joke-spin var(--sp-dur-slow) var(--sp-ease-out);
+}
+
+@keyframes joke-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Invisible hit area keeps the compact look while meeting the 44px touch target */
+.joke__again::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
 }

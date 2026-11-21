@@ -49,6 +49,10 @@ export interface StrippedTopic {
   fancy_title: string;
   link: string;
   created_at: string;
+  /**
+   * First Discourse tag or RSS category, shown as the card's kicker
+   */
+  tag?: string;
 }
 
 export interface Topic {

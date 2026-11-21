@@ -1,13 +1,227 @@
-@reference "../../styles.css";
-
-p {
-  @apply text-color;
+:host {
+  display: block;
+  container-type: inline-size;
 }
 
-ul {
-  @apply my-4 block list-inside list-disc space-y-1 text-left!;
+.news {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-div > table {
-  margin-top: 2.5rem !important;
+.news__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding-inline: 0.25rem;
+}
+
+.news__title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--sp-text);
+}
+
+.news__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.news__title a:hover {
+  color: var(--sp-accent);
+}
+
+.news__dot {
+  position: relative;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--sp-accent);
+}
+
+.news__dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  animation: news-pulse 2.4s var(--sp-ease-out) 3;
+}
+
+@keyframes news-pulse {
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(2.6);
+  }
+}
+
+.news__cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+  height: 100%;
+  min-height: 7.75rem;
+  box-sizing: border-box;
+  padding: 1rem;
+  background: var(--sp-glass);
+  backdrop-filter: var(--sp-glass-blur);
+  border: 1px solid var(--sp-border-strong);
+  border-radius: var(--sp-radius-lg);
+  box-shadow: var(--sp-shadow-sm);
+  color: var(--sp-text);
+  text-align: left;
+  text-decoration: none;
+  touch-action: manipulation;
+  transition:
+    transform var(--sp-dur) var(--sp-ease-out),
+    border-color var(--sp-dur) ease,
+    box-shadow var(--sp-dur) var(--sp-ease-out);
+}
+
+@media (hover: hover) {
+  a.card:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in oklab, var(--sp-accent) 35%, var(--sp-border));
+    box-shadow: var(--sp-shadow-md);
+  }
+}
+
+.card__kicker {
+  overflow: hidden;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--sp-accent);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.card__title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.35;
+  text-wrap: pretty;
+}
+
+.card__time {
+  font-size: 0.75rem;
+  color: var(--sp-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.bone {
+  display: block;
+  height: 0.75rem;
+  border-radius: 4px;
+  background:
+    linear-gradient(90deg, transparent, color-mix(in oklab, var(--sp-text) 8%, transparent), transparent) 0 0 / 200%
+      100%,
+    color-mix(in oklab, var(--sp-text) 8%, transparent);
+  animation: news-shimmer 1.4s linear infinite;
+}
+
+.bone--short {
+  width: 40%;
+  height: 0.5rem;
+}
+
+@keyframes news-shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* Error / empty: one wide card in the same band */
+.news__state {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  min-height: 7.75rem;
+  font-size: 0.875rem;
+  color: var(--sp-text-muted);
+}
+
+.news__state p {
+  flex: 1;
+  margin: 0;
+  color: inherit;
+}
+
+.news__state > .pi {
+  font-size: 1.25rem;
+}
+
+.news__retry {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0 0.875rem;
+  border: 1px solid var(--sp-border-strong);
+  border-radius: var(--sp-radius-md);
+  background: transparent;
+  color: var(--sp-text);
+  font: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.news__retry:hover {
+  background: var(--sp-hover);
+}
+
+@container (max-width: 52rem) {
+  .news__cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container (max-width: 30rem) {
+  .news__cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .news__cards > li:nth-child(n + 3) {
+    display: none;
+  }
+
+  .card {
+    min-height: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .news__dot::after,
+  .bone {
+    animation: none;
+  }
+}
+
+@media (min-width: 1024px) and (max-height: 860px) {
+  .card {
+    min-height: 6.5rem;
+    padding: 0.875rem 1rem;
+  }
 }

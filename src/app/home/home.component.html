@@ -1,22 +1,43 @@
-<div class="mb-5 grid-cols-12 md:mb-0 md:grid md:px-10">
-  <div
-    [ngClass]="{
-      'col-span-9': configService.settings().showNews,
-      'col-span-12': !configService.settings().showNews,
-    }"
-  >
-    <app-search></app-search>
-    @if (configService.settings().jokesEnabled) {
-      <app-jokes></app-jokes>
-    }
-    <app-links></app-links>
-    @if (configService.settings().defaultLinks) {
-      <app-contact-links></app-contact-links>
-    }
-  </div>
-  @if (configService.settings().showNews) {
-    <div class="col-span-3 mt-5">
-      <app-news></app-news>
+<ng-container *transloco="let t">
+  @let settings = configService.settings();
+  <main [class.home--centered]="!settings.showNews" class="home" id="main" tabindex="-1">
+    <div class="home__top">
+      <app-hero />
+      <app-search class="home__search" />
+      @if (settings.jokesEnabled) {
+        <app-jokes class="sp-enter" style="--i: 3" />
+      }
     </div>
+
+    @if (settings.showNews) {
+      <!-- Loaded after first paint: keeps the emoji converter out of the initial bundle -->
+      @defer (on idle) {
+        <app-news class="home__news" />
+      } @placeholder {
+        <div aria-hidden="true" class="home__news news-placeholder"></div>
+      }
+    }
+
+    <app-links class="home__dock" />
+
+    @if (!settings.showNews && settings.defaultLinks) {
+      <app-contact-links class="home__community" />
+    }
+  </main>
+
+  <button
+    (click)="customizeOpen.set(true)"
+    [attr.aria-label]="t('home.customize')"
+    aria-keyshortcuts=","
+    class="customize-trigger"
+    type="button"
+  >
+    <i class="pi pi-sliders-h" aria-hidden="true"></i>
+    <span>{{ t('home.customize') }}</span>
+  </button>
+
+  <!-- Fetched while idle, rendered on first open -->
+  @defer (when customizeOpen(); prefetch on idle) {
+    <app-customize [(visible)]="customizeOpen" />
   }
-</div>
+</ng-container>

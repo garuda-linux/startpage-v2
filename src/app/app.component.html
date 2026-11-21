@@ -1,41 +1,35 @@
 <ng-container *transloco="let t">
-  <div class="background-filter">
-    <div class="non-blurred overflow-hidden">
-      <div class="background min-h-svh">
-        <garuda-shell #shell [menuItems]="configService.settings().customMenuLinks">
-          <img
-            [ngSrc]="logoLink()"
-            alt="logo"
-            class="cursor-pointer"
-            garudaShellBarStart
-            height="32"
-            priority
-            routerLink="/"
-            width="32"
-          />
-          <div class="ml-5 min-w-fit" garudaShellBarStart>
-            {{ welcomeText() }}
-          </div>
-          <div garudaShellBarEnd>
-            @if (configService.settings().avatarEnabled) {
+  <a (click)="skipToMain($event)" class="skip-link" href="#main">{{ t('common.skipToContent') }}</a>
+  <app-wallpaper />
+  <div class="relative z-10 overflow-x-clip">
+    <div class="min-h-svh">
+      <garuda-shell #shell [menuItems]="configService.settings().customMenuLinks">
+        <a [attr.aria-label]="t('menu.home')" class="shell-logo" garudaShellBarStart routerLink="/">
+          <img [ngSrc]="logoLink()" alt="" height="32" priority width="32" />
+        </a>
+        <div garudaShellBarEnd>
+          @if (configService.settings().avatarEnabled) {
+            <button
+              (click)="displayEasterEgg()"
+              [attr.aria-label]="t('common.surprise')"
+              class="shell-avatar"
+              type="button"
+            >
               <p-avatar
-                (click)="displayEasterEgg()"
                 [image]="
                   configService.settings().avatarUrl !== ''
                     ? configService.settings().avatarUrl
                     : '/assets/avatars/cat.png'
                 "
-                ngClass="cursor-pointer"
                 shape="circle"
-              >
-              </p-avatar>
-            }
-          </div>
-          <div class="router-container">
-            <router-outlet #routerOutlet="outlet"></router-outlet>
-          </div>
-        </garuda-shell>
-      </div>
+              />
+            </button>
+          }
+        </div>
+        <div class="router-container">
+          <router-outlet #routerOutlet="outlet"></router-outlet>
+        </div>
+      </garuda-shell>
     </div>
   </div>
 </ng-container>

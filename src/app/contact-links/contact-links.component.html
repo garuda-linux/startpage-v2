@@ -1,18 +1,21 @@
-<div class="social-handles">
-  @for (contact of contactsConfig(); track contact) {
-    <div [class]="gridCols()">
-      <garuda-card
-        cardRole="product-showcase-small"
-        class="cursor-pointer"
-        (click)="$event.stopPropagation(); openLink(contact?.link)"
-      >
-        <div garudaCardTitleWrapper>
-          <h4>{{ contact?.cardTitle }}</h4>
-        </div>
-        <div garudaCardThumbnailWrapper>
-          <img [src]="contact?.cardImageUrl" width="60" height="60" alt="logo" />
-        </div>
-      </garuda-card>
-    </div>
-  }
-</div>
+<ng-container *transloco="let t">
+  <div class="community">
+    <span class="community__label" id="community-label">{{ t('home.joinCommunity') }}</span>
+    <ul aria-labelledby="community-label" class="community__list">
+      @for (contact of contacts; track contact.link) {
+        <li>
+          <a
+            [attr.aria-label]="contact.title"
+            [href]="contact.link"
+            [target]="configService.settings().openInNewTab ? '_blank' : '_self'"
+            [title]="contact.title + ' · ' + contact.subtitle"
+            class="pill"
+            rel="noopener"
+          >
+            <img [src]="contact.logo" alt="" height="18" loading="lazy" width="18" />
+          </a>
+        </li>
+      }
+    </ul>
+  </div>
+</ng-container>

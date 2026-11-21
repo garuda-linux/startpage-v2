@@ -1,16 +1,50 @@
-<div class="product-small mt-4">
-  @for (product of productsConfig(); track product) {
-    <garuda-card
-      cardRole="product-showcase-small"
-      class="cursor-pointer"
-      (click)="$event.stopPropagation(); openLink(product?.link)"
+<ng-container *transloco="let t">
+  @let newTab = configService.settings().openInNewTab;
+  <nav [attr.aria-label]="t('home.links')" [class.dock--compact]="compact()" class="dock">
+    @if (links().length) {
+      <ul class="dock__list">
+        @for (link of links(); track link.id; let i = $index) {
+          <li>
+            <a
+              [attr.aria-keyshortcuts]="i < shortcutCount ? i + 1 : null"
+              [attr.aria-label]="showLabels() ? null : link.title"
+              [href]="link.link"
+              [target]="newTab ? '_blank' : '_self'"
+              [title]="link.subtitle || hostnameOf(link.link)"
+              class="dock__item"
+              rel="noopener"
+            >
+              <span class="dock__icon">
+                @if (link.icon && !brokenIcons().has(link.id)) {
+                  <img (error)="markBroken(link.id)" [src]="link.icon" alt="" height="30" loading="lazy" width="30" />
+                } @else {
+                  <span aria-hidden="true" class="dock__monogram">{{ (link.title || '?').charAt(0) }}</span>
+                }
+              </span>
+              @if (showLabels()) {
+                <span class="dock__label">{{ link.title }}</span>
+              }
+              @if (i < shortcutCount) {
+                <kbd aria-hidden="true" class="sp-kbd dock__key">{{ i + 1 }}</kbd>
+              }
+            </a>
+          </li>
+        }
+      </ul>
+    }
+    <!-- Editing lives outside the dock so the bar only ever holds the user's own links -->
+    <a
+      [attr.aria-label]="links().length ? t('home.editLinks') : null"
+      [class.dock__edit--labelled]="!links().length"
+      [title]="t('home.editLinks')"
+      class="dock__edit"
+      fragment="links"
+      routerLink="/settings"
     >
-      <div garudaCardTitleWrapper>
-        <h4>{{ product?.cardTitle }}</h4>
-      </div>
-      <div garudaCardThumbnailWrapper>
-        <img [src]="product?.cardImageUrl" width="60" height="60" alt="logo" />
-      </div>
-    </garuda-card>
-  }
-</div>
+      <i [class]="links().length ? 'pi pi-pencil' : 'pi pi-plus'" aria-hidden="true"></i>
+      @if (!links().length) {
+        <span>{{ t('home.addLink') }}</span>
+      }
+    </a>
+  </nav>
+</ng-container>

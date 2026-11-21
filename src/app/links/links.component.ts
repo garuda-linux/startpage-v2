@@ -1,40 +1,50 @@
-import { ChangeDetectionStrategy, Component, computed, inject, Injector, runInInjectionContext } from '@angular/core';
-import type { ServiceLinks } from '../types';
-import { serviceLinks } from '../../../config';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { TranslocoDirective } from '@jsverse/transloco';
 import { ConfigService } from '../config/config.service';
-import { SmallCardModel, CardComponent, PopupService } from '@garudalinux/core';
-import { DialogService } from '@openng/optimus-ui/dynamicdialog';
+import type { ServiceLink } from '../types';
+import { hostnameOf, openUrl } from '../functions';
 
+/**
+ * Number of links reachable through the 1–9 keyboard shortcuts
+ */
+const SHORTCUT_COUNT = 9;
+
+/**
+ * The link dock: one row of launcher items, labelled unless compact density or the label toggle hides them.
+ */
 @Component({
   selector: 'app-links',
-  imports: [CardComponent],
-  providers: [DialogService, PopupService],
+  imports: [TranslocoDirective, RouterLink],
   templateUrl: './links.component.html',
   styleUrl: './links.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinksComponent {
-  private readonly injector = inject(Injector);
   protected readonly configService = inject(ConfigService);
+  protected readonly hostnameOf = hostnameOf;
+  protected readonly shortcutCount = SHORTCUT_COUNT;
 
-  gridCols = computed(() => `col-span-${this.configService.settings().gridCols} cursor-pointer p-2 text-center`);
+  protected readonly links = computed<ServiceLink[]>(() => this.configService.settings().customLinks ?? []);
+  protected readonly compact = computed(() => this.configService.settings().tileDensity === 'compact');
+  /**
+   * Compact density is icons only. Otherwise labels follow the user's toggle
+   */
+  protected readonly showLabels = computed(() => !this.compact() && this.configService.settings().showLinkLabels);
+  protected readonly brokenIcons = signal<ReadonlySet<string>>(new Set());
 
-  productsConfig = computed<SmallCardModel[]>(() => {
-    return runInInjectionContext(this.injector, () => {
-      const currentLinks: ServiceLinks = serviceLinks || [];
+  /**
+   * Open the n-th link (1-based), used by the global number shortcuts.
+   * @returns Whether a link existed at that position.
+   */
+  openByShortcut(position: number): boolean {
+    const link = this.links()[position - 1];
+    if (!link || position > SHORTCUT_COUNT) return false;
+    openUrl(link.link, this.configService.settings().openInNewTab);
+    return true;
+  }
 
-      return currentLinks.map((link) => ({
-        cardRole: 'product-showcase-small',
-        cardTitle: link.title || link.id || '',
-        cardImageUrl: link.icon || '',
-        link: link.link || link.routerLink || '',
-      }));
-    });
-  });
-
-  protected openLink(url?: string): void {
-    if (url) {
-      window.open(url, '_blank');
-    }
+  protected markBroken(id: string): void {
+    this.brokenIcons.update((set) => new Set(set).add(id));
   }
 }

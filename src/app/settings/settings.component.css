@@ -1,0 +1,250 @@
+.settings {
+  width: 100%;
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 5vh, 3rem) clamp(1rem, 4vw, 2.5rem) 6rem;
+}
+
+.settings__header {
+  margin-bottom: 2rem;
+}
+
+.settings__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--sp-text-muted);
+  text-decoration: none;
+}
+
+.settings__back:hover {
+  color: var(--sp-text);
+}
+
+.settings__back .pi {
+  font-size: 0.75rem;
+  transition: transform var(--sp-dur) var(--sp-ease-out);
+}
+
+.settings__back:hover .pi {
+  transform: translateX(-3px);
+}
+
+.settings__title {
+  margin: 0;
+  font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem);
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  color: var(--sp-text);
+}
+
+.settings__layout {
+  display: grid;
+  grid-template-columns: 13rem minmax(0, 1fr);
+  align-items: start;
+  gap: 2.5rem;
+}
+
+.settings__nav {
+  position: sticky;
+  top: calc(var(--sp-shell-offset) + 1rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.settings__nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--sp-radius-md);
+  font-size: 0.875rem;
+  color: var(--sp-text-muted);
+  text-decoration: none;
+  transition:
+    color var(--sp-dur-fast) ease,
+    background-color var(--sp-dur-fast) ease;
+}
+
+.settings__nav a:hover {
+  color: var(--sp-text);
+  background: var(--sp-hover);
+}
+
+.settings__nav a.is-active {
+  color: var(--sp-accent);
+  background: var(--sp-accent-soft);
+}
+
+.settings__nav .pi {
+  font-size: 0.875rem;
+}
+
+.settings__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-width: 0;
+}
+
+.card {
+  padding: 1.5rem;
+  scroll-margin-top: calc(var(--sp-shell-offset) + 1rem);
+  background: var(--sp-glass);
+  backdrop-filter: var(--sp-glass-blur);
+  border: 1px solid var(--sp-border);
+  border-radius: var(--sp-radius-xl);
+  box-shadow: var(--sp-shadow-md);
+}
+
+.card__title {
+  margin: 0 0 1.25rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--sp-text);
+}
+
+.card__hint {
+  margin: -0.75rem 0 1.25rem;
+  font-size: 0.875rem;
+  color: var(--sp-text-muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.25rem;
+}
+
+.grid + .rows {
+  margin-top: 1.25rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.field--wide {
+  grid-column: 1 / -1;
+}
+
+.field label {
+  font-size: 0.875rem;
+  color: var(--sp-text);
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: 3.25rem;
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--sp-border);
+  font-size: 0.9375rem;
+  color: var(--sp-text);
+}
+
+.rows > .row:first-child {
+  border-top: 0;
+}
+
+.row--nested {
+  padding-left: 1rem;
+  border-top-style: dashed;
+  font-size: 0.875rem;
+  color: var(--sp-text-muted);
+}
+
+/* One fixed width for every segmented control in a row, so labels never resize them */
+.row app-segmented {
+  flex: none;
+  width: 16rem;
+}
+
+.row input {
+  width: min(22rem, 60%);
+}
+
+:host ::ng-deep .row__slider {
+  width: min(14rem, 50%);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+:host ::ng-deep .actions__danger {
+  margin-left: auto;
+}
+
+@media (max-width: 1023px) {
+  .settings__layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .settings__nav {
+    position: static;
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+  }
+
+  .settings__nav a {
+    flex: none;
+  }
+}
+
+@media (max-width: 639px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .card {
+    padding: 1.125rem;
+  }
+
+  .row {
+    flex-wrap: wrap;
+  }
+
+  .row input,
+  .row app-segmented {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+.card:focus {
+  outline: none;
+}
+
+.field__hint {
+  font-size: 0.75rem;
+  color: var(--sp-text-muted);
+}
+
+.row__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.field__error {
+  font-size: 0.75rem;
+  color: var(--p-red-400, #f38ba8);
+}

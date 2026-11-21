@@ -7,8 +7,8 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
-import { provideRouter, Router, withViewTransitions } from '@angular/router';
-import { provideGarudaNG } from '@garudalinux/core';
+import { provideRouter, Router, withInMemoryScrolling, withViewTransitions } from '@angular/router';
+import { provideGarudaNG } from '@garudalinux/core/config';
 import { APP_CONFIG } from '../environments/app-config.token';
 import { environment } from '../environments/environment.dev';
 import { routes } from './app.routes';
@@ -28,38 +28,37 @@ export const appConfig: ApplicationConfig = {
             darkModeSelector: '.p-dark',
           },
         },
-        ripple: true,
+        ripple: false,
+        // Overlays render at body level: inside a frosted card they could only blur the card itself
+        overlayAppendTo: 'body',
         inputStyle: 'outlined',
       },
     ),
     provideRouter(
       routes,
+      withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }),
       withViewTransitions({
         skipInitialTransition: true,
         onViewTransitionCreated: ({ transition }) => {
           const router = inject(Router);
-          try {
-            const nav = router.currentNavigation();
-            const info = nav?.extras?.info as any;
+          const nav = router.currentNavigation();
+          const info = nav?.extras?.info as any;
 
-            if (info?.disableViewTransition) {
-              const style = document.createElement('style');
-              style.id = 'skip-transition';
-              style.textContent = '* { view-transition-name: none !important; }';
-              document.head.appendChild(style);
+          if (info?.disableViewTransition) {
+            const style = document.createElement('style');
+            style.id = 'skip-transition';
+            style.textContent = '* { view-transition-name: none !important; }';
+            document.head.appendChild(style);
 
-              transition.finished.finally(() => {
-                const el = document.getElementById('skip-transition');
-                if (el) el.remove();
-                document.body.classList.remove('is-transitioning');
-              });
-            } else {
-              transition.finished.finally(() => {
-                document.body.classList.remove('is-transitioning');
-              });
-            }
-          } catch {
-            // Ignore parse errors, let transition proceed
+            transition.finished.finally(() => {
+              const el = document.getElementById('skip-transition');
+              if (el) el.remove();
+              document.body.classList.remove('is-transitioning');
+            });
+          } else {
+            transition.finished.finally(() => {
+              document.body.classList.remove('is-transitioning');
+            });
           }
         },
       }),
@@ -73,6 +72,8 @@ export const appConfig: ApplicationConfig = {
           setTimeout(() => resolve(), 0);
         });
       }
+      // The active preset is a lazy chunk: load it before the first render so nothing paints unstyled
+      await configService.applyTheme(configService.settings().activeTheme);
     }),
     provideTransloco({
       config: {

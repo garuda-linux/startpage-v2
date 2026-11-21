@@ -10,5 +10,5 @@ allowBuilds:
   unrs-resolver: true
   workerd: true
 minimumReleaseAgeExclude:
-  - '@garudalinux/core@2.0.0'
-  - '@garudalinux/themes@2.0.0'
+  - '@garudalinux/core@2.0.0 || 2.1.0-rc.1 || 2.1.0-rc.3 || 2.1.0-rc.6'
+  - '@garudalinux/themes@2.0.0 || 2.1.0-rc.1 || 2.1.0-rc.3 || 2.1.0-rc.6'

@@ -1,0 +1,387 @@
+.le {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.le__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.le__count {
+  font-size: 0.875rem;
+  color: var(--sp-text-muted);
+}
+
+.le__primary,
+.le__ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 2.375rem;
+  padding: 0 1rem;
+  border-radius: var(--sp-radius-md);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color var(--sp-dur-fast) ease,
+    transform var(--sp-dur-fast) ease;
+}
+
+.le__primary {
+  border: 0;
+  background: var(--sp-accent);
+  color: var(--sp-accent-contrast);
+}
+
+.le__primary:hover {
+  background: color-mix(in oklab, var(--sp-accent) 88%, var(--sp-text));
+}
+
+.le__ghost {
+  flex: none;
+  border: 1px solid var(--sp-border-strong);
+  background: transparent;
+  color: var(--sp-text);
+  font-weight: 500;
+}
+
+.le__ghost:hover:not(:disabled) {
+  background: var(--sp-hover);
+}
+
+.le__ghost:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.le__primary:active,
+.le__ghost:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.le__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--sp-border);
+  border-radius: var(--sp-radius-lg);
+  overflow: hidden;
+}
+
+.le__row {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  min-height: 3.5rem;
+  padding: 0.5rem 0.75rem 0.5rem 0.5rem;
+  background: var(--sp-glass-strong);
+  border-top: 1px solid var(--sp-border);
+  transition: background-color var(--sp-dur-fast) ease;
+}
+
+.le__list > :first-child {
+  border-top: 0;
+}
+
+.le__row:hover {
+  background: color-mix(in oklab, var(--sp-glass-strong) 92%, var(--sp-text));
+}
+
+.le__handle {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 2rem;
+  border-radius: var(--sp-radius-sm);
+  color: var(--sp-text-muted);
+  cursor: grab;
+}
+
+.le__handle:hover {
+  background: var(--sp-hover);
+}
+
+.le__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--sp-radius-md);
+  background: color-mix(in oklab, var(--sp-text) 7%, transparent);
+  box-shadow: inset 0 0 0 1px var(--sp-border);
+  color: var(--sp-text);
+}
+
+.le__icon img {
+  width: 1.375rem;
+  height: 1.375rem;
+  object-fit: contain;
+}
+
+.le__monogram {
+  font-weight: 650;
+  color: var(--sp-accent);
+}
+
+.le__text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  font-size: 0.875rem;
+}
+
+.le__text strong {
+  font-weight: 600;
+  color: var(--sp-text);
+}
+
+.le__text span,
+.le__text strong {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.le__text span {
+  color: var(--sp-text-muted);
+  font-size: 0.8125rem;
+}
+
+.le__actions {
+  display: flex;
+  gap: 0.125rem;
+  opacity: 0;
+  transition: opacity var(--sp-dur-fast) ease;
+}
+
+.le__row:hover .le__actions,
+.le__row:focus-within .le__actions {
+  opacity: 1;
+}
+
+.le__icon-btn {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 0;
+  border-radius: var(--sp-radius-sm);
+  background: transparent;
+  color: var(--sp-text-muted);
+  cursor: pointer;
+}
+
+.le__icon-btn:hover:not(:disabled) {
+  background: var(--sp-hover);
+  color: var(--sp-text);
+}
+
+.le__icon-btn--danger:hover {
+  color: var(--p-red-400, #f38ba8) !important;
+}
+
+.le__icon-btn:disabled {
+  opacity: 0.35;
+}
+
+/* Move buttons exist for keyboard users. Pointer users drag */
+.le__sr-move:not(:focus-visible) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.le__placeholder {
+  min-height: 3.5rem;
+  background: var(--sp-accent-soft);
+  border: 1px dashed var(--sp-accent);
+}
+
+.cdk-drag-preview.le__row {
+  border-radius: var(--sp-radius-md);
+  box-shadow: var(--sp-shadow-lg);
+}
+
+.cdk-drag-animating,
+.le__list.cdk-drop-list-dragging .le__row:not(.cdk-drag-placeholder) {
+  transition: transform var(--sp-dur) var(--sp-ease-out);
+}
+
+.le__empty {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--sp-text-muted);
+}
+
+.le__editing {
+  border-top: 1px solid var(--sp-border);
+}
+
+.le__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--sp-accent-soft);
+  border: 1px solid color-mix(in oklab, var(--sp-accent) 35%, transparent);
+  border-radius: var(--sp-radius-lg);
+}
+
+.le__editing .le__form {
+  border-radius: 0;
+  border-width: 0;
+}
+
+.le__form--in {
+  animation: sp-rise var(--sp-dur) var(--sp-ease-out) backwards;
+}
+
+.le__preview {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.le__fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.875rem;
+}
+
+.le__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.le__field--wide {
+  grid-column: 1 / -1;
+}
+
+.le__field label,
+.le__field legend {
+  padding: 0;
+  margin-bottom: 0.375rem;
+  font-size: 0.8125rem;
+  color: var(--sp-text);
+}
+
+.le__inline {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.le__inline input {
+  flex: 1;
+  min-width: 0;
+}
+
+.le__error {
+  color: var(--p-red-400, #f38ba8);
+}
+
+.le__icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.le__icon-choice {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid var(--sp-border);
+  border-radius: var(--sp-radius-sm);
+  background: transparent;
+  color: var(--sp-text-muted);
+  cursor: pointer;
+}
+
+.le__icon-choice:hover {
+  background: var(--sp-hover);
+  color: var(--sp-text);
+}
+
+.le__icon-choice[aria-checked='true'] {
+  border-color: var(--sp-accent);
+  background: var(--sp-accent-soft);
+  color: var(--sp-accent);
+}
+
+.le__form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.le__undo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  border: 1px solid var(--sp-border);
+  border-radius: var(--sp-radius-md);
+  background: var(--sp-glass-strong);
+  font-size: 0.875rem;
+  color: var(--sp-text);
+}
+
+.le__text--button {
+  align-items: flex-start;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+@media (hover: none) {
+  .le__actions {
+    opacity: 1;
+  }
+}
+
+/* Phones: the title area edits, only delete stays, so the text keeps its width */
+@media (max-width: 639px) {
+  .le__fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .le__row {
+    gap: 0.625rem;
+    padding-right: 0.375rem;
+  }
+
+  .le__actions {
+    opacity: 1;
+  }
+
+  .le__icon-btn:not(.le__icon-btn--danger, .le__sr-move) {
+    display: none;
+  }
+
+  .le__icon {
+    width: 2rem;
+    height: 2rem;
+  }
+}

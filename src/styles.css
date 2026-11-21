@@ -2,9 +2,132 @@
 @import '@openng/icons/openng-icons.css';
 @plugin '@openng/optimus-ui-tailwindcss';
 
-/* Font */
 :root {
   font-family: Inter, system-ui, sans-serif;
+  font-feature-settings: 'cv11', 'ss01';
+}
+
+/* Maps onto the active Optimus preset (--p-*), so theme and dark mode re-skin every custom surface */
+:root {
+  --sp-accent: var(--p-primary-color);
+  --sp-accent-contrast: var(--p-primary-contrast-color);
+  --sp-text: var(--p-text-color);
+  /* Theme muted colours are tuned for flat surfaces. Mix toward text so they hold up on wallpapers */
+  --sp-text-muted: color-mix(in oklab, var(--p-text-color) 68%, var(--p-content-background));
+  --sp-surface: var(--p-content-background);
+  /* The Garuda presets ship a translucent content background and a dark-only popover background,
+     so opaque surfaces use the theme's base colour, set per mode by ConfigService */
+  --sp-surface-solid: var(--sp-base, var(--p-overlay-popover-background));
+  --sp-border: color-mix(in oklab, var(--p-text-color) 10%, transparent);
+  --sp-border-strong: color-mix(in oklab, var(--p-text-color) 18%, transparent);
+
+  /* Clear glass: frosted surfaces blur what's behind them without tinting it */
+  --sp-glass: transparent;
+  --sp-glass-strong: color-mix(in oklab, var(--p-content-background) 88%, transparent);
+  /* Overridden at runtime from the panelBlur setting */
+  --sp-glass-blur: blur(2px);
+  --sp-overlay: color-mix(in oklab, var(--sp-surface-solid) 72%, transparent);
+  --sp-overlay-blur: blur(20px);
+  --sp-hover: color-mix(in oklab, var(--p-text-color) 6%, transparent);
+  --sp-accent-soft: color-mix(in oklab, var(--p-primary-color) 14%, transparent);
+
+  /* Height of the fixed shell bar plus its margin: anything sticky or scrolled-to must clear it */
+  --sp-shell-offset: 4.5rem;
+
+  --sp-radius-sm: 6px;
+  --sp-radius-md: 10px;
+  --sp-radius-lg: 14px;
+  --sp-radius-xl: 20px;
+
+  --sp-shadow-sm: 0 1px 1px rgb(0 0 0 / 0.06), 0 2px 6px -2px rgb(0 0 0 / 0.12);
+  --sp-shadow-md: 0 1px 2px rgb(0 0 0 / 0.08), 0 8px 24px -8px rgb(0 0 0 / 0.28);
+  --sp-shadow-lg: 0 2px 4px rgb(0 0 0 / 0.08), 0 24px 48px -12px rgb(0 0 0 / 0.4);
+
+  --sp-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --sp-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --sp-dur-fast: 140ms;
+  --sp-dur: 220ms;
+  --sp-dur-slow: 380ms;
+  --sp-stagger: 60ms;
+  --sp-rise: 12px;
+}
+
+/* Motion levels: "subtle" keeps fades but drops travel, "off" removes motion entirely */
+:root[data-motion='subtle'] {
+  --sp-rise: 4px;
+  --sp-stagger: 30ms;
+}
+
+:root[data-motion='off'] *,
+:root[data-motion='off'] *::before,
+:root[data-motion='off'] *::after {
+  animation-duration: 0.01ms !important;
+  animation-delay: 0ms !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* Reduced motion at the OS level wins over the in-app setting: no travel, no loops, instant transitions */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --sp-rise: 0px;
+    --sp-stagger: 0ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+main:focus {
+  outline: none;
+}
+
+@keyframes sp-rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--sp-rise));
+  }
+}
+
+@keyframes sp-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Staggered fade for plain content only (text, list rows). Never put it on anything that
+   contains a frosted panel: an animating opacity on an ancestor switches the panel's
+   backdrop blur off until it ends, and movement on whole sections reads as a layout shift. */
+.sp-enter {
+  animation: sp-fade var(--sp-dur-slow) var(--sp-ease-out) backwards;
+  animation-delay: calc(var(--i, 0) * var(--sp-stagger));
+}
+
+.sp-kbd {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.375rem;
+  height: 1.375rem;
+  padding: 0 0.375rem;
+  border: 1px solid var(--sp-border-strong);
+  border-bottom-width: 2px;
+  border-radius: var(--sp-radius-sm);
+  font:
+    500 0.6875rem/1 ui-monospace,
+    'JetBrains Mono',
+    monospace;
+  color: var(--sp-text-muted);
+}
+
+:focus-visible {
+  outline: 2px solid var(--sp-accent);
+  outline-offset: 2px;
 }
 
 @supports (font-variation-settings: normal) {
@@ -13,12 +136,10 @@
   }
 }
 
-/* GarudaNG override */
 .garuda-shell-content {
   @apply m-0!;
 }
 
-/*`Custom classes`*/
 body {
   @apply selection:bg-primary selection:text-surface-0;
   font-optical-sizing: auto;
@@ -71,48 +192,6 @@ p-button {
   @apply w-full md:w-auto;
 }
 
-.bg-contain {
-  @apply bg-cover bg-fixed bg-no-repeat;
-}
-
-.background-blurred-1 .background-filter::after {
-  @apply fixed top-0 block h-full w-full backdrop-blur-sm;
-  content: '';
-}
-
-.background-blurred-2 .background-filter::after {
-  @apply fixed top-0 block h-full w-full backdrop-blur-md;
-  content: '';
-}
-
-.background-blurred-3 .background-filter::after {
-  @apply fixed top-0 block h-full w-full backdrop-blur-lg;
-  content: '';
-}
-
-.background-blurred-4 .background-filter::after {
-  @apply fixed top-0 block h-full w-full backdrop-blur-xl;
-  content: '';
-}
-
-.background-blurred-5 .background-filter::after {
-  @apply fixed top-0 block h-full w-full backdrop-blur-2xl;
-  content: '';
-}
-
-.background-blurred-6 .background-filter::after {
-  @apply fixed top-0 block h-full w-full backdrop-blur-3xl;
-  content: '';
-}
-
-.background-filter {
-  @apply relative;
-}
-
-.non-blurred {
-  @apply relative z-10;
-}
-
 body.is-transitioning .route-container {
   view-transition-name: main-content;
 }
@@ -145,4 +224,212 @@ body.is-transitioning .route-container {
       transform: translateY(0);
     }
   }
+}
+
+/* Customize drawer root lives in the overlay layer, so it is styled globally */
+.p-drawer.customize {
+  width: min(26rem, 100vw);
+  background: var(--sp-glass-strong);
+  backdrop-filter: var(--sp-glass-blur);
+  border-left: 1px solid var(--sp-border);
+  box-shadow: var(--sp-shadow-lg);
+}
+
+.p-confirmdialog-icon {
+  color: var(--sp-accent);
+}
+
+.p-dialog-mask {
+  backdrop-filter: blur(10px);
+  transition: backdrop-filter var(--sp-dur) ease;
+}
+
+.p-overlay-mask-leave-active {
+  backdrop-filter: blur(0);
+}
+
+.p-drawer.customize .p-drawer-footer {
+  border-top: 1px solid var(--sp-border);
+  padding-block: 0.875rem;
+}
+
+.garuda-shell-menubar.p-menubar {
+  --p-menubar-background: var(--sp-glass);
+  --p-menubar-border-color: var(--sp-border);
+  --p-menubar-border-radius: var(--sp-radius-lg);
+  --p-menubar-item-color: var(--sp-text-muted);
+  --p-menubar-item-icon-color: var(--sp-text-muted);
+  --p-menubar-item-focus-color: var(--sp-text);
+  --p-menubar-item-icon-focus-color: var(--sp-text);
+  --p-menubar-item-focus-background: var(--sp-hover);
+  --p-menubar-item-active-color: var(--sp-text);
+  --p-menubar-item-active-background: var(--sp-hover);
+  background: var(--sp-glass);
+  backdrop-filter: var(--sp-glass-blur);
+  border: 1px solid var(--sp-border);
+  border-radius: var(--sp-radius-lg);
+  box-shadow: var(--sp-shadow-sm);
+}
+
+.garuda-shell-menubar .p-menubar-item-link {
+  border-radius: var(--sp-radius-md);
+  transition:
+    color var(--sp-dur-fast) ease,
+    background-color var(--sp-dur-fast) ease;
+}
+
+.garuda-shell-menubar .p-menubar-item-link,
+.garuda-shell-menubar .p-menubar-item-icon {
+  color: var(--sp-text-muted);
+}
+
+.garuda-shell-menubar .p-menubar-item-link:hover,
+.garuda-shell-menubar .p-menubar-item-link:hover .p-menubar-item-icon {
+  color: var(--sp-text);
+}
+
+.garuda-shell-menubar.p-menubar-mobile .p-menubar-root-list {
+  padding: 0.375rem;
+  gap: 0.125rem;
+  background: var(--sp-overlay);
+  backdrop-filter: var(--sp-overlay-blur);
+  border: 1px solid var(--sp-border);
+  border-radius: var(--sp-radius-lg);
+  box-shadow: var(--sp-shadow-lg);
+  top: calc(100% + 0.5rem);
+  z-index: 1000;
+  transform-origin: top center;
+  animation: sp-unfold var(--sp-dur) var(--sp-ease-out) both;
+}
+
+.garuda-shell-menubar.p-menubar-mobile .p-menubar-item-link {
+  min-height: 2.75rem;
+  padding-inline: 0.875rem;
+  gap: 0.75rem;
+}
+
+.garuda-shell-menubar.p-menubar-mobile .p-menubar-button {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--sp-radius-md);
+  color: var(--sp-text);
+}
+
+/* No page scrollbar: it only appears on pages that scroll, so navigating between the homepage
+   and settings would shift the layout by its width. Wheel, keyboard and touch scrolling remain. */
+html {
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+.p-select-overlay,
+.p-multiselect-overlay,
+.p-autocomplete-overlay,
+.p-cascadeselect-overlay,
+.p-menu-overlay,
+.p-tieredmenu-overlay,
+.p-contextmenu,
+.p-datepicker-panel,
+.p-dialog {
+  --p-dialog-background: var(--sp-overlay);
+  --p-dialog-color: var(--sp-text);
+  --p-select-overlay-background: var(--sp-overlay);
+  --p-multiselect-overlay-background: var(--sp-overlay);
+  --p-autocomplete-overlay-background: var(--sp-overlay);
+  --p-menu-background: var(--sp-overlay);
+  --p-tieredmenu-background: var(--sp-overlay);
+  --p-datepicker-panel-background: var(--sp-overlay);
+  background: var(--sp-overlay) !important;
+  backdrop-filter: var(--sp-overlay-blur);
+  border: 1px solid var(--sp-border-strong) !important;
+  border-radius: var(--sp-radius-lg) !important;
+  box-shadow: var(--sp-shadow-lg) !important;
+  overflow: hidden;
+}
+
+.p-select-overlay .p-select-list,
+.p-autocomplete-overlay .p-autocomplete-list,
+.p-multiselect-overlay .p-multiselect-list {
+  padding: 0.375rem;
+}
+
+.p-select-option,
+.p-autocomplete-option,
+.p-multiselect-option {
+  border-radius: var(--sp-radius-md);
+  color: var(--sp-text) !important;
+  background: transparent !important;
+  transition: background-color var(--sp-dur-fast) ease;
+}
+
+.p-select-option:not(.p-select-option-selected):hover,
+.p-select-option.p-focus,
+.p-autocomplete-option:hover,
+.p-autocomplete-option.p-focus,
+.p-multiselect-option:hover,
+.p-multiselect-option.p-focus {
+  background: var(--sp-hover) !important;
+}
+
+.p-select-option.p-select-option-selected,
+.p-autocomplete-option-selected {
+  background: var(--sp-accent-soft) !important;
+  color: var(--sp-accent) !important;
+}
+
+.p-select-option-group,
+.p-autocomplete-option-group {
+  background: transparent !important;
+  color: var(--sp-text-muted) !important;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/*
+ * Popup entrances without opacity. A fade on the popup or any parent switches its backdrop
+ * blur off until the fade ends, so the blur would pop in late. Instead the panel unfolds from
+ * the top (clip on the panel itself) while its wrapper only moves (transform keeps the blur).
+ */
+@keyframes sp-pop-in {
+  from {
+    transform: translateY(-6px) scale(0.985);
+  }
+}
+
+@keyframes sp-pop-out {
+  to {
+    transform: translateY(-6px) scale(0.985);
+  }
+}
+
+@keyframes sp-unfold {
+  from {
+    clip-path: inset(0 0 100% 0 round var(--sp-radius-lg));
+  }
+
+  to {
+    clip-path: inset(0 0 0 0 round var(--sp-radius-lg));
+  }
+}
+
+.p-motion[class*='overlay-enter-active'] {
+  animation-name: sp-pop-in !important;
+  animation-duration: var(--sp-dur) !important;
+  animation-timing-function: var(--sp-ease-out) !important;
+}
+
+.p-motion[class*='overlay-leave-active'] {
+  animation-name: sp-pop-out !important;
+  animation-duration: var(--sp-dur-fast) !important;
+  animation-timing-function: var(--sp-ease-in) !important;
+}
+
+.p-motion[class*='overlay-enter'] > .p-overlay-content > .p-component-overlay,
+.p-motion[class*='overlay-enter'] .p-select-overlay,
+.p-motion[class*='overlay-enter'] .p-autocomplete-overlay,
+.p-motion[class*='overlay-enter'] .p-multiselect-overlay {
+  animation: sp-unfold var(--sp-dur) var(--sp-ease-out) both;
 }

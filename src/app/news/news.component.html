@@ -1,36 +1,69 @@
 <ng-container *transloco="let t">
-  <p-panel>
-    @if (!newsService.blogDataReady()) {
-      <div class="px-2.5 md:h-[80vh] md:px-10">
-        @for (_ of [].constructor(8); track _) {
-          <div class="mb-4 flex">
-            <div>
-              <p-skeleton width="100%" styleClass="mb-2" />
-            </div>
-          </div>
-          <p-skeleton width="100%" height="75px" />
+  @let settings = configService.settings();
+  @let newTab = settings.openInNewTab;
+  @let title = customTitle() || t('home.news');
+  <section aria-labelledby="news-heading" class="news">
+    <header class="news__header">
+      <h2 class="news__title" id="news-heading">
+        <span aria-hidden="true" class="news__dot"></span>
+        @if (newsService.siteUrl(); as site) {
+          <a [href]="site" [target]="newTab ? '_blank' : '_self'" rel="noopener">{{ title }}</a>
+        } @else {
+          {{ title }}
         }
-      </div>
-    }
-    <p-scroll-panel [style]="{ height: '80vh' }">
-      <div class="grid grid-cols-12">
-        <div class="col-span-12">
-          <p-timeline [value]="newsService.blogData()">
-            <ng-template #opposite let-topic>
-              <small class="text-surface-300">{{ topic.created_at | date }}</small>
-            </ng-template>
-            <ng-template #content let-topic>
-              <div
-                (click)="openLinkInNewTab(topic.link)"
-                (keydown)="openLinkInNewTab(topic.link)"
-                [innerHTML]="topic.fancy_title | emojiPipe"
-                class="cursor-pointer text-color"
-                tabindex="0"
-              ></div>
-            </ng-template>
-          </p-timeline>
+      </h2>
+      @if (settings.defaultLinks) {
+        <app-contact-links />
+      }
+    </header>
+
+    @switch (state()) {
+      @case ('ready') {
+        <ol class="news__cards">
+          @for (topic of items(); track topic.link; let i = $index) {
+            <li>
+              <a [href]="topic.link" [target]="newTab ? '_blank' : '_self'" class="card" rel="noopener">
+                <span class="card__kicker">{{ topic.tag || (isRss() ? title : t('home.announcement')) }}</span>
+                <span [innerHTML]="topic.fancy_title | emojiPipe" class="card__title"></span>
+                @if (topic.created_at) {
+                  <time [attr.datetime]="topic.created_at" class="card__time">{{
+                    relativeTime(topic.created_at)
+                  }}</time>
+                }
+              </a>
+            </li>
+          }
+        </ol>
+      }
+      @case ('loading') {
+        <ol aria-busy="true" class="news__cards">
+          @for (row of skeletonRows; track row) {
+            <li>
+              <div aria-hidden="true" class="card">
+                <span class="bone bone--short"></span>
+                <span class="bone"></span>
+                <span class="bone bone--short"></span>
+              </div>
+            </li>
+          }
+        </ol>
+      }
+      @case ('error') {
+        <div class="news__state card" role="status">
+          <i aria-hidden="true" class="pi pi-wifi"></i>
+          <p>{{ isRss() ? t('home.feedError') : t('home.newsError') }}</p>
+          <button (click)="refresh()" class="news__retry" type="button">
+            <i aria-hidden="true" class="pi pi-refresh"></i>
+            {{ t('home.retry') }}
+          </button>
         </div>
-      </div>
-    </p-scroll-panel>
-  </p-panel>
+      }
+      @case ('empty') {
+        <div class="news__state card" role="status">
+          <i aria-hidden="true" class="pi pi-inbox"></i>
+          <p>{{ needsUrl() ? t('home.feedMissing') : t('home.newsEmpty') }}</p>
+        </div>
+      }
+    }
+  </section>
 </ng-container>

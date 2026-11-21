@@ -1,8 +1,42 @@
 .router-container {
   position: relative;
-  min-height: 100vh;
 }
 
 ::ng-deep .p-menubar-start {
   margin-right: 0 !important;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 2000;
+  padding: 0.625rem 1rem;
+  border-radius: var(--sp-radius-md);
+  background: var(--sp-accent);
+  color: var(--sp-accent-contrast);
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
+.shell-logo,
+.shell-avatar {
+  display: grid;
+  place-items: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--sp-radius-md);
+  background: transparent;
+  cursor: pointer;
+}
+
+.shell-avatar {
+  border-radius: 999px;
 }

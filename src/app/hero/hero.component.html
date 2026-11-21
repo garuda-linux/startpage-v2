@@ -1,0 +1,62 @@
+<ng-container *transloco="let t">
+  @let settings = configService.settings();
+  @let largeClock = settings.showClock && settings.clockStyle === 'large';
+  <section class="hero">
+    @if (largeLogo(); as logo) {
+      <img
+        [src]="logo"
+        alt=""
+        class="hero__logo-large sp-enter"
+        fetchpriority="high"
+        height="112"
+        style="--i: 0"
+        width="112"
+      />
+    }
+
+    @if (largeClock) {
+      <time [attr.datetime]="clock().iso" class="hero__clock sp-enter" style="--i: 1">
+        <span class="hero__digits">
+          @for (part of [clock().hours]; track part) {
+            <span animate.enter="hero__roll--in" class="hero__roll">{{ part }}</span>
+          }
+        </span>
+        <span aria-hidden="true" class="hero__colon">:</span>
+        <span class="hero__digits">
+          @for (part of [clock().minutes]; track part) {
+            <span animate.enter="hero__roll--in" class="hero__roll">{{ part }}</span>
+          }
+        </span>
+        @if (clock().period) {
+          <span class="hero__period">{{ clock().period }}</span>
+        }
+      </time>
+    }
+
+    @if (settings.showGreeting) {
+      <p class="hero__date sp-enter" style="--i: 1">
+        @if (settings.showClock && !largeClock) {
+          <time [attr.datetime]="clock().iso" class="hero__time">
+            {{ clock().hours }}:{{ clock().minutes }}
+            @if (clock().period) {
+              <span class="hero__period">{{ clock().period }}</span>
+            }
+          </time>
+          <span aria-hidden="true" class="hero__sep">·</span>
+        }
+        {{ dateLabel() }}
+      </p>
+      <h1 class="hero__greeting sp-enter" style="--i: 2">
+        @if (settings.showLogo && settings.logoStyle === 'inline' && logoSource(); as logo) {
+          <img [src]="logo" alt="" class="hero__logo" height="48" width="48" />
+        }
+        {{ settings.welcomeText || t(greetingKey()) }},
+        <span class="hero__name">{{ settings.username || t('home.friend') }}</span>
+      </h1>
+    } @else if (settings.showClock && !largeClock) {
+      <p class="hero__date sp-enter" style="--i: 1">
+        <time [attr.datetime]="clock().iso" class="hero__time">{{ clock().hours }}:{{ clock().minutes }}</time>
+      </p>
+    }
+  </section>
+</ng-container>

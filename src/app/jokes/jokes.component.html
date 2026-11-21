@@ -1,8 +1,16 @@
-<!-- <div class="mx-auto mt-10 block w-5/6 rounded-lg p-6 text-primary-emphasis sm:w-3/4 md:mt-12">
-  <blockquote (click)="setJoke()" (keydown)="setJoke()" class="cursor-pointer text-center text-xl font-semibold italic">
-    {{ joke() }}
-  </blockquote>
-</div> -->
-<div class="jokes cursor-pointer" (click)="setJoke()" (keydown.enter)="setJoke()" tabindex="0">
-  <garuda-jokes [jokes]="jokesConfig()"></garuda-jokes>
-</div>
+<ng-container *transloco="let t">
+  <p class="joke">
+    @for (text of [joke()]; track text) {
+      <span class="joke__text" animate.enter="joke__text--in">{{ text }}</span>
+    }
+    <button
+      (click)="setJoke()"
+      [attr.aria-label]="t('home.anotherJoke')"
+      [title]="t('home.anotherJoke')"
+      class="joke__again"
+      type="button"
+    >
+      <i class="pi pi-refresh" [class.joke__spin]="spin()" aria-hidden="true"></i>
+    </button>
+  </p>
+</ng-container>

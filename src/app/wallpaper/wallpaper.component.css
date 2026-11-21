@@ -1,0 +1,50 @@
+:host {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.layer {
+  position: absolute;
+  /* Fixed bleed past the viewport so the blur never shows a soft edge. Not animated, since it would cost layout */
+  inset: -8rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: blur(var(--blur, 0px));
+  transition: filter var(--sp-dur-slow) var(--sp-ease-out);
+}
+
+.layer--contain {
+  background-size: contain;
+}
+
+/* Scrim toward the theme base so text drawn straight on the wallpaper keeps its contrast.
+   Light themes need a much stronger one: dark text on a dark photo is unreadable otherwise. */
+.layer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: color-mix(in oklab, var(--sp-surface-solid) 62%, transparent);
+}
+
+:host-context(.p-dark) .layer::after {
+  background: color-mix(in oklab, var(--sp-surface-solid) 30%, transparent);
+}
+
+.layer--in {
+  animation: wp-in 600ms var(--sp-ease-out) both;
+}
+
+.layer--out {
+  animation: wp-in 400ms var(--sp-ease-in) reverse both;
+}
+
+@keyframes wp-in {
+  from {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+}

@@ -3,6 +3,12 @@ import type { AvailableJokeSources } from '../jokes/jokes';
 import type { AppTheme } from '../theme';
 import type { AutocompleteProvider } from '../../../config';
 
+export type MotionLevel = 'full' | 'subtle' | 'off';
+export type TileDensity = 'comfortable' | 'compact';
+export type ClockStyle = 'compact' | 'large';
+export type NewsSource = 'garuda' | 'rss';
+export type LogoStyle = 'large' | 'inline';
+
 export interface AppSettings {
   activeJoke: AvailableJokeSources;
   activeSearchEngine: string;
@@ -12,7 +18,9 @@ export interface AppSettings {
   autocompleteProvider: AutocompleteProvider;
   autoGridCols: boolean;
   blurBackground: boolean;
-  blurStrength: 1 | 2 | 3 | 4;
+  blurStrength: 1 | 2 | 3 | 4 | 5 | 6;
+  clock24h: boolean;
+  clockStyle: ClockStyle;
   corsProxy: string;
   customLinks: ServiceLinks;
   customMenuLinks: MenuBarItems;
@@ -25,12 +33,24 @@ export interface AppSettings {
   language: string;
   languageChanged: boolean;
   logo: string;
+  logoStyle: LogoStyle;
   logoUrl: string;
+  motion: MotionLevel;
+  newsSource: NewsSource;
+  openInNewTab: boolean;
+  panelBlur: number;
+  rssTitle: string;
+  rssUrl: string;
   searchEngineName: string;
   searchEngineUrl: string;
-
   searchEngines: SearchEngineEntry[];
+  settingsVersion: number;
+  showClock: boolean;
+  showGreeting: boolean;
+  showLinkLabels: boolean;
+  showLogo: boolean;
   showNews: boolean;
+  tileDensity: TileDensity;
   translationVersion: number;
   username: string;
   wallpaper: string;

@@ -1,0 +1,204 @@
+<ng-container *transloco="let t">
+  <ng-template #iconPreview let-item>
+    <span class="le__icon" aria-hidden="true">
+      @if (iconMode() === 'class') {
+        <i [class]="item.icon || 'pi pi-link'"></i>
+      } @else if (item.icon && !brokenIcons().has(item.id || item.icon)) {
+        <img (error)="markBroken(item.id || item.icon)" [src]="item.icon" alt="" height="22" width="22" />
+      } @else {
+        <span class="le__monogram">{{ (item.title || '?').charAt(0) }}</span>
+      }
+    </span>
+  </ng-template>
+
+  <ng-template #form>
+    @let d = draft()!;
+    <form (ngSubmit)="save()" class="le__form" animate.enter="le__form--in" novalidate>
+      <div class="le__preview">
+        <ng-container *ngTemplateOutlet="iconPreview; context: { $implicit: d }" />
+        <span class="le__text">
+          <strong>{{ d.title || t('settings.linkTitle') }}</strong>
+          <span>{{ hostnameOf(d.url) || 'https://…' }}</span>
+        </span>
+      </div>
+
+      <div class="le__fields">
+        <div class="le__field">
+          <label for="le-title">{{ t('settings.linkTitle') }}</label>
+          <input
+            (ngModelChange)="patch({ title: $event })"
+            [attr.aria-describedby]="submitted() && errors().title ? 'le-title-error' : null"
+            [attr.aria-invalid]="submitted() && errors().title"
+            [class.ng-dirty]="submitted() && errors().title"
+            [class.ng-invalid]="submitted() && errors().title"
+            [ngModel]="d.title"
+            autocomplete="off"
+            aria-required="true"
+            id="le-title"
+            name="title"
+            pInputText
+          />
+          @if (submitted() && errors().title) {
+            <small class="le__error" id="le-title-error">{{ t('settings.isRequired') }}</small>
+          }
+        </div>
+        <div class="le__field">
+          <label for="le-url">{{ t('settings.url') }}</label>
+          <input
+            (ngModelChange)="patch({ url: $event })"
+            [attr.aria-describedby]="submitted() && errors().url ? 'le-url-error' : null"
+            [attr.aria-invalid]="submitted() && errors().url"
+            [class.ng-dirty]="submitted() && errors().url"
+            [class.ng-invalid]="submitted() && errors().url"
+            [ngModel]="d.url"
+            aria-required="true"
+            id="le-url"
+            inputmode="url"
+            name="url"
+            pInputText
+            placeholder="https://"
+          />
+          @if (submitted() && errors().url) {
+            <small class="le__error" id="le-url-error">{{ t('settings.invalidUrl') }}</small>
+          }
+        </div>
+
+        @if (iconMode() === 'image') {
+          <div class="le__field le__field--wide">
+            <label for="le-icon">{{ t('settings.iconLink') }}</label>
+            <div class="le__inline">
+              <input
+                (ngModelChange)="patch({ icon: $event })"
+                [ngModel]="d.icon"
+                id="le-icon"
+                inputmode="url"
+                name="icon"
+                pInputText
+                placeholder="https://…/icon.svg"
+              />
+              <button (click)="useSiteIcon()" [disabled]="errors().url" class="le__ghost" type="button">
+                {{ t('settings.useSiteIcon') }}
+              </button>
+            </div>
+          </div>
+        } @else {
+          <fieldset class="le__field le__field--wide le__picker">
+            <legend>{{ t('settings.icon') }}</legend>
+            <div class="le__icons" role="radiogroup">
+              @for (icon of iconChoices; track icon) {
+                <button
+                  (click)="patch({ icon })"
+                  [attr.aria-checked]="d.icon === icon"
+                  [attr.aria-label]="icon.replace('pi pi-', '')"
+                  class="le__icon-choice"
+                  role="radio"
+                  type="button"
+                >
+                  <i [class]="icon" aria-hidden="true"></i>
+                </button>
+              }
+            </div>
+          </fieldset>
+        }
+      </div>
+
+      <div class="le__form-actions">
+        <button (click)="cancel()" class="le__ghost" type="button">{{ t('settings.cancel') }}</button>
+        <button class="le__primary" type="submit">
+          {{ d.isNew ? addLabel() : t('settings.saveChanges') }}
+        </button>
+      </div>
+    </form>
+  </ng-template>
+
+  <div class="le">
+    <div class="le__toolbar">
+      <span class="le__count">{{ t('settings.itemCount', { count: items().length }) }}</span>
+      @if (!draft()?.isNew) {
+        <button (click)="startAdd()" class="le__primary" type="button">
+          <i class="pi pi-plus" aria-hidden="true"></i>
+          {{ addLabel() }}
+        </button>
+      }
+    </div>
+
+    @if (draft()?.isNew) {
+      <ng-container *ngTemplateOutlet="form" />
+    }
+
+    @if (removed(); as r) {
+      <div class="le__undo" role="status" animate.enter="le__form--in">
+        <span>{{ t('settings.removedItem', { title: r.item.title }) }}</span>
+        <button (click)="undo()" class="le__ghost" type="button">{{ t('settings.undo') }}</button>
+      </div>
+    }
+
+    <ol (cdkDropListDropped)="drop($event)" cdkDropList class="le__list" cdkDropListLockAxis="y">
+      @for (item of items(); track item.id; let i = $index, first = $first, last = $last) {
+        @if (draft()?.id === item.id && !draft()?.isNew) {
+          <li class="le__editing"><ng-container *ngTemplateOutlet="form" /></li>
+        } @else {
+          <li cdkDrag class="le__row">
+            <span cdkDragHandle class="le__handle" aria-hidden="true">
+              <i class="pi pi-bars"></i>
+            </span>
+            <ng-container *ngTemplateOutlet="iconPreview; context: { $implicit: item }" />
+            <button
+              (click)="startEdit(item)"
+              [attr.aria-label]="t('settings.editItem', { title: item.title })"
+              class="le__text le__text--button"
+              type="button"
+            >
+              <strong>{{ item.title }}</strong>
+              <span>{{ item.url.startsWith('/') ? item.url : hostnameOf(item.url) }}</span>
+            </button>
+            <span class="le__actions">
+              <button
+                (click)="move(i, -1)"
+                [attr.aria-label]="t('settings.moveUp', { title: item.title })"
+                [disabled]="first"
+                class="le__icon-btn le__sr-move"
+                type="button"
+              >
+                <i class="pi pi-arrow-up" aria-hidden="true"></i>
+              </button>
+              <button
+                (click)="move(i, 1)"
+                [attr.aria-label]="t('settings.moveDown', { title: item.title })"
+                [disabled]="last"
+                class="le__icon-btn le__sr-move"
+                type="button"
+              >
+                <i class="pi pi-arrow-down" aria-hidden="true"></i>
+              </button>
+              <button
+                (click)="startEdit(item)"
+                [attr.aria-label]="t('settings.editItem', { title: item.title })"
+                class="le__icon-btn"
+                type="button"
+              >
+                <i class="pi pi-pencil" aria-hidden="true"></i>
+              </button>
+              <button
+                (click)="remove(item, i)"
+                [attr.aria-label]="t('settings.deleteItem', { title: item.title })"
+                class="le__icon-btn le__icon-btn--danger"
+                type="button"
+              >
+                <i class="pi pi-trash" aria-hidden="true"></i>
+              </button>
+            </span>
+            <div *cdkDragPlaceholder class="le__placeholder"></div>
+          </li>
+        }
+      } @empty {
+        @if (!draft()) {
+          <li class="le__empty">
+            <i class="pi pi-inbox" aria-hidden="true"></i>
+            {{ t('settings.listEmpty') }}
+          </li>
+        }
+      }
+    </ol>
+  </div>
+</ng-container>

@@ -1,44 +1,115 @@
 <ng-container *transloco="let t">
-  <div>
-    <img [ngSrc]="logoSource()" alt="Garuda Logo" class="mx-auto mb-10 mt-20" height="150" priority width="150" />
-  </div>
-  <div>
-    <div class="mx-auto w-3/4 md:w-1/2">
-      @if (configService.settings().autocompleteProvider === 'none') {
-        <input
-          (keydown.enter)="search()"
-          [(ngModel)]="searchTerm"
-          [placeholder]="t('search.placeholder') + ' ' + searchEngine().label"
-          [style]="{ height: '3rem' }"
-          pInputText
-          autofocus
-          fluid
-          variant="outlined"
-        />
-      } @else {
-        <p-auto-complete
-          (completeMethod)="autocomplete($event)"
-          (keydown.enter)="search()"
-          [(ngModel)]="searchTerm"
-          [placeholder]="t('search.placeholder') + ' ' + searchEngine().label"
-          [style]="{ height: '3rem' }"
-          [suggestions]="suggestions()"
-          autoHighlight
-          autofocus
-          fluid
-        />
+  <div class="cmd" [class.cmd--open]="open()" [class.cmd--focused]="focused()">
+    <div class="cmd__bar">
+      <button
+        (click)="toggleEngineMenu()"
+        [attr.aria-expanded]="engineMenu()"
+        [attr.aria-label]="t('search.changeEngine') + ': ' + engine().label"
+        [title]="t('search.changeEngine')"
+        class="cmd__engine"
+        type="button"
+      >
+        <i class="pi pi-search" aria-hidden="true"></i>
+        <span class="cmd__engine-label">{{ engine().label }}</span>
+        <i class="pi pi-chevron-down cmd__chevron" aria-hidden="true"></i>
+      </button>
+
+      <input
+        #input
+        (focus)="focused.set(true)"
+        (input)="onInput(input.value)"
+        (keydown)="onKeydown($event)"
+        [attr.aria-activedescendant]="open() ? optionId(activeIndex()) : null"
+        [attr.aria-expanded]="open()"
+        [attr.aria-label]="t('search.placeholder') + ' ' + engine().label"
+        [placeholder]="t('search.placeholder') + ' ' + engine().label"
+        aria-autocomplete="list"
+        aria-controls="search-options"
+        autocomplete="off"
+        class="cmd__input"
+        enterkeyhint="search"
+        role="combobox"
+        spellcheck="false"
+        type="search"
+      />
+
+      @if (!focused()) {
+        <kbd class="sp-kbd cmd__hint" aria-hidden="true">/</kbd>
       }
     </div>
-    <div class="mx-auto mt-2.5 w-1/3 md:w-1/6">
-      <p-button
-        (click)="search()"
-        (keydown.enter)="search()"
-        [label]="t('search.search')"
-        fluid
-        icon="pi pi-search"
-        severity="secondary"
-        styleClass="hover:scale-105 animation duration-1000 z-0"
-      />
-    </div>
+
+    @if (open()) {
+      <div class="cmd__panel" animate.enter="cmd__panel--in" animate.leave="cmd__panel--out">
+        <ul
+          [attr.aria-label]="engineMenu() ? t('search.engines') : t('search.search')"
+          class="cmd__list"
+          id="search-options"
+          role="listbox"
+        >
+          @for (option of options(); track $index; let i = $index) {
+            @if (engineMenu() && i === 0) {
+              <li class="cmd__group" role="presentation">{{ t('search.engines') }}</li>
+            }
+            @if (i === firstLinkIndex()) {
+              <li class="cmd__group" role="presentation">{{ t('search.links') }}</li>
+            }
+            @if (i === firstSuggestionIndex()) {
+              <li class="cmd__group" role="presentation">{{ t('search.suggestions') }}</li>
+            }
+            <!-- Combobox pattern: focus stays in the input, options are reached via aria-activedescendant -->
+            <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
+            <li
+              (click)="choose(option, $event.ctrlKey || $event.metaKey)"
+              (mousedown)="$event.preventDefault()"
+              (mousemove)="activeIndex.set(i)"
+              [attr.aria-selected]="i === activeIndex()"
+              [class.cmd__option--active]="i === activeIndex()"
+              [id]="optionId(i)"
+              class="cmd__option"
+              role="option"
+            >
+              @switch (option.kind) {
+                @case ('web') {
+                  <span class="cmd__icon"><i class="pi pi-search" aria-hidden="true"></i></span>
+                  <span class="cmd__text">
+                    <span class="cmd__muted">{{ t('search.searchFor', { engine: engine().label }) }}</span>
+                    <strong>{{ option.query }}</strong>
+                  </span>
+                }
+                @case ('link') {
+                  <span class="cmd__icon">
+                    <img [src]="option.link.icon" alt="" height="18" width="18" />
+                  </span>
+                  <span class="cmd__text">
+                    <strong>{{ option.link.title }}</strong>
+                    <span class="cmd__muted">{{ hostnameOf(option.link.link) }}</span>
+                  </span>
+                }
+                @case ('suggestion') {
+                  <span class="cmd__icon"><i class="pi pi-arrow-up-right" aria-hidden="true"></i></span>
+                  <span class="cmd__text">{{ option.text }}</span>
+                }
+                @case ('engine') {
+                  <span class="cmd__icon">
+                    @if (option.engine.value === engine().value) {
+                      <i class="pi pi-check cmd__check" aria-hidden="true"></i>
+                    }
+                  </span>
+                  <span class="cmd__text">{{ option.engine.label }}</span>
+                }
+              }
+              @if (i === activeIndex()) {
+                <kbd class="sp-kbd cmd__enter" aria-hidden="true">↵</kbd>
+              }
+            </li>
+          }
+        </ul>
+        <div class="cmd__footer" aria-hidden="true">
+          <span><kbd class="sp-kbd">↑</kbd><kbd class="sp-kbd">↓</kbd> {{ t('search.toNavigate') }}</span>
+          <span><kbd class="sp-kbd">↵</kbd> {{ t('search.toOpen') }}</span>
+          <span><kbd class="sp-kbd">esc</kbd> {{ t('search.toClose') }}</span>
+        </div>
+      </div>
+    }
   </div>
 </ng-container>

@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <meta content="Garuda's Startpage" property="og:title" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="#1e1e2e" name="theme-color" />
+    <meta content="dark light" name="color-scheme" />
 
     <title>Garuda's Startpage</title>
     <base href="/" />
@@ -13,8 +15,29 @@
     <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
     <link href="/site.webmanifest" rel="manifest" />
 
-    <link href="https://rsms.me/" rel="preconnect" />
-    <link href="https://rsms.me/inter/inter.css" rel="stylesheet" />
+    <link crossorigin href="https://rsms.me/" rel="preconnect" />
+    <!-- Font stylesheet must not block first paint. system-ui renders until Inter arrives -->
+    <link href="https://rsms.me/inter/inter.css" media="print" onload="this.media = 'all'" rel="stylesheet" />
+    <noscript><link href="https://rsms.me/inter/inter.css" rel="stylesheet" /></noscript>
+
+    <script>
+      // Before Angular boots: apply the saved colour scheme and start fetching the wallpaper,
+      // so neither waits for the app bundle. Mirrors optimizedWallpaper() in functions.ts.
+      try {
+        var s = JSON.parse(localStorage.getItem('settings') || '{}');
+        if (s.darkMode === false) document.documentElement.classList.remove('p-dark');
+        var w = s.wallpaper === 'custom' ? s.wallpaperUrl : s.wallpaper;
+        if (w && w !== 'none') {
+          var m = /^assets\/wallpapers\/([^/]+)\.(png|jpe?g)$/.exec(w);
+          var l = document.createElement('link');
+          l.rel = 'preload';
+          l.as = 'image';
+          l.href = m ? 'assets/wallpapers/optimized/' + m[1] + '.webp' : w;
+          l.setAttribute('fetchpriority', 'high');
+          document.head.appendChild(l);
+        }
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <app-root></app-root>

@@ -1,357 +1,473 @@
 <ng-container *transloco="let t">
-  <div class="mx-auto max-w-7xl px-2.5 md:px-10">
-    <app-title [title]="t('settings.title')"></app-title>
-    <p-panel [header]="t('settings.general')">
-      <div class="mt-5 grid grid-cols-1 gap-5 text-color md:grid-cols-2">
-        <div class="ml-10">
-          <p-checkbox
-            (ngModelChange)="updateConfig('defaultLinks', $event)"
-            [(ngModel)]="defaultLinks"
-            [binary]="true"
-            id="default-links"
-          />
-          <label class="ml-2" for="default-links">{{ t('settings.defaultLinksLabel') }}</label>
-        </div>
-        <div class="ml-10">
-          <p-checkbox
-            (ngModelChange)="updateConfig('showNews', $event)"
-            [(ngModel)]="showNews"
-            [binary]="true"
-            id="show-news"
-          />
-          <label class="ml-2" for="blur-bg">{{ t('settings.showNews') }}</label>
-        </div>
-        <div class="ml-10">
-          <p-checkbox
-            (ngModelChange)="updateConfig('jokesEnabled', $event)"
-            [(ngModel)]="jokesEnabled"
-            [binary]="true"
-            id="jokes-enabled"
-          />
-          <label class="ml-2" for="jokes-enabled">{{ t('settings.jokesEnabledLabel') }}</label>
-        </div>
-        <div class="ml-10">
-          <p-checkbox
-            (ngModelChange)="updateConfig('fitWallpaper', $event)"
-            [(ngModel)]="fitWallpaper"
-            [binary]="true"
-            id="fit-wp"
-          />
-          <label class="ml-2" for="fit-wp">{{ t('settings.fitWallpaper') }}</label>
-        </div>
-        <div class="ml-10">
-          <p-checkbox
-            (ngModelChange)="updateConfig('blurBackground', $event)"
-            [(ngModel)]="blurBackground"
-            [binary]="true"
-            id="blur-bg"
-          />
-          <label class="ml-2" for="blur-bg">{{ t('settings.blurBackground') }}</label>
-        </div>
-        <div class="ml-10">
-          <p-checkbox
-            (ngModelChange)="updateConfig('darkMode', $event)"
-            [(ngModel)]="darkMode"
-            [binary]="true"
-            id="dark-mode"
-          />
-          <label class="ml-2" for="dark-mode">{{ t('settings.darkMode') }}</label>
-        </div>
-        <div class="ml-10">
-          <p-checkbox
-            (ngModelChange)="updateConfig('avatarEnabled', $event)"
-            [(ngModel)]="avatarEnabled"
-            [binary]="true"
-            id="avatar-enabled"
-          />
-          <label class="ml-2" for="avatar-enabled">{{ t('settings.avatarEnabled') }}</label>
-        </div>
-        <div class="ml-10">
-          <p-checkbox
-            (ngModelChange)="updateConfig('autoGridCols', $event)"
-            [(ngModel)]="autoGridCols"
-            [binary]="true"
-            id="auto-grid-cols"
-          />
-          <label class="ml-2" for="auto-grid-cols">{{ t('settings.autoGridCols') }}</label>
-        </div>
-      </div>
+  @let s = configService.settings();
+  <main class="settings" id="main" tabindex="-1">
+    <header class="settings__header sp-enter">
+      <a class="settings__back" routerLink="/">
+        <i class="pi pi-arrow-left" aria-hidden="true"></i>
+        {{ t('menu.home') }}
+      </a>
+      <h1 class="settings__title">{{ t('settings.title') }}</h1>
+    </header>
 
-      <div class="mx-auto mt-10 w-3/4 md:ml-10 md:flex">
-        <p-button
-          (click)="downloadSettings()"
-          [label]="t('settings.saveSettings')"
-          icon="pi pi-download"
-          styleClass="w-full"
-        >
-        </p-button>
-        <p-fileupload
-          (onSelect)="restoreSettings($event)"
-          [chooseLabel]="t('settings.restoreSettings')"
-          accept=".json"
-          auto
-          chooseIcon="pi pi-upload"
-          maxFileSize="1000000"
-          mode="basic"
-          styleClass="block mt-2.5 md:mt-0 md:ml-2.5 w-full"
-        >
-        </p-fileupload>
-        <p-button
-          (click)="resetSettings()"
-          [label]="t('settings.resetSettings')"
-          icon="pi pi-refresh"
-          styleClass="mt-2.5 md:mt-0 md:ml-5 w-full"
-        >
-        </p-button>
-      </div>
-    </p-panel>
-
-    <p-panel [header]="t('settings.customize')" styleClass="mt-2.5">
-      <div class="mt-5 grid grid-cols-1 gap-5 text-color md:grid-cols-2">
-        <div class="flex flex-col gap-2">
-          <label for="theme">{{ t('settings.themeLabel') }}</label>
-          <p-select
-            (ngModelChange)="updateConfig('activeTheme', $event)"
-            [(ngModel)]="activeTheme"
-            [options]="availableThemes"
-            fluid
-            id="theme"
-          />
-        </div>
-
-        <div class="flex flex-col gap-2">
-          <label for="search-engine">{{ t('settings.language') }}</label>
-          <p-select
-            (ngModelChange)="updateConfig('language', $event)"
-            [(ngModel)]="language"
-            [options]="availableLanguages"
-            fluid
-            id="language"
-            optionLabel="prettyName"
-            optionValue="name"
-          />
-        </div>
-
-        <div class="flex flex-col gap-2">
-          <label for="search-engine">{{ t('settings.searchEngineLabel') }}</label>
-          <p-select
-            (ngModelChange)="updateConfig('activeSearchEngine', $event)"
-            [(ngModel)]="activeSearchEngine"
-            [options]="searchEngineMappings"
-            fluid
-            group
-            id="search-engine"
+    <div class="settings__layout">
+      <nav [attr.aria-label]="t('settings.sectionsNav')" class="settings__nav sp-enter" style="--i: 1">
+        @for (section of sections; track section.id) {
+          <a
+            (click)="scrollTo(section.id, $event)"
+            [attr.aria-current]="activeSection() === section.id ? 'location' : null"
+            [class.is-active]="activeSection() === section.id"
+            [href]="'#' + section.id"
           >
-          </p-select>
-        </div>
-
-        <div class="flex flex-col gap-2">
-          <label for="autocomplete-provider">{{ t('settings.autocompleteLabel') }}</label>
-          <p-select
-            (ngModelChange)="updateConfig('autocompleteProvider', $event)"
-            [(ngModel)]="autocompleteProvider"
-            [ngClass]="{
-              'ng-invalid ng-dirty':
-                configService.settings().autocompleteProvider !== 'none' &&
-                !configService.settings().corsProxy.includes('https://'),
-            }"
-            [options]="autocompleteProviders"
-            fluid
-            group
-            id="autocomplete-provider"
-          />
-        </div>
-
-        @if (configService.settings().activeSearchEngine === 'custom') {
-          <div class="flex flex-col gap-2">
-            <label for="custom-search">{{ t('settings.searchEngineUrl') }}</label>
-            <input
-              pInputText
-              id="custom-search"
-              (ngModelChange)="updateConfig('searchEngineUrl', $event)"
-              [placeholder]="t('settings.searchEngineUrlPlaceholder')"
-              [(ngModel)]="searchEngineUrl"
-            />
-          </div>
-          <div class="flex flex-col gap-2">
-            <label for="custom-search-name">{{ t('settings.searchEngineName') }}</label>
-            <input
-              pInputText
-              id="custom-search-name"
-              (ngModelChange)="updateConfig('searchEngineName', $event)"
-              [placeholder]="t('settings.searchEngineNamePlaceholder')"
-              [(ngModel)]="searchEngineName"
-            />
-          </div>
+            <i [class]="section.icon" aria-hidden="true"></i>
+            {{ t(section.label) }}
+          </a>
         }
+      </nav>
 
-        @if (configService.settings().jokesEnabled) {
-          <div class="flex flex-col gap-2">
-            <label for="active-joke">{{ t('settings.activeJoke') }}</label>
-            <p-select
-              (ngModelChange)="updateConfig('activeJoke', $event)"
-              [(ngModel)]="activeJoke"
-              [options]="jokeSources"
-              fluid
-              id="active-joke"
-              optionLabel="prettyName"
-              optionValue="name"
+      <div class="settings__content">
+        <section class="card" id="appearance" tabindex="-1">
+          <h2 class="card__title">{{ t('settings.appearanceSection') }}</h2>
+          <div class="grid">
+            <div class="field">
+              <label for="theme">{{ t('settings.themeLabel') }}</label>
+              <p-select
+                (ngModelChange)="updateConfig('activeTheme', $event)"
+                [ngModel]="s.activeTheme"
+                [options]="availableThemes"
+                fluid
+                inputId="theme"
+              />
+            </div>
+            <div class="field">
+              <label for="wallpaper">{{ t('settings.wallpaperLabel') }}</label>
+              <p-select
+                (ngModelChange)="updateConfig('wallpaper', $event)"
+                [ngModel]="s.wallpaper"
+                [options]="wallpapers"
+                fluid
+                group
+                inputId="wallpaper"
+              />
+            </div>
+            @if (s.wallpaper === 'custom') {
+              <div class="field field--wide">
+                <label for="custom-wallpaper">{{ t('settings.wallpaperCustomLabel') }}</label>
+                <input
+                  (ngModelChange)="updateConfig('wallpaperUrl', $event)"
+                  [ngModel]="s.wallpaperUrl"
+                  [placeholder]="t('settings.wallpaperCustomPlaceholder')"
+                  id="custom-wallpaper"
+                  pInputText
+                  type="url"
+                />
+              </div>
+            }
+            <div class="field">
+              <label for="logo">{{ t('settings.logoLabel') }}</label>
+              <p-select
+                (ngModelChange)="updateConfig('logo', $event)"
+                [ngModel]="s.logo"
+                [options]="logos"
+                fluid
+                group
+                inputId="logo"
+              />
+            </div>
+            @if (s.logo === 'custom') {
+              <div class="field">
+                <label for="custom-logo">{{ t('settings.customLogo') }}</label>
+                <input
+                  (ngModelChange)="updateConfig('logoUrl', $event)"
+                  [ngModel]="s.logoUrl"
+                  [placeholder]="t('settings.logoUrlPlaceholder')"
+                  id="custom-logo"
+                  pInputText
+                  type="url"
+                />
+              </div>
+            }
+          </div>
+          <div class="rows">
+            <div class="row">
+              <span id="logo-style">{{ t('customize.logoStyle') }}</span>
+              <app-segmented
+                (valueChange)="updateConfig('logoStyle', $event)"
+                [options]="logoStyleOptions()"
+                [value]="s.logoStyle"
+                labelledBy="logo-style"
+              />
+            </div>
+            @if (s.logo === 'custom') {
+              <div class="row row--nested">
+                <span>{{ t('customize.logoUpload') }}</span>
+                <span class="row__actions">
+                  @if (uploadError()) {
+                    <small class="field__error" role="alert">{{ t('customize.logoUploadError') }}</small>
+                  }
+                  <p-button
+                    (onClick)="logoFile.click()"
+                    [label]="t('customize.logoUpload')"
+                    icon="pi pi-upload"
+                    outlined
+                    severity="secondary"
+                    size="small"
+                  />
+                  <input #logoFile (change)="uploadLogo(logoFile)" accept="image/*" hidden type="file" />
+                </span>
+              </div>
+            }
+            <div class="row">
+              <label for="st-darkMode">{{ t('settings.darkMode') }}</label>
+              <p-toggleswitch
+                (ngModelChange)="updateConfig('darkMode', $event)"
+                [ngModel]="s.darkMode"
+                inputId="st-darkMode"
+              />
+            </div>
+            <div class="row">
+              <label for="st-fitWallpaper">{{ t('settings.fitWallpaper') }}</label>
+              <p-toggleswitch
+                (ngModelChange)="updateConfig('fitWallpaper', $event)"
+                [ngModel]="s.fitWallpaper"
+                inputId="st-fitWallpaper"
+              />
+            </div>
+            <div class="row">
+              <label for="st-blurBackground">{{ t('settings.blurBackground') }}</label>
+              <p-toggleswitch
+                (ngModelChange)="updateConfig('blurBackground', $event)"
+                [ngModel]="s.blurBackground"
+                inputId="st-blurBackground"
+              />
+            </div>
+            @if (s.blurBackground) {
+              <div class="row row--nested">
+                <span id="blur-strength"
+                  >{{ t('settings.blurStrength') }} · {{ wallpaperBlurPx(s.blurStrength) }}px</span
+                >
+                <p-slider
+                  (ngModelChange)="updateConfig('blurStrength', $event)"
+                  [max]="6"
+                  [min]="1"
+                  [ngModel]="s.blurStrength"
+                  ariaLabelledBy="blur-strength"
+                  styleClass="row__slider"
+                />
+              </div>
+            }
+            <div class="row">
+              <span id="panel-blur">{{ t('customize.panelBlur') }} · {{ s.panelBlur }}px</span>
+              <p-slider
+                (ngModelChange)="updateConfig('panelBlur', $event)"
+                [max]="48"
+                [min]="0"
+                [ngModel]="s.panelBlur"
+                [step]="2"
+                ariaLabelledBy="panel-blur"
+                styleClass="row__slider"
+              />
+            </div>
+            <div class="row">
+              <span id="motion">{{ t('customize.motion') }}</span>
+              <app-segmented
+                (valueChange)="updateConfig('motion', $event)"
+                [options]="motionOptions()"
+                [value]="s.motion"
+                labelledBy="motion"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section class="card" id="homepage" tabindex="-1">
+          <h2 class="card__title">{{ t('settings.homepageSection') }}</h2>
+          <div class="rows">
+            @for (row of homepageToggles; track row.key) {
+              @if (!row.dependsOn || s[row.dependsOn]) {
+                <div class="row" [class.row--nested]="row.dependsOn">
+                  <label [for]="'st-' + row.key">{{ t(row.label) }}</label>
+                  <p-toggleswitch
+                    (ngModelChange)="updateConfig(row.key, $event)"
+                    [inputId]="'st-' + row.key"
+                    [ngModel]="s[row.key]"
+                  />
+                </div>
+              }
+            }
+            @if (s.jokesEnabled) {
+              <div class="row row--nested">
+                <label for="active-joke">{{ t('settings.activeJoke') }}</label>
+                <p-select
+                  (ngModelChange)="updateConfig('activeJoke', $event)"
+                  [ngModel]="s.activeJoke"
+                  [options]="jokeSources"
+                  inputId="active-joke"
+                  optionLabel="prettyName"
+                  optionValue="name"
+                />
+              </div>
+            }
+            @if (s.showClock) {
+              <div class="row row--nested">
+                <span id="clock-style">{{ t('customize.clockStyle') }}</span>
+                <app-segmented
+                  (valueChange)="updateConfig('clockStyle', $event)"
+                  [options]="clockOptions()"
+                  [value]="s.clockStyle"
+                  labelledBy="clock-style"
+                />
+              </div>
+            }
+            <div class="row">
+              <span id="news-source">{{ t('customize.feed') }}</span>
+              <app-segmented
+                (valueChange)="updateConfig('newsSource', $event)"
+                [options]="sourceOptions()"
+                [value]="s.newsSource"
+                labelledBy="news-source"
+              />
+            </div>
+            @if (s.newsSource === 'rss') {
+              <div class="row row--nested">
+                <label for="rss-title">{{ t('customize.rssTitle') }}</label>
+                <input
+                  (ngModelChange)="updateConfig('rssTitle', $event)"
+                  [ngModel]="s.rssTitle"
+                  [placeholder]="t('customize.rssTitlePlaceholder')"
+                  id="rss-title"
+                  pInputText
+                />
+              </div>
+              <div class="row row--nested">
+                <label for="rss-url">{{ t('customize.rssUrl') }}</label>
+                <input
+                  #rssUrl
+                  (change)="updateConfig('rssUrl', rssUrl.value.trim())"
+                  [value]="s.rssUrl"
+                  [title]="t('customize.rssUrlHint')"
+                  id="rss-url"
+                  inputmode="url"
+                  pInputText
+                  placeholder="https://example.org/feed.xml"
+                  type="url"
+                />
+              </div>
+            }
+            <div class="row">
+              <span id="density">{{ t('customize.density') }}</span>
+              <app-segmented
+                (valueChange)="updateConfig('tileDensity', $event)"
+                [options]="densityOptions()"
+                [value]="s.tileDensity"
+                labelledBy="density"
+              />
+            </div>
+            @if (s.tileDensity === 'comfortable') {
+              <div class="row row--nested">
+                <label for="st-showLinkLabels">{{ t('customize.showLinkLabels') }}</label>
+                <p-toggleswitch
+                  (ngModelChange)="updateConfig('showLinkLabels', $event)"
+                  [ngModel]="s.showLinkLabels"
+                  inputId="st-showLinkLabels"
+                />
+              </div>
+            }
+          </div>
+        </section>
+
+        <section class="card" id="search" tabindex="-1">
+          <h2 class="card__title">{{ t('settings.searchSection') }}</h2>
+          <div class="grid">
+            <div class="field">
+              <label for="search-engine">{{ t('settings.searchEngineLabel') }}</label>
+              <p-select
+                (ngModelChange)="updateConfig('activeSearchEngine', $event)"
+                [ngModel]="s.activeSearchEngine"
+                [options]="searchEngineMappings"
+                fluid
+                group
+                inputId="search-engine"
+              />
+            </div>
+            <div class="field">
+              <label for="autocomplete-provider">{{ t('settings.autocompleteLabel') }}</label>
+              <p-select
+                (ngModelChange)="updateConfig('autocompleteProvider', $event)"
+                [ngModel]="s.autocompleteProvider"
+                [options]="autocompleteProviders"
+                fluid
+                group
+                inputId="autocomplete-provider"
+              />
+            </div>
+            @if (s.activeSearchEngine === 'custom') {
+              <div class="field">
+                <label for="custom-search-name">{{ t('settings.searchEngineName') }}</label>
+                <input
+                  (ngModelChange)="updateConfig('searchEngineName', $event)"
+                  [ngModel]="s.searchEngineName"
+                  [placeholder]="t('settings.searchEngineNamePlaceholder')"
+                  id="custom-search-name"
+                  pInputText
+                />
+              </div>
+              <div class="field">
+                <label for="custom-search">{{ t('settings.searchEngineUrl') }}</label>
+                <input
+                  (ngModelChange)="updateConfig('searchEngineUrl', $event)"
+                  [ngModel]="s.searchEngineUrl"
+                  [placeholder]="t('settings.searchEngineUrlPlaceholder')"
+                  id="custom-search"
+                  pInputText
+                  type="url"
+                />
+              </div>
+            }
+            @if (s.autocompleteProvider && s.autocompleteProvider !== 'none') {
+              <div class="field field--wide">
+                <label for="cors-proxy">{{ t('settings.corsProxyLabel') }}</label>
+                <input
+                  (ngModelChange)="updateConfig('corsProxy', $event)"
+                  [attr.aria-invalid]="!s.corsProxy.startsWith('https://')"
+                  [class.ng-invalid]="!s.corsProxy.startsWith('https://')"
+                  [class.ng-dirty]="!s.corsProxy.startsWith('https://')"
+                  [ngModel]="s.corsProxy"
+                  [placeholder]="t('settings.corsProxyPlaceholder')"
+                  aria-describedby="cors-proxy-hint"
+                  id="cors-proxy"
+                  pInputText
+                  type="url"
+                />
+                <small class="field__hint" id="cors-proxy-hint">{{ t('settings.corsProxyHint') }}</small>
+              </div>
+            }
+          </div>
+          <div class="rows">
+            <div class="row">
+              <label for="st-openInNewTab">{{ t('customize.openInNewTab') }}</label>
+              <p-toggleswitch
+                (ngModelChange)="updateConfig('openInNewTab', $event)"
+                [ngModel]="s.openInNewTab"
+                inputId="st-openInNewTab"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section class="card" id="personal" tabindex="-1">
+          <h2 class="card__title">{{ t('settings.personalSection') }}</h2>
+          <div class="grid">
+            <div class="field">
+              <label for="name">{{ t('settings.name') }}</label>
+              <input
+                (ngModelChange)="updateConfig('username', $event)"
+                [ngModel]="s.username"
+                [placeholder]="t('settings.namePlaceholder')"
+                autocomplete="given-name"
+                id="name"
+                pInputText
+              />
+            </div>
+            <div class="field">
+              <label for="language">{{ t('settings.language') }}</label>
+              <p-select
+                (ngModelChange)="updateConfig('language', $event); updateConfig('languageChanged', true)"
+                [ngModel]="language()"
+                [options]="availableLanguages"
+                fluid
+                inputId="language"
+                optionLabel="prettyName"
+                optionValue="name"
+              />
+            </div>
+            <div class="field">
+              <label for="welcome">{{ t('settings.welcomeText') }}</label>
+              <input
+                (ngModelChange)="updateConfig('welcomeText', $event)"
+                [ngModel]="s.welcomeText"
+                [placeholder]="t('settings.welcomeTextPlaceholder')"
+                id="welcome"
+                pInputText
+              />
+            </div>
+            <div class="field">
+              <label for="title">{{ t('settings.customTitle') }}</label>
+              <input
+                (ngModelChange)="updateConfig('customTitle', $event)"
+                [ngModel]="s.customTitle"
+                [placeholder]="t('settings.customTitlePlaceholder')"
+                id="title"
+                pInputText
+              />
+            </div>
+          </div>
+          <div class="rows">
+            <div class="row">
+              <label for="st-avatarEnabled">{{ t('settings.avatarEnabled') }}</label>
+              <p-toggleswitch
+                (ngModelChange)="updateConfig('avatarEnabled', $event)"
+                [ngModel]="s.avatarEnabled"
+                inputId="st-avatarEnabled"
+              />
+            </div>
+            @if (s.avatarEnabled) {
+              <div class="row row--nested">
+                <label for="avatar-url">{{ t('settings.avatarUrl') }}</label>
+                <input
+                  (ngModelChange)="updateConfig('avatarUrl', $event)"
+                  [ngModel]="s.avatarUrl"
+                  [placeholder]="t('settings.avatarUrlPlaceholder')"
+                  id="avatar-url"
+                  pInputText
+                  type="url"
+                />
+              </div>
+            }
+          </div>
+        </section>
+
+        <section class="card" id="links" tabindex="-1">
+          <h2 class="card__title">{{ t('settings.customLinks') }}</h2>
+          <app-links-editor />
+        </section>
+
+        <section class="card" id="menu" tabindex="-1">
+          <h2 class="card__title">{{ t('settings.customMenu') }}</h2>
+          <app-menu-editor />
+        </section>
+
+        <section class="card" id="backup" tabindex="-1">
+          <h2 class="card__title">{{ t('settings.backupSection') }}</h2>
+          <p class="card__hint">{{ t('settings.backupHint') }}</p>
+          <div class="actions">
+            <p-button
+              (click)="downloadSettings()"
+              [label]="t('settings.saveSettings')"
+              icon="pi pi-download"
+              severity="secondary"
+            />
+            <p-fileupload
+              (onSelect)="restoreSettings($event)"
+              [chooseLabel]="t('settings.restoreSettings')"
+              accept=".json"
+              auto
+              chooseIcon="pi pi-upload"
+              maxFileSize="1000000"
+              mode="basic"
+            />
+            <p-button
+              (click)="resetSettings()"
+              [label]="t('settings.resetSettings')"
+              icon="pi pi-refresh"
+              outlined
+              severity="danger"
+              styleClass="actions__danger"
             />
           </div>
-        }
-
-        <div class="flex flex-col gap-2">
-          <label for="wallpaper">{{ t('settings.wallpaperLabel') }}</label>
-          <p-select
-            (ngModelChange)="updateConfig('wallpaper', $event)"
-            [(ngModel)]="wallpaper"
-            [options]="wallpapers"
-            fluid
-            group
-            id="wallpaper"
-          >
-          </p-select>
-        </div>
-
-        @if (configService.settings().autocompleteProvider !== 'none') {
-          <div class="flex flex-col gap-2">
-            <label for="cors-proxy">{{ t('settings.corsProxyLabel') }}</label>
-            <input
-              [ngClass]="{ 'ng-invalid ng-dirty': !configService.settings().corsProxy.includes('https://') }"
-              (ngModelChange)="updateConfig('corsProxy', $event)"
-              [(ngModel)]="corsProxy"
-              [placeholder]="t('settings.corsProxyPlaceholder')"
-              pInputText
-              id="cors-proxy"
-            />
-          </div>
-        }
-
-        @if (configService.settings().wallpaper === 'custom') {
-          <div class="flex flex-col gap-2">
-            <label for="custom-wallpaper">{{ t('settings.wallpaperCustomLabel') }}</label>
-            <input
-              pInputText
-              id="custom-wallpaper"
-              (ngModelChange)="updateConfig('wallpaperUrl', $event)"
-              [placeholder]="t('settings.wallpaperCustomPlaceholder')"
-              [(ngModel)]="wallpaperUrl"
-            />
-          </div>
-        }
-
-        <div class="flex flex-col gap-2">
-          <label for="logo">{{ t('settings.logoLabel') }}</label>
-          <p-select
-            (ngModelChange)="updateConfig('logo', $event)"
-            [(ngModel)]="logo"
-            [options]="logos"
-            fluid
-            group
-            id="logo"
-          >
-          </p-select>
-        </div>
-
-        <div class="flex flex-col gap-2">
-          <label for="blur-strength">{{ t('settings.blurStrength') }}</label>
-          <p-input-number
-            (ngModelChange)="updateConfig('blurStrength', $event)"
-            [(ngModel)]="blurStrength"
-            [max]="6"
-            [min]="1"
-            id="blur-strength"
-            inputId="grid-cols"
-            mode="decimal"
-            showButtons
-          />
-        </div>
-
-        <div class="flex flex-col gap-2">
-          <label for="title">{{ t('settings.customTitle') }}</label>
-          <input
-            (ngModelChange)="updateConfig('customTitle', $event)"
-            [(ngModel)]="customTitle"
-            [placeholder]="t('settings.customTitlePlaceholder')"
-            id="title"
-            pInputText
-          />
-        </div>
-
-        <div class="flex flex-col gap-2">
-          <label for="name">{{ t('settings.name') }}</label>
-          <input
-            (ngModelChange)="updateConfig('username', $event)"
-            [(ngModel)]="username"
-            [placeholder]="t('settings.namePlaceholder')"
-            id="name"
-            pInputText
-          />
-        </div>
-
-        <div class="flex flex-col gap-2">
-          <label for="welcome">{{ t('settings.welcomeText') }}</label>
-          <input
-            (ngModelChange)="updateConfig('welcomeText', $event)"
-            [(ngModel)]="welcomeText"
-            [placeholder]="t('settings.welcomeTextPlaceholder')"
-            id="welcome"
-            pInputText
-          />
-        </div>
-
-        @if (configService.settings().avatarEnabled) {
-          <div class="flex flex-col gap-2">
-            <label for="avatar-url">{{ t('settings.avatarUrl') }}</label>
-            <input
-              pInputText
-              id="avatar-url"
-              (ngModelChange)="updateConfig('avatarUrl', $event)"
-              [(ngModel)]="avatarUrl"
-              [placeholder]="t('settings.avatarUrlPlaceholder')"
-            />
-          </div>
-        }
-
-        @if (configService.settings().logo === 'custom') {
-          <div class="flex flex-col gap-2">
-            <label for="custom-logo">{{ t('settings.customLogo') }}</label>
-            <input
-              pInputText
-              id="custom-logo"
-              (ngModelChange)="updateConfig('logoUrl', $event)"
-              [placeholder]="t('settings.logoUrlPlaceholder')"
-              [(ngModel)]="logoUrl"
-            />
-          </div>
-        }
-
-        @if (!autoGridCols()) {
-          <div class="flex flex-col gap-2">
-            <label for="grid-cols">{{ t('settings.gridCols') }}</label>
-            <p-input-number
-              [(ngModel)]="gridCols"
-              [max]="12"
-              [min]="1"
-              (ngModelChange)="updateConfig('gridCols', $event)"
-              showButtons
-              id="grid-cols"
-              inputId="grid-cols"
-              mode="decimal"
-            />
-          </div>
-        }
+        </section>
       </div>
-    </p-panel>
-
-    <p-panel [header]="t('settings.customLinks')" styleClass="mt-2.5">
-      <app-links-editor></app-links-editor>
-    </p-panel>
-
-    <p-panel [header]="t('settings.customMenu')" styleClass="mt-2.5">
-      <app-menu-editor></app-menu-editor>
-    </p-panel>
-  </div>
+    </div>
+  </main>
 
   <p-confirmDialog />
 </ng-container>

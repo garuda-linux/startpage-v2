@@ -1,13 +1,23 @@
-import { DOCUMENT, type ElementRef, inject, Injectable, type Renderer2, REQUEST, signal } from '@angular/core';
+import { DOCUMENT, inject, Injectable, signal } from '@angular/core';
 import type { AppSettings } from './interfaces';
 import { Title } from '@angular/platform-browser';
-import { WallpaperService } from '../wallpaper/wallpaper.service';
 import { menubarItems, serviceLinks } from '../../../config';
 import { usePreset } from '@openng/optimus-ui-themes';
-import { type AppTheme, backgroundColors, scrollbarColors, themes } from '../theme';
+import { type AppTheme, backgroundColors, loadThemePreset, scrollbarColors } from '../theme';
+import { browserUses24h } from '../functions';
 
 import { TranslocoService } from '@jsverse/transloco';
 import { firstValueFrom } from 'rxjs';
+
+/**
+ * Bump when saved settings need a one-time migration in main.ts
+ */
+export const SETTINGS_VERSION = 1;
+
+/**
+ * Bump whenever translation files gain or change keys, to invalidate cached translations
+ */
+export const TRANSLATION_VERSION = 13;
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +33,8 @@ export class ConfigService {
     autoGridCols: true,
     blurBackground: false,
     blurStrength: 1,
+    clock24h: browserUses24h(),
+    clockStyle: 'compact',
     corsProxy: '',
     customLinks: serviceLinks,
     customMenuLinks: menubarItems,
@@ -35,12 +47,25 @@ export class ConfigService {
     language: 'en',
     languageChanged: false,
     logo: 'assets/logos/violet-orange.png',
+    logoStyle: 'large',
     logoUrl: '',
+    motion: 'full',
+    newsSource: 'garuda',
+    openInNewTab: true,
+    panelBlur: 2,
+    rssTitle: '',
+    rssUrl: '',
     searchEngineName: '',
     searchEngineUrl: '',
     searchEngines: [],
+    settingsVersion: SETTINGS_VERSION,
+    showClock: true,
+    showGreeting: true,
+    showLinkLabels: true,
+    showLogo: true,
     showNews: true,
-    translationVersion: 5,
+    tileDensity: 'comfortable',
+    translationVersion: TRANSLATION_VERSION,
     username: '',
     wallpaper: 'none',
     wallpaperUrl: '',
@@ -52,9 +77,7 @@ export class ConfigService {
 
   private readonly document = inject(DOCUMENT);
   private readonly title = inject(Title);
-  private readonly request = inject(REQUEST);
   private readonly translocoService = inject(TranslocoService);
-  private readonly wallpaperService: WallpaperService;
 
   constructor() {
     this.initStore().then((pendingConfigUpdate) => {
@@ -64,10 +87,8 @@ export class ConfigService {
       this.initialized.set(true);
     });
 
-    this.wallpaperService = new WallpaperService(this);
-
     if (!this.settings().languageChanged) {
-      const lang: string = navigator.language.includes('-') ? navigator.language.split('-')[0] : navigator.language;
+      const lang = navigator.language.split('-')[0];
       if ((this.translocoService.getAvailableLangs() as string[]).includes(lang)) {
         this.translocoService.setActiveLang(lang);
       }
@@ -76,76 +97,44 @@ export class ConfigService {
     }
   }
 
-  /**
-   * Update configuration value in both the service and the store.
-   * @param key The configuration key to update.
-   * @param value The new value for the configuration key.
-   * @param renderer The renderer to use for DOM manipulation.
-   * @param el The element reference to the DOM element.
-   * @param write Whether to write the value to local storage.
-   */
-  updateConfig(key: string, value: any, renderer?: Renderer2, el?: ElementRef, write = true): void {
+  updateConfig(key: string, value: any, write = true): void {
     this.settings.update((prev: AppSettings) => ({ ...prev, [key]: value }));
     if (write) localStorage.setItem('settings', JSON.stringify(this.settings()));
-    void this.syncSetting(key, value, renderer, el);
+    void this.syncSetting(key, value);
   }
 
-  /**
-   * Initializes the configuration settings, specifically here because
-   * we have renderer and element references.
-   * @param renderer The renderer to use for DOM manipulation.
-   * @param el The element reference to the DOM element.
-   */
-  initConfig(renderer: Renderer2, el: ElementRef) {
+  initConfig() {
     for (const key of Object.keys(this.settings())) {
       const value = this.settings()[key];
-      void this.syncSetting(key, value, renderer, el);
+      void this.syncSetting(key, value);
     }
   }
 
-  /**
-   * Restores settings from a file.
-   * @param file The file containing the settings to restore.
-   * @param renderer The renderer to use for DOM manipulation.
-   * @param el The element reference to the DOM element.
-   */
-  async restoreSettings(file: File, renderer: Renderer2, el: ElementRef): Promise<void> {
+  async restoreSettings(file: File): Promise<void> {
     const buffer: ArrayBuffer = await file.arrayBuffer();
     const blob: Blob = new Blob([buffer], { type: 'application/json' });
     const content: string = await blob.text();
 
     try {
       const settings = JSON.parse(content) as Partial<AppSettings>;
-      this.iterateSettings(settings, renderer, el);
+      this.iterateSettings(settings);
       localStorage.setItem('settings', JSON.stringify(settings));
     } catch (error) {
       console.error('Error parsing settings file:', error);
     }
   }
 
-  /**
-   * Resets the settings to their default values.
-   * @param renderer The renderer to use for DOM manipulation.
-   * @param el The element reference to the DOM element.
-   */
-  resetSettings(renderer: Renderer2, el: ElementRef): void {
+  resetSettings(): void {
     const settings = this.defaultSettings as { [key: string]: any };
 
     localStorage.clear();
-    this.iterateSettings(settings, renderer, el);
+    this.iterateSettings(settings);
   }
 
-  /**
-   * Iterates through the settings and updates the configuration.
-   * @param settings The settings object containing key-value pairs to update.
-   * @param renderer The renderer to use for DOM manipulation.
-   * @param el The element reference to the DOM element.
-   * @private
-   */
-  private iterateSettings(settings: { [key: string]: unknown }, renderer?: Renderer2, el?: ElementRef) {
+  private iterateSettings(settings: { [key: string]: unknown }) {
     for (const key of Object.keys(settings)) {
       if (Object.prototype.hasOwnProperty.call(this.settings(), key)) {
-        this.updateConfig(key, settings[key], renderer, el);
+        this.updateConfig(key, settings[key]);
       } else {
         console.warn(`Key "${key}" not found in settings, ignoring`);
       }
@@ -153,34 +142,20 @@ export class ConfigService {
   }
 
   /**
-   * Initializes the settings signal, overwriting the default settings with saved ones.
-   * @returns A promise that resolves to the saved settings or an empty object if none are found.
-   * @private
+   * Saved settings from localStorage, or an empty object when none are stored or they fail to parse
    */
   private async initStore(): Promise<Partial<AppSettings>> {
-    const settings: { [key: string]: any } = {};
     const savedSettings: string | null = localStorage.getItem('settings');
-    if (savedSettings) {
-      try {
-        return JSON.parse(savedSettings);
-      } catch (err: any) {
-        console.error('Error parsing settings:', err);
-        return {};
-      }
+    if (!savedSettings) return {};
+    try {
+      return JSON.parse(savedSettings);
+    } catch (err: any) {
+      console.error('Error parsing settings:', err);
+      return {};
     }
-
-    return settings;
   }
 
-  /**
-   * Synchronizes a specific setting with the current state.
-   * @param key The configuration key to synchronize.
-   * @param value The new value for the configuration key.
-   * @param renderer The renderer to use for DOM manipulation.
-   * @param el The element reference to the DOM element.
-   * @private
-   */
-  private async syncSetting(key: string, value: any, renderer?: Renderer2, el?: ElementRef) {
+  private async syncSetting(key: string, value: any) {
     switch (key) {
       case 'customTitle': {
         if (!this.settings().customTitle) {
@@ -191,23 +166,8 @@ export class ConfigService {
         }
         break;
       }
-      case 'wallpaper': {
-        if (renderer && el) {
-          this.wallpaperService.loadWallpaper(value, renderer, el, this.settings().wallpaperUrl);
-        }
-        break;
-      }
-      case 'fitWallpaper':
-      case 'blurBackground':
-      case 'blurStrength': {
-        if (renderer && el) {
-          this.wallpaperService.applyWallpaperStyle(key, this.settings().blurBackground, renderer, el);
-        }
-        break;
-      }
       case 'activeTheme': {
-        usePreset(themes[value]);
-        this.handleMiscColors(this.settings().darkMode);
+        await this.applyTheme(value);
         break;
       }
       case 'darkMode': {
@@ -218,13 +178,33 @@ export class ConfigService {
         this.translocoService.setActiveLang(value);
         break;
       }
+      case 'panelBlur': {
+        this.document.documentElement.style.setProperty('--sp-glass-blur', `blur(${Number(value) || 0}px)`);
+        break;
+      }
+      case 'motion': {
+        this.document.documentElement.dataset['motion'] = value;
+        break;
+      }
     }
   }
 
+  private themeRequest = 0;
+
   /**
-   * Handles setting background and scrollbar colors, as well as dark mode.
-   * @param value The value of the dark mode setting.
-   * @private
+   * Load and apply a theme preset. Presets are separate chunks, so only the chosen one is
+   * downloaded. When themes are switched quickly, only the most recent pick is applied.
+   */
+  async applyTheme(theme: string): Promise<void> {
+    const request = ++this.themeRequest;
+    const preset = await loadThemePreset(theme);
+    if (request !== this.themeRequest) return;
+    usePreset(preset);
+    this.handleMiscColors(this.settings().darkMode);
+  }
+
+  /**
+   * Sets background and scrollbar colors, as well as dark mode
    */
   private handleMiscColors(value: boolean) {
     const activeTheme: AppTheme = this.settings().activeTheme;
@@ -233,7 +213,7 @@ export class ConfigService {
     let backgroundColor: string;
 
     if (activeTheme.includes('Catppuccin')) {
-      const flavors = this.settings().activeTheme.includes('Mocha') ? 'primary' : 'alt';
+      const flavors = activeTheme.includes('Mocha') ? 'primary' : 'alt';
 
       if (value) {
         if (flavors === 'primary') {
@@ -252,6 +232,9 @@ export class ConfigService {
           backgroundColor = backgroundColors.alt.light;
         }
       }
+    } else if (activeTheme.includes('Dr460nized')) {
+      scrollbarColor = value ? scrollbarColors.dr460nized.dark : scrollbarColors.dr460nized.light;
+      backgroundColor = value ? backgroundColors.dr460nized.dark : backgroundColors.dr460nized.light;
     } else if (activeTheme.includes('Vo1ded')) {
       if (value) {
         scrollbarColor = scrollbarColors.vo1ded.dark;
@@ -262,12 +245,13 @@ export class ConfigService {
       }
     }
 
-    if (value) {
-      this.document.documentElement.classList.add('p-dark');
-    } else {
-      this.document.documentElement.classList.remove('p-dark');
-    }
+    this.document.documentElement.classList.toggle('p-dark', value);
     this.document.documentElement.style.backgroundColor = backgroundColor!;
+    // Native controls, scrollbars and the mobile browser chrome follow the active theme
+    this.document.documentElement.style.colorScheme = value ? 'dark' : 'light';
+    // Theme presets leave some surfaces dark in light mode. Expose the real base colour per mode
+    this.document.documentElement.style.setProperty('--sp-base', backgroundColor!);
+    this.document.querySelector('meta[name="theme-color"]')?.setAttribute('content', backgroundColor!);
     this.document.documentElement.style.scrollbarColor = scrollbarColor!;
   }
 }
