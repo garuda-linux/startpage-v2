@@ -13,3 +13,6 @@ allowBuilds:
 minimumReleaseAgeExclude:
   - '@garudalinux/core@2.0.0 || 2.1.0-rc.1 || 2.1.0-rc.3 || 2.1.0-rc.6'
   - '@garudalinux/themes@2.0.0 || 2.1.0-rc.1 || 2.1.0-rc.3 || 2.1.0-rc.6'
+overrides:
+  # nx 24.0.6 imports architect/node/index.js, which the exports map of 0.2203 rejects
+  '@angular-devkit/architect': 0.2202.8

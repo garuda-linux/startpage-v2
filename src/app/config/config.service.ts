@@ -12,7 +12,7 @@ import { firstValueFrom } from 'rxjs';
 /**
  * Bump when saved settings need a one-time migration in main.ts
  */
-export const SETTINGS_VERSION = 2;
+export const SETTINGS_VERSION = 3;
 
 export const DEFAULT_LOGO = 'assets/garuda-purple.svg';
 

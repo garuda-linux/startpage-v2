@@ -11,13 +11,23 @@ try {
   const settings = JSON.parse(localStorage.getItem('settings') ?? '{}');
   const version = settings.settingsVersion ?? 0;
   if (version < SETTINGS_VERSION) {
-    // v1: development builds saved panelBlur 32 and showLogo false as defaults. Restore the real defaults
     if (version < 1) {
       if (settings.panelBlur === 32) settings.panelBlur = 2;
       settings.showLogo = true;
     }
-    // v2: pt-br was offered without a translation file
+
     if (settings.language === 'pt-br') settings.language = 'pt';
+
+    if (version < 3) {
+      if (settings.activeSearchEngine === 'whoogle') delete settings.activeSearchEngine;
+      if (Array.isArray(settings.customLinks)) {
+        settings.customLinks = settings.customLinks.filter(
+          (link: { link?: string }) => !link.link?.startsWith('https://search.garudalinux.org'),
+        );
+      }
+      if (settings.logo === 'assets/logos/violet-orange.png') delete settings.logo;
+    }
+
     settings.settingsVersion = SETTINGS_VERSION;
     if (Object.keys(settings).length > 1) localStorage.setItem('settings', JSON.stringify(settings));
   }

@@ -125,13 +125,6 @@ export const serviceLinks: ServiceLinks = [
     id: 'gpv',
   },
   {
-    link: 'https://search.garudalinux.org',
-    title: 'Whoogle',
-    icon: 'assets/pictures/whoogle.svg',
-    subtitle: 'Privacy-respecting Google',
-    id: 'gwh',
-  },
-  {
     link: 'https://librey.garudalinux.org',
     title: 'LibreY',
     icon: 'assets/pictures/librey.png',
@@ -195,11 +188,6 @@ export const searchEngineMappings: SearchEngineList = [
         value: 'searxng',
         label: 'SearxNG',
         url: 'https://searx.garudalinux.org/search?q=%s',
-      },
-      {
-        value: 'whoogle',
-        label: 'Whoogle',
-        url: 'https://search.garudalinux.org/search?q=%s',
       },
       // This seems to be one of the better instances.
       // Doesn't nag with Cloudflare Captcha unlike ours.
