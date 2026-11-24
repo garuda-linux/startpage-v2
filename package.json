@@ -75,7 +75,7 @@
     "@types/emoji-js": "^3.5.2",
     "@types/mime-types": "^3.0.1",
     "@types/node": "^26.6.6",
-    "@typescript-eslint/utils": "8.73.0",
+    "@typescript-eslint/utils": "8.74.0",
     "angular-eslint": "22.8.0",
     "eslint": "^10.15.0",
     "eslint-config-prettier": "^10.1.8",
@@ -88,7 +88,7 @@
     "tailwindcss": "^4.3.5",
     "tslib": "^2.9.1",
     "typescript": "^6.0.3",
-    "typescript-eslint": "8.73.0",
+    "typescript-eslint": "8.74.0",
     "wrangler": "^4.165.0"
   },
   "engines": {
