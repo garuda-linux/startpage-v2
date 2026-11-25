@@ -42,7 +42,7 @@
     "@openng/icons": "^1.0.0",
     "@openng/optimus-ui": "2.0.2",
     "@openng/optimus-ui-tailwindcss": "^2.0.2",
-    "@openng/optimus-ui-themes": "2.0.2",
+    "@openng/optimus-ui-themes": "2.1.0",
     "dayjs": "^1.11.23",
     "emoji-js": "^3.9.0",
     "marked": "^18.2.1",
