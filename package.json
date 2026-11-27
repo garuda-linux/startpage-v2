@@ -81,7 +81,7 @@
     "eslint-config-prettier": "^10.1.8",
     "knip": "^6.47.0",
     "mime-types": "^3.0.2",
-    "nx": "24.0.6",
+    "nx": "24.1.0",
     "postcss": "^8.5.33",
     "prettier": "^3.10.1",
     "prettier-plugin-tailwindcss": "^0.8.1",
